@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Semantic Search Demo</title>
+    <!-- Tailwind CSS (인터넷 연결 필수) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; overflow: hidden; }
+        
+        /* 커스텀 스타일 */
+        .chat-bubble { position: relative; max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; }
+        .chat-user { background-color: #A50034; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-bot { background-color: #e5e7eb; color: #1f2937; align-self: flex-start; border-bottom-left-radius: 2px; }
+        
+        /* LG Red 색상 정의 */
+        .bg-lg-red { background-color: #A50034; }
+        .text-lg-red { color: #A50034; }
+        .border-lg-red { border-color: #A50034; }
+
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* 애니메이션 */
+        .animate-fade-in { animation: fadeIn 0.5s ease-out; } 
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .transition-all { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-200">
+
+    <!-- Main Container: PPT 슬라이드에 꽉 차게 보이도록 크기 조정 -->
+    <div class="w-full h-full max-w-5xl max-h-[90vh] bg-gray-900 rounded-xl overflow-hidden shadow-2xl flex flex-col m-4">
+        
+        <!-- Header Window -->
+        <div class="bg-gray-800 px-4 py-3 flex items-center justify-between shrink-0">
+            <span class="text-gray-300 text-sm font-mono font-bold">AI Search Engine Simulator</span>
+            <div class="flex space-x-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+        </div>
+
+        <!-- Body Content -->
+        <div class="bg-gray-50 flex-grow flex overflow-hidden">
+            <!-- Chat Area -->
+            <div class="flex-grow p-6 flex flex-col space-y-4 overflow-y-auto" id="chat-display">
+                <div class="chat-bubble chat-bot shadow-sm">
+                    안녕하세요! 데이터 탐색 도우미 AI입니다. <br>
+                    찾으시는 데이터가 무엇인가요?
+                </div>
+            </div>
+            
+            <!-- Logic Visualization Panel (우측 로직 화면) -->
+            <div class="w-80 bg-white border-l border-gray-200 p-6 flex flex-col shrink-0">
+                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">System Logic Process</h4>
+                
+                <!-- Step 1 -->
+                <div class="mb-4 opacity-30 transition-all" id="logic-step-1">
+                    <div class="flex items-center mb-1">
+                        <span class="w-2 h-2 rounded-full bg-lg-red mr-2"></span>
+                        <span class="text-sm font-bold">1. Query Analysis</span>
+                    </div>
+                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">질문 의도/키워드 추출 (LLM)</div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-4 opacity-30 transition-all" id="logic-step-2">
+                    <div class="flex items-center mb-1">
+                        <span class="w-2 h-2 rounded-full bg-blue-600 mr-2"></span>
+                        <span class="text-sm font-bold">2. Vector Search</span>
+                    </div>
+                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">유사도 검색 (Embedding)</div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="mb-4 opacity-30 transition-all" id="logic-step-3">
+                    <div class="flex items-center mb-1">
+                        <span class="w-2 h-2 rounded-full bg-green-600 mr-2"></span>
+                        <span class="text-sm font-bold">3. Mapping Result</span>
+                    </div>
+                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">테이블/컬럼 매핑 반환</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="bg-white p-4 border-t border-gray-200 shrink-0">
+            <div class="flex space-x-2">
+                <button onclick="runSimulation('지난달 모델별 불만 접수 건수 알려줘')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-3 px-4 rounded transition-colors text-left border border-gray-300 shadow-sm">
+                    💬 "지난달 모델별 불만 접수 건수..."
+                </button>
+                <button onclick="runSimulation('북미 지역 세탁기 소음 관련 부품 비용은?')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-3 px-4 rounded transition-colors text-left border border-gray-300 shadow-sm">
+                    💬 "북미 지역 세탁기 소음 비용..."
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function runSimulation(query) {
+            const display = document.getElementById('chat-display');
+            
+            // 1. 사용자 질문 표시
+            display.innerHTML += `<div class="chat-bubble chat-user mb-4 animate-fade-in">${query}</div>`;
+            display.scrollTop = display.scrollHeight;
+
+            // 2. Logic Step 1 (0.5초)
+            setTimeout(() => { highlightLogic(1); }, 500);
+
+            // 3. Logic Step 2 (1.5초)
+            setTimeout(() => { highlightLogic(2); }, 1500);
+
+            // 4. Logic Step 3 (2.5초)
+            setTimeout(() => { highlightLogic(3); }, 2500);
+
+            // 5. 봇 응답 (3.5초)
+            setTimeout(() => {
+                let response = "";
+                let details = "";
+
+                if(query.includes("소음")) {
+                    response = "<strong>'세탁기 소음 비용'</strong>과 관련된 최적의 데이터를 찾았습니다.";
+                    details = `
+                        <div class="mt-3 bg-white border border-gray-200 rounded p-3 text-xs text-gray-800">
+                            <div class="font-bold text-lg-red mb-1">🔍 검색 결과 (Similarity: 98%)</div>
+                            <table class="w-full text-left">
+                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Table</th><td>SVC_COST_FACT</td></tr>
+                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Column</th><td>Rpr_Amt (수리비)</td></tr>
+                                <tr><th class="py-1 w-16 text-gray-500">Filter</th><td>Defect_Type = 'Noise'</td></tr>
+                            </table>
+                            <button class="mt-2 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 font-bold">데이터 조회하기</button>
+                        </div>
+                    `;
+                } else {
+                    response = "요청하신 <strong>'모델별 불만 접수'</strong> 데이터 매핑 결과입니다.";
+                    details = `
+                        <div class="mt-3 bg-white border border-gray-200 rounded p-3 text-xs text-gray-800">
+                            <div class="font-bold text-lg-red mb-1">🔍 검색 결과 (Similarity: 95%)</div>
+                            <table class="w-full text-left">
+                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Table</th><td>VOC_MASTER</td></tr>
+                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Group</th><td>Model_Name</td></tr>
+                                <tr><th class="py-1 w-16 text-gray-500">Measure</th><td>Count(Voc_ID)</td></tr>
+                            </table>
+                            <button class="mt-2 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 font-bold">데이터 조회하기</button>
+                        </div>
+                    `;
+                }
+
+                display.innerHTML += `
+                    <div class="chat-bubble chat-bot mb-4 animate-fade-in">
+                        ${response}
+                        ${details}
+                    </div>
+                `;
+                display.scrollTop = display.scrollHeight;
+                resetLogic();
+            }, 3500);
+        }
+
+        function highlightLogic(step) {
+            // 초기화
+            [1, 2, 3].forEach(i => {
+                const el = document.getElementById(`logic-step-${i}`);
+                el.classList.add('opacity-30');
+                el.classList.remove('opacity-100', 'bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
+            });
+            
+            // 강조
+            const el = document.getElementById(`logic-step-${step}`);
+            el.classList.remove('opacity-30');
+            el.classList.add('opacity-100', 'bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
+        }
+
+        function resetLogic() {
+             [1, 2, 3].forEach(i => {
+                const el = document.getElementById(`logic-step-${i}`);
+                 el.classList.remove('bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
+                 el.classList.add('opacity-30');
+            });
+        }
+    </script>
+</body>
+</html>
