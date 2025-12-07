@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Canvas Simulation - Global CS Strategy (PPT)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .lg-red { color: #A50034; }
+        .bg-lg-red { background-color: #A50034; }
+        
+        /* Animation Classes */
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .slide-transition {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Ratio 16:9 */
+        .slide-container {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            max-width: 960px; /* Standard Slide Width Simulation */
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Typing Dots */
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col overflow-hidden">
+
+    <!-- Nav -->
+    <nav class="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm z-10">
+        <div class="flex items-center space-x-2">
+            <div class="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Gemini</div>
+            <span class="text-gray-400 text-sm">with Canvas</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button onclick="location.reload()" class="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-gray-700 font-medium transition">
+                ↺ 다시 보기
+            </button>
+            <div class="text-sm text-gray-500">Global CS Strategy Demo</div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- LEFT PANEL: Chat -->
+        <div class="w-[350px] bg-white border-r flex flex-col flex-shrink-0">
+            <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-6">
+                <!-- Chat items will be injected here -->
+            </div>
+            <!-- Input Area -->
+            <div class="p-4 border-t">
+                <div class="bg-gray-100 rounded-full px-4 py-3 text-gray-400 text-sm flex justify-between items-center">
+                    <span>Gemini에게 요청하기...</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Canvas (Slide View) -->
+        <div class="flex-1 bg-gray-100 p-8 overflow-y-auto flex items-center justify-center">
+            
+            <!-- The Slide -->
+            <div id="slide-paper" class="slide-container p-8 opacity-0 scale-95 slide-transition flex flex-col">
+                <!-- Content will be injected here -->
+            </div>
+
+            <!-- Floating Tool (Visual) -->
+            <div class="absolute right-8 top-8 bg-white p-2 rounded shadow border text-gray-400">
+                <i class="fas fa-pen"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Content Templates
+        const slideDraft = `
+            <div class="h-full flex flex-col justify-center">
+                <h1 class="text-4xl font-bold text-black mb-6">Global AICC 도입 및 고도화 전략</h1>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded border">
+                        <h2 class="font-bold text-lg mb-2">1. 배경</h2>
+                        <p class="text-gray-700">글로벌 상담 품질 편차 해소 및 운영 효율화 필요</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded border">
+                        <h2 class="font-bold text-lg mb-2">2. 주요 과제</h2>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>AI 상담 어시스턴트 도입 (STT/TA)</li>
+                            <li>24/365 무인 대응 챗봇 고도화</li>
+                            <li>데이터 기반 VOC 분석 체계 구축</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded border">
+                        <h2 class="font-bold text-lg mb-2">3. 기대 효과</h2>
+                        <p class="text-gray-700">상담 생산성 20% 향상, 고객 대기시간 30% 단축</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const slideFinal = `
+            <div class="h-full flex flex-col font-sans">
+                <!-- Header -->
+                <div class="border-b-2 border-[#A50034] pb-2 mb-6 flex justify-between items-end">
+                    <h1 class="text-3xl font-bold text-gray-800">Global AICC (AI Contact Center) 전략 Roadmap</h1>
+                    <span class="text-xs text-gray-500 font-bold tracking-wide">Global CS Strategy Team</span>
+                </div>
+
+                <!-- Body Content -->
+                <div class="flex-1 flex gap-4">
+                    <!-- Left: Purpose -->
+                    <div class="w-1/4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="text-[#A50034] font-bold text-lg mb-3 border-b border-gray-300 pb-1">Strategy Goal</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                            "AI 기반의<br>
+                            Seamless한<br>
+                            고객 경험 제공"
+                        </p>
+                        <div class="mt-4 text-xs text-gray-500">
+                            Target: Global All Subs.<br>
+                            Period: 2025 ~ 2027
+                        </div>
+                    </div>
+
+                    <!-- Right: Roadmap -->
+                    <div class="w-3/4 flex flex-col gap-3">
+                        <!-- Phase 1 -->
+                        <div class="flex items-center border border-gray-200 rounded-lg p-3 shadow-sm">
+                            <div class="w-20 font-bold text-[#A50034] text-center">Phase 1<br><span class="text-xs text-gray-400">('25)</span></div>
+                            <div class="flex-1 border-l pl-4 ml-2">
+                                <p class="font-bold text-sm text-gray-800">기반 구축 (Foundation)</p>
+                                <p class="text-xs text-gray-600">- Global STT/TA 솔루션 표준화 및 북미/한국 시범 도입</p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="flex items-center border border-gray-200 rounded-lg p-3 shadow-sm bg-red-50 border-red-100">
+                            <div class="w-20 font-bold text-[#A50034] text-center">Phase 2<br><span class="text-xs text-gray-400">('26)</span></div>
+                            <div class="flex-1 border-l border-red-200 pl-4 ml-2">
+                                <p class="font-bold text-sm text-gray-800">글로벌 확산 (Expansion)</p>
+                                <p class="text-xs text-gray-600">- 유럽/아시아 주요 법인 Roll-out 및 상담 챗봇 고도화</p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="flex items-center border border-gray-200 rounded-lg p-3 shadow-sm">
+                            <div class="w-20 font-bold text-[#A50034] text-center">Phase 3<br><span class="text-xs text-gray-400">('27)</span></div>
+                            <div class="flex-1 border-l pl-4 ml-2">
+                                <p class="font-bold text-sm text-gray-800">지능형 완성 (Intelligence)</p>
+                                <p class="text-xs text-gray-600">- 생성형 AI 기반 초개인화 상담 및 완전 무인 대응</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="mt-4 pt-2 border-t border-gray-200 flex justify-between text-xs text-gray-400">
+                    <span>LG Electronics Confidential</span>
+                    <span>14</span>
+                </div>
+            </div>
+        `;
+
+        const slideDense = `
+            <div class="h-full flex flex-col font-sans bg-white">
+                <!-- Header -->
+                <div class="border-b-2 border-[#A50034] pb-1 mb-2 flex justify-between items-end">
+                    <h1 class="text-xl font-bold text-gray-900 tracking-tight">Global AICC 도입 세부 실행 계획 (Detailed Action Plan)</h1>
+                    <span class="text-[10px] text-gray-500 font-bold">Confidential</span>
+                </div>
+                
+                <div class="flex-1 grid grid-cols-2 gap-3 text-[10px]">
+                    <!-- Left Panel -->
+                    <div class="space-y-2">
+                         <!-- Section 1 -->
+                        <div class="border border-gray-300 p-2 h-auto">
+                            <h3 class="bg-gray-100 font-bold p-1 mb-1 border-b text-[#A50034] text-xs">1. 현황 및 문제점 (As-Is Analysis)</h3>
+                            <ul class="list-disc ml-4 space-y-1 text-gray-700 leading-tight">
+                                 <li><strong>상담 효율 저하:</strong> 단순 반복 문의가 전체의 45%를 차지하여 상담사 피로도 누적 및 이직률 15% 상승 (Global Avg. 대비 +3%p)</li>
+                                 <li><strong>데이터 파편화:</strong> 법인별 VOC 분류 기준 상이로 인한 통합 분석 불가 (Matching Rate 60% 미만) → 전사 품질 관리 한계</li>
+                                 <li><strong>시스템 노후화:</strong> 레거시 CTI 장비의 한계로 실시간 STT 인식률 70% 수준 답보 (Target: 95%)</li>
+                            </ul>
+                        </div>
+                        <!-- Section 2 -->
+                        <div class="border border-gray-300 p-2 flex-1">
+                            <h3 class="bg-gray-100 font-bold p-1 mb-1 border-b text-[#A50034] text-xs">2. 추진 목표 (To-Be Image)</h3>
+                             <div class="grid grid-cols-2 gap-2 mt-2 mb-2">
+                                <div class="bg-red-50 p-1 text-center rounded border border-red-100">
+                                    <div class="font-bold text-gray-800">상담 생산성</div>
+                                    <div class="text-lg font-bold text-red-600">+25%</div>
+                                    <div class="text-[8px] text-gray-500">CPH 기준</div>
+                                </div>
+                                <div class="bg-red-50 p-1 text-center rounded border border-red-100">
+                                    <div class="font-bold text-gray-800">무인 응대율</div>
+                                    <div class="text-lg font-bold text-red-600">40%</div>
+                                    <div class="text-[8px] text-gray-500">챗봇/보이스봇</div>
+                                </div>
+                             </div>
+                             <ul class="list-disc ml-4 space-y-1 text-gray-700 leading-tight">
+                                <li>AI Standard Process 정립을 통한 글로벌 운영 표준화</li>
+                                <li>상담사-AI 협업 모델(Hybrid) 구축으로 고난이도 상담 집중</li>
+                             </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="space-y-2">
+                         <!-- Section 3 -->
+                        <div class="border border-gray-300 p-2">
+                            <h3 class="bg-gray-100 font-bold p-1 mb-1 border-b text-[#A50034] text-xs">3. 세부 추진 일정 (Milestones)</h3>
+                            <table class="w-full border-collapse border border-gray-300 text-center text-[9px]">
+                                <tr class="bg-gray-50">
+                                    <th class="border border-gray-300 p-1">구분</th>
+                                    <th class="border border-gray-300 p-1">Q1</th>
+                                    <th class="border border-gray-300 p-1">Q2</th>
+                                    <th class="border border-gray-300 p-1">Q3</th>
+                                    <th class="border border-gray-300 p-1">Q4</th>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 font-bold bg-gray-50">기획</td>
+                                    <td class="border border-gray-300 bg-blue-50 text-blue-700">ISP 수립</td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300"></td>
+                                </tr>
+                                 <tr>
+                                    <td class="border border-gray-300 font-bold bg-gray-50">개발</td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300 bg-blue-50 text-blue-700">엔진 학습</td>
+                                    <td class="border border-gray-300 bg-blue-50 text-blue-700">Pilot</td>
+                                    <td class="border border-gray-300"></td>
+                                </tr>
+                                 <tr>
+                                    <td class="border border-gray-300 font-bold bg-gray-50">오픈</td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300"></td>
+                                    <td class="border border-gray-300 bg-red-100 font-bold text-red-700">Grand Open</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- Section 4 -->
+                         <div class="border border-gray-300 p-2">
+                            <h3 class="bg-gray-100 font-bold p-1 mb-1 border-b text-[#A50034] text-xs">4. 리스크 관리 (Risk Mgmt.)</h3>
+                             <ul class="list-disc ml-4 space-y-1 text-gray-700 leading-tight">
+                                 <li><strong>인식률 저조:</strong> 현업 특화 말뭉치(Corpus) 10만 건 사전 학습으로 보완 (개발팀 협업)</li>
+                                 <li><strong>법적 이슈:</strong> 국가별 개인정보보호법(GDPR 등) 준수 검토 완료 (법무팀 必)</li>
+                                 <li><strong>변화 관리:</strong> 상담사 대상 AI 활용 교육 프로그램 사전 운영</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-2 text-[8px] text-gray-400 flex justify-between border-t pt-1">
+                    <span>Global CS Strategy Team</span>
+                    <span>LG Electronics Confidential</span>
+                </div>
+            </div>
+        `;
+
+        // Simulation Script
+        const steps = [
+            {
+                type: 'user',
+                text: "내년도 <strong>'Global AICC 도입 전략'</strong> 발표자료 장표 1장으로 만들어줘. (배경, 과제, 기대효과 포함)",
+                delay: 1000
+            },
+            {
+                type: 'ai',
+                text: "네, Global AICC 전략의 핵심 내용을 요약하여 장표 초안을 구성했습니다.",
+                canvas: 'draft',
+                delay: 2000
+            },
+            {
+                type: 'user',
+                text: "내용은 좋은데 디자인을 <strong>LG전자 PPT 템플릿 스타일</strong>로 바꿔줘.<br>1. LG Red 라인 헤더 적용<br>2. 로드맵(Phase 1~3) 형태로 구조화<br>3. 가로형 레이아웃 유지",
+                delay: 4000
+            },
+            {
+                type: 'ai',
+                text: "요청하신 대로 LG전자 PPT 스타일 가이드를 적용하여, 로드맵 중심의 장표로 디자인을 수정했습니다.",
+                canvas: 'final',
+                delay: 2500
+            },
+            {
+                type: 'user',
+                text: `
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded"><i class="fas fa-paperclip"></i> 이미지 업로드</span>
+                    </div>
+                    잠깐, 내가 캡처한 이 장표처럼 내용을 <strong>상세하게 꽉 채워줘.</strong><br>
+                    임원 보고용이라 세부 실행 일정, 정량적 수치, 리스크 관리까지 다 들어가야 해.`,
+                delay: 4500
+            },
+            {
+                type: 'ai',
+                text: "업로드하신 이미지를 참고하여, 세부 실행 계획(Action Plan)과 데이터를 포함한 <strong>상세 보고서 형태(Dense Layout)</strong>로 다시 작성했습니다.",
+                canvas: 'dense',
+                delay: 3000
+            }
+        ];
+
+        async function runSimulation() {
+            const chatContainer = document.getElementById('chat-container');
+            const slidePaper = document.getElementById('slide-paper');
+
+            for (let step of steps) {
+                await new Promise(r => setTimeout(r, step.delay));
+
+                // Typing Effect
+                if (step.type === 'ai') {
+                    const typing = document.createElement('div');
+                    typing.className = "flex justify-start fade-in-up mb-4";
+                    typing.innerHTML = `
+                        <div class="bg-gray-50 rounded-2xl rounded-tl-none px-4 py-3 flex space-x-1">
+                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                        </div>`;
+                    chatContainer.appendChild(typing);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    await new Promise(r => setTimeout(r, 1500));
+                    chatContainer.removeChild(typing);
+                }
+
+                // Add Message
+                const msg = document.createElement('div');
+                msg.className = `flex fade-in-up mb-4 ${step.type === 'user' ? 'justify-end' : 'justify-start'}`;
+                const bubbleClass = step.type === 'user' ? 'bg-blue-50 border border-blue-100 rounded-tr-none' : 'bg-white border border-gray-200 rounded-tl-none shadow-sm';
+                
+                msg.innerHTML = `
+                    <div class="${bubbleClass} rounded-2xl px-4 py-3 max-w-[90%] text-sm text-gray-800 leading-relaxed">
+                        ${step.text}
+                    </div>
+                `;
+                chatContainer.appendChild(msg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // Update Canvas
+                if (step.canvas) {
+                    slidePaper.style.opacity = '0';
+                    slidePaper.style.transform = 'scale(0.98)';
+                    
+                    await new Promise(r => setTimeout(r, 300));
+                    
+                    if (step.canvas === 'draft') slidePaper.innerHTML = slideDraft;
+                    else if (step.canvas === 'final') slidePaper.innerHTML = slideFinal;
+                    else if (step.canvas === 'dense') slidePaper.innerHTML = slideDense;
+                    
+                    slidePaper.style.opacity = '1';
+                    slidePaper.style.transform = 'scale(1)';
+                }
+            }
+        }
+
+        window.onload = runSimulation;
+    </script>
+</body>
+</html>
