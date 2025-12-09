@@ -15,7 +15,7 @@
     <!-- Prop-Types (Recharts Dependency) -->
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
 
-    <!-- Recharts (Ver 2.12.7 - Fixed Version) -->
+    <!-- Recharts (Ver 2.12.7) -->
     <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
     
     <!-- Babel -->
@@ -23,391 +23,369 @@
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .kpi-card-header { background-color: #A50034; color: white; } /* LG Red */
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState } = React;
-        
-        // Ensure Recharts is loaded
         const { 
-            BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, 
-            AreaChart, Area, PieChart, Pie, Cell 
+            LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
         } = window.Recharts;
 
-        // --- Icons (Inline SVGs) ---
-        const IconUsers = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        );
-        const IconMessageSquare = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        );
-        const IconHeadphones = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-        );
-        const IconCheckCircle = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        );
-        const IconFilter = ({ size = 16 }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-        );
-        const IconDownload = ({ size = 16 }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        );
-        const IconInfo = ({ size = 16, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        );
+        // --- Icons ---
+        const IconUser = ({ size = 16, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+        const IconBot = ({ size = 16, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>;
+        const IconPhone = ({ size = 16, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>;
+        const IconHome = ({ size = 16, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
+        const IconArrowDown = ({ size = 16 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>;
+        const IconArrowUp = ({ size = 16 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>;
 
         // --- Mock Data ---
+        // Trend Data (Line Chart)
         const trendData = [
-          { time: '09:00', inbound: 1200, resolved: 980, abandon: 50 },
-          { time: '10:00', inbound: 1800, resolved: 1500, abandon: 80 },
-          { time: '11:00', inbound: 2400, resolved: 2100, abandon: 120 },
-          { time: '12:00', inbound: 1600, resolved: 1300, abandon: 40 },
-          { time: '13:00', inbound: 2100, resolved: 1800, abandon: 90 },
-          { time: '14:00', inbound: 2600, resolved: 2200, abandon: 150 },
-          { time: '15:00', inbound: 2300, resolved: 2000, abandon: 100 },
-          { time: '16:00', inbound: 1900, resolved: 1700, abandon: 60 },
-          { time: '17:00', inbound: 1400, resolved: 1200, abandon: 30 },
+          { month: '1월', ARS: 180, ThinQ: 120, Chatbot: 80, Web: 200 },
+          { month: '2월', ARS: 210, ThinQ: 130, Chatbot: 90, Web: 210 },
+          { month: '3월', ARS: 170, ThinQ: 125, Chatbot: 100, Web: 220 },
+          { month: '4월', ARS: 230, ThinQ: 140, Chatbot: 110, Web: 250 },
+          { month: '5월', ARS: 200, ThinQ: 150, Chatbot: 130, Web: 240 },
+          { month: '6월', ARS: 560, ThinQ: 200, Chatbot: 180, Web: 300 }, // Event Spike
+          { month: '7월', ARS: 635, ThinQ: 220, Chatbot: 210, Web: 320 },
+          { month: '8월', ARS: 540, ThinQ: 210, Chatbot: 200, Web: 310 },
+          { month: '9월', ARS: 206, ThinQ: 160, Chatbot: 150, Web: 280 },
+          { month: '10월', ARS: 240, ThinQ: 170, Chatbot: 160, Web: 290 },
         ];
 
-        const channelData = [
-          { name: 'Voice (IVR)', value: 45, color: '#A50034' }, 
-          { name: 'Chatbot (AI)', value: 30, color: '#4B5563' },
-          { name: 'Live Chat', value: 15, color: '#6B7280' },
-          { name: 'App/Web Inquiry', value: 10, color: '#9CA3AF' },
-        ];
-
-        const satisfactionData = [
-          { name: '매우 만족', value: 65, color: '#10B981' },
-          { name: '만족', value: 20, color: '#34D399' },
-          { name: '보통', value: 10, color: '#FBBF24' },
-          { name: '불만족', value: 5, color: '#EF4444' },
-        ];
-
-        // --- Sankey Diagram Constants ---
+        // --- Colors ---
         const COLORS = {
-          inbound: '#9CA3AF', 
-          voiceBot: '#A50034', // LG Red
-          visibleArs: '#D32F2F', 
-          touchArs: '#757575',
-          direct: '#2E7D32', 
-          selfAttempt: '#E53935', 
-          agentConnect: '#2E7D32', 
-          selfResolved: '#C62828', 
-          agentResolved: '#1B5E20', 
-          drop: '#BDBDBD', 
-          flowBase: '#FFCDD2', 
-          flowAgent: '#C8E6C9', 
+            ARS: "#A50034",    // LG Red
+            Chatbot: "#4B5563", // Gray
+            ThinQ: "#10B981",   // Green
+            Web: "#6B7280",     // Light Gray
+            Sankey: {
+                inbound: "#9CA3AF",
+                voiceBot: "#A50034",
+                visibleArs: "#EF4444", // Lighter Red
+                touchArs: "#757575",
+                direct: "#15803D", // Dark Green
+                selfAttempt: "#DC2626", // Red
+                agentAttempt: "#166534", // Green
+                drop: "#D1D5DB", // Light Gray for drop
+                selfResolved: "#B91C1C", // Dark Red
+                agentResolved: "#14532D", // Darker Green
+                pathBase: "#FECACA", // Light Pink
+                pathAgent: "#BBF7D0", // Light Green
+                pathDrop: "#E5E7EB" // Gray
+            }
         };
 
         // --- Components ---
-        const Card = ({ title, children, className = "" }) => (
-          <div className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 ${className}`}>
-            <h3 className="text-gray-500 text-sm font-semibold mb-3 flex items-center gap-2">
-              {title}
-            </h3>
-            {children}
-          </div>
+
+        const SummaryCard = ({ title, value, change, icon: Icon, color }) => (
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col items-center justify-center h-28 relative overflow-hidden">
+                <div className={`absolute top-0 left-0 w-1 h-full`} style={{backgroundColor: color}}></div>
+                <div className="flex items-center gap-2 mb-2">
+                    <div className="p-1.5 rounded-full bg-gray-100 text-gray-600">
+                        <Icon size={16} />
+                    </div>
+                    <span className="text-gray-500 text-sm font-bold">{title}</span>
+                </div>
+                <div className="text-xl font-bold text-gray-800">{value}</div>
+                <div className={`text-xs mt-1 font-medium flex items-center ${change.includes('▼') ? 'text-red-500' : 'text-green-500'}`}>
+                    {change}
+                </div>
+            </div>
         );
 
-        const KPICard = ({ title, value, subtext, icon: Icon, trend }) => (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start justify-between">
-            <div>
-              <p className="text-gray-500 text-sm font-medium mb-1">{title}</p>
-              <h4 className="text-2xl font-bold text-gray-800">{value}</h4>
-              <p className={`text-xs mt-2 flex items-center ${trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                {trend === 'up' ? '▲' : '▼'} {subtext}
-              </p>
+        const KPICard = ({ title, mainValue, subText, type = 'default' }) => (
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 h-full">
+                <div className={`px-4 py-2 text-sm font-bold text-center ${type === 'red' ? 'bg-[#A50034] text-white' : 'bg-gray-100 text-gray-700'}`}>
+                    {title}
+                </div>
+                <div className="p-4 flex flex-col items-center justify-center h-24">
+                    <div className="text-xl font-bold text-gray-800 whitespace-pre-line text-center">{mainValue}</div>
+                    {subText && <div className="text-xs text-gray-500 mt-1 text-center">{subText}</div>}
+                </div>
             </div>
-            <div className="p-3 bg-gray-50 rounded-lg text-gray-600">
-              <Icon size={20} />
-            </div>
-          </div>
         );
 
-        const CallFlowSankey = () => {
-          const [hoveredPath, setHoveredPath] = useState(null);
+        // --- Advanced Sankey Diagram (SVG) ---
+        const AdvancedSankey = () => {
+            const [hovered, setHovered] = useState(null);
 
-          // Layout Constants
-          const width = 800;
-          const height = 400;
-          const colX = [50, 250, 500, 750]; 
-          const barWidth = 20;
+            // Coordinates
+            const w = 800;
+            const h = 500;
+            const col1 = 50;  // Inbound
+            const col2 = 250; // ARS Type
+            const col3 = 500; // Attempt Type
+            const col4 = 750; // Resolution
 
-          // Node Data
-          const c1_Total = { x: colX[0], y: 25, h: 350, color: COLORS.inbound, label: "총 콜 인입", value: "1,245,621" };
+            // --- Node Data (Based on image_bcbdfe.png) ---
+            // Total: 1,245,621 (100% height = 400px approx)
+            const scale = 400 / 1245621;
 
-          const c2_VoiceBot = { x: colX[1], y: 25, h: 105, color: COLORS.voiceBot, label: "보이스봇", value: "30.0%" };
-          const c2_Visible = { x: colX[1], y: 140, h: 95, color: COLORS.visibleArs, label: "보이는ARS", value: "27.4%" };
-          const c2_Touch = { x: colX[1], y: 245, h: 90, color: COLORS.touchArs, label: "누르는ARS", value: "29.7%" };
-          const c2_Direct = { x: colX[1], y: 345, h: 30, color: COLORS.direct, label: "직접연결", value: "12.8%" };
+            // Col 1: Total
+            const n_Total = { x: col1, y: 50, val: 1245621, h: 1245621 * scale, color: COLORS.Sankey.inbound, label: "콜 인입", sub: "1,245,621" };
 
-          const c3_Self_Top = { x: colX[2], y: 25, h: 80, color: COLORS.selfAttempt, label: "무인시도", value: "46.4%" };
-          const c3_Agent_Top = { x: colX[2], y: 115, h: 60, color: COLORS.agentConnect, label: "상담연결", value: "24.9%" };
-          
-          const c3_Self_Mid = { x: colX[2], y: 185, h: 60, color: COLORS.selfAttempt, label: "무인시도", value: "38.2%" };
-          const c3_Agent_Mid = { x: colX[2], y: 255, h: 50, color: COLORS.agentConnect, label: "상담연결", value: "45.1%" };
+            // Col 2: ARS Split
+            // VoiceBot: 373,695 (30.0%)
+            // Visible: 341,477 (27.4%)
+            // Touch: 370,564 (29.7%)
+            // Direct: 159,885 (12.8%)
+            const n_Voice = { x: col2, y: 50, val: 373695, h: 373695 * scale, color: COLORS.Sankey.voiceBot, label: "보이스봇", sub: "30.0%" };
+            const n_Vis = { x: col2, y: 180, val: 341477, h: 341477 * scale, color: COLORS.Sankey.visibleArs, label: "보이는ARS", sub: "27.4%" };
+            const n_Touch = { x: col2, y: 300, val: 370564, h: 370564 * scale, color: COLORS.Sankey.touchArs, label: "누르는ARS", sub: "29.7%" };
+            const n_Direct = { x: col2, y: 430, val: 159885, h: 159885 * scale, color: COLORS.Sankey.direct, label: "직접연결", sub: "12.8%" };
 
-          const c3_Agent_Bot = { x: colX[2], y: 320, h: 55, color: COLORS.agentConnect, label: "상담연결", value: "87.2%" };
+            // Col 3: Attempts (Simplified grouping for visualization)
+            // Top (VoiceBot Origin): Self(46.4%), Agent(24.9%), Drop(28.7%)
+            const y_Voice_Base = 50;
+            const n_Voice_Self = { x: col3, y: y_Voice_Base, h: (173367 * scale), color: COLORS.Sankey.selfAttempt, label: "무인시도", sub: "173K" };
+            const n_Voice_Agnt = { x: col3, y: y_Voice_Base + 60, h: (93129 * scale), color: COLORS.Sankey.agentAttempt, label: "상담연결", sub: "93K" };
+            const n_Voice_Drop = { x: col3, y: y_Voice_Base + 100, h: (107199 * scale), color: COLORS.Sankey.drop, label: "끊음", sub: "107K" };
 
-          const c4_SelfRes_Top = { x: colX[3], y: 25, h: 60, color: COLORS.selfResolved, label: "무인해결", value: "46.2%" };
-          const c4_AgentRes_Top = { x: colX[3], y: 100, h: 40, color: COLORS.agentResolved, label: "상담해결", value: "85%" };
-          
-          const c4_SelfRes_Mid = { x: colX[3], y: 160, h: 50, color: COLORS.selfResolved, label: "무인해결", value: "71.4%" };
-          const c4_AgentRes_Bot = { x: colX[3], y: 240, h: 100, color: COLORS.agentResolved, label: "상담해결", value: "90%" };
+            // Mid (Visible Origin): Self(38.2%), Agent(45.1%), Drop(16.7%)
+            const y_Vis_Base = 180;
+            const n_Vis_Self = { x: col3, y: y_Vis_Base, h: (130567 * scale), color: COLORS.Sankey.selfAttempt, label: "무인시도", sub: "130K" };
+            const n_Vis_Agnt = { x: col3, y: y_Vis_Base + 50, h: (153772 * scale), color: COLORS.Sankey.agentAttempt, label: "상담연결", sub: "153K" };
+            const n_Vis_Drop = { x: col3, y: y_Vis_Base + 110, h: (57138 * scale), color: COLORS.Sankey.drop, label: "끊음", sub: "57K" };
 
-          const drawPath = (start, end, color, id) => {
-            const controlPoint1X = start.x + (end.x - start.x) / 2;
-            const controlPoint2X = end.x - (end.x - start.x) / 2;
+            // Bot (Touch Origin): Self(7.2%), Agent(46.9%), Drop(45.9%)
+            const y_Touch_Base = 320;
+            const n_Touch_Self = { x: col3, y: y_Touch_Base, h: (26805 * scale), color: COLORS.Sankey.selfAttempt, label: "무인시도", sub: "26K" };
+            const n_Touch_Agnt = { x: col3, y: y_Touch_Base + 20, h: (173840 * scale), color: COLORS.Sankey.agentAttempt, label: "상담연결", sub: "173K" };
+            const n_Touch_Drop = { x: col3, y: y_Touch_Base + 85, h: (169919 * scale), color: COLORS.Sankey.drop, label: "끊음", sub: "169K" };
             
-            const startY = start.y + start.h / 2;
-            const endY = end.y + end.h / 2;
-            const thickness = Math.min(start.h, end.h) * 0.8;
+            // Direct -> Agent (Assume mostly agent or drop)
+            const n_Direct_Agnt = { x: col3, y: 440, h: (159885 * scale), color: COLORS.Sankey.direct, label: "직접연결", sub: "159K" };
 
-            const pathData = `
-              M ${start.x + barWidth} ${startY - thickness/2}
-              C ${controlPoint1X} ${startY - thickness/2}, ${controlPoint2X} ${endY - thickness/2}, ${end.x} ${endY - thickness/2}
-              L ${end.x} ${endY + thickness/2}
-              C ${controlPoint2X} ${endY + thickness/2}, ${controlPoint1X} ${startY + thickness/2}, ${start.x + barWidth} ${startY + thickness/2}
-              Z
-            `;
 
-            const isHovered = hoveredPath === id;
+            // Col 4: Resolution (Simplified Aggregation)
+            // Top (From Voice Self): Resolved(46.2%), Agent(26.4%), Drop(27.4%)
+            const y_Res_Top = 50;
+            const n_Res_Voice_Ok = { x: col4, y: y_Res_Top, h: (80073 * scale), color: COLORS.Sankey.selfResolved, label: "무인해결", sub: "46%" };
+            const n_Res_Voice_Ag = { x: col4, y: y_Res_Top + 30, h: (45749 * scale), color: COLORS.Sankey.agentResolved, label: "상담연결", sub: "26%" };
+
+            // Mid (From Vis Self): Resolved(71.4%), Agent(8.6%), Drop(20.0%)
+            const y_Res_Mid = 180;
+            const n_Res_Vis_Ok = { x: col4, y: y_Res_Mid, h: (93225 * scale), color: COLORS.Sankey.selfResolved, label: "무인해결", sub: "71%" };
+            const n_Res_Vis_Ag = { x: col4, y: y_Res_Mid + 35, h: (11238 * scale), color: COLORS.Sankey.agentResolved, label: "상담연결", sub: "8%" };
+
+            // Bot (From Touch Self): Resolved(25.6%), Agent(40.3%)
+            const y_Res_Bot = 320;
+            const n_Res_Touch_Ok = { x: col4, y: y_Res_Bot, h: (6855 * scale), color: COLORS.Sankey.selfResolved, label: "무인해결", sub: "25%" };
+            
+            // --- Helper to draw Paths ---
+            const drawLink = (src, dst, color, opacity = 0.3) => {
+                const c1 = src.x + 100;
+                const c2 = dst.x - 100;
+                // Calculate mid-points based on height to center links roughly
+                const srcY = src.y + src.h / 2;
+                const dstY = dst.y + dst.h / 2;
+                const thick = Math.min(src.h, dst.h) * 0.8; // thickness
+
+                return (
+                    <path 
+                        d={`M ${src.x + 20} ${srcY} C ${c1} ${srcY}, ${c2} ${dstY}, ${dst.x} ${dstY}`}
+                        stroke={color}
+                        strokeWidth={thick}
+                        fill="none"
+                        opacity={opacity}
+                        className="hover:opacity-60 transition-opacity duration-300"
+                    />
+                );
+            };
+
+            const renderNode = (n) => (
+                <g>
+                    <rect x={n.x} y={n.y} width={20} height={n.h} fill={n.color} rx={4} />
+                    <text x={n.x + 25} y={n.y + 15} fontSize="12" fontWeight="bold" fill="#374151">{n.label}</text>
+                    <text x={n.x + 25} y={n.y + 28} fontSize="11" fill="#6B7280">{n.sub}</text>
+                </g>
+            );
 
             return (
-              <path
-                key={id}
-                d={pathData}
-                fill={color}
-                opacity={isHovered ? 0.9 : 0.4}
-                stroke={isHovered ? color : "none"}
-                strokeWidth={1}
-                onMouseEnter={() => setHoveredPath(id)}
-                onMouseLeave={() => setHoveredPath(null)}
-                className="transition-all duration-300 cursor-pointer"
-              />
+                <div className="w-full h-[520px] overflow-x-auto bg-white rounded-lg p-4 relative">
+                    <svg width="100%" height="100%" viewBox={`0 0 ${w} ${h}`}>
+                        {/* Headers */}
+                        <text x={col1} y="30" fontSize="14" fontWeight="bold" textAnchor="start">ARS별 인입</text>
+                        <text x={col2} y="30" fontSize="14" fontWeight="bold" textAnchor="start">ARS 선택</text>
+                        <text x={col3} y="30" fontSize="14" fontWeight="bold" textAnchor="start">상담 시도</text>
+                        <text x={col4} y="30" fontSize="14" fontWeight="bold" textAnchor="start">문제 해결 여부</text>
+
+                        {/* Links: L1 -> L2 */}
+                        {drawLink(n_Total, n_Voice, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Total, n_Vis, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Total, n_Touch, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Total, n_Direct, COLORS.Sankey.pathAgent)}
+
+                        {/* Links: L2 -> L3 (Voice) */}
+                        {drawLink(n_Voice, n_Voice_Self, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Voice, n_Voice_Agnt, COLORS.Sankey.pathAgent)}
+                        {drawLink(n_Voice, n_Voice_Drop, COLORS.Sankey.pathDrop, 0.5)}
+
+                        {/* Links: L2 -> L3 (Visible) */}
+                        {drawLink(n_Vis, n_Vis_Self, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Vis, n_Vis_Agnt, COLORS.Sankey.pathAgent)}
+                        {drawLink(n_Vis, n_Vis_Drop, COLORS.Sankey.pathDrop, 0.5)}
+
+                        {/* Links: L2 -> L3 (Touch) */}
+                        {drawLink(n_Touch, n_Touch_Self, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Touch, n_Touch_Agnt, COLORS.Sankey.pathAgent)}
+                        {drawLink(n_Touch, n_Touch_Drop, COLORS.Sankey.pathDrop, 0.5)}
+                        
+                        {/* Links: L2 -> L3 (Direct) */}
+                        {drawLink(n_Direct, n_Direct_Agnt, COLORS.Sankey.pathAgent)}
+
+                        {/* Links: L3 -> L4 (Results from Self) */}
+                        {drawLink(n_Voice_Self, n_Res_Voice_Ok, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Voice_Self, n_Res_Voice_Ag, COLORS.Sankey.pathDrop)}
+                        
+                        {drawLink(n_Vis_Self, n_Res_Vis_Ok, COLORS.Sankey.pathBase)}
+                        {drawLink(n_Vis_Self, n_Res_Vis_Ag, COLORS.Sankey.pathDrop)}
+
+                        {drawLink(n_Touch_Self, n_Res_Touch_Ok, COLORS.Sankey.pathBase)}
+
+
+                        {/* Nodes */}
+                        {renderNode(n_Total)}
+                        
+                        {renderNode(n_Voice)}
+                        {renderNode(n_Vis)}
+                        {renderNode(n_Touch)}
+                        {renderNode(n_Direct)}
+
+                        {renderNode(n_Voice_Self)}
+                        {renderNode(n_Voice_Agnt)}
+                        {renderNode(n_Voice_Drop)}
+
+                        {renderNode(n_Vis_Self)}
+                        {renderNode(n_Vis_Agnt)}
+                        {renderNode(n_Vis_Drop)}
+
+                        {renderNode(n_Touch_Self)}
+                        {renderNode(n_Touch_Agnt)}
+                        {renderNode(n_Touch_Drop)}
+                        {renderNode(n_Direct_Agnt)}
+
+                        {renderNode(n_Res_Voice_Ok)}
+                        {renderNode(n_Res_Voice_Ag)}
+                        {renderNode(n_Res_Vis_Ok)}
+                        {renderNode(n_Res_Vis_Ag)}
+                        {renderNode(n_Res_Touch_Ok)}
+
+                    </svg>
+
+                    {/* Footer Summary (Absolute Positioned at bottom) */}
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-between bg-gray-50 p-3 rounded border border-gray-200 text-sm">
+                        <div className="flex gap-4">
+                            <span className="text-red-700 font-bold">57.4% 무인대상</span>
+                            <span className="text-gray-400">|</span>
+                            <span>보이스봇 + 보이는ARS</span>
+                        </div>
+                        <div className="flex gap-4">
+                            <span className="text-red-700 font-bold">42.5% 무인시도</span>
+                            <span className="text-gray-400">|</span>
+                            <span>전체 콜 比 26.6%</span>
+                        </div>
+                        <div className="flex gap-4">
+                            <span className="text-red-700 font-bold">57.0% 무인해결</span>
+                            <span className="text-gray-400">|</span>
+                            <span>성공률 14.5%</span>
+                        </div>
+                    </div>
+                </div>
             );
-          };
-
-          const renderBar = (node) => (
-            <g key={node.label + node.y}>
-              <rect x={node.x} y={node.y} width={barWidth} height={node.h} fill={node.color} rx={4} />
-              <text x={node.x + barWidth + 5} y={node.y + 15} fontSize="11" fontWeight="bold" fill="#374151">{node.label}</text>
-              <text x={node.x + barWidth + 5} y={node.y + 28} fontSize="10" fill="#6B7280">{node.value}</text>
-            </g>
-          );
-
-          return (
-            <div className="w-full overflow-x-auto">
-              <div className="min-w-[800px] h-[420px] relative">
-                <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
-                  <text x={colX[0]} y="15" fontSize="14" fontWeight="bold" fill="#111827" textAnchor="start">ARS 인입</text>
-                  <text x={colX[1]} y="15" fontSize="14" fontWeight="bold" fill="#111827" textAnchor="start">ARS 메뉴 선택</text>
-                  <text x={colX[2]} y="15" fontSize="14" fontWeight="bold" fill="#111827" textAnchor="start">상담/무인 시도</text>
-                  <text x={colX[3]} y="15" fontSize="14" fontWeight="bold" fill="#111827" textAnchor="start">최종 결과</text>
-
-                  {drawPath(c1_Total, c2_VoiceBot, COLORS.flowBase, 'l1-1')}
-                  {drawPath(c1_Total, c2_Visible, COLORS.flowBase, 'l1-2')}
-                  {drawPath(c1_Total, c2_Touch, COLORS.flowBase, 'l1-3')}
-                  {drawPath(c1_Total, c2_Direct, COLORS.flowAgent, 'l1-4')}
-
-                  {drawPath(c2_VoiceBot, c3_Self_Top, COLORS.flowBase, 'l2-1')}
-                  {drawPath(c2_VoiceBot, c3_Agent_Top, COLORS.flowAgent, 'l2-2')}
-                  {drawPath(c2_Visible, c3_Self_Mid, COLORS.flowBase, 'l2-3')}
-                  {drawPath(c2_Visible, c3_Agent_Mid, COLORS.flowAgent, 'l2-4')}
-                  {drawPath(c2_Touch, c3_Agent_Bot, COLORS.flowAgent, 'l2-5')}
-                  {drawPath(c2_Direct, c3_Agent_Bot, COLORS.flowAgent, 'l2-6')}
-
-                  {drawPath(c3_Self_Top, c4_SelfRes_Top, COLORS.flowBase, 'l3-1')}
-                  {drawPath(c3_Self_Top, c4_AgentRes_Top, '#E0E0E0', 'l3-2')}
-                  {drawPath(c3_Self_Mid, c4_SelfRes_Mid, COLORS.flowBase, 'l3-3')}
-                  {drawPath(c3_Agent_Top, c4_AgentRes_Top, COLORS.flowAgent, 'l3-4')}
-                  {drawPath(c3_Agent_Mid, c4_AgentRes_Bot, COLORS.flowAgent, 'l3-5')}
-                  {drawPath(c3_Agent_Bot, c4_AgentRes_Bot, COLORS.flowAgent, 'l3-6')}
-
-                  {renderBar(c1_Total)}
-                  {renderBar(c2_VoiceBot)}
-                  {renderBar(c2_Visible)}
-                  {renderBar(c2_Touch)}
-                  {renderBar(c2_Direct)}
-                  {renderBar(c3_Self_Top)}
-                  {renderBar(c3_Agent_Top)}
-                  {renderBar(c3_Self_Mid)}
-                  {renderBar(c3_Agent_Mid)}
-                  {renderBar(c3_Agent_Bot)}
-                  {renderBar(c4_SelfRes_Top)}
-                  {renderBar(c4_AgentRes_Top)}
-                  {renderBar(c4_SelfRes_Mid)}
-                  {renderBar(c4_AgentRes_Bot)}
-                </svg>
-              </div>
-            </div>
-          );
         };
 
+
         const DashboardApp = () => {
-          const [dateRange, setDateRange] = useState('Today');
+            const [period, setPeriod] = useState('월별');
 
-          return (
-            <div className="min-h-screen bg-gray-50 p-6 font-sans">
-              <header className="flex justify-between items-center mb-8">
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    <span className="w-3 h-8 bg-[#A50034] rounded-sm"></span> 
-                    Customer Journey Analytics
-                  </h1>
-                  <p className="text-gray-500 text-sm mt-1 ml-5">LG전자 고객가치혁신 / 하이텔레서비스 통합 관제</p>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <div className="bg-white border border-gray-200 rounded-lg p-1 flex items-center">
-                     {['Today', 'Week', 'Month'].map((range) => (
-                       <button 
-                        key={range}
-                        onClick={() => setDateRange(range)}
-                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                          dateRange === range 
-                          ? 'bg-gray-800 text-white shadow-sm' 
-                          : 'text-gray-500 hover:bg-gray-100'
-                        }`}
-                       >
-                         {range}
-                       </button>
-                     ))}
-                  </div>
-                  <button className="flex items-center gap-2 bg-white border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">
-                    <IconFilter size={16} /> 필터
-                  </button>
-                  <button className="flex items-center gap-2 bg-[#A50034] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#8a002b]">
-                    <IconDownload size={16} /> 리포트 다운로드
-                  </button>
-                </div>
-              </header>
+            return (
+                <div className="min-h-screen bg-gray-100 p-6 font-sans">
+                    {/* Header */}
+                    <div className="flex justify-between items-end mb-6">
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-900">상담 여정 통합 대시보드</h1>
+                            <p className="text-sm text-gray-500 mt-1">채널별 인입 현황 및 ARS 상세 Call Flow 분석</p>
+                        </div>
+                        <div className="flex bg-white rounded-lg shadow-sm border border-gray-200 p-1">
+                            {['연도별', '월별', '주별', '일별'].map(p => (
+                                <button 
+                                    key={p} 
+                                    onClick={() => setPeriod(p)}
+                                    className={`px-4 py-1.5 rounded text-sm font-bold transition-colors ${period === p ? 'bg-[#A50034] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
+                                >
+                                    {p}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <KPICard 
-                  title="총 인입 건수 (Total Inflow)" 
-                  value="1,245,621" 
-                  subtext="전일 대비 +12%" 
-                  trend="up"
-                  icon={IconUsers}
-                />
-                <KPICard 
-                  title="무인 처리율 (Self-Service)" 
-                  value="57.0%" 
-                  subtext="목표 대비 +2.5%p" 
-                  trend="up"
-                  icon={IconMessageSquare}
-                />
-                <KPICard 
-                  title="상담원 연결율 (Connect Rate)" 
-                  value="43.0%" 
-                  subtext="전일 대비 -1.2%" 
-                  trend="down"
-                  icon={IconHeadphones}
-                />
-                <KPICard 
-                  title="문제 해결율 (FCR)" 
-                  value="88.5%" 
-                  subtext="안정적 유지 중" 
-                  trend="up"
-                  icon={IconCheckCircle}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <Card title="ARS Call Flow Analysis (상담 여정 상세 흐름)" className="lg:col-span-3">
-                  <div className="py-2">
-                     <CallFlowSankey />
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100 flex gap-6 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
-                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-[#A50034] rounded-full"></div>
-                        <span><strong>보이스봇/ARS:</strong> 무인 처리 중심 경로</span>
-                     </div>
-                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-[#2E7D32] rounded-full"></div>
-                        <span><strong>상담원 연결:</strong> 전문 상담사 개입 경로</span>
-                     </div>
-                     <div className="flex items-center gap-2 ml-auto">
-                        <IconInfo size={16} className="text-gray-400"/>
-                        <span>막대 높이는 인입량을 의미하며, 흐름선(Flow) 굵기는 이동 비율을 나타냅니다.</span>
-                     </div>
-                  </div>
-                </Card>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <Card title="채널별 인입 비중">
-                  <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={channelData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={80}
-                          paddingAngle={5}
-                          dataKey="value"
-                        >
-                          {channelData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend verticalAlign="bottom" height={36}/>
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                </Card>
-
-                <Card title="시간대별 인입 추이">
-                  <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={trendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="colorInbound" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#A50034" stopOpacity={0.1}/>
-                            <stop offset="95%" stopColor="#A50034" stopOpacity={0}/>
-                          </linearGradient>
-                        </defs>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis dataKey="time" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="inbound" stroke="#A50034" fillOpacity={1} fill="url(#colorInbound)" />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
-                </Card>
-
-                <Card title="고객 만족도 (CSAT)">
-                   <div className="h-64 flex flex-col justify-center items-center">
-                     <h4 className="text-5xl font-bold text-gray-800 mb-2">4.2</h4>
-                     <div className="flex gap-1 mb-4">
-                        {[1,2,3,4].map(i => <span key={i} className="text-yellow-400 text-2xl">★</span>)}
-                        <span className="text-gray-300 text-2xl">★</span>
-                     </div>
-                     <div className="w-full px-4">
-                        {satisfactionData.map((item) => (
-                          <div key={item.name} className="flex items-center gap-2 mb-2">
-                            <span className="text-xs w-16 text-gray-500">{item.name}</span>
-                            <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                              <div className="h-full rounded-full" style={{width: `${item.value}%`, backgroundColor: item.color}}></div>
+                    {/* Main Layout: 1:2 Ratio */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        {/* Left Column: Summary & Trend */}
+                        <div className="flex flex-col gap-6">
+                            {/* Channel Summary Cards */}
+                            <div className="grid grid-cols-2 gap-3">
+                                <SummaryCard title="ARS" value="653,236" change="557K ▼" icon={IconPhone} color={COLORS.ARS} />
+                                <SummaryCard title="챗봇" value="423,420" change="337K ▼" icon={IconBot} color={COLORS.Chatbot} />
+                                <SummaryCard title="ThinQ" value="206,110" change="334K ▼" icon={IconHome} color={COLORS.ThinQ} />
+                                <SummaryCard title="홈페이지" value="952,445" change="248K ▼" icon={IconUser} color={COLORS.Web} />
                             </div>
-                            <span className="text-xs w-8 text-right font-medium">{item.value}%</span>
-                          </div>
-                        ))}
-                     </div>
-                   </div>
-                </Card>
-              </div>
-            </div>
-          );
+
+                            {/* Trend Chart */}
+                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 flex-1 min-h-[300px]">
+                                <h3 className="text-gray-700 font-bold mb-4 flex items-center gap-2">
+                                    <span className="w-1 h-4 bg-gray-400"></span> [ 기간별 채널별 유입 Trend ]
+                                </h3>
+                                <div className="h-64">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <LineChart data={trendData}>
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                            <XAxis dataKey="month" tick={{fontSize: 12}} />
+                                            <YAxis hide />
+                                            <Tooltip />
+                                            <Legend iconType="circle" />
+                                            <Line type="monotone" dataKey="ARS" stroke={COLORS.ARS} strokeWidth={2} dot={{r:3}} />
+                                            <Line type="monotone" dataKey="ThinQ" stroke={COLORS.ThinQ} strokeWidth={2} dot={{r:3}} />
+                                            <Line type="monotone" dataKey="Chatbot" stroke={COLORS.Chatbot} strokeWidth={2} dot={{r:3}} />
+                                            <Line type="monotone" dataKey="Web" stroke={COLORS.Web} strokeWidth={2} dot={{r:3}} />
+                                        </LineChart>
+                                    </ResponsiveContainer>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column: KPIs & Call Flow */}
+                        <div className="lg:col-span-2 flex flex-col gap-6">
+                            
+                            {/* Top KPIs (Red Header Style) */}
+                            <div className="grid grid-cols-4 gap-4 h-32">
+                                <KPICard title="전체 인입" mainValue="85,632 건\n2.6% ▲" type="red" />
+                                <KPICard title="무인상담" mainValue="21,901 건\n40.9%" />
+                                <KPICard title="무인처리 Top3" mainValue="" subText="① 출장접수 49.3% ② 컨텐츠제공 23.8% ③ 센터예약 5.6%" />
+                                <KPICard title="유인상담" mainValue="24,565 건\n52.9%" type="red" />
+                            </div>
+
+                            {/* Main Call Flow Chart */}
+                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-0 overflow-hidden">
+                                <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+                                    <h3 className="font-bold text-gray-800 text-lg">【 ARS Call Flow 상세 분석 】</h3>
+                                    <span className="text-xs text-gray-400">※ Data 기준: '25년 10월</span>
+                                </div>
+                                <AdvancedSankey />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            );
         };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
