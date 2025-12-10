@@ -1,0 +1,417 @@
+import React, { useState, useMemo } from 'react';
+import { Database, ArrowRight, Layers, Combine, Copy, Check } from 'lucide-react';
+
+const MergeVisualization = () => {
+  // --- 상태 관리 ---
+  // mode: 'join' (Normal Merge) 또는 'union' (Union/Union All)
+  const [mode, setMode] = useState('join');
+  // subOption: join일 때는 'inner'/'left', union일 때는 'union'/'unionAll'
+  const [subOption, setSubOption] = useState('inner');
+
+  // --- 데이터셋 정의 ---
+
+  // 시나리오 1: Normal Merge (Join)용 데이터
+  // 직원 테이블 (왼쪽)
+  const employees = [
+    { id: 1, name: '김철수', deptId: 101 },
+    { id: 2, name: '이영희', deptId: 102 },
+    { id: 3, name: '박민수', deptId: 999 }, // 부서 없음 (매칭 실패 케이스)
+  ];
+
+  // 부서 테이블 (오른쪽)
+  const departments = [
+    { id: 101, deptName: '인사팀' },
+    { id: 102, deptName: '개발팀' },
+    { id: 103, deptName: '디자인팀' }, // 직원 없음
+  ];
+
+  // 시나리오 2: Union 용 데이터 (구조가 같은 두 테이블)
+  const groupA = [
+    { id: 1, item: '사과' },
+    { id: 2, item: '바나나' },
+    { id: 3, item: '포도' },
+  ];
+
+  const groupB = [
+    { id: 3, item: '포도' }, // 중복 데이터
+    { id: 4, item: '오렌지' },
+    { id: 5, item: '키위' },
+  ];
+
+  // --- 로직 계산 ---
+
+  const resultData = useMemo(() => {
+    if (mode === 'join') {
+      if (subOption === 'inner') {
+        // Inner Join: 양쪽 모두에 키가 존재하는 경우만
+        const results = [];
+        employees.forEach(emp => {
+          const dept = departments.find(d => d.id === emp.deptId);
+          if (dept) {
+            results.push({ ...emp, deptName: dept.deptName, status: 'matched' });
+          }
+        });
+        return results;
+      } else if (subOption === 'left') {
+        // Left Outer Join: 왼쪽(직원)은 모두 유지, 오른쪽(부서)은 매칭되면 가져오고 아니면 null
+        return employees.map(emp => {
+          const dept = departments.find(d => d.id === emp.deptId);
+          return {
+            ...emp,
+            deptName: dept ? dept.deptName : '(NULL)',
+            status: dept ? 'matched' : 'unmatched'
+          };
+        });
+      }
+    } else { // Union Mode
+      if (subOption === 'union') {
+        // Union: 중복 제거 합치기
+        const uniqueItems = new Map();
+        [...groupA, ...groupB].forEach(item => {
+          uniqueItems.set(item.item, item); // item 이름을 키로 중복 제거
+        });
+        return Array.from(uniqueItems.values());
+      } else if (subOption === 'unionAll') {
+        // Union All: 무조건 다 합치기
+        return [...groupA, ...groupB];
+      }
+    }
+    return [];
+  }, [mode, subOption]);
+
+  // SQL 쿼리 생성기
+  const getSqlQuery = () => {
+    if (mode === 'join') {
+      const joinType = subOption === 'inner' ? 'INNER JOIN' : 'LEFT OUTER JOIN';
+      return `SELECT A.name, B.deptName\nFROM Employees A\n${joinType} Departments B\nON A.deptId = B.id;`;
+    } else {
+      const unionType = subOption === 'union' ? 'UNION' : 'UNION ALL';
+      return `SELECT item FROM GroupA\n${unionType}\nSELECT item FROM GroupB;`;
+    }
+  };
+
+  // --- 컴포넌트 ---
+
+  const TableCard = ({ title, data, highlightColor = "bg-white", columns }) => (
+    <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+      <div className="bg-slate-50 px-4 py-2 border-b border-slate-200 font-semibold text-slate-700 flex items-center gap-2">
+        <Database size={16} /> {title}
+      </div>
+      <div className="p-2 overflow-auto flex-1">
+        <table className="w-full text-sm text-left">
+          <thead>
+            <tr className="border-b border-slate-100 text-slate-500">
+              {columns.map((col, idx) => <th key={idx} className="pb-1 px-2">{col}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((row, idx) => (
+              <tr key={idx} className={`border-b border-slate-50 last:border-0 ${highlightColor}`}>
+                {columns.map((col, cIdx) => (
+                  // 데이터 객체에서 키를 소문자로 매핑하여 값 추출 (단순화)
+                  <td key={cIdx} className="py-2 px-2 text-slate-700">
+                    {row[col === 'ID' ? 'id' : col === '이름' ? 'name' : col === '부서ID' ? 'deptId' : col === '부서명' ? 'deptName' : 'item']}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const ResultTable = ({ data, columns }) => (
+    <div className="bg-blue-50 rounded-lg shadow-inner border border-blue-100 overflow-hidden mt-4">
+      <div className="bg-blue-100 px-4 py-2 text-blue-800 font-bold flex items-center gap-2">
+        <ArrowRight size={16} /> 결과 데이터 ({data.length}행)
+      </div>
+      <div className="p-4">
+        {data.length === 0 ? (
+          <div className="text-center text-slate-400 py-4">결과가 없습니다.</div>
+        ) : (
+          <table className="w-full text-sm text-left bg-white rounded-md overflow-hidden shadow-sm">
+            <thead className="bg-slate-100 text-slate-600">
+              <tr>
+                {columns.map((col, idx) => <th key={idx} className="py-2 px-3">{col}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, idx) => (
+                <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-blue-50 transition-colors">
+                  {columns.map((col, cIdx) => (
+                     <td key={cIdx} className="py-2 px-3 text-slate-800">
+                     {
+                        // 결과 테이블 컬럼 매핑
+                        mode === 'join' 
+                        ? (col === '이름' ? row.name : row.deptName)
+                        : row.item
+                     }
+                   </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+
+  // 벤 다이어그램 (SVG)
+  const VennDiagram = ({ type }) => {
+    // type: inner, left
+    const colorLeft = type === 'left' ? '#60A5FA' : '#E2E8F0'; // Blue-400 : Slate-200
+    const colorIntersection = '#2563EB'; // Blue-600 (항상 포함됨)
+    
+    return (
+      <div className="relative w-64 h-40 mx-auto my-4 flex justify-center items-center">
+        <svg viewBox="0 0 200 120" className="w-full h-full drop-shadow-lg">
+          {/* Left Circle (A) */}
+          <circle cx="70" cy="60" r="50" fill={colorLeft} fillOpacity="0.8" stroke="white" strokeWidth="2" />
+          {/* Right Circle (B) */}
+          <circle cx="130" cy="60" r="50" fill="#E2E8F0" fillOpacity="0.8" stroke="white" strokeWidth="2" />
+          
+          {/* Intersection (Clip Path trick or just a shape) - Simplified simulation */}
+          <path d="M 100,20 A 50,50 0 0,1 100,100 A 50,50 0 0,1 100,20 z" fill={colorIntersection} opacity={type === 'inner' || type === 'left' ? 1 : 0} />
+          
+           {/* Labels */}
+           <text x="50" y="65" fill={type === 'left' ? 'white' : '#64748B'} fontSize="12" fontWeight="bold">A</text>
+           <text x="150" y="65" fill="#64748B" fontSize="12" fontWeight="bold">B</text>
+        </svg>
+        <div className="absolute -bottom-6 text-xs text-slate-500 font-medium">
+          {type === 'inner' ? '교집합 (Inner)' : '왼쪽 전체 + 교집합 (Left Outer)'}
+        </div>
+      </div>
+    );
+  };
+
+  // 유니온 다이어그램 (Stack)
+  const UnionDiagram = ({ type }) => {
+    return (
+      <div className="flex flex-col items-center justify-center h-40 gap-2 my-4">
+        <div className="flex gap-4 items-end">
+          {/* Set A */}
+          <div className="flex flex-col gap-1 items-center">
+            <div className="w-12 h-16 bg-blue-100 border-2 border-blue-400 rounded-md flex items-center justify-center text-xs text-blue-600">A</div>
+          </div>
+          <div className="text-2xl text-slate-400 font-bold">+</div>
+          {/* Set B */}
+          <div className="flex flex-col gap-1 items-center">
+             <div className="w-12 h-16 bg-green-100 border-2 border-green-400 rounded-md flex items-center justify-center text-xs text-green-600">B</div>
+          </div>
+          <div className="text-2xl text-slate-400 font-bold">=</div>
+          {/* Result */}
+          <div className="relative">
+             <div className={`w-16 ${type === 'unionAll' ? 'h-32' : 'h-24'} bg-indigo-100 border-2 border-indigo-500 rounded-md flex flex-col items-center justify-center text-xs text-indigo-700 transition-all duration-500`}>
+                <span>결과</span>
+                <span className="text-[10px] opacity-70 mt-1">{type === 'union' ? '중복제거' : '전체포함'}</span>
+             </div>
+             {type === 'unionAll' && (
+                <div className="absolute -right-20 top-1/2 -translate-y-1/2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                   중복 허용
+                </div>
+             )}
+              {type === 'union' && (
+                <div className="absolute -right-20 top-1/2 -translate-y-1/2 text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">
+                   중복 1회만
+                </div>
+             )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-6 font-sans text-slate-800">
+      <div className="max-w-5xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+            <Combine className="text-blue-600" />
+            데이터 병합 옵션 시각화
+          </h1>
+          <p className="text-slate-600">
+            데이터베이스나 데이터 처리 도구(Pandas 등)에서 데이터를 합치는 방식(Merge/Join)을 시각적으로 학습합니다.
+          </p>
+        </header>
+
+        {/* 메인 컨트롤 패널 */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          {/* 왼쪽: 설정 및 입력 데이터 */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* 1. 병합 방식 선택 (라디오 버튼 시뮬레이션) */}
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+              <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                <Layers size={20} className="text-slate-500"/> 1. 병합 방식 선택
+              </h2>
+              
+              <div className="space-y-4">
+                {/* Normal Merge Group */}
+                <div className="space-y-2">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="mainMode" 
+                      checked={mode === 'join'} 
+                      onChange={() => { setMode('join'); setSubOption('inner'); }}
+                      className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    />
+                    <span className="font-semibold text-slate-900">Normal Merge (Joins)</span>
+                  </label>
+                  
+                  {mode === 'join' && (
+                    <div className="ml-8 space-y-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                      <select 
+                        value={subOption} 
+                        onChange={(e) => setSubOption(e.target.value)}
+                        className="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                      >
+                        <option value="inner">Inner Join (교집합)</option>
+                        <option value="left">Left Outer Join (왼쪽 기준)</option>
+                      </select>
+                      <p className="text-xs text-slate-500 mt-1">
+                        {subOption === 'inner' 
+                          ? '양쪽 테이블에 공통된 "키(Key)"가 있는 데이터만 남깁니다.' 
+                          : '왼쪽 테이블의 모든 데이터를 유지하고, 오른쪽은 매칭되는 것만 가져옵니다.'}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Union Group */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <input 
+                      type="radio" 
+                      name="mainMode" 
+                      checked={mode === 'union'} 
+                      onChange={() => { setMode('union'); setSubOption('union'); }}
+                      className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    />
+                    <span className="font-semibold text-slate-900">Union (결합)</span>
+                  </div>
+
+                  {mode === 'union' && (
+                    <div className="ml-8 flex flex-col gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                         <input 
+                            type="radio" 
+                            name="unionSub" 
+                            checked={subOption === 'union'} 
+                            onChange={() => setSubOption('union')}
+                            className="text-blue-600"
+                         />
+                         <span className="text-sm">Union (중복 제거)</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                         <input 
+                            type="radio" 
+                            name="unionSub" 
+                            checked={subOption === 'unionAll'} 
+                            onChange={() => setSubOption('unionAll')}
+                            className="text-blue-600"
+                         />
+                         <span className="text-sm">Union All (모두 포함)</span>
+                      </label>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* 2. 입력 데이터 미리보기 */}
+            <div className="space-y-2">
+              <h2 className="text-lg font-bold flex items-center gap-2">
+                <Database size={20} className="text-slate-500"/> 2. 입력 데이터 (Input)
+              </h2>
+              <div className="grid grid-cols-2 gap-2 h-48">
+                {mode === 'join' ? (
+                  <>
+                    <TableCard title="A: 직원" columns={['ID', '이름', '부서ID']} data={employees} highlightColor="bg-blue-50" />
+                    <TableCard title="B: 부서" columns={['ID', '부서명']} data={departments} highlightColor="bg-green-50" />
+                  </>
+                ) : (
+                  <>
+                    <TableCard title="A: 그룹 1" columns={['ID', '아이템']} data={groupA} highlightColor="bg-blue-50" />
+                    <TableCard title="B: 그룹 2" columns={['ID', '아이템']} data={groupB} highlightColor="bg-green-50" />
+                  </>
+                )}
+              </div>
+              <p className="text-xs text-slate-500 text-right">
+                * {mode === 'join' ? '직원의 부서ID와 부서의 ID가 연결 고리(Key)입니다.' : '두 그룹에 "포도"가 중복되어 있습니다.'}
+              </p>
+            </div>
+
+          </div>
+
+          {/* 오른쪽: 시각화 및 결과 */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 h-full flex flex-col">
+               <h2 className="text-lg font-bold mb-4 flex items-center gap-2 border-b pb-2">
+                <Combine size={20} className="text-blue-600"/> 3. 병합 결과 시각화
+              </h2>
+
+              {/* 시각화 영역 */}
+              <div className="bg-slate-50 rounded-lg p-4 mb-4 flex flex-col items-center justify-center border border-slate-100 min-h-[200px]">
+                {mode === 'join' ? (
+                  <VennDiagram type={subOption} />
+                ) : (
+                  <UnionDiagram type={subOption} />
+                )}
+                <div className="mt-2 text-center px-4">
+                  <p className="font-bold text-slate-800 text-lg">
+                    {mode === 'join' 
+                      ? (subOption === 'inner' ? 'Inner Join' : 'Left Outer Join')
+                      : (subOption === 'union' ? 'Union' : 'Union All')
+                    }
+                  </p>
+                  <p className="text-sm text-slate-600 mt-1">
+                    {mode === 'join'
+                      ? (subOption === 'inner' 
+                          ? '두 테이블 간에 교집합(매칭되는 데이터)만 결과로 추출합니다.' 
+                          : '왼쪽(A) 테이블은 모두 유지하고, 오른쪽(B)에 매칭되는 정보가 없으면 빈칸(Null)으로 둡니다.')
+                      : (subOption === 'union'
+                          ? '두 리스트를 수직으로 합치되, 중복된 데이터("포도")는 한 번만 표시합니다.'
+                          : '두 리스트를 무조건 수직으로 합칩니다. 중복된 데이터도 그대로 나옵니다.')
+                    }
+                  </p>
+                </div>
+              </div>
+
+              {/* 결과 테이블 */}
+              <ResultTable 
+                data={resultData} 
+                columns={mode === 'join' ? ['이름', '부서명'] : ['아이템']}
+              />
+
+              {/* SQL 미리보기 */}
+              <div className="mt-6">
+                <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 flex justify-between">
+                  <span>SQL Query Preview</span>
+                  <Copy size={12} className="cursor-pointer hover:text-blue-600" onClick={() => alert("복사 기능은 예시입니다.")}/>
+                </div>
+                <div className="bg-slate-800 text-green-400 p-4 rounded-md font-mono text-sm overflow-x-auto shadow-inner relative">
+                  <div className="absolute top-2 left-2 flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                  </div>
+                  <pre className="mt-4 whitespace-pre-wrap leading-relaxed">
+                    {getSqlQuery()}
+                  </pre>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MergeVisualization;
