@@ -8,14 +8,14 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- React & ReactDOM (Ver 18.2.0) -->
+    <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 
     <!-- Prop-Types (Recharts Dependency) -->
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
 
-    <!-- Recharts (Ver 2.12.7) -->
+    <!-- Recharts -->
     <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
 
     <!-- Babel -->
@@ -24,10 +24,6 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-        .kpi-card-header {
-            background-color: #A50034;
-            color: white;
         }
     </style>
 </head>
@@ -137,39 +133,35 @@
         </div>
     );
 
-    const KPICard = ({ title, mainValue, subText, type = 'default' }) => {
-        const lines = typeof mainValue === 'string' ? mainValue.split('\n') : [mainValue];
-
-        return (
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 h-full">
-                <div
-                    className={`px-4 py-2 text-sm font-bold text-center ${type === 'red' ? 'bg-[#A50034] text-white' : 'bg-gray-100 text-gray-700'}`}>
-                    {title}
-                </div>
-                <div className="p-4 flex flex-col items-center justify-center h-24">
-                    <div className="text-xl font-bold text-gray-800 text-center">
-                        {lines.map((line, idx) => (
-                            <span key={idx}>
-                                {line}
-                                {idx !== lines.length - 1 && <br/>}
-                            </span>
-                        ))}
-                    </div>
-                    {subText && <div className="text-xs text-gray-500 mt-1 text-center">{subText}</div>}
-                </div>
+    // 줄바꿈을 prop 두 개로 분리해서 확실히 처리
+    const KPICard = ({ title, line1, line2, subText, type = 'default' }) => (
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 h-full">
+            <div
+                className={`px-4 py-2 text-sm font-bold text-center ${
+                    type === 'red' ? 'bg-[#A50034] text-white' : 'bg-gray-100 text-gray-700'
+                }`}
+            >
+                {title}
             </div>
-        );
-    };
+            <div className="p-4 flex flex-col items-center justify-center h-24">
+                <div className="text-xl font-bold text-gray-800 text-center leading-tight">
+                    {line1 && <div>{line1}</div>}
+                    {line2 && <div className="mt-1">{line2}</div>}
+                </div>
+                {subText && <div className="text-xs text-gray-500 mt-1 text-center">{subText}</div>}
+            </div>
+        </div>
+    );
 
     // --- Advanced Sankey Diagram (SVG) ---
     const AdvancedSankey = () => {
-        const w = 800;
-        const h = 650; // 높이 여유 있게
+        const w = 1000;
+        const h = 520;  // 원본 비율 근처
 
         const col1 = 50;
-        const col2 = 250;
-        const col3 = 500;
-        const col4 = 750;
+        const col2 = 280;
+        const col3 = 600;
+        const col4 = 900;
 
         const scale = 400 / 1245621;
 
@@ -178,7 +170,7 @@
         const n_Voice = { x: col2, y: 80, val: 373695, h: 373695 * scale, color: COLORS.Sankey.voiceBot, label: "보이스봇", sub: "30.0%" };
         const n_Vis   = { x: col2, y: 200, val: 341477, h: 341477 * scale, color: COLORS.Sankey.visibleArs, label: "보이는ARS", sub: "27.4%" };
         const n_Touch = { x: col2, y: 320, val: 370564, h: 370564 * scale, color: COLORS.Sankey.touchArs, label: "누르는ARS", sub: "29.7%" };
-        const n_Direct= { x: col2, y: 440, val: 159885, h: 159885 * scale, color: COLORS.Sankey.direct, label: "직접연결", sub: "12.8%" };
+        const n_Direct= { x: col2, y: 430, val: 159885, h: 159885 * scale, color: COLORS.Sankey.direct, label: "직접연결", sub: "12.8%" };
 
         const y_Voice_Base = 80;
         const n_Voice_Self = { x: col3, y: y_Voice_Base, h: (173367 * scale), color: COLORS.Sankey.selfAttempt, label: "무인시도", sub: "173K" };
@@ -195,7 +187,7 @@
         const n_Touch_Agnt = { x: col3, y: y_Touch_Base + 50, h: (173840 * scale), color: COLORS.Sankey.agentAttempt, label: "상담연결", sub: "173K" };
         const n_Touch_Drop = { x: col3, y: y_Touch_Base + 140, h: (169919 * scale), color: COLORS.Sankey.drop, label: "끊음", sub: "169K" };
 
-        const n_Direct_Agnt = { x: col3, y: 480, h: (159885 * scale), color: COLORS.Sankey.direct, label: "직접연결", sub: "159K" };
+        const n_Direct_Agnt = { x: col3, y: 460, h: (159885 * scale), color: COLORS.Sankey.direct, label: "직접연결", sub: "159K" };
 
         const y_Res_Top = 80;
         const n_Res_Voice_Ok = { x: col4, y: y_Res_Top, h: (80073 * scale), color: COLORS.Sankey.selfResolved, label: "무인해결", sub: "46%" };
@@ -209,8 +201,8 @@
         const n_Res_Touch_Ok = { x: col4, y: y_Res_Bot, h: (6855 * scale), color: COLORS.Sankey.selfResolved, label: "무인해결", sub: "25%" };
 
         const drawLink = (src, dst, color, opacity = 0.3) => {
-            const c1 = src.x + 100;
-            const c2 = dst.x - 100;
+            const c1 = src.x + 80;
+            const c2 = dst.x - 80;
             const srcY = src.y + src.h / 2;
             const dstY = dst.y + dst.h / 2;
             const thick = Math.min(src.h, dst.h) * 0.8;
@@ -236,8 +228,13 @@
         );
 
         return (
-            <div className="w-full min-h-[520px] h-[60vh] overflow-x-auto bg-white rounded-lg p-4 relative">
-                <svg width="100%" height="100%" viewBox={`0 0 ${w} ${h}`}>
+            <div className="w-full overflow-visible bg-white p-4">
+                <svg
+                    className="block mx-auto"
+                    width={w}
+                    height={h}
+                    viewBox={`0 0 ${w} ${h}`}
+                >
                     <text x={col1} y="40" fontSize="14" fontWeight="bold" textAnchor="start">ARS별 인입</text>
                     <text x={col2} y="40" fontSize="14" fontWeight="bold" textAnchor="start">ARS 선택</text>
                     <text x={col3} y="40" fontSize="14" fontWeight="bold" textAnchor="start">상담 시도</text>
@@ -297,8 +294,7 @@
                     {renderNode(n_Res_Touch_Ok)}
                 </svg>
 
-                <div
-                    className="absolute bottom-4 left-4 right-4 flex justify-between bg-gray-50 p-3 rounded border border-gray-200 text-sm">
+                <div className="mt-4 flex justify-between bg-gray-50 p-3 rounded border border-gray-200 text-sm">
                     <div className="flex gap-4">
                         <span className="text-red-700 font-bold">57.4% 무인대상</span>
                         <span className="text-gray-400">|</span>
@@ -334,7 +330,9 @@
                             <button
                                 key={p}
                                 onClick={() => setPeriod(p)}
-                                className={`px-4 py-1.5 rounded text-sm font-bold transition-colors ${period === p ? 'bg-[#A50034] text-white' : 'text-gray-500 hover:bg-gray-50'}`}
+                                className={`px-4 py-1.5 rounded text-sm font-bold transition-colors ${
+                                    period === p ? 'bg-[#A50034] text-white' : 'text-gray-500 hover:bg-gray-50'
+                                }`}
                             >
                                 {p}
                             </button>
@@ -383,31 +381,37 @@
                         <div className="grid grid-cols-4 gap-4 h-32">
                             <KPICard
                                 title="전체 인입"
-                                mainValue={`85,632 건\n2.6% ▲`}
+                                line1="85,632 건"
+                                line2="2.6% ▲"
                                 type="red"
                             />
                             <KPICard
                                 title="무인상담"
-                                mainValue={`21,901 건\n40.9%`}
+                                line1="21,901 건"
+                                line2="40.9%"
                             />
                             <KPICard
                                 title="무인처리 Top3"
-                                mainValue=""
+                                line1=""
                                 subText="① 출장접수 49.3% ② 컨텐츠제공 23.8% ③ 센터예약 5.6%"
                             />
                             <KPICard
                                 title="유인상담"
-                                mainValue={`24,565 건\n52.9%`}
+                                line1="24,565 건"
+                                line2="52.9%"
                                 type="red"
                             />
                         </div>
 
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-0 overflow-hidden">
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-0">
                             <div className="p-4 border-b border-gray-100 flex justify-between items-center">
                                 <h3 className="font-bold text-gray-800 text-lg">【 ARS Call Flow 상세 분석 】</h3>
                                 <span className="text-xs text-gray-400">※ Data 기준: '25년 10월</span>
                             </div>
-                            <AdvancedSankey/>
+
+                            <div className="overflow-x-auto">
+                                <AdvancedSankey/>
+                            </div>
                         </div>
                     </div>
                 </div>
