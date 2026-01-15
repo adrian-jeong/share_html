@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LG전자 고객가치혁신부문 IT 지식 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <style>
+        :root {
+            --lg-red: #A50034;
+            --lg-gray: #717171;
+            --lg-dark: #202020;
+            --lg-light-gray: #f4f4f4;
+        }
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            background-color: var(--lg-light-gray);
+            color: var(--lg-dark);
+            margin: 0;
+        }
+        .card-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        .card {
+            scroll-snap-align: start;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 50px 80px;
+            background: white;
+            position: relative;
+            border-bottom: 1px solid #eee;
+            overflow: hidden;
+        }
+        /* PPT 헤더 */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--lg-red);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .lg-logo {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--lg-red);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lg-logo-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--lg-red);
+            border-radius: 50%;
+        }
+        .page-category {
+            font-weight: 700;
+            color: var(--lg-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .card-num {
+            position: absolute;
+            bottom: 30px;
+            right: 80px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--lg-gray);
+        }
+
+        .card-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 25px;
+            letter-spacing: -0.04em;
+            color: var(--lg-dark);
+        }
+        .card-title span {
+            color: var(--lg-red);
+        }
+
+        /* 정의 섹션 (Definition) */
+        .definition-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 18px 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--lg-dark);
+        }
+        .def-label {
+            display: inline-block;
+            color: var(--lg-red);
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .def-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 본문 스타일 */
+        .card-content {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 1100px;
+            color: #444;
+            text-align: left;
+            word-break: keep-all;
+        }
+        .card-content p {
+            margin-bottom: 15px;
+        }
+
+        /* 역할 시각화 카드 */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .role-card {
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: var(--lg-red);
+        }
+        .role-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .role-name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--lg-dark);
+        }
+        .role-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .flow-arrow {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        /* AI 계층 시각화 */
+        .ai-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fdfdfd;
+            border-radius: 15px;
+            border: 1px dashed #ccc;
+        }
+        .ai-layer-box {
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .layer-ai { background-color: #ffebee; border: 2px solid #ef9a9a; color: #b71c1c; }
+        .layer-ml { background-color: #e3f2fd; border: 2px solid #90caf9; color: #0d47a1; margin-left: 40px; }
+        .layer-dl { background-color: #e8f5e9; border: 2px solid #a5d6a7; color: #1b5e20; margin-left: 80px; }
+
+        /* 데이터 레이어 비교 테이블 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        .data-table th {
+            background-color: var(--lg-dark);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .data-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        .intro-card {
+            background: white;
+            justify-content: center;
+        }
+        .intro-card .card-header {
+            position: absolute;
+            top: 50px;
+            left: 80px;
+            right: 80px;
+        }
+
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            color: var(--lg-red);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--lg-gray);
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <!-- 01: 도입부 -->
+        <div class="card intro-card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">Customer Value Innovation</div>
+            </div>
+            <h2 class="card-title">현업의 기획을 기술로 번역하는<br><span>IT 핵심 소통 가이드</span></h2>
+            <div class="card-content" style="border-left: 6px solid var(--lg-red); padding-left: 30px;">
+                <p>LG전자 고객가치혁신부문 임직원 여러분, 우리의 모든 혁신 활동은 고도화된 IT 시스템과 데이터 인프라를 통해 실체화됩니다. </p>
+                <p>비즈니스 요구사항을 IT 언어로 정확히 전달하는 능력은 프로젝트의 속도와 퀄리티를 결정짓는 핵심 역량입니다. 본 가이드는 현업에서 흔히 사용하는 용어들의 <b>기술적 정의(Technical Definition)</b>와 <b>실무적 맥락</b>을 함께 정리하였습니다.</p>
+                <p>단순한 용어 암기를 넘어, IT 파트너와 동일한 관점에서 시스템 아키텍처와 데이터 흐름을 논의할 수 있는 기반이 되기를 바랍니다.</p>
+            </div>
+            <div class="scroll-hint">마우스 휠을 사용하여 한 장씩 넘겨보세요 ↓</div>
+            <div class="card-num">01 / 20</div>
+        </div>
+		
+		<!-- 02: 발표자 소개 -->  
+		<div class="card">  
+			<div class="card-header">  
+				<div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>  
+				<div class="page-category">Presenter Info</div>  
+			</div>  
+		  
+			<h2 class="card-title">안녕하세요, <span class="text-gray-500">물리학에서 데이터 분석까지</span></h2>  
+			  
+			<div class="flex gap-10 mt-4">  
+				<!-- Left: Profile Info -->  
+				<div class="w-2/5 bg-gray-50 rounded-2xl border p-10 flex flex-col justify-center">  
+					<div class="mb-8">  
+						<h3 class="text-4xl font-black mb-2">정선영 선임</h3>  
+						<p class="text-[#A50034] text-xl font-bold">CC&S 전략팀</p>  
+					</div>  
+					  
+					<div class="space-y-4">  
+						<h4 class="text-lg font-bold border-b border-gray-200 pb-2">Technical Skills</h4>  
+						<div class="grid grid-cols-2 gap-3 text-sm font-medium">  
+							<div class="flex items-center gap-2"><span class="fa-brands fa-python text-[#A50034]"></span> Python</div>  
+							<div class="flex items-center gap-2"><span class="fa-solid fa-database text-[#A50034]"></span> SQL / Cypher</div>  
+							<div class="flex items-center gap-2"><span class="fa-solid fa-brain text-[#A50034]"></span> NLP / LLM</div>  
+							<div class="flex items-center gap-2"><span class="fa-solid fa-project-diagram text-[#A50034]"></span> Network Science</div>  
+						</div>  
+		  
+						<h4 class="text-lg font-bold border-b border-gray-200 pb-2 mt-6">Soft Skills</h4>  
+						<div class="space-y-2 text-sm font-medium">  
+							<div class="flex items-center gap-2"><span class="fa-solid fa-tasks text-[#A50034]"></span> 프로젝트 수행 및 리딩</div>  
+							<div class="flex items-center gap-2"><span class="fa-solid fa-comments text-[#A50034]"></span> 기술-비즈니스 커뮤니케이션</div>  
+						</div>  
+					</div>  
+				</div>  
+		  
+				<!-- Right: Career Path -->  
+				<div class="w-3/5 py-5 px-5">  
+					<h3 class="text-2xl font-bold mb-8 flex items-center gap-3">  
+						<span class="fa-solid fa-route text-[#A50034]"></span> 커리어 성장 경로  
+					</h3>  
+					<div class="relative pl-8">  
+						<!-- Path Line -->  
+						<div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-100"></div>  
+						  
+						<!-- Step 1 -->  
+						<div class="mb-10 relative group">  
+							<div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[#A50034] ring-4 ring-white"></div>  
+							<h4 class="text-xl font-bold">물리학 전공 · 복잡계 연구실</h4>  
+							<p class="text-gray-500 text-sm mt-1">기초 과학 데이터를 다루는 분석적 사고와 프로그래밍 기초 습득</p>  
+						</div>  
+						<!-- Step 2 -->  
+						<div class="mb-10 relative group">  
+							<div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[#A50034] ring-4 ring-white"></div>  
+							<h4 class="text-xl font-bold">국가기상위성센터 연구원</h4>  
+							<p class="text-gray-500 text-sm mt-1">대규모 시계열 위성 데이터 처리 및 공공 도메인 분석 경험 (4년)</p>  
+						</div>  
+						<!-- Step 3 -->  
+						<div class="mb-10 relative group">  
+							<div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[#A50034] ring-4 ring-white"></div>  
+							<h4 class="text-xl font-bold">비트나인 R&D 센터장</h4>  
+							<p class="text-gray-500 text-sm mt-1">스타트업의 속도감 있는 환경에서 그래프 DB 및 AI 모델 상용화 (3년)</p>  
+						</div>  
+						<!-- Step 4 -->  
+						<div class="relative group">  
+							<div class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[#A50034] ring-4 ring-white"></div>  
+							<h4 class="text-xl font-bold">LG전자 고객서비스 분석가</h4>  
+							<p class="text-gray-500 text-sm mt-1">글로벌 서비스 데이터를 활용한 실질적 고객가치 창출 및 문제 해결</p>  
+						</div>  
+					</div>  
+				</div>  
+			</div>  
+		  
+			<div class="absolute bottom-8 left-20 right-20 flex justify-between items-center text-gray-400 text-sm">  
+				<span>© LG Electronics. All Rights Reserved.</span>  
+				<span class="font-bold">02 / 20</span>  
+			</div>  
+		</div>  
+		
+        <!-- 03: On-Premise vs Cloud -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">01. Infrastructure Architecture</div>
+            </div>
+            <h2 class="card-title">물리적 인프라(On-Premise)와<br><span>가상화 서비스(Cloud)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: On-Premise vs Cloud</span>
+                <p class="def-text"><b>온프레미스</b>는 조직이 물리적으로 소유한 공간에 직접 서버 장비를 구축·운영하는 방식이며, <b>클라우드</b>는 외부 공급자(AWS, Azure 등)의 가상화된 컴퓨팅 자원을 네트워크를 통해 사용한 만큼 비용을 지불하고 이용하는 서비스 모델입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>과거 시스템 구축의 정석이었던 <b>온프레미스</b>는 보안성이 뛰어나지만 서버 도입까지 수개월의 조달 기간이 소요되며, 트래픽 폭주 시 즉각적인 대응이 어렵습니다.</p>
+                <p>반면, <b>클라우드</b>는 클릭 몇 번으로 서버 사양을 조절(Auto-scaling)할 수 있어 LG전자의 글로벌 마케팅 이벤트나 신규 서비스 런칭 시 발생하는 불확실한 접속량에 유연하게 대응할 수 있습니다. IT 파트너가 "클라우드 네이티브"를 언급한다면, 시스템 설계 단계부터 클라우드의 이러한 가변성과 고가용성을 최우선으로 고려하자는 전략적 제안입니다.</p>
+            </div>
+            <div class="card-num">03 / 20</div>
+        </div>
+
+        <!-- 04: Client vs Server -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">02. Network Communication</div>
+            </div>
+            <h2 class="card-title">상호작용의 시작과 끝,<br><span>클라이언트(Client)와 서버(Server)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Client & Server</span>
+                <p class="def-text"><b>클라이언트</b>는 사용자에게 정보 출력을 요청하고 결과를 표시하는 인터페이스(앱/웹)를 의미하며, <b>서버</b>는 네트워크를 통해 클라이언트로부터 수신된 요청을 처리하고 데이터를 가공하여 응답을 반환하는 고성능 컴퓨터 시스템입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>우리가 일상적으로 사용하는 LG ThinQ 앱의 화면 구성이나 버튼들은 모두 <b>클라이언트</b> 사이드에 속합니다. 사용자가 "건조기 상태 확인" 버튼을 누르는 행위는 서버를 향한 '요청(Request)'이 됩니다.</p>
+                <p>서버는 해당 제품의 실시간 상태 값을 DB에서 조회하여 다시 앱으로 전송(Response)합니다. 만약 "서버 응답이 없다"는 보고를 받는다면, 이는 주방(서버)에서 주문(요청)을 처리하지 못할 만큼 과부하가 걸렸거나 통신 경로에 문제가 생겼음을 의미합니다. 기획 시 사용자 경험(UX)뿐만 아니라 서버 부하량까지 고려해야 하는 이유입니다.</p>
+            </div>
+            <div class="card-num">04 / 20</div>
+        </div>
+
+        <!-- 05: 통합 데이터 인프라 (DB, DW, DL) -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">03. Data Ecosystem</div>
+            </div>
+            <h2 class="card-title">데이터의 흐름과 저장 체계,<br><span>DB, DW 그리고 Data Lake</span></h2>
+            <div class="card-content">
+                <p>현대 IT 아키텍처에서 데이터는 그 성격과 활용 목적에 따라 세 가지 계층으로 관리됩니다. 이를 정확히 구분하는 것이 데이터 기반 기획의 시작입니다.</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="20%">구분</th>
+                            <th width="26%">데이터베이스 (DB)</th>
+                            <th width="27%">데이터 웨어하우스 (DW)</th>
+                            <th width="27%">데이터 레이크 (DL)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold bg-gray-50 text-center text-sm">정의 (Definition)</td>
+                            <td>실시간 비즈니스 트랜잭션을 처리하고 기록하기 위한 <b>운영용 저장소</b></td>
+                            <td>의사결정을 위해 여러 DB의 데이터를 통합·정제한 <b>분석용 저장소</b></td>
+                            <td>가공되지 않은 모든 형태의 데이터를 원형 그대로 보관하는 <b>원천 저장소</b></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 text-center text-sm">데이터 형태</td>
+                            <td>정형 (Structured)<br><span class="text-xs text-gray-500">표 형태, 명확한 스키마</span></td>
+                            <td>정형 (Structured)<br><span class="text-xs text-gray-500">분석에 최적화된 테마별 정리</span></td>
+                            <td>모든 형태 (Any format)<br><span class="text-xs text-gray-500">로그, 이미지, 음성, 텍스트 등</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 text-center text-sm">주요 목적</td>
+                            <td><b>OLTP</b> (Online Transaction)<br><span class="text-xs text-gray-500">주문, 결제, 회원가입 등 실시간 처리</span></td>
+                            <td><b>OLAP</b> (Online Analytical)<br><span class="text-xs text-gray-500">통계 분석, KPI 도출, 리포트 작성</span></td>
+                            <td><b>Data Science / AI</b><br><span class="text-xs text-gray-500">AI 모델 학습, 탐색적 데이터 분석</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 text-center text-sm">실무적 관점</td>
+                            <td>"지금 서비스가 돌아가게 하는 데이터인가?"</td>
+                            <td>"과거 데이터를 정제해서 인사이트를 뽑을 것인가?"</td>
+                            <td>"나중에 무엇이든 분석할 수 있게 일단 다 모아둘 것인가?"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-num">05 / 20</div>
+        </div>
+
+        <!-- 06: API -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">04. Interface & Integration</div>
+            </div>
+            <h2 class="card-title">시스템 간 소통의 약속,<br><span>API (응용 프로그램 인터페이스)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: API</span>
+                <p class="def-text">애플리케이션 간에 데이터와 기능을 서로 주고받기 위해 정의된 통신 규격입니다. 상호 작용을 위한 '창구'이자 소프트웨어 컴포넌트 간의 '계약'으로 정의됩니다.</p>
+            </div>
+            <div class="card-content">
+                <p>우리의 시스템이 외부 결제 서비스나 배송 추적 서비스와 연동될 때, 상대방의 소스 코드를 직접 가져오는 것이 아니라 그들이 열어둔 <b>API</b> 창구를 이용합니다.</p>
+                <p>IT 부서에서 "API 명세서를 확인해야 한다"고 말한다면, 그것은 어떤 데이터 형식을 보내고 받아야 하는지 기술된 가이드(규약)를 체크하겠다는 뜻입니다. 현업에서는 신규 솔루션 도입 시 "우리 내부 시스템과 API 연동이 자유로운가?"를 체크하는 것이 향후 확장성 확보에 필수적입니다.</p>
+            </div>
+            <div class="card-num">06 / 20</div>
+        </div>
+
+        <!-- 07: JSON -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">05. Data Interchange Format</div>
+            </div>
+            <h2 class="card-title">데이터를 담는 표준 양식,<br><span>JSON (제이슨)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: JSON</span>
+                <p class="def-text">JavaScript Object Notation의 약자로, 속성-값 쌍(Attribute-Value Pairs)으로 구성된 텍스트 기반의 데이터 교환 포맷입니다. 기계가 파싱하기 쉽고 인간이 읽기 편한 구조를 가지고 있습니다.</p>
+            </div>
+            <div class="card-content">
+                <p>시스템 간 대화 시 <code>{"제품": "TV", "가격": 2500000}</code>와 같은 형태를 사용합니다. 과거의 복잡했던 XML 포맷보다 가볍고 직관적이어서 현재 전 세계적으로 표준처럼 쓰입니다.</p>
+                <p>기획자가 화면에 들어갈 데이터 항목을 정의할 때, IT 담당자와 이 <b>JSON</b> 구조(Key와 Value의 관계)에 대해 논의하면 데이터 누락 없는 정확한 기능 구현이 가능해집니다.</p>
+            </div>
+            <div class="card-num">07 / 20</div>
+        </div>
+
+        <!-- 08: Development Roles -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">06. Development Roles & Process</div>
+            </div>
+            <h2 class="card-title">가치를 만드는 4대 핵심 역할,<br><span>디자인부터 백엔드까지</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: UX/UI to Backend Flow</span>
+                <p class="def-text">하나의 IT 제품은 사용자의 눈에 보이는 <b>디자인(Design)</b>, 이를 브라우저 언어로 옮기는 <b>퍼블리싱(Publishing)</b>, 화면의 기능을 구현하는 <b>프론트엔드(Frontend)</b>, 데이터와 로직을 처리하는 <b>백엔드(Backend)</b>의 유기적 협업으로 완성됩니다.</p>
+            </div>
+            
+            <div class="role-grid">
+                <div class="role-card bg-pink-50">
+                    <div class="role-icon">🎨</div>
+                    <div class="role-name">디자이너 (Designer)</div>
+                    <div class="role-desc">UX를 설계하고 UI 가이드를 제작합니다.<br><b>"어떻게 보일까?"</b></div>
+                    <div class="flow-arrow">→</div>
+                </div>
+                <div class="role-card bg-blue-50">
+                    <div class="role-icon">📑</div>
+                    <div class="role-name">퍼블리셔 (Publisher)</div>
+                    <div class="role-desc">디자인을 웹 표준 언어로 변환합니다.<br><b>"뼈대를 만들까?"</b></div>
+                    <div class="flow-arrow">→</div>
+                </div>
+                <div class="role-card bg-green-50">
+                    <div class="role-icon">💻</div>
+                    <div class="role-name">프론트엔드 (Frontend)</div>
+                    <div class="role-desc">사용자 동작과 데이터를 연결합니다.<br><b>"어떻게 동작할까?"</b></div>
+                    <div class="flow-arrow">↔</div>
+                </div>
+                <div class="role-card bg-purple-50">
+                    <div class="role-icon">⚙️</div>
+                    <div class="role-name">백엔드 (Backend)</div>
+                    <div class="role-desc">데이터 처리와 핵심 로직을 담당합니다.<br><b>"어떻게 처리할까?"</b></div>
+                </div>
+            </div>
+
+            <div class="card-content mt-8">
+                <p class="text-sm bg-gray-50 p-4 rounded-lg border">
+                    💡 <b>기획자와의 소통 Point:</b> <br>
+                    - "디자인 가이드와 달라요" → <b>디자이너/퍼블리셔</b> 소통 <br>
+                    - "버튼 클릭 시 화면이 안 변해요" → <b>프론트엔드</b> 소통 <br>
+                    - "데이터 저장이 안 돼요" → <b>백엔드</b> 소통
+                </p>
+            </div>
+            <div class="card-num">08 / 20</div>
+        </div>
+
+        
+        <!-- 09: Web Server vs WAS (번호 밀림 대응) -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">08. Server Logic</div>
+            </div>
+            <h2 class="card-title">서버의 두 가지 심장,<br><span>Web Server와 WAS</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Web Server vs WAS</span>
+                <p class="def-text"><b>웹 서버</b>는 정적 콘텐츠(HTML, 이미지)를 제공하며, <b>WAS</b>는 비즈니스 로직을 수행하고 DB 조회를 거쳐 동적 데이터를 생성하여 제공합니다.</p>
+            </div>
+            <div class="card-content">
+                <p>똑같이 보이는 홈페이지 대문 이미지는 <b>Web Server</b>가 빠르게 전달합니다. 하지만 로그인을 하거나 제품 추천 리스트를 가져오는 것은 <b>WAS</b>가 내부 로직을 계산해서 보내줘야 합니다.</p>
+                <p>시스템 성능 지연 보고 시 "WAS 리소스 점검"이라는 표현이 나온다면, 복잡한 비즈니스 계산이나 DB 접근 과정에서 병목 현상이 발생했다는 뜻입니다.</p>
+            </div>
+            <div class="card-num">09 / 20</div>
+        </div>
+
+        <!-- 10: SQL -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">09. Database Query Language</div>
+            </div>
+            <h2 class="card-title">데이터를 뽑아내는 마법의 문장,<br><span>SQL (구조화 질의 언어)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: SQL</span>
+                <p class="def-text">관계형 데이터베이스(RDBMS)에서 데이터를 관리하고 조작하기 위해 설계된 특수 목적의 프로그래밍 언어입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>기획자가 IT에 데이터 추출 요청을 할 때 가장 많이 언급되는 단어입니다. "SQL을 짠다"는 것은 거대한 데이터베이스 표들 사이에서 내가 원하는 조건만 필터링하여 가져오는 명령문을 작성하는 것입니다.</p>
+                <p>기초적인 SQL 구문을 이해하고 있으면 IT 부서에 의존하지 않고도 직접 분석용 저장소(DW)에서 필요한 통계치를 추출하여 신속한 의사결정을 내릴 수 있습니다.</p>
+            </div>
+            <div class="card-num">10 / 20</div>
+        </div>
+
+        <!-- 11: Docker & Container -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">10. Infrastructure Virtualization</div>
+            </div>
+            <h2 class="card-title">어디서든 똑같이 돌아가는 패키지,<br><span>도커(Docker)와 컨테이너</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Docker</span>
+                <p class="def-text">애플리케이션과 환경 설정을 하나의 '컨테이너'에 담아 실행 환경의 독립성을 보장하는 플랫폼입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>개발자의 PC에서는 잘 돌아가는데 운영 서버에만 올리면 에러가 나는 문제는 서버마다 설정이 다르기 때문입니다. <b>도커</b>는 모든 환경을 하나의 가방(컨테이너)에 통째로 담습니다.</p>
+                <p>이 가방만 옮기면 어디서든 똑같은 동작을 보장하므로 배포 효율이 비약적으로 향상됩니다. 현대적인 클라우드 기반 프로젝트에서 인프라 구성을 논의할 때 빠지지 않는 핵심 기술입니다.</p>
+            </div>
+            <div class="card-num">11 / 20</div>
+        </div>
+
+        <!-- 12: Deploy & CI/CD -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">11. Release Management</div>
+            </div>
+            <h2 class="card-title">코드 완료가 끝이 아니다,<br><span>배포(Deploy)와 자동화(CI/CD)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Deployment & CI/CD</span>
+                <p class="def-text"><b>배포</b>는 소프트웨어를 실제 운영 환경에 설치하여 사용자에게 제공하는 과정이며, <b>CI/CD</b>는 이 과정을 자동화하는 파이프라인 기술입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>배포 자동화(CI/CD)가 잘 구축된 조직은 하루에도 여러 번 작은 기능들을 안전하게 서비스에 반영할 수 있습니다. 이는 고객 피드백에 기민하게 반응해야 하는 프로젝트에 매우 유리한 기술적 인프라입니다.</p>
+            </div>
+            <div class="card-num">12 / 20</div>
+        </div>
+
+        <!-- 13: Load Balancing -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">12. High Availability</div>
+            </div>
+            <h2 class="card-title">트래픽 정체를 해결하는 교통 정리,<br><span>로드밸런싱(Load Balancing)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Load Balancing</span>
+                <p class="def-text">서버에 들어오는 요청을 여러 대의 서버에 균등하게 분산시켜주는 장치나 기술입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>갑작스러운 신제품 알림톡을 보내면 수십만 명의 고객이 한꺼번에 접속합니다. 이때 로드밸런서는 교통경찰처럼 요청들을 놀고 있는 서버들로 적절히 나누어 보냅니다.</p>
+                <p>대규모 이벤트 시의 서비스 장애를 사전에 방지하기 위해 로드밸런싱 설정이 충분한지 IT에 미리 질의하는 습관이 중요합니다.</p>
+            </div>
+            <div class="card-num">13 / 20</div>
+        </div>
+		<!-- 14: NEW - AI, ML, DL의 이해와 역사 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">07. AI Evolution</div>
+            </div>
+            <h2 class="card-title">알파고에서 챗GPT까지,<br><span>AI · ML · DL의 핵심 개념</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: AI > ML > DL</span>
+                <p class="def-text"><b>AI(인공지능)</b>는 인간의 지능을 모사하는 가장 넓은 개념이며, <b>ML(머신러닝)</b>은 데이터로부터 기계가 스스로 학습하는 방법론, <b>DL(딥러닝)</b>은 인간의 뇌 구조를 본뜬 인공신경망을 통해 복잡한 패턴을 찾아내는 기술입니다.</p>
+            </div>
+            <div class="card-content">
+                <div class="flex gap-8">
+                    <div class="w-1/2">
+                        <p class="mb-4">우리는 2016년 <b>'알파고(AlphaGo)'</b>를 통해 딥러닝의 위력을 실감했습니다. 특정 규칙(바둑) 내에서 최적의 수를 찾는 '전문가형 AI' 시대였습니다.</p>
+                        <p>하지만 2020년 <b>GPT-3.0</b>이 발표되면서 판도가 바뀌었습니다. 특정 목적이 아닌, 방대한 데이터를 학습하여 '인간처럼 대화하고 창작하는' <b>생성형 AI(Generative AI)</b>의 시대가 열린 것입니다.</p>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="ai-layers">
+                            <div class="ai-layer-box layer-ai text-sm">Artificial Intelligence (인공지능)</div>
+                            <div class="ai-layer-box layer-ml text-sm">Machine Learning (기계학습)</div>
+                            <div class="ai-layer-box layer-dl text-sm">Deep Learning (심층학습)</div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-4 text-center">※ 하위 개념으로 갈수록 데이터 집약적이며 복잡한 처리가 가능합니다.</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                    <p class="text-sm font-bold">왜 LLM(거대언어모델)이 좋은가요?</p>
+                    <p class="text-xs leading-relaxed">과거 AI는 사진 한 장을 분류하기 위해 수만 장의 사진을 새로 학습시켜야 했습니다. 하지만 <b>LLM</b>은 이미 세상의 거의 모든 지식을 학습했기에, 아주 적은 힌트(프롬프트)만으로도 우리 비즈니스에 맞는 결과를 즉시 만들어낼 수 있습니다. 이것이 <b>혁신의 속도</b>를 바꾸고 있습니다.</p>
+                </div>
+            </div>
+            <div class="card-num">14 / 20</div>
+        </div>
+
+        <!-- 15: LLM -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">13. Generative AI</div>
+            </div>
+            <h2 class="card-title">인간처럼 이해하고 생성하는,<br><span>거대 언어 모델(LLM)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: LLM</span>
+                <p class="def-text">방대한 텍스트 데이터를 학습하여 자연어 이해 및 생성 능력을 갖춘 딥러닝 모델입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>최근 LG전자에서 '공감 지능'을 구현하기 위한 핵심 도구입니다. 고객 상담 데이터를 요약하거나, 사용자의 명령을 가전 제품이 알아듣도록 번역하는 데 사용됩니다.</p>
+                <p>단, LLM은 아는 척하며 오답을 말하는 '할루시네이션(환각)' 현상이 있습니다. 이를 보완하기 위해 RAG 기술을 결합하여 정확도를 높이는 것이 기획 포인트입니다.</p>
+            </div>
+            <div class="card-num">15 / 20</div>
+        </div>
+
+        <!-- 16: RAG -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">14. Knowledge-Based AI</div>
+            </div>
+            <h2 class="card-title">AI의 신뢰도를 결정하는 근거,<br><span>검색 증강 생성(RAG)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: RAG</span>
+                <p class="def-text">AI가 답변 전, 신뢰할 수 있는 외부 지식(매뉴얼 등)에서 정보를 '검색'한 뒤 답변을 구성하게 하는 기술입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>범용적인 AI는 LG전자의 최신 매뉴얼을 알지 못합니다. <b>RAG</b>를 적용하면 답변 직전에 "최신 OLED TV 매뉴얼"을 뒤져보고 그 근거를 바탕으로 대답하여 신뢰도를 높입니다.</p>
+            </div>
+            <div class="card-num">16 / 20</div>
+        </div>
+
+        <!-- 17: AI Agent -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">15. Autonomous AI</div>
+            </div>
+            <h2 class="card-title">대화를 넘어 스스로 행동하는,<br><span>AI 에이전트(Agent)</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: AI Agent</span>
+                <p class="def-text">목표 달성을 위해 스스로 계획을 수립하고 도구를 사용하여 자율적으로 실행까지 완료하는 지능형 시스템입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>기존 AI가 "냉장고가 이상해"라는 말에 해결책만 제시했다면, <b>AI 에이전트</b>는 동의 하에 AS 기사를 예약하거나 가전 기기의 정밀 진단 명령을 직접 수행합니다.</p>
+            </div>
+            <div class="card-num">17 / 20</div>
+        </div>
+
+        <!-- 18: Prompt Engineering -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">16. AI Interaction</div>
+            </div>
+            <h2 class="card-title">AI로부터 최선의 답을 얻는 기술,<br><span>프롬프트 엔지니어링</span></h2>
+            <div class="definition-section">
+                <span class="def-label">Definition: Prompt Engineering</span>
+                <p class="def-text">LLM의 성능을 극대화하기 위해 입력값(Prompt)을 최적화하는 과정입니다.</p>
+            </div>
+            <div class="card-content">
+                <p>질문 방식에 따라 결과가 천차만별입니다. "LG전자 상담원처럼 답변해줘"라는 페르소나를 부여하거나, 답변의 형식을 지정하는 등의 정교한 지시가 필요합니다.</p>
+            </div>
+            <div class="card-num">18 / 20</div>
+        </div>
+
+        <!-- 19: 통합 요약 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">17. Total Overview</div>
+            </div>
+            <h2 class="card-title">혁신 시스템을 지탱하는<br><span>기술 구조 및 데이터 흐름 요약</span></h2>
+            <div class="card-content">
+                <div class="grid grid-cols-2 gap-8 mt-4">
+                    <div class="border-2 border-gray-100 p-6 rounded-xl">
+                        <h4 class="font-bold text-[#A50034] mb-3">인프라 및 개발</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-sm">
+                            <li><b>Cloud / Docker</b>: 유연한 서버 환경 구축</li>
+                            <li><b>Designer / FE / BE / Pub</b>: 전문화된 제품 제작 프로세스</li>
+                            <li><b>API / JSON</b>: 표준화된 시스템 간 연결</li>
+                            <li><b>Deploy / CI-CD</b>: 신속한 기능 서비스 반영</li>
+                        </ul>
+                    </div>
+                    <div class="border-2 border-gray-100 p-6 rounded-xl">
+                        <h4 class="font-bold text-[#A50034] mb-3">데이터 및 AI</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-sm">
+                            <li><b>DB / DW / DL</b>: 목적에 맞는 데이터 관리</li>
+                            <li><b>AI / ML / DL / LLM</b>: 지능형 서비스의 진화 단계</li>
+                            <li><b>RAG / Agent</b>: 신뢰 기반 자율 업무 수행</li>
+                            <li><b>Prompt Eng.</b>: 최적의 AI 답변 유도 기술</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-8 text-center font-semibold text-gray-500">LG전자 고객가치혁신부문 IT 전문성 강화를 위해 제작되었습니다.</p>
+            </div>
+            <div class="card-num">19 / 20</div>
+        </div>
+
+        <!-- 20: 맺음말 -->
+        <div class="card intro-card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">Closing Remarks</div>
+            </div>
+            <h2 class="card-title">소통의 기술은 곧<br><span>혁신의 속도</span>입니다</h2>
+            <div class="card-content" style="border-left: 6px solid var(--lg-red); padding-left: 30px;">
+                <p>우리가 배운 용어들은 단순히 IT 부서의 전문 지식이 아닙니다. 여러분이 기획하는 혁신적인 가치들이 기술이라는 그릇에 담길 때, 그 설계도가 얼마나 정교한지를 결정하는 <b>'공용어'</b>입니다.</p>
+                <p>IT 파트너와 더 깊이 있게 논의하고, 기술적 한계보다는 기술적 기회를 먼저 발견하는 전문가가 되시기를 응원합니다.</p>
+            </div>
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="mt-12 px-10 py-5 bg-[#A50034] text-white font-black rounded-full hover:bg-[#85002a] transition shadow-xl">처음부터 다시 읽기</button>
+            <div class="card-num">20 / 20</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
