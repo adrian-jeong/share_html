@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정선영 - 데이터 분석가이자 아빠의 기록</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --lg-red: #A50034;
+            --lg-dark: #111111;
+        }
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            background-color: #ffffff;
+            color: var(--lg-dark);
+            line-height: 1.7;
+        }
+        .text-lg-red { color: var(--lg-red); }
+        .bg-lg-red { background-color: var(--lg-red); }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #A50034, #E6004D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .career-line {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .career-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #eee;
+        }
+        .career-dot {
+            position: absolute;
+            left: -5px;
+            top: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            border: 2px solid white;
+        }
+        .career-dot.active {
+            background: var(--lg-red);
+        }
+    </style>
+</head>
+<body class="selection:bg-red-100">
+
+    <!-- Header (Simple) -->
+    <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg border-b border-gray-50">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-2 font-black text-lg tracking-tight">
+                <span class="text-lg-red italic">LG</span> Electronics
+            </div>
+            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Presenter Profile</div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-8 pt-32 pb-20">
+        <!-- Introduction Header -->
+        <div class="fade-in mb-24">
+            <p class="text-lg-red font-bold mb-4 tracking-wider uppercase text-sm">Hello, World!</p>
+            <h1 class="text-5xl md:text-6xl font-black leading-[1.15] tracking-tight mb-8">
+                데이터로 세상을 읽고<br>
+                <span class="gradient-text">사랑으로 가족을 씁니다.</span>
+            </h1>
+            <p class="text-xl text-gray-500 font-medium max-w-2xl leading-relaxed">
+                안녕하세요, LG전자 글로벌 CS 전략팀에서 데이터 분석을 담당하고 있는 정선영 선임입니다. 
+                저는 복잡한 데이터 사이에서 유의미한 패턴을 찾아내고, 두 아들의 성장을 분석(?)하며 행복을 찾는 아빠입니다.
+            </p>
+        </div>
+
+        <!-- Personality Tag -->
+        <div class="fade-in mb-24 flex flex-wrap gap-3">
+            <div class="px-5 py-3 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-xs text-gray-400 font-bold mb-1 uppercase">Personality</p>
+                <p class="font-bold">ENFP <span class="text-gray-400 font-normal ml-1">F-호소인</span></p>
+            </div>
+            <div class="px-5 py-3 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-xs text-gray-400 font-bold mb-1 uppercase">Hobby</p>
+                <p class="font-bold">취미 부자 <span class="text-gray-400 font-normal ml-1">Sports Lover</span></p>
+            </div>
+            <div class="px-5 py-3 bg-gray-50 rounded-2xl border border-gray-100">
+                <p class="text-xs text-gray-400 font-bold mb-1 uppercase">Role</p>
+                <p class="font-bold">Parenting Pro <span class="text-gray-400 font-normal ml-1">육아 전념</span></p>
+            </div>
+        </div>
+
+        <!-- Career Journey Section (Integrated) -->
+        <div class="fade-in mb-32">
+            <h2 class="text-sm font-black text-gray-400 uppercase tracking-[0.2em] mb-10">Career Journey</h2>
+            <div class="space-y-12">
+                <div class="career-line">
+                    <div class="career-dot"></div>
+                    <p class="text-xs font-bold text-gray-400 mb-1">Beginnings</p>
+                    <h3 class="text-xl font-black mb-2">물리학 전공 · 복잡계 연구</h3>
+                    <p class="text-gray-500 text-sm">
+                        현상의 본질을 파헤치는 물리적 사고를 통해 데이터 분석의 기초 체력을 길렀습니다. 
+                        수많은 입자의 움직임 속에서 질서를 찾는 과정은 지금의 데이터 분석 방식과 많이 닮아 있습니다.
+                    </p>
+                </div>
+
+                <div class="career-line">
+                    <div class="career-dot"></div>
+                    <p class="text-xs font-bold text-gray-400 mb-1">National Research</p>
+                    <h3 class="text-xl font-black mb-2">국가기상위성센터 연구원 (4년)</h3>
+                    <p class="text-gray-500 text-sm">
+                        거대한 위성 데이터를 처리하며 시계열 데이터 분석의 정수를 경험했습니다. 
+                        예측의 중요성과 공공 도메인 데이터의 사회적 가치를 체감한 시간이었습니다.
+                    </p>
+                </div>
+
+                <div class="career-line">
+                    <div class="career-dot"></div>
+                    <p class="text-xs font-bold text-gray-400 mb-1">Startup Spirit</p>
+                    <h3 class="text-xl font-black mb-2">비트나인 R&D 센터장 (3년)</h3>
+                    <p class="text-gray-500 text-sm">
+                        스타트업의 치열한 전장에서 그래프 데이터베이스와 AI 모델을 상용화했습니다. 
+                        기술적 리더십뿐만 아니라 비즈니스의 속도를 이해하게 된 중요한 변곡점이었습니다.
+                    </p>
+                </div>
+
+                <div class="career-line">
+                    <div class="career-dot active shadow-[0_0_10px_rgba(165,0,52,0.4)]"></div>
+                    <p class="text-xs font-bold text-lg-red mb-1">Current</p>
+                    <h3 class="text-xl font-black mb-2">LG전자 데이터 분석가</h3>
+                    <p class="text-gray-500 text-sm">
+                        글로벌 서비스 데이터를 활용해 고객의 가치를 재정의합니다. 
+                        실질적인 문제 해결을 통해 고객의 삶을 더 편리하게 만드는 데 집중하고 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fatherhood Section (Integrated) -->
+        <div class="fade-in mb-32 p-10 bg-red-50/50 rounded-[32px] border border-red-100/50 relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-sm font-black text-lg-red uppercase tracking-[0.2em] mb-8">Fatherhood</h2>
+                <h3 class="text-3xl font-black mb-6 leading-tight">두 아들의 아빠로 살아가는 법</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-2">Wedding</p>
+                        <p class="text-lg font-black">2020년 6월 결혼</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-2">Dad status</p>
+                        <p class="text-lg font-black">현재 결혼 6년차</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-blue-400">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-2">First Son</p>
+                        <p class="text-lg font-black">2022년 8월생</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-blue-300">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-2">Second Son</p>
+                        <p class="text-lg font-black">2025년 1월생</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-600 leading-relaxed italic">
+                    "일할 때의 저는 이성적인 'T'처럼 보일 수 있지만, 집에서는 아이들의 작은 몸짓에도 감동받는 'F'입니다. 
+                    술을 좋아하지만, 퇴근 후 아이들과 온전히 함께하기 위해 최근엔 자제력을 발휘하고 있습니다."
+                </p>
+            </div>
+            <!-- Decorative Icon -->
+            <i class="fas fa-baby-carriage absolute -right-4 -bottom-4 text-9xl text-red-100/50"></i>
+        </div>
+
+        <!-- Hobbies Section (Integrated) -->
+        <div class="fade-in mb-32">
+            <h2 class="text-sm font-black text-gray-400 uppercase tracking-[0.2em] mb-10">Passion & Hobbies</h2>
+            <div class="space-y-6">
+                <div class="group flex items-center justify-between p-6 bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center gap-6">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-lg-red group-hover:bg-lg-red group-hover:text-white transition-all">
+                            <i class="fas fa-golf-ball-tee"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">골프 (Golf)</p>
+                            <p class="text-xs text-gray-400">필드 90타 / 스크린 언더파</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-200"></i>
+                </div>
+
+                <div class="group flex items-center justify-between p-6 bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center gap-6">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-lg-red group-hover:bg-lg-red group-hover:text-white transition-all">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">마라톤 (Marathon)</p>
+                            <p class="text-xs text-gray-400 italic font-medium">25년 3월 와이프와 하프 마라톤 도전 예정</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-200"></i>
+                </div>
+
+                <div class="group flex items-center justify-between p-6 bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center gap-6">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-lg-red group-hover:bg-lg-red group-hover:text-white transition-all">
+                            <i class="fas fa-bicycle"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">기타 스포츠</p>
+                            <p class="text-xs text-gray-400 font-medium">자전거, 볼링, 탁구 등 '스포츠 매니아'</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-200"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing -->
+        <div class="fade-in text-center pt-20 border-t border-gray-100">
+            <h3 class="text-2xl font-black mb-4 uppercase tracking-tighter">Life is a Series of Data Points.</h3>
+            <p class="text-gray-400 text-sm">데이터 분석가 정선영의 소개를 들어주셔서 감사합니다.</p>
+            <div class="mt-12 flex justify-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-lg-red"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 bg-white text-center">
+        <p class="text-[10px] font-black text-gray-300 tracking-[0.5em] uppercase">LG Electronics Confidential</p>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll reveal
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
