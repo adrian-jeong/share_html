@@ -213,6 +213,22 @@
         }
         .ai-table td:last-child { border-right: none; }
         .ai-table tr:last-child td { border-bottom: none; }
+		/* 공통 박스 스타일 */
+        .strategy-box {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .strategy-box:hover {
+            border-color: var(--lg-red);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
 
         /* 다이어그램 스타일 */
         .flow-diagram {
@@ -327,6 +343,34 @@
             align-items: center;
             gap: 8px;
         }
+		/* 카톡 UI 요소 */
+        .kakao-chat {
+            background: #bacee0;
+            padding: 15px;
+            border-radius: 15px;
+            width: 250px;
+            font-size: 0.75rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chat-bubble {
+            background: #fee500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            position: relative;
+            display: inline-block;
+            max-width: 80%;
+            font-weight: bold;
+            color: #381e1f;
+        }
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 10px;
+            border-left: 10px solid #fee500;
+            border-bottom: 10px solid transparent;
+        }
+		
     </style>
 </head>
 <body>
@@ -358,7 +402,7 @@
             </div>
         </div>
 
-        <!-- 02: Presenter -->
+        <!-- 02: Presenter (요청 사항 반영: 반반 구성, 4:3 비율 사진) -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
@@ -366,30 +410,114 @@
             </div>
             <div class="fade-in">
                 <h2 class="card-title">안녕하세요, <span class="text-gray-400">데이터와 소통하는 분석가</span></h2>
-                <div class="flex gap-10 mt-2">
-                    <div class="w-2/5 bg-gray-50 rounded-2xl border p-10 flex flex-col justify-center">
-                        <div class="mb-6">
-                            <h3 class="text-4xl font-black mb-1">정선영 선임</h3>
-                            <p class="text-[#A50034] text-xl font-bold">CC&S 전략팀</p>
+                <div class="flex gap-10 mt-2 items-stretch">
+                    <!-- 왼쪽 영역 (50%) -->
+                    <div class="w-1/2 bg-gray-50 rounded-3xl border p-12 flex flex-col justify-center items-center shadow-sm">
+                        <div class="mb-8 w-full flex flex-col items-center">
+                            <!-- 발표자 사진: 4:3 비율, 전체 노출 -->
+                            <div class="w-full max-w-md bg-white p-2 rounded-2xl shadow-md border">
+                                <img src="images/presenter.png" alt="발표자 사진" onerror="this.src='https://via.placeholder.com/400x300?text=Presenter+4:3'" class="w-full aspect-[4/3] rounded-xl object-cover">
+                            </div>
+                            <div class="mt-8 text-center">
+                                <h3 class="text-4xl font-black mb-2 tracking-tight">정선영 선임</h3>
+                                <p class="text-[#A50034] text-xl font-bold">CC&S 전략팀</p>
+                            </div>
                         </div>
-                        <div class="space-y-4 text-sm font-bold text-zinc-600">
-                            <div class="flex items-center gap-2"><i class="fa-brands fa-python text-red-700"></i> Python / SQL / Cypher / NLP</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-brain text-red-700"></i> AI Modeling & Network Science</div>
+                        <div class="space-y-4 text-base font-bold text-zinc-600 w-full max-w-sm">
+                            <div class="flex items-center gap-3"><i class="fa-brands fa-python text-red-700 w-6"></i> Python / SQL / Cypher / NLP</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-brain text-red-700 w-6"></i> AI Modeling & Network Science</div>
                         </div>
                     </div>
-                    <div class="w-3/5 py-2">
-                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-zinc-800"><i class="fa-solid fa-route text-[#A50034]"></i> 커리어 성장 경로</h3>
-                        <div class="relative pl-8 border-l-2 border-gray-100 space-y-6 text-zinc-700">
-                            <div><h4 class="font-bold">물리학 전공 · 복잡계 연구실</h4><p class="text-xs text-gray-500">기초 과학 데이터를 다루는 분석적 사고와 프로그래밍 기초 습득</p></div>
-                            <div><h4 class="font-bold">국가기상위성센터 연구원 (4년)</h4><p class="text-xs text-gray-500">대규모 시계열 위성 데이터 처리 및 공공 도메인 분석 경험</p></div>
-                            <div><h4 class="font-bold">비트나인 R&D 센터장 (3년)</h4><p class="text-xs text-gray-500">스타트업의 속도감 있는 환경에서 그래프 DB 및 AI 모델 상용화 주도</p></div>
-                            <div><h4 class="font-bold">LG전자 고객서비스 분석가</h4><p class="text-xs text-gray-500">글로벌 서비스 데이터를 활용한 실질적 고객가치 창출 및 문제 해결</p></div>
+                    <!-- 오른쪽 영역 (50%) -->
+                    <div class="w-1/2 py-4 pl-6 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-10 flex items-center gap-3 text-zinc-800"><i class="fa-solid fa-route text-[#A50034]"></i> 커리어 성장 경로</h3>
+                        <div class="relative pl-10 border-l-2 border-gray-100 space-y-10 text-zinc-700">
+                            <div class="relative">
+                                <div class="absolute -left-[51px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-[#A50034]"></div>
+                                <h4 class="font-bold text-lg">물리학 전공 · 복잡계 연구실</h4>
+                                <p class="text-sm text-gray-500 mt-1">기초 과학 데이터를 다루는 분석적 사고와 프로그래밍 기초 습득</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[51px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-[#A50034]"></div>
+                                <h4 class="font-bold text-lg">기상청 국가기상위성센터 연구원 (4년)</h4>
+                                <p class="text-sm text-gray-500 mt-1">대규모 기상 위성 데이터 처리/ 공공 도메인 분석 경험</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[51px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-[#A50034]"></div>
+                                <h4 class="font-bold text-lg">비트나인 R&D 센터장 (3년)</h4>
+                                <p class="text-sm text-gray-500 mt-1">스타트업의 속도감 있는 환경에서 그래프 DB 및 AI 모델 상용화 주도</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[51px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-[#A50034]"></div>
+                                <h4 class="font-bold text-lg text-[#A50034]">LG전자 고객서비스 분석가</h4>
+                                <p class="text-sm text-gray-500 mt-1">글로벌 서비스 데이터를 활용한 실질적 고객가치 창출 및 문제 해결</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+        <!-- 04: Client vs Server (수정: 카카오톡 예시 반영) -->
+        <div class="card">
+            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">02. Network Communication</div></div>
+            <div class="fade-in">
+                <h2 class="card-title">요청하는 자와 응답하는 자:<br><span>클라이언트(Client)와 서버(Server)</span></h2>
+                <div class="definition-section">
+                    <p class="def-text text-sm"><b>클라이언트</b>는 서비스를 요청하는 창구이며, <b>서버</b>는 요청을 처리하고 응답을 반환하는 시스템입니다.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-10 items-center">
+                    <div class="card-content">
+                        <h4 class="font-bold text-zinc-800 mb-4 text-xl"><i class="fa-solid fa-mobile-screen mr-2 text-red-700"></i> 쉽게 이해하는 카카오톡 비유</h4>
+                        <p class="text-sm leading-relaxed text-zinc-600 mb-6">
+                            우리가 친구에게 메시지를 보낼 때, 스마트폰 화면에서 작동하는 <b>카카오톡 앱</b>은 서버에게 "이 메시지를 전달해줘"라고 요청하는 <b>'클라이언트'</b>입니다.<br><br>
+                            보이지 않는 곳에서 메시지를 받아 친구에게 전달하고, 보낸 내용을 저장하는 <b>카카오 본사의 거대 컴퓨터</b>가 바로 <b>'서버'</b>입니다.
+                        </p>
+                        <ul class="text-xs space-y-2 text-zinc-500">
+                            <li>• <b>요청(Request)</b>: "메시지 보내줘!", "친구 목록 보여줘!"</li>
+                            <li>• <b>응답(Response)</b>: "전송 완료!", "여기 친구 목록이야!"</li>
+                        </ul>
+                    </div>
+
+                    <!-- 카톡 시각화 다이어그램 -->
+                    <div class="bg-zinc-50 p-8 rounded-3xl border flex flex-col items-center gap-6 shadow-inner">
+                        <div class="flex items-center gap-10">
+                            <!-- Client -->
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="kakao-chat flex flex-col items-end">
+                                    <div class="chat-bubble mb-2 text-[9px]">친구야 오늘 뭐해?</div>
+                                    <span class="text-[8px] text-zinc-400">오후 2:30</span>
+                                </div>
+                                <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-2">Client (내 폰)</span>
+                            </div>
+
+                            <!-- Arrow & Flow -->
+                            <div class="flex flex-col items-center gap-4">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-arrow-right text-red-700 text-2xl"></i>
+                                    <p class="text-[9px] font-bold text-red-800 mt-1 uppercase">Request</p>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fa-solid fa-arrow-left text-zinc-400 text-2xl"></i>
+                                    <p class="text-[9px] font-bold text-zinc-500 mt-1 uppercase">Response</p>
+                                </div>
+                            </div>
+
+                            <!-- Server -->
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="w-20 h-20 bg-zinc-800 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                                    <i class="fa-solid fa-server text-3xl"></i>
+                                </div>
+                                <span class="text-[10px] font-black text-zinc-800 uppercase tracking-widest mt-2">Server (카카오 본사)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+		
         <!-- 03: On-Premise, Cloud -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">01. Infrastructure Architecture</div></div>
@@ -410,30 +538,7 @@
             </div>
         </div>
 
-        <!-- 04: Client vs Server -->
-        <div class="card">
-            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">02. Network Communication</div></div>
-            <div class="fade-in">
-                <h2 class="card-title">클라이언트(Client)와<br><span>서버(Server)</span></h2>
-                <div class="definition-section">
-                    <span class="def-label">Definition: Client & Server</span>
-                    <p class="def-text"><b>클라이언트</b>는 서비스를 요청하는 창구이며, <b>서버</b>는 요청을 처리하고 응답을 반환하는 시스템입니다.</p>
-                </div>
-                <div class="card-content mb-6">
-                    <p>IT에서 말하는 <b>'클라이언트'</b>는 우리가 응대하는 '최종 고객'이 아닙니다. 상담사가 사용하는 <b>Smile Plus 화면</b>이나 고객이 직접 쓰는 <b>ThinQ 앱 그 자체</b>를 의미합니다. 즉, 서버에게 "데이터를 달라"고 요청하는 프로그램이 클라이언트입니다.</p>
-                    <p>반대로 <b>'서버'</b>는 보이지 않는 곳에서 클라이언트의 요청을 기다리고 있다가 정보를 처리하여 다시 화면으로 보내주는 장치입니다.</p>
-                </div>
-                <div class="flex justify-center items-center py-6 gap-16">
-                    <div class="text-center group"><i class="fa-solid fa-desktop text-6xl text-gray-300 group-hover:text-blue-500 transition-colors"></i><p class="mt-2 font-bold text-lg text-zinc-400">Client</p></div>
-                    <div class="flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-arrow-right-long text-3xl text-red-700"></i>
-                        <span class="text-[10px] font-bold text-gray-300 uppercase">Req & Res</span>
-                        <i class="fa-solid fa-arrow-left-long text-3xl text-red-700"></i>
-                    </div>
-                    <div class="text-center group"><i class="fa-solid fa-database text-6xl text-gray-300 group-hover:text-red-500 transition-colors"></i><p class="mt-2 font-bold text-lg text-zinc-400">Server</p></div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- 05: DB, DL, DW, DM -->
         <div class="card">
@@ -734,53 +839,50 @@
             </div>
         </div>
 		
-        <!-- 10: Basic IT Terms (NEW SLIDE) -->
+        <!-- 10: Basic IT Glossary (수정: 트래픽 추가) -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">09. Basic IT Glossary</div></div>
             <div class="fade-in">
                 <h2 class="card-title">협업의 해상도를 높이는<br><span>필수 기본 IT 용어</span></h2>
                 
                 <div class="grid grid-cols-2 gap-8 mt-4">
-                    <!-- 운영 및 연계 관련 -->
                     <div class="space-y-4">
                         <div class="bg-zinc-50 p-5 rounded-2xl border border-zinc-100">
                             <h4 class="font-bold text-[#A50034] mb-2 text-sm"><i class="fa-solid fa-puzzle-piece mr-2"></i> 시스템 연계 및 인터페이스</h4>
                             <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                서로 다른 시스템이 데이터를 주고받을 수 있도록 <b>'연결'</b>하는 행위 자체를 <b>시스템 연계</b>라고 하며, 그 연결 통로나 규격을 <b>인터페이스(Interface)</b>라고 부릅니다.
+                                서로 다른 시스템이 데이터를 주고받을 수 있도록 연결하는 통로나 규격을 <b>인터페이스(Interface)</b>라고 부릅니다.
                             </p>
                         </div>
                         <div class="bg-zinc-50 p-5 rounded-2xl border border-zinc-100">
                             <h4 class="font-bold text-[#A50034] mb-2 text-sm"><i class="fa-solid fa-calendar-check mr-2"></i> 배치 (Batch)</h4>
                             <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                실시간으로 즉시 처리하는 것이 아니라, 대량의 데이터를 <b>정해진 시간(예: 매일 새벽 2시)에 일괄적으로 처리</b>하는 방식입니다. 주로 대용량 통계 생성 시 활용됩니다.
+                                실시간이 아니라, 대량의 데이터를 <b>정해진 시간(예: 매일 새벽 2시)에 일괄적으로 처리</b>하는 방식입니다.
                             </p>
                         </div>
                     </div>
 
-                    <!-- 소통 및 통신 관련 -->
                     <div class="bg-red-50/50 p-6 rounded-3xl border border-red-100">
-                        <h4 class="font-bold text-zinc-800 mb-4 text-sm"><i class="fa-solid fa-comments mr-2"></i> 시스템 간의 대화: Request & Return</h4>
-                        <div class="space-y-4">
+                        <h4 class="font-bold text-zinc-800 mb-4 text-sm"><i class="fa-solid fa-screwdriver-wrench mr-2"></i> 운영 핵심: Deployment & Traffic</h4>
+                        <div class="space-y-5">
                             <div>
-                                <b class="text-xs text-red-800">리퀘스트 (Request)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">클라이언트가 서버에게 "이 데이터 줘"라고 던지는 <b>질문/요청</b>입니다.</p>
+                                <b class="text-xs text-red-800">배포 (Deployment)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1">개발된 코드를 실제 서버에 반영하여 고객이 사용할 수 있게 만드는 <b>출시 작업</b>입니다.</p>
                             </div>
                             <div>
-                                <b class="text-xs text-red-800">리턴 (Return/Response)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">서버가 요청을 처리한 후 다시 보내주는 <b>답변/결과값</b>입니다.</p>
+                                <b class="text-xs text-red-800">트래픽 (Traffic)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1">특정 시간 동안 시스템에 흐르는 <b>사용자 수나 데이터의 양</b>입니다. 과도한 트래픽은 서버 다운의 원인이 됩니다.</p>
                             </div>
                             <div>
-                                <b class="text-xs text-red-800">파라미터 (Parameter)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">요청할 때 함께 보내는 <b>세부 조건</b>입니다. (예: '고객명'이라는 질문에 '홍길동'이라는 파라미터를 담아 보냄)</p>
+                                <b class="text-xs text-red-800">로그 (Log)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1">시스템에서 일어난 모든 발자취를 남긴 <b>기록물</b>입니다. 장애 발생 시 블랙박스 역할을 합니다.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 p-4 bg-zinc-900 text-white rounded-xl text-center">
-                    <p class="text-[11px] font-medium leading-relaxed">
-                        💡 <b>"오늘자 VOC 데이터를 배치로 돌려서 마트에 적재한 뒤, 인터페이스 파라미터 값을 확인해 봅시다."</b><br>
-                        이제 이 문장이 자연스럽게 들린다면 여러분은 이미 IT 파트너와 소통할 준비가 되었습니다!
+                    <p class="text-[11px] font-medium leading-relaxed italic">
+                        💡 <b>"이번 배포 이후 트래픽이 급증했네요. 로그를 확인해 보니 시스템 연계 문제는 아닌 것 같습니다."</b>
                     </p>
                 </div>
             </div>
@@ -856,7 +958,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">10. AI Model Portfolio</div>
+                <div class="page-category">11. AI Model Portfolio</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">글로벌 AI 모델 라인업:<br><span>텍스트에서 비디오까지</span></h2>
@@ -924,151 +1026,210 @@
                 </div>
             </div>
         </div>
-		<!-- 15: AI Optimization Strategy (상세 보강 버전) -->
+		<!-- 13: GPT 연대기 (Chronicle) -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">13. AI Optimization Strategy</div>
+                <div class="page-category">11. The GPT Lineage</div>
             </div>
             <div class="fade-in">
-                <h2 class="card-title">AI를 효율적으로 활용하는 방법:<br><span>성능 최적화 3대 핵심 기술</span></h2>
-                
-                <div class="grid grid-cols-3 gap-5 mt-2">
-                    <!-- Prompt Engineering Detail -->
-                    <div class="strategy-box border-t-4 border-t-zinc-400">
-                        <h4 class="font-black text-zinc-800 text-sm mb-1"><i class="fa-solid fa-terminal mr-2"></i> 프롬프트 엔지니어링</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p><b>핵심 개념</b>: 모델의 파라미터를 수정하지 않고, <b>질문(Prompt)의 구성</b>만 최적화하여 결과 품질을 높이는 기술입니다.</p>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="bg-blue-50 p-2 rounded-lg"><b class="text-blue-800">장점</b><br>즉각 적용 가능, 비용 거의 없음</div>
-                                <div class="bg-red-50 p-2 rounded-lg"><b class="text-red-800">단점</b><br>일관성 부족, 복잡한 로직 한계</div>
-                            </div>
-                            <p class="text-[9px] bg-zinc-50 p-2 rounded-lg border border-zinc-100 italic">"인턴에게 상세한 <b>업무 지시서</b>를 주는 것과 같습니다."</p>
+                <h2 class="card-title">단순 앵무새에서 천재로의 진화:<br><span>GPT가 써 내려간 지능의 역사</span></h2>
+                <div class="definition-section">
+                    <p class="def-text text-sm">"암기 위주의 학생에서 이미지·소리도 이해하고 스스로 추론하는 박사님으로"</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 text-zinc-600">
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-layer-group text-blue-500 mr-2"></i> 지능의 규모 (파라미터)</h4>
+                            <p class="text-[11px] leading-relaxed">초창기 모델이 1,750억 개의 뇌세포를 가진 고등학생이었다면, 현재는 <b>조 단위 이상의 세포</b>를 가졌습니다. 단순히 아는 게 많은 게 아니라 맥락 파악 능력이 비약적으로 상승했습니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-ear-listen text-blue-500 mr-2"></i> 멀티모달 (Multimodal)</h4>
+                            <p class="text-[11px] leading-relaxed">텍스트만 알던 장님 AI가 <b>눈과 귀</b>를 얻었습니다. 냉장고 사진을 보고 "남은 재료로 요리해줘"가 가능해진 이유입니다. (GPT-4o 등)</p>
                         </div>
                     </div>
-
-                    <!-- RAG Detail -->
-                    <div class="strategy-box border-t-4 border-t-blue-500 bg-blue-50/10">
-                        <h4 class="font-black text-blue-900 text-sm mb-1"><i class="fa-solid fa-book-open mr-2"></i> RAG (검색 증강 생성)</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p><b>핵심 개념</b>: 답변 생성 전, <b>외부 지식베이스</b>에서 신뢰할 수 있는 정보를 먼저 검색한 뒤 이를 참고하여 답변을 만듭니다.</p>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="bg-blue-50 p-2 rounded-lg"><b class="text-blue-800">장점</b><br>환각 방지, 최신 정보 즉시 반영</div>
-                                <div class="bg-red-50 p-2 rounded-lg"><b class="text-red-800">단점</b><br>검색 속도 지연, 구축 비용 발생</div>
-                            </div>
-                            <p class="text-[9px] bg-blue-50 p-2 rounded-lg border border-blue-100 italic">"AI에게 <b>오픈북 테스트(사전 지참)</b>를 시키는 것입니다."</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-link text-red-500 mr-2"></i> 추론 방식 (생각의 사슬, o1)</h4>
+                            <p class="text-[11px] leading-relaxed">받은 질문에 바로 답하지 않고 내부적으로 <b>"이렇게 풀어야겠군"하며 검토</b>합니다. 복잡한 물리 문제 풀이 정확도가 90% 이상으로 올라간 비결입니다.</p>
                         </div>
-                    </div>
-
-                    <!-- Fine-tuning Detail -->
-                    <div class="strategy-box border-t-4 border-t-red-600 bg-red-50/10">
-                        <h4 class="font-black text-red-900 text-sm mb-1"><i class="fa-solid fa-brain mr-2"></i> 파인튜닝 (미세 조정)</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p><b>핵심 개념</b>: 특정 목적의 데이터를 사용하여 AI 모델 자체를 <b>추가 학습</b>시켜 모델의 가중치(Parameter)를 수정합니다.</p>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="bg-blue-50 p-2 rounded-lg"><b class="text-blue-800">장점</b><br>고유 말투/지식 완벽 내재화</div>
-                                <div class="bg-red-50 p-2 rounded-lg"><b class="text-red-800">단점</b><br>고비용, 데이터 업데이트 어려움</div>
+                        <div class="bg-zinc-50 p-4 rounded-xl border">
+                            <h4 class="font-bold text-zinc-800 text-[11px] mb-2">기억력 (컨텍스트 윈도우)</h4>
+                            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                                <div class="p-2 bg-white rounded border"><b>GPT-3.5</b>: 책 몇 페이지 분량 기억 (앞 내용 금방 까먹음)</div>
+                                <div class="p-2 bg-red-50 rounded border border-red-100"><b>GPT-4o</b>: 전공 서적 한 권 분량 (긴 소설 전체 수정 가능)</div>
                             </div>
-                            <p class="text-[9px] bg-red-50 p-2 rounded-lg border border-red-100 italic">"범용 직원을 <b>특수 분야 전문가</b>로 양성하는 교육입니다."</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-6 bg-zinc-900 rounded-2xl p-4 text-white">
-                    <div class="flex items-center justify-between gap-6">
-                        <p class="text-[10px] font-medium leading-relaxed">
-                            <span class="text-red-500 font-bold">결론:</span> <b>프롬프트</b>는 기본 도구이며, 데이터 신뢰도가 중요하다면 <b>RAG</b>를, <br>
-                            기업 고유의 정체성이나 고도의 전문성이 필요하다면 <b>파인튜닝</b>을 결합하여 최적의 성능을 냅니다.
-                        </p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-zinc-800 rounded-full text-[9px] border border-zinc-700">#Accuracy</span>
-                            <span class="px-3 py-1 bg-zinc-800 rounded-full text-[9px] border border-zinc-700">#Specialty</span>
+            </div>
+        </div>
+		<!-- 14: AI Agent 상세 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">12. AI Agent vs Agentic AI</div>
+            </div>
+            <div class="fade-in">
+                <h2 class="card-title">지시하는 시대에서 자율의 시대로:<br><span>AI 에이전트(Agent)의 탄생</span></h2>
+                <div class="grid grid-cols-2 gap-10 mt-4">
+                    <div class="space-y-6">
+                        <div class="p-6 bg-zinc-50 rounded-2xl border">
+                            <h4 class="font-bold text-sm mb-2 text-zinc-400">기존 LLM (말하는 지식인)</h4>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed italic">"A제품 매뉴얼을 찾아줘" → 답변을 읽고 사람이 직접 다음 행동을 결정함</p>
+                            <p class="text-[10px] text-zinc-400 mt-2">※ 사람이 머리(기획)를 쓰고 AI는 입(정보 제공)만 빌려줍니다.</p>
+                        </div>
+                        <div class="p-6 bg-red-50 rounded-2xl border border-red-100 shadow-sm">
+                            <h4 class="font-bold text-sm mb-2 text-red-800">AI 에이전트 (행동하는 해결사)</h4>
+                            <p class="text-[11px] text-red-700 leading-relaxed italic">"A제품 수리 예약을 잡아줘" → AI가 스스로 캘린더 확인, 부품 조회, 예약 대행</p>
+                            <p class="text-[10px] text-red-600 mt-2">※ <b>목표</b>만 주면 AI가 <b>도구(API)</b>를 사용해 현실의 문제를 스스로 처리합니다.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 border rounded-3xl bg-zinc-50 flex flex-col justify-center">
+                        <h4 class="font-black text-xs text-zinc-800 mb-4 uppercase">핵심 차이점: Agentic AI</h4>
+                        <div class="space-y-4">
+                            <div class="text-[11px] leading-relaxed">
+                                <b class="text-zinc-800">AI Agent</b>: 사용자의 요청을 직접 수행하는 하나의 개별 비서.
+                            </div>
+                            <div class="text-[11px] leading-relaxed">
+                                <b class="text-zinc-800">Agentic AI</b>: 여러 에이전트가 서로 협력하고 비판하며 <b>시스템 전체가 자율적으로</b> 돌아가는 구조.
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-dashed text-[10px] text-zinc-500 mt-4">
+                                💡 <b>비유</b>: 에이전트가 일을 잘하는 '개인 직원'이라면, Agentic AI는 직원이 없어도 회사가 스스로 돌아가는 '자동화 사무실'입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- 15: Modern AI Evolution Flow (LLM → VLA → Physical) -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">13. The Path to Physical AI</div>
+            </div>
+            <div class="fade-in">
+                <h2 class="card-title">지능에서 신체로:<br><span>현대 AI의 최종 목적지</span></h2>
+                <div class="grid grid-cols-3 gap-6 mt-6">
+                    <div class="strategy-box border-t-4 border-t-zinc-400">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-brain text-zinc-400"></i>
+                            <span class="text-[9px] font-black text-zinc-400 uppercase">Stage 1. 언어 중심</span>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">LLM (Language)</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
+                            <p>텍스트를 통해 세상을 배우고 논리를 구축하는 단계입니다.</p>
+                            <p><b>핵심</b>: 질문에 대해 가장 확률 높은 '단어'를 뱉어내는 <b>똑똑한 뇌</b>.</p>
+                        </div>
+                    </div>
+                    <div class="strategy-box border-t-4 border-t-blue-500 bg-blue-50/10">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-hand-pointer text-blue-500"></i>
+                            <span class="text-[9px] font-black text-blue-500 uppercase">Stage 2. 행동 연결</span>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">VLA Model</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
+                            <p><b>Vision-Language-Action</b>. 시각을 보고 말로 이해하여 실제 <b>행동 명령</b>을 내리는 브릿지 단계입니다.</p>
+                            <p><b>핵심</b>: 이미지와 행동을 매칭하여 <b>실행력</b>을 가진 중간 지능.</p>
+                        </div>
+                    </div>
+                    <div class="strategy-box border-t-4 border-t-red-600 bg-red-50/10 shadow-md">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-robot text-red-600"></i>
+                            <span class="text-[9px] font-black text-red-600 uppercase">Stage 3. 기계 이식</span>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Physical AI</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
+                            <p>지능이 로봇, 가전 등 <b>현실의 물리적 기기</b>에 탑재되어 작동하는 최종 단계입니다.</p>
+                            <p><b>핵심</b>: <b>가전을 직접 제어</b>하여 물리적인 고객 가치를 창출하는 AI.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 		
-		<!-- 13: Modern AI Narrative (NEW: Agent Added) -->
+		<!-- 16: Hardware Market View (NVIDIA & Tesla) -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">11. Modern AI Narrative</div>
+                <div class="page-category">14. Market Insights: Brain & Body</div>
             </div>
             <div class="fade-in">
-                <h2 class="card-title">지능에서 감각, 그리고 자율적인 행동으로:<br><span>현대 AI의 진화 스토리</span></h2>
-                
-                <div class="grid grid-cols-4 gap-4 mt-2">
-                    <!-- Step 1: Brain -->
-                    <div class="strategy-box border-t-4 border-t-zinc-400">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-brain text-zinc-400 text-lg"></i>
-                            <span class="text-[9px] font-black text-zinc-400 uppercase">Stage 1. 지능</span>
+                <h2 class="card-title">왜 엔비디아와 테슬라인가:<br><span>주식 시장이 열광하는 AI 골드러시</span></h2>
+                <div class="grid grid-cols-2 gap-10 mt-4">
+                    <div class="space-y-6">
+                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-green-600">
+                            <h4 class="font-black text-sm text-zinc-800 mb-2">엔비디아 (NVIDIA) : 지능의 공장</h4>
+                            <p class="text-[11px] text-zinc-600 leading-relaxed">
+                                AI가 생각하려면 엄청난 연산이 필요합니다. <b>GPU</b>는 AI의 뇌세포 역할을 하며, 전 세계 모든 기업이 이 칩을 사기 위해 줄을 서고 있습니다. 지능을 만드는 <b>'삽과 곡괭이'</b>를 독점한 결과 주가가 폭등했습니다.
+                            </p>
                         </div>
-                        <h4 class="font-bold text-sm mb-1">Foundation Model</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p>거대한 <b>'지식의 뇌'</b>를 구축하는 기초 단계입니다.</p>
-                            <p><b>장점</b>: 한 번의 학습으로 요약, 코딩 등 범용적 활용 가능</p>
-                            <p><b>단점</b>: 천문학적 비용, <b>할루시네이션(환각)</b> 리스크</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Senses -->
-                    <div class="strategy-box border-t-4 border-t-blue-500 bg-blue-50/10">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-eye text-blue-500 text-lg"></i>
-                            <span class="text-[9px] font-black text-blue-500 uppercase">Stage 2. 감각</span>
-                        </div>
-                        <h4 class="font-bold text-sm mb-1">Multi-modal AI</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p>뇌에 <b>'보고 듣는 오감'</b>이 연결되는 단계입니다.</p>
-                            <p><b>장점</b>: 사진/음성 이해로 인간과 더 풍부한 소통 가능</p>
-                            <p><b>단점</b>: 데이터 복잡도 증가로 인한 <b>연산 처리 지연</b></p>
+                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-red-600">
+                            <h4 class="font-black text-sm text-zinc-800 mb-2">테슬라 (Tesla) : 행동의 신체</h4>
+                            <p class="text-[11px] text-zinc-600 leading-relaxed">
+                                뇌(NVIDIA)가 아무리 좋아도 몸이 없으면 소용없습니다. 자율주행 데이터와 로봇 기술을 가진 테슬라는 AI가 현실에서 움직일 수 있는 <b>'가장 정교한 몸'</b>을 만들고 있어 미래 AI 시장의 주역으로 평가받습니다.
+                            </p>
                         </div>
                     </div>
-
-                    <!-- Step 3: Autonomy -->
-                    <div class="strategy-box border-t-4 border-t-purple-600 bg-purple-50/10">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-user-gear text-purple-600 text-lg"></i>
-                            <span class="text-[9px] font-black text-purple-600 uppercase">Stage 3. 자율</span>
-                        </div>
-                        <h4 class="font-bold text-sm mb-1">AI Agent</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p>지능을 이용해 <b>'스스로 판단하고 실행'</b>하는 단계입니다.</p>
-                            <p><b>장점</b>: 목표만 주어지면 과정을 <b>스스로 계획</b>하고 업무 처리</p>
-                            <p><b>단점</b>: 자율적인 판단에 따른 <b>제어 불능 및 보안</b> 이슈</p>
+                    <div class="bg-red-50 p-8 rounded-3xl border border-red-100 flex flex-col justify-center">
+                        <h4 class="font-bold text-red-800 mb-4 text-sm"><i class="fa-solid fa-battery-three-quarters mr-2"></i> 핵심 전쟁터: 에너지와 소형화</h4>
+                        <div class="space-y-4 text-[11px] text-zinc-700 leading-relaxed">
+                            <p>AI가 기기에 붙어 돌아다니려면(Physical AI), 거대한 데이터센터가 아닌 <b>작은 기기 내부</b>에서 연산이 이뤄져야 합니다.</p>
+                            <p>이를 위해 <b>저전력 고효율 GPU</b>와 이를 버티게 해줄 <b>고밀도 배터리</b>가 현대 IT 산업의 가장 귀한 몸이 된 것입니다.</p>
+                            <p class="font-black text-red-900 mt-4">"지능과 신체가 결합된 모바일 AI 시대를 선점하는 곳이 승리합니다."</p>
                         </div>
                     </div>
-
-                    <!-- Step 4: Body -->
-                    <div class="strategy-box border-t-4 border-t-red-600 bg-red-50/10 shadow-md">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-robot text-red-600 text-lg"></i>
-                            <span class="text-[9px] font-black text-red-600 uppercase">Stage 4. 행동</span>
-                        </div>
-                        <h4 class="font-bold text-sm mb-1">Physical AI</h4>
-                        <div class="text-[10px] text-zinc-600 space-y-2 leading-relaxed">
-                            <p>자율 지능이 <b>'현실의 신체(기기)'</b>와 결합하는 최종 단계입니다.</p>
-                            <p><b>장점</b>: 현실 세계에서 물리적인 도움(로봇, 가전) 제공</p>
-                            <p><b>단점</b>: 물리적 충돌 등 <b>안전성과 고도의 신뢰성</b> 요구</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 bg-zinc-900 rounded-3xl p-6 text-white text-center relative overflow-hidden">
-                    <p class="text-xs font-medium leading-relaxed">
-                        "뇌(<b>Foundation</b>)와 오감(<b>Multi-modal</b>)을 가진 AI가 스스로 계획(<b>Agent</b>)하고 <br>
-                        마침내 신체(<b>Physical</b>)를 얻어 현실을 움직이는 존재로 거듭나고 있습니다."
-                    </p>
                 </div>
             </div>
         </div>
+		
+		
+		
+		<!-- 17: AI Optimization Strategy -->
+        <div class="card">
+            <div class="card-header">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+                <div class="page-category">15. AI Optimization Strategy</div>
+            </div>
+            <div class="fade-in">
+                <h2 class="card-title">AI 성능 최적화의 3가지 길:<br><span>프롬프트, RAG, 그리고 파인튜닝</span></h2>
+                <div class="grid grid-cols-3 gap-5 mt-2">
+                    <div class="strategy-box border-t-4 border-t-zinc-400">
+                        <h4 class="font-black text-sm mb-1">1. 프롬프트 엔지니어링</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-1">
+                            <p><b>장점</b>: 즉각 적용 가능, 비용 거의 없음</p>
+                            <p><b>단점</b>: 결과의 일관성 및 복잡성 한계</p>
+                            <p class="mt-2 text-[9px] bg-zinc-50 p-2 italic rounded">"가장 경제적인 지시서"</p>
+                        </div>
+                    </div>
+                    <div class="strategy-box border-t-4 border-t-blue-500 bg-blue-50/10">
+                        <h4 class="font-black text-sm mb-1">2. RAG (검색 증강)</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-1">
+                            <p><b>장점</b>: 환각 방지, 최신 정보 실시간 반영</p>
+                            <p><b>단점</b>: 검색용 인프라(DB) 유지 비용 발생</p>
+                            <p class="mt-2 text-[9px] bg-blue-50 p-2 italic rounded">"신뢰할 수 있는 오픈북"</p>
+                        </div>
+                    </div>
+                    <div class="strategy-box border-t-4 border-t-red-600 bg-red-50/10">
+                        <h4 class="font-black text-sm mb-1">3. 파인튜닝 (미세 조정)</h4>
+                        <div class="text-[10px] text-zinc-600 space-y-1">
+                            <p><b>장점</b>: 고유 스타일 및 전문 지식 완벽 이식</p>
+                            <p><b>단점</b>: <b>천문학적 비용 발생, 업데이트 곤란</b></p>
+                            <p class="mt-2 text-[9px] bg-red-50 p-2 italic rounded text-red-600">"최근 지양하는 고비용 전문가 교육"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-zinc-900 rounded-xl text-white text-[11px] text-center">
+                    💡 최근 추세는 <b>'적은 비용으로 정확도를 높이는 RAG'</b>와 <b>'프롬프트 기술'</b>을 조합하는 것이 주류입니다.
+                </div>
+            </div>
+        </div>
+		
 		<!-- 14: Sovereign AI -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">12. Sovereign AI</div>
+                <div class="page-category">14. Sovereign AI</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">데이터와 기술의 독립:<br><span>왜 지금 소버린 AI(Sovereign AI)인가?</span></h2>
