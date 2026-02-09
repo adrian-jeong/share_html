@@ -839,50 +839,69 @@
             </div>
         </div>
 		
-        <!-- 10: Basic IT Glossary (수정: 트래픽 추가) -->
+        <!-- 10: Basic IT Glossary (OLTP/OLAP 보강) -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">09. Basic IT Glossary</div></div>
             <div class="fade-in">
                 <h2 class="card-title">협업의 해상도를 높이는<br><span>필수 기본 IT 용어</span></h2>
                 
-                <div class="grid grid-cols-2 gap-8 mt-4">
+                <div class="grid grid-cols-2 gap-8 mt-2">
+                    <!-- 운영 및 연계 관련 -->
                     <div class="space-y-4">
-                        <div class="bg-zinc-50 p-5 rounded-2xl border border-zinc-100">
-                            <h4 class="font-bold text-[#A50034] mb-2 text-sm"><i class="fa-solid fa-puzzle-piece mr-2"></i> 시스템 연계 및 인터페이스</h4>
-                            <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                서로 다른 시스템이 데이터를 주고받을 수 있도록 연결하는 통로나 규격을 <b>인터페이스(Interface)</b>라고 부릅니다.
+                        <div class="bg-zinc-50 p-4 rounded-2xl border border-zinc-100 shadow-sm">
+                            <h4 class="font-bold text-[#A50034] mb-1 text-sm"><i class="fa-solid fa-puzzle-piece mr-2"></i> 인터페이스 (Interface)</h4>
+                            <p class="text-[10px] text-zinc-600 leading-relaxed">
+                                서로 다른 시스템이 데이터를 주고받을 수 있도록 연결하는 <b>규격이나 통로</b>입니다. 시스템 간의 '대화 약속'이라고 이해하면 쉽습니다.
                             </p>
                         </div>
-                        <div class="bg-zinc-50 p-5 rounded-2xl border border-zinc-100">
-                            <h4 class="font-bold text-[#A50034] mb-2 text-sm"><i class="fa-solid fa-calendar-check mr-2"></i> 배치 (Batch)</h4>
-                            <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                실시간이 아니라, 대량의 데이터를 <b>정해진 시간(예: 매일 새벽 2시)에 일괄적으로 처리</b>하는 방식입니다.
+                        <div class="bg-zinc-50 p-4 rounded-2xl border border-zinc-100 shadow-sm">
+                            <h4 class="font-bold text-[#A50034] mb-1 text-sm"><i class="fa-solid fa-calendar-check mr-2"></i> 배치 (Batch)</h4>
+                            <p class="text-[10px] text-zinc-600 leading-relaxed">
+                                실시간이 아니라, 대량의 데이터를 <b>정해진 시간(예: 매일 새벽 2시)에 일괄적으로 처리</b>하는 방식입니다. 대규모 집계 작업에 필수적입니다.
                             </p>
+                        </div>
+                        <!-- OLTP/OLAP 상세 설명 -->
+                        <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-700 shadow-lg text-white">
+                            <h4 class="font-bold text-red-500 mb-3 text-sm flex items-center gap-2"><i class="fa-solid fa-database"></i> 데이터 처리 방식의 이해</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <b class="text-xs text-blue-400 block mb-1">OLTP (Online Transaction Processing)</b>
+                                    <p class="text-[9px] text-zinc-400 leading-relaxed">
+                                        <b>"현재의 거래를 기록하는 엔진"</b>입니다. 여러 사용자가 동시에 데이터를 입력, 수정, 삭제하는 작업을 오류 없이 빠르게 처리하는 것이 목적입니다. <b>무결성</b>(데이터가 꼬이지 않음)이 핵심이며, 은행 입출금이나 주문 결제 시스템이 대표적입니다.
+                                    </p>
+                                </div>
+                                <div>
+                                    <b class="text-xs text-green-400 block mb-1">OLAP (Online Analytical Processing)</b>
+                                    <p class="text-[9px] text-zinc-400 leading-relaxed">
+                                        <b>"과거의 데이터를 분석하는 창고"</b>입니다. 이미 저장된 방대한 데이터를 다각도에서 조회하고 통계를 내는 것이 목적입니다. 실시간 기록보다는 <b>조회 속도와 분석 편의성</b>이 중요하며, 마케팅 인사이트 도출이나 경영 리포트 작성에 사용됩니다.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-red-50/50 p-6 rounded-3xl border border-red-100">
-                        <h4 class="font-bold text-zinc-800 mb-4 text-sm"><i class="fa-solid fa-screwdriver-wrench mr-2"></i> 운영 핵심: Deployment & Traffic</h4>
-                        <div class="space-y-5">
+                    <div class="bg-red-50/50 p-6 rounded-3xl border border-red-100 flex flex-col justify-center">
+                        <h4 class="font-bold text-zinc-800 mb-6 text-sm"><i class="fa-solid fa-screwdriver-wrench mr-2 text-red-700"></i> 운영 핵심: Deployment & Traffic</h4>
+                        <div class="space-y-8">
                             <div>
-                                <b class="text-xs text-red-800">배포 (Deployment)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">개발된 코드를 실제 서버에 반영하여 고객이 사용할 수 있게 만드는 <b>출시 작업</b>입니다.</p>
+                                <b class="text-sm text-red-800">배포 (Deployment)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">개발된 코드를 실제 서버 환경에 반영하여 고객이 사용할 수 있게 만드는 <b>최종 출시 작업</b>입니다. 서비스 중단을 최소화하는 것이 기술력의 척도입니다.</p>
                             </div>
                             <div>
-                                <b class="text-xs text-red-800">트래픽 (Traffic)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">특정 시간 동안 시스템에 흐르는 <b>사용자 수나 데이터의 양</b>입니다. 과도한 트래픽은 서버 다운의 원인이 됩니다.</p>
+                                <b class="text-sm text-red-800">트래픽 (Traffic)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">특정 시간 동안 시스템에 흐르는 <b>사용자 수나 데이터의 총량</b>입니다. '도로 위의 차량 흐름'과 같아서, 트래픽이 몰리면 서버 과부하로 서비스가 멈출 수 있습니다.</p>
                             </div>
                             <div>
-                                <b class="text-xs text-red-800">로그 (Log)</b>
-                                <p class="text-[11px] text-zinc-600 mt-1">시스템에서 일어난 모든 발자취를 남긴 <b>기록물</b>입니다. 장애 발생 시 블랙박스 역할을 합니다.</p>
+                                <b class="text-sm text-red-800">로그 (Log)</b>
+                                <p class="text-[11px] text-zinc-600 mt-1 leading-relaxed">시스템 내부에서 일어난 모든 사건의 <b>발자취를 남긴 기록물</b>입니다. 장애가 발생했을 때 원인을 파악하는 결정적인 '디지털 증거'가 됩니다.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 p-4 bg-zinc-900 text-white rounded-xl text-center">
+                <div class="mt-8 p-4 bg-zinc-900 text-white rounded-xl text-center shadow-lg">
                     <p class="text-[11px] font-medium leading-relaxed italic">
-                        💡 <b>"이번 배포 이후 트래픽이 급증했네요. 로그를 확인해 보니 시스템 연계 문제는 아닌 것 같습니다."</b>
+                        💡 <b>"OLTP 운영 로그를 분석해 보니 배포 직후 트래픽이 몰렸네요. OLAP용 배치 데이터 적재에 지연이 없는지 확인해 봅시다."</b>
                     </p>
                 </div>
             </div>
