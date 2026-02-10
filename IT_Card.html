@@ -1381,15 +1381,74 @@
                 </div>
             </div>
         </div>
+		<!-- 15: CPU vs GPU (수정: 기술적 특성 중심) -->
+        <div class="card">
+            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">15. AI Computing Architecture</div></div>
+            <div class="fade-in text-left">
+                <h2 class="card-title">왜 AI는 GPU를 원하는가:<br><span>순차 방식(CPU) vs 병렬 방식(GPU)</span></h2>
+                
+                <div class="grid grid-cols-2 gap-8 items-start mt-2">
+                    <div class="space-y-4">
+                        <div class="definition-section">
+                            <p class="def-text text-sm">인공지능 모델의 핵심은 수억 번의 <b>'행렬 곱셈(Matrix Multiplication)'</b>입니다. 이 거대한 계산 뭉치를 처리하는 방식의 차이가 성능을 결정합니다.</p>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <!-- CPU Card -->
+                            <div class="vs-card bg-zinc-50 border-zinc-200">
+                                <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                                    <i class="fa-solid fa-book-open text-xl"></i>
+                                    <b class="text-sm uppercase">CPU</b>
+                                </div>
+                                <h4 class="text-xs font-black text-zinc-700 mb-2">"책을 한 페이지씩 읽는 방식"</h4>
+                                <p class="text-[10px] text-zinc-500 leading-relaxed">
+                                    복잡한 논리나 시스템 운영 명령어를 <b>순서대로(Sequential)</b> 처리하는 데 특화되어 있습니다. 하나하나 깊이 있게 처리하지만, 단순 반복 계산이 수억 개라면 줄을 서서 기다려야 하는 병목 현상이 발생합니다.
+                                </p>
+                            </div>
+                            <!-- GPU Card -->
+                            <div class="vs-card bg-red-50/30 border-red-100">
+                                <div class="flex items-center gap-2 mb-3 text-red-600">
+                                    <i class="fa-solid fa-table-cells text-xl"></i>
+                                    <b class="text-sm uppercase">GPU</b>
+                                </div>
+                                <h4 class="text-xs font-black text-red-800 mb-2">"이미지/행렬을 통째로 연산"</h4>
+                                <p class="text-[10px] text-zinc-600 leading-relaxed">
+                                    원래 그래픽(이미지)의 수만 개 픽셀을 동시에 칠하기 위해 탄생했습니다. 수천 개의 코어가 <b>동시에(Parallel)</b> 행렬 연산을 수행하므로, AI가 데이터를 학습하고 결과를 도출하는 시간을 수천 배 단축시킵니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-zinc-900 p-6 rounded-3xl text-white relative overflow-hidden">
+                            <div class="absolute right-[-10px] bottom-[-10px] opacity-10 text-white"><i class="fa-solid fa-braille text-[120px]"></i></div>
+                            <h4 class="font-bold text-red-500 mb-3 text-sm"><i class="fa-solid fa-microchip mr-2"></i> AI 연산의 본질: 행렬(Matrix)</h4>
+                            <p class="text-[11px] text-zinc-300 leading-relaxed mb-4">
+                                인공지능이 "고양이"를 인식하거나 "글"을 쓸 때, 내부에서는 거대한 수치 데이터(가중치)들이 <b>격자 형태의 행렬</b>로 곱해집니다.
+                            </p>
+                            <div class="p-3 bg-zinc-800 rounded-xl border border-zinc-700">
+                                <p class="text-[10px] text-zinc-400">
+                                    <span class="text-white font-bold">결론:</span> CPU가 소설책을 정독하는 독서가라면, GPU는 수만 개의 수치를 한꺼번에 계산기에 넣고 돌리는 <b>행렬 연산의 특화 도구</b>입니다. AI가 똑똑해질수록 이 행렬의 크기가 커지기에 더 강력한 GPU가 필요합니다.
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-[10.5px] text-zinc-500 italic bg-zinc-50 p-3 rounded-lg border border-dashed text-center">
+                            "행렬 연산의 독보적 효율성이 <b>엔비디아</b>를 AI 시대의 주인공으로 만들었습니다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
 		
 		<!-- 16: NVIDIA, Tesla & HBM (상세 보강) -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-caㅏtegory">15. Market Insights: Hardware Alliance</div>
+                <div class="page-caㅏtegory">16. Market Insights: Hardware Alliance</div>
             </div>
             <div class="fade-in">
-                <h2 class="card-title">왜 엔비디아! 테슬라! 하이닉스인가!:<br><span>주식시장이 열광하는 AI골드러시</span></h2>
+                <h2 class="card-title">왜 엔비디아! 테슬라! 하이닉스인가!<br><span>주식시장이 열광하는 AI골드러시</span></h2>
                 <div class="grid grid-cols-2 gap-8 mt-4 text-left">
                     <div class="space-y-4">
                         <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-green-600 shadow-sm">
@@ -1433,7 +1492,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">16. AI Optimization Strategy</div>
+                <div class="page-category">17. AI Optimization Strategy</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">AI 성능 최적화의 3가지 길:<br><span>프롬프트, RAG, 그리고 파인튜닝</span></h2>
@@ -1473,7 +1532,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">17. Sovereign AI</div>
+                <div class="page-category">18. Sovereign AI</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">데이터와 기술의 독립:<br><span>왜 지금 소버린 AI(Sovereign AI)인가?</span></h2>
