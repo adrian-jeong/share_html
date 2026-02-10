@@ -268,6 +268,9 @@
             z-index: 1;
         }
         .flow-item:last-child .flow-connector { display: none; }
+		.api-structure-card { background: #f8fafc; border-radius: 12px; border-left: 4px solid var(--lg-red); padding: 12px; font-size: 0.75rem; }
+        .api-method { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; margin-right: 5px; }
+
 
         /* 데이터 테이블 */
         .data-table {
@@ -282,8 +285,8 @@
         /* 역할 그리드 상세화 - 네모 칸이 생기게 하는 핵심 CSS */
         .role-grid { 
             display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 15px; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 12px; 
             margin-top: 20px; 
         }
         .role-card { 
@@ -370,6 +373,37 @@
             border-left: 10px solid #fee500;
             border-bottom: 10px solid transparent;
         }
+		/* 챕터 페이지 특화 스타일 */
+        .chapter-page {
+            background-color: var(--lg-dark);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+		/* AI 계층 다이어그램 */
+        .ai-hierarchy-container { position: relative; width: 100%; height: 220px; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 10px; }
+        .hierarchy-box { border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 8px; position: absolute; border: 2px solid; transition: all 0.3s ease; }
+        .ai-box { width: 95%; height: 210px; background: #f8fafc; border-color: #e2e8f0; bottom: 0; z-index: 1; }
+        .ml-box { width: 85%; height: 145px; background: #eff6ff; border-color: #dbeafe; bottom: 0; z-index: 2; }
+        .dl-box { width: 75%; height: 95px; background: #dbeafe; border-color: #bfdbfe; bottom: 0; z-index: 3; }
+        .gen-box { width: 65%; height: 50px; background: var(--lg-red); border-color: var(--lg-accent); bottom: 0; z-index: 4; color: white; justify-content: center; padding-top: 0; }
+
+        .hierarchy-label { font-weight: 900; font-size: 0.75rem; text-transform: uppercase; }
+        .gen-box .hierarchy-label { font-size: 0.9rem; }
+
+        /* 타임라인 스타일 */
+        .timeline-container { display: flex; justify-content: space-between; position: relative; margin-top: 15px; padding: 5px 0; width: 100%; }
+        .timeline-line { position: absolute; top: 25px; left: 0; width: 100%; height: 2px; background: #eee; z-index: 1; }
+        .timeline-point { z-index: 2; display: flex; flex-direction: column; align-items: center; width: 22%; }
+        .point-dot { width: 10px; height: 10px; background: #ccc; border-radius: 50%; margin: 8px 0; border: 2px solid white; }
+        .active-dot { background: var(--lg-red); transform: scale(1.2); }
+
+        /* 패러다임 미니 카드 */
+        .paradigm-mini-grid { display: flex; gap: 15px; margin-top: 15px; }
+        .mini-shift-card { flex: 1; padding: 15px; border-radius: 16px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 15px; }
+        .mini-shift-card.past { background: #f1f5f9; }
+        .mini-shift-card.now { background: #1e1e1e; color: white; border-color: #333; }
 		
     </style>
 </head>
@@ -387,17 +421,26 @@
     <div class="card-container" id="main-container">
         
         <!-- 01: Intro -->
-        <div class="card justify-center">
+        <div class="card justify-center text-left">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
                 <div class="page-category">Customer Value Innovation</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">현업의 기획을 기술로 번역하는<br><span>IT 핵심 소통 가이드</span></h2>
-                <div class="card-content border-l-[8px] border-[#A50034] pl-10 py-4">
+                <div class="card-content border-l-[8px] border-[#A50034] pl-10 py-4 text-left">
                     <p class="text-2xl font-bold mb-4 text-zinc-800">고객가치혁신부문 임직원 여러분을 환영합니다</p>
                     <p class="text-gray-600 mb-4 leading-relaxed">LG전자 고객가치혁신부문 임직원 여러분, 우리의 모든 혁신 활동은 고도화된 IT 시스템과 데이터 인프라를 통해 실체화됩니다. 비즈니스 요구사항을 IT 언어로 정확히 전달하는 능력은 프로젝트의 속도와 퀄리티를 결정짓는 핵심 역량입니다.</p>
-                    <p class="text-gray-600 leading-relaxed">본 가이드는 현업에서 흔히 사용하는 용어들의 기술적 정의(Technical Definition)와 실무적 맥락을 함께 정리하였습니다. IT 파트너와 동일한 관점에서 시스템 아키텍처와 데이터 흐름을 논의할 수 있는 기반이 되기를 바랍니다.</p>
+                    <p class="text-gray-600 leading-relaxed mb-10">본 가이드는 현업에서 흔히 사용하는 용어들의 기술적 정의(Technical Definition)와 실무적 맥락을 함께 정리하였습니다. IT 파트너와 동일한 관점에서 시스템 아키텍처와 데이터 흐름을 논의할 수 있는 기반이 되기를 바랍니다.</p>
+                    
+                    <!-- AI 제작 및 안내 문구 추가 -->
+                    <div class="pt-8 border-t border-zinc-100 flex items-start gap-3 opacity-60">
+                        <i class="fa-solid fa-robot text-zinc-400 mt-1"></i>
+                        <p class="text-xs text-zinc-500 leading-relaxed">
+                            본 가이드는 <b class="text-zinc-800">Gemini Canvas(생성형 AI)</b>를 활용하여 제작되었습니다.<br>
+                            비전공 임직원의 이해를 돕기 위해 복잡한 기술적 정확성보다는 <b class="text-zinc-800">쉬운 비유와 실무적인 예시</b>를 중심으로 구성되었으므로, 실제 시스템의 상세 명세와는 차이가 있을 수 있음을 유의하시기 바랍니다.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -457,10 +500,31 @@
                 </div>
             </div>
         </div>
-		
-        <!-- 04: Client vs Server (수정: 카카오톡 예시 반영) -->
+		<!-- NEW Chapter 1 Intro -->
+        <div class="card chapter-page">
+            <div class="fade-in">
+                <span class="text-lg font-black text-red-500 uppercase tracking-widest mb-4 block">Chapter 01</span>
+                <h2 class="text-6xl font-black mb-8">시스템 인프라 및<br><span class="text-red-500">IT 기본 지식</span></h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-10"></div>
+                <div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto text-sm text-zinc-400">
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-cloud text-3xl mb-4 text-white"></i>
+                        <p>Cloud & Infra</p>
+                    </div>
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-network-wired text-3xl mb-4 text-white"></i>
+                        <p>Client / Server</p>
+                    </div>
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-database text-3xl mb-4 text-white"></i>
+                        <p>Data & API</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 03: Client vs Server (수정: 카카오톡 예시 반영) -->
         <div class="card">
-            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">02. Network Communication</div></div>
+            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">01. Network Communication</div></div>
             <div class="fade-in">
                 <h2 class="card-title">요청하는 자와 응답하는 자:<br><span>클라이언트(Client)와 서버(Server)</span></h2>
                 <div class="definition-section">
@@ -518,29 +582,58 @@
         </div>
 
 		
-        <!-- 03: On-Premise, Cloud -->
+        <!-- 04: On-Premise vs Cloud (수정 및 보강) -->
         <div class="card">
-            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">01. Infrastructure Architecture</div></div>
-            <div class="fade-in">
-                <h2 class="card-title">온프레미스(On-Premise)와<br><span>가상화 서비스(Cloud)</span></h2>
-                <div class="definition-section">
-                    <span class="def-label">Definition: On-Premise vs Cloud</span>
-                    <p class="def-text"><b>온프레미스</b>는 조직이 직접 서버 장비를 구축 운영하는 방식이며, <b>클라우드</b>는 외부 공급자의 가상화된 자원을 이용하는 모델입니다.</p>
+            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">02. Infrastructure Architecture</div></div>
+            <div class="fade-in text-left">
+                <h2 class="card-title">인프라의 두 가지 선택:<br><span>온프레미스(On-Premise) vs 클라우드(Cloud)</span></h2>
+                
+                <div class="grid grid-cols-2 gap-8 items-start">
+                    <div class="space-y-4">
+                        <div class="definition-section">
+                            <span class="def-label">Core Definition</span>
+                            <p class="def-text"><b>온프레미스</b>는 서버를 직접 구매해 회사 안에 두는 방식이고, <b>클라우드</b>는 아마존(AWS)이나 구글의 거대 서버를 빌려 쓰는 방식입니다.</p>
+                        </div>
+                        
+                        <!-- 비유 섹션 -->
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                            <h4 class="font-bold text-blue-900 mb-3 text-sm"><i class="fa-solid fa-lightbulb mr-2"></i> 이해를 돕는 비유: "내 집 마련 vs 호텔 숙박"</h4>
+                            <div class="grid grid-cols-2 gap-4 text-[10.5px] leading-relaxed">
+                                <div class="p-3 bg-white rounded-xl border border-blue-200">
+                                    <b class="text-blue-800">온프레미스 (내 집 마련)</b><br>
+                                    부지를 사고 집을 직접 짓습니다. 인테리어나 구조를 내 맘대로 100% 통제하지만, 수도가 고장 나면 직접 고쳐야 하고 집을 넓히려면 이사가 힘듭니다.
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-blue-200">
+                                    <b class="text-blue-800">클라우드 (호텔 숙박)</b><br>
+                                    필요한 기간만큼 방을 빌립니다. 청소와 관리는 호텔이 다 해주고, 사람이 늘어나면 옆방을 즉시 더 빌리면 됩니다. 대신 빌린 만큼 비용을 냅니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <table class="night-table text-[10px]">
+                            <thead>
+                                <tr><th width="18%">비교 항목</th><th width="41%">온프레미스 (예: 레거시 GSFS)</th><th width="41%">클라우드 (예: Smile Plus)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="bg-zinc-800 font-bold text-center">비용 구조</td><td><b>CAPEX</b> (초기 구축 비용 과다)</td><td><b>OPEX</b> (사용한 만큼 내는 월 구독료)</td></tr>
+                                <tr><td class="bg-zinc-800 font-bold text-center">확장 속도</td><td class="highlight-red">수개월 (서버 주문 및 배송 대기)</td><td class="highlight-blue"><b>수분 이내</b> (즉시 클릭 한 번으로 증설)</td></tr>
+                                <tr><td class="bg-zinc-800 font-bold text-center">보안/관리</td><td>조직이 직접 철저한 <b>물리적 통제</b></td><td>클라우드 사의 <b>보안 가이드</b> 준수</td></tr>
+                                <tr><td class="bg-zinc-800 font-bold text-center">주요 목적</td><td>변동성 적은 핵심 시스템 (Core)</td><td>트래픽 변화 심한 고객 접점 서비스</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="text-[11px] text-zinc-500 italic bg-zinc-50 p-3 rounded-lg border border-dashed text-center">
+                            "현재 LG전자는 보안이 필수적인 데이터는 온프레미스에, 유연한 확장이 필요한 서비스는 클라우드에 두는 <b>하이브리드</b> 전략을 선호합니다."
+                        </p>
+                    </div>
                 </div>
-                <table class="night-table text-xs">
-                    <thead><tr><th width="20%">구분</th><th width="40%">온프레미스 (예: GSFS)</th><th width="40%">클라우드 (예: Smile Plus)</th></tr></thead>
-                    <tbody>
-                        <tr><td class="bg-zinc-800 font-bold text-center">개념</td><td> IDC 센터 내 물리 서버 직접 구축</td><td>가상화된 자원 네트워크 원격 활용</td></tr>
-                        <tr><td class="bg-zinc-800 font-bold text-center">장점</td><td class="highlight-blue">철저한 보안 및 물리적 통제 가능</td><td class="highlight-blue">유연한 확장성 및 빠른 도입 속도</td></tr>
-                        <tr><td class="bg-zinc-800 font-bold text-center">단점</td><td class="highlight-red">서버 증설 시 수개월의 조달 소요</td><td class="highlight-red">사용량에 따른 가변 비용 발생</td></tr>
-                    </tbody>
-                </table>
             </div>
         </div>
 
 
 
-        <!-- 05: DB, DL, DW, DM -->
+        <!-- 05: DB, DL, DW, DM (수정된 섹션) -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">03. Data Architecture</div></div>
             <div class="fade-in">
@@ -555,7 +648,7 @@
 
                 <div class="bg-red-50 border-l-8 border-red-800 p-4 mb-4 text-center">
                     <p class="text-sm font-bold text-gray-800 italic">
-                        "표준 IT 정의에서는 DM을 DW의 일부로 보지만, 우리 CS 환경에서의 데이터 마트는 DB, DW, DL을 모두 아우르는 통합 허브로 운영됩니다."
+                        "데이터는 원재료(DL)에서 가공(DW)을 거쳐 최종 상품(DM)으로 진화하여 비즈니스에 활용됩니다."
                     </p>
                 </div>
 
@@ -563,56 +656,100 @@
                     <thead>
                         <tr>
                             <th width="15%">구분</th>
-                            <th width="21%">DB (Database)</th>
-                            <th width="21%">DL (Data Lake)</th>
-                            <th width="21%">DW (Warehouse)</th>
-                            <th width="22%">DM (Data Mart)</th>
+                            <th width="21%">DB (운영 저장소)</th>
+                            <th width="21%">DL (데이터 호수)</th>
+                            <th width="21%">DW (데이터 창고)</th>
+                            <th width="22%">DM (데이터 마트)</th>
                         </tr>
                     </thead>
                     <tbody class="text-[11px] leading-relaxed">
                         <tr>
                             <td class="font-bold bg-gray-50 text-center">표준 정의</td>
-                            <td>실시간 비즈니스 트랜잭션을 처리하기 위한 <b>운영용</b> 저장소</td>
-                            <td>가공되지 않은 모든 원천 데이터를 원형 그대로 보관하는 <b>거대한 호수</b></td>
-                            <td>의사결정을 위해 여러 DB 데이터를 통합·정제한 <b>분석 전문</b> 저장소</td>
-                            <td><b>DW에서 특정 부서나 목적을 위해 추출한 요약 데이터 세트</b></td>
+                            <td>실시간 업무를 처리하기 위한 <b>현행용</b> 저장소</td>
+                            <td>가공되지 않은 <b>원천 정보</b>를 날것 그대로 담은 큰 호수</td>
+                            <td>의사결정을 위해 여러 곳의 데이터를 <b>통합/정제</b>한 창고</td>
+                            <td>특정 목적이나 부서에 맞게 <b>요약/추출</b>한 데이터셋</td>
                         </tr>
                         <tr>
-                            <td class="font-bold bg-gray-50 text-center">핵심 특징</td>
-                            <td>빠른 읽기/쓰기 (OLTP) 및 데이터 무결성 중점</td>
-                            <td>비정형 데이터(이미지, 로그 등) 무제한 보관 및 AI 학습 원천</td>
-                            <td>대규모 통합 분석 (OLAP) 및 히스토리 데이터 일관성 유지</td>
-                            <td><b>분석 효율성 극대화 및 현업 사용자의 데이터 접근성 최적화</b></td>
+                            <td class="font-bold bg-gray-50 text-center">쉬운 비유</td>
+                            <td>주방의 <b>냉장고</b><br>(지금 요리에 쓸 재료 보관)</td>
+                            <td>산지 직송 <b>대형 물류센터</b><br>(상자째 쌓여있는 원재료들)</td>
+                            <td>규격화된 <b>대형 할인마트</b><br>(섹션별로 정리된 상품들)</td>
+                            <td>동네의 <b>편의점</b><br>(딱 필요한 물건만 골라 놓음)</td>
                         </tr>
                         <tr>
-                            <td class="font-bold bg-gray-50 text-center">CS 실무 예시</td>
-                            <td><b>Smile Plus 접수 정보</b><br>(실시간 상담 예약 데이터)</td>
-                            <td><b>상담 음성/가전 로그</b><br>(녹취 파일, 에어컨 센서 로우 데이터)</td>
-                            <td><b>글로벌 서비스 통합 이력</b><br>(지난 5년 전 세계 수리 정보 집계)</td>
-                            <td><b>품질 분석용 요약 마트</b><br>(특정 모델 고장 원인 분석용 데이터셋)</td>
+                            <td class="font-bold bg-gray-50 text-center">데이터 예시</td>
+                            <td>회원가입 정보, 주문 이력, 실시간 재고량</td>
+                            <td>CCTV 영상 로그, 웹사이트 클릭 기록, 센서 로그</td>
+                            <td>지난 10년간 전사 매출 통합 이력, 고객군 분석 정보</td>
+                            <td>이번 달 마케팅 타겟 고객 리스트, 부서별 실적 보고서</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-gray-50 text-center">대표 솔루션</td>
+                            <td>Oracle, MySQL, PostgreSQL</td>
+                            <td>AWS S3, Hadoop, Google Cloud Storage</td>
+                            <td>Snowflake, Google BigQuery, Teradata</td>
+                            <td>BI 도구용 테이블, Tableau/PowerBI 연동 소스</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- 06: API -->
+        <!-- 06: API (보강된 섹션) -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">04. Interface & Real-time Integration</div></div>
-            <div class="fade-in">
+            <div class="fade-in text-left">
                 <h2 class="card-title">시스템 연동의 실시간 심장,<br><span>API (Application Programming Interface)</span></h2>
-                <div class="definition-section">
-                    <p class="def-text">서로 다른 시스템이 약속된 <b>URL 주소</b>를 통해 실시간으로 데이터를 주고받는 <b>연결 창구</b>입니다.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="card-content">
-                        <h4 class="font-bold text-[#A50034] mb-3"><i class="fa-solid fa-bolt mr-2"></i> 왜 DB-to-DB가 아닌 API인가?</h4>
-                        <p class="text-xs text-zinc-600 leading-relaxed mb-4">우리는 보통 데이터베이스끼리 직접 연결하는 방식을 떠올리지만, 실시간성이 중요한 현대 IT에서는 <b>API 송/수신 방식</b>을 활용합니다. 특정 정보를 원할 때 URL 주소(Endpoint)를 호출하여 즉시 답을 받기 때문입니다.</p>
-                        <div class="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-[10px] mb-2">GET https://api.lg-service.com/v1/customer/status</div>
+                
+                <div class="grid grid-cols-2 gap-8 items-start">
+                    <div class="space-y-4">
+                        <div class="definition-section">
+                            <span class="def-label">Definition</span>
+                            <p class="def-text">서로 다른 소프트웨어가 표준화된 규칙에 따라 실시간으로 데이터를 주고받는 <b>'디지털 접점'</b>입니다.</p>
+                        </div>
+                        
+                        <div class="bg-zinc-50 p-5 rounded-2xl border">
+                            <h4 class="font-bold text-zinc-800 mb-3 text-sm"><i class="fa-solid fa-utensils mr-2"></i> "API는 식당의 점원과 같습니다"</h4>
+                            <p class="text-[11px] text-zinc-600 leading-relaxed">
+                                손님(Client)이 주방(Server)에 직접 들어가 요리를 할 수 없습니다. 대신 <b>점원(API)</b>에게 메뉴판(API 가이드)을 보고 주문(Request)을 하면, 점원이 주방에 전달하고 완성된 요리(Data)를 손님에게 가져다주는(Response) 것과 같은 원리입니다.
+                            </p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-zinc-800 text-sm"><i class="fa-solid fa-shield-halved mr-2 text-blue-600"></i> 왜 DB 직접 연결보다 API인가?</h4>
+                            <ul class="text-[10px] text-zinc-600 space-y-1 list-disc pl-4 leading-relaxed">
+                                <li><b>보안성</b>: 서버의 소스코드나 DB 구조를 노출하지 않고 필요한 문만 열어줍니다.</li>
+                                <li><b>독립성</b>: 내부 DB 구조가 바뀌어도 API 규격만 유지하면 상대방 시스템은 영향을 받지 않습니다.</li>
+                                <li><b>표준화</b>: 기종이 다른 시스템(예: 모바일 앱 ↔ 메인프레임) 간에도 자유롭게 대화가 가능합니다.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="bg-zinc-50 p-5 rounded-xl border border-zinc-200">
-                        <h4 class="font-black text-[11px] mb-2 text-zinc-800">CS 핵심 사례: 고객 OneView</h4>
-                        <p class="text-[10px] text-zinc-600 leading-normal">상담사가 <b>고객 OneView</b>를 열 때, 물류 시스템의 배송 현황이나 IoT 상태 정보를 <b>실시간 API 호출</b>로 가져옵니다. DB가 동기화되길 기다리지 않고 즉시 데이터를 수신하는 것이 핵심입니다.</p>
+
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-[#A50034] text-sm"><i class="fa-solid fa-code mr-2"></i> API의 언어: 어떻게 대화하는가?</h4>
+                        <div class="space-y-3">
+                            <div class="api-structure-card">
+                                <div class="flex items-center mb-2"><span class="api-method get">GET</span> <code class="font-mono text-[10px]">/v1/delivery-status</code></div>
+                                <p class="text-[10px] text-zinc-500 mb-2"><b>Request (질문)</b>: "주문번호 1234번의 배송 현황 알려줘"</p>
+                                <div class="bg-gray-900 text-green-400 p-2 rounded font-mono text-[9px]">
+                                    { "order_id": 1234 }
+                                </div>
+                            </div>
+                            <div class="api-structure-card" style="border-left-color: #166534;">
+                                <p class="text-[10px] text-zinc-500 mb-2"><b>Response (답변)</b>: "현재 배송 중이며, 김LG 기사님이 이동 중입니다."</p>
+                                <div class="bg-gray-900 text-green-400 p-2 rounded font-mono text-[9px]">
+                                    { "status": "In Transit", "courier": "Kim LG" }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-red-50 rounded-xl border border-red-100 mt-4">
+                            <h5 class="font-bold text-red-800 text-[11px] mb-1">CS 실무: OneView 실시간 조회</h5>
+                            <p class="text-[10px] text-zinc-600 leading-relaxed">
+                                상담사가 <b>OneView</b> 화면을 띄울 때, 배송 시스템/IoT 센서 서버/부품 시스템 등으로 <b>수십 개의 API가 동시에 발사</b>됩니다. 각 서버로부터 받아온 데이터가 브라우저라는 그릇에 담겨 상담사에게 한눈에 보이는 것입니다.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -668,60 +805,71 @@
             </div>
         </div>
 
-        <!-- 08: Roles -->
+        <!-- 08: Roles (수정: 기획자 포함 5대 역할) -->
         <div class="card">
             <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">06. Development Roles</div></div>
             <div class="fade-in">
-                <h2 class="card-title">가치를 만드는 4대 핵심 역할,<br><span>디자인부터 백엔드까지</span></h2>
+                <h2 class="card-title">가치를 만드는 5대 핵심 역할,<br><span>기획부터 백엔드까지</span></h2>
                 
                 <div class="definition-section">
-                    <span class="def-label">Definition: UX/UI to Backend Flow</span>
-                    <p class="def-text text-sm">하나의 IT 제품은 사용자의 눈에 보이는 <b>디자인(Design)</b>, 이를 브라우저 언어로 옮기는 <b>퍼블리싱(Publishing)</b>, 화면의 기능을 구현하는 <b>프론트엔드(Frontend)</b>, 데이터와 로직을 처리하는 <b>백엔드(Backend)</b>의 유기적 협업으로 완성됩니다.</p>
+                    <span class="def-label">Definition: Product Development Lifecycle</span>
+                    <p class="def-text text-sm">하나의 IT 제품은 비즈니스를 설계하는 <b>기획(Planning)</b>에서 시작하여, <b>디자인</b>, <b>퍼블리싱</b>, <b>프론트엔드</b>, <b>백엔드</b> 개발자의 유기적인 협업으로 완성됩니다.</p>
                 </div>
 
                 <div class="role-grid">
+                    <!-- Planner (New) -->
+                    <div class="role-card">
+                        <span class="role-icon">📝</span>
+                        <div class="role-name">기획자 (Planner)</div>
+                        <div class="role-tagline">"어떤 가치를 줄까?"</div>
+                        <p class="role-desc">비즈니스 요구사항을 분석하고 서비스의 구조를 설계합니다. 화면 정의서(Wireframe)를 작성하고 프로젝트 일정을 조율합니다.</p>
+                    </div>
                     <!-- Designer -->
                     <div class="role-card">
                         <span class="role-icon">🎨</span>
                         <div class="role-name">디자이너 (Designer)</div>
                         <div class="role-tagline">"어떻게 보일까?"</div>
-                        <p class="role-desc">사용자 경험(UX)을 설계하고 시각적 요소(UI) 가이드를 제작합니다. 상담원의 시선 이동과 편의성을 최우선으로 고려합니다.</p>
+                        <p class="role-desc">사용자 경험(UX)을 설계하고 UI 가이드를 제작합니다. 브랜드 가이드에 맞는 시각적 요소를 완성합니다.</p>
                     </div>
                     <!-- Publisher -->
                     <div class="role-card">
                         <span class="role-icon">📑</span>
                         <div class="role-name">퍼블리셔 (Publisher)</div>
                         <div class="role-tagline">"뼈대를 만들까?"</div>
-                        <p class="role-desc">디자인 시안을 웹 표준 언어(HTML/CSS)로 변환합니다. 모든 브라우저에서 화면이 깨지지 않고 똑같이 보이게 정렬합니다.</p>
+                        <p class="role-desc">디자인 시안을 브라우저가 읽을 수 있는 언어(HTML/CSS)로 변환합니다. 모든 기기에서 화면이 깨지지 않게 합니다.</p>
                     </div>
                     <!-- Frontend -->
                     <div class="role-card">
                         <span class="role-icon">💻</span>
                         <div class="role-name">프론트엔드 (Frontend)</div>
                         <div class="role-tagline">"어떻게 동작할까?"</div>
-                        <p class="role-desc">사용자 동작과 데이터를 연결합니다. 버튼 클릭 시 팝업을 띄우거나, API 정보를 화면에 실시간으로 뿌려주는 역할을 합니다.</p>
+                        <p class="role-desc">사용자 동작과 데이터를 연결합니다. 버튼 클릭 로직을 구현하고 API 정보를 화면에 뿌려주는 역할을 합니다.</p>
                     </div>
                     <!-- Backend -->
                     <div class="role-card">
                         <span class="role-icon">⚙️</span>
                         <div class="role-name">백엔드 (Backend)</div>
                         <div class="role-tagline">"어떻게 처리할까?"</div>
-                        <p class="role-desc">데이터 처리와 핵심 비즈니스 로직을 담당합니다. DB 재고 조회나 상담 저장을 처리하는 '보이지 않는 엔진'입니다.</p>
+                        <p class="role-desc">데이터 처리와 비즈니스 로직을 담당합니다. DB 관리와 보안을 책임지는 시스템의 보이지 않는 심장입니다.</p>
                     </div>
                 </div>
 
                 <div class="mt-8 bg-zinc-50 p-5 rounded-xl border border-zinc-200">
                     <h4 class="font-bold text-zinc-800 mb-3 text-sm">💡 기획자와의 소통 Point:</h4>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="text-[11px] leading-relaxed">
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="text-[10px] leading-relaxed">
+                            <b>"비즈니스 목표가 불명확해요"</b><br>
+                            <span class="text-zinc-500">→ 기획자와 요구사항 재정립</span>
+                        </div>
+                        <div class="text-[10px] leading-relaxed">
                             <b>"디자인 가이드와 달라요"</b><br>
                             <span class="text-zinc-500">→ 디자이너/퍼블리셔 소통</span>
                         </div>
-                        <div class="text-[11px] leading-relaxed">
-                            <b>"버튼 클릭 시 화면이 안 변해요"</b><br>
+                        <div class="text-[10px] leading-relaxed">
+                            <b>"버튼 클릭 시 반응이 없어요"</b><br>
                             <span class="text-zinc-500">→ 프론트엔드 소통</span>
                         </div>
-                        <div class="text-[11px] leading-relaxed">
+                        <div class="text-[10px] leading-relaxed">
                             <b>"데이터 저장이 안 돼요"</b><br>
                             <span class="text-zinc-500">→ 백엔드 소통</span>
                         </div>
@@ -906,66 +1054,87 @@
                 </div>
             </div>
         </div>
-
-        <!-- 11: AI Evolution - Timeline & Concepts -->
-        <div class="card">
-            <div class="card-header">
-                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">10. AI Evolution</div>
-            </div>
+		<!-- NEW Chapter 2 Intro -->
+        <div class="card chapter-page">
             <div class="fade-in">
+                <span class="text-lg font-black text-red-500 uppercase tracking-widest mb-4 block">Chapter 02</span>
+                <h2 class="text-6xl font-black mb-8">AI 기술의<br><span class="text-red-500">도약과 진화</span></h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-10"></div>
+                <div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto text-sm text-zinc-400">
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-robot text-3xl mb-4 text-white"></i>
+                        <p>GPT Chronicles</p>
+                    </div>
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-user-gear text-3xl mb-4 text-white"></i>
+                        <p>AI Agents</p>
+                    </div>
+                    <div class="p-6 border border-zinc-700 rounded-2xl">
+                        <i class="fa-solid fa-microchip text-3xl mb-4 text-white"></i>
+                        <p>Hardware Alliance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 10: AI Hierarchy & Paradigm Shift (수정 및 통합 장표) -->
+        <div class="card">
+            <div class="card-header"><div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div><div class="page-category">10. AI Hierarchy & Paradigm Shift</div></div>
+            <div class="fade-in text-left">
                 <h2 class="card-title">판을 바꾸는 기술의 도약:<br><span>알파고에서 챗GPT까지의 여정</span></h2>
                 
-                <div class="grid grid-cols-4 gap-4 mt-4 mb-8">
-                    <div class="p-4 bg-zinc-50 rounded-xl border border-zinc-200">
-                        <span class="text-xs font-black text-blue-700 uppercase tracking-widest">1단계: AI</span>
-                        <h4 class="font-bold text-sm my-2">인공지능</h4>
-                        <p class="text-[10px] text-zinc-500 leading-normal">인간의 지능을 기계로 모사하는 <b>가장 포괄적인 개념</b>입니다.</p>
+                <div class="grid grid-cols-2 gap-10 items-start">
+                    <!-- 왼쪽: 계층 및 타임라인 -->
+                    <div class="flex flex-col">
+                        <div class="ai-hierarchy-container">
+                            <div class="hierarchy-box ai-box"><span class="hierarchy-label text-zinc-400">AI (인공지능)</span></div>
+                            <div class="hierarchy-box ml-box"><span class="hierarchy-label text-blue-600">ML (머신러닝)</span></div>
+                            <div class="hierarchy-box dl-box"><span class="hierarchy-label text-blue-800">DL (딥러닝)</span></div>
+                            <div class="hierarchy-box gen-box"><span class="hierarchy-label text-white">Gen AI (생성형 AI)</span></div>
+                        </div>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+                            <div class="timeline-point"><span class="text-[9px] font-bold text-zinc-400">1950s</span><div class="point-dot"></div><span class="text-[8px] text-zinc-400">AI 탄생</span></div>
+                            <div class="timeline-point"><span class="text-[9px] font-bold text-zinc-400">1980s</span><div class="point-dot"></div><span class="text-[8px] text-zinc-400">머신러닝</span></div>
+                            <div class="timeline-point"><span class="text-[9px] font-bold text-blue-600">2016</span><div class="point-dot active-dot"></div><span class="text-[8px] text-blue-600 font-bold">알파고(DL)</span></div>
+                            <div class="timeline-point"><span class="text-[9px] font-bold text-red-600">2022</span><div class="point-dot active-dot" style="background-color: var(--lg-red);"></div><span class="text-[8px] text-red-600 font-bold">챗GPT(Gen AI)</span></div>
+                        </div>
                     </div>
-                    <div class="p-4 bg-zinc-100 rounded-xl border border-zinc-200">
-                        <span class="text-xs font-black text-blue-800 uppercase tracking-widest">2단계: ML</span>
-                        <h4 class="font-bold text-sm my-2">머신러닝</h4>
-                        <p class="text-[10px] text-zinc-500 leading-normal">사람이 규칙을 일일이 정하지 않고, <b>데이터로 학습</b>하는 방법론입니다.</p>
-                    </div>
-                    <div class="p-4 bg-zinc-200 rounded-xl border border-zinc-300">
-                        <span class="text-xs font-black text-zinc-800 uppercase tracking-widest">3단계: DL</span>
-                        <h4 class="font-bold text-sm my-2">딥러닝</h4>
-                        <p class="text-[10px] text-zinc-500 leading-normal">뇌 구조를 본뜬 인공신경망으로 <b>복잡한 패턴</b>을 스스로 찾아냅니다.</p>
-                    </div>
-                    <div class="p-4 bg-red-50 rounded-xl border border-red-200">
-                        <span class="text-xs font-black text-red-700 uppercase tracking-widest">4단계: Gen AI</span>
-                        <h4 class="font-bold text-sm my-2">생성형 AI</h4>
-                        <p class="text-[10px] text-zinc-500 leading-normal">데이터를 이해하는 수준을 넘어 <b>새로운 결과물을 창작</b>하는 지능입니다.</p>
+
+                    <!-- 오른쪽: 상세 정의 -->
+                    <div class="space-y-2">
+                        <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-100 shadow-sm text-[10px] leading-relaxed">
+                            <b class="text-zinc-800 block mb-1">AI (Artificial Intelligence)</b> 인간의 지능을 기계로 모사하는 가장 포괄적 개념.
+                        </div>
+                        <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100 shadow-sm text-[10px] leading-relaxed">
+                            <b class="text-blue-900 block mb-1">ML (Machine Learning)</b> 명시적 규칙 없이 데이터 학습을 통해 성능을 개선하는 알고리즘.
+                        </div>
+                        <div class="p-3 bg-blue-100/50 rounded-xl border border-blue-200 shadow-sm text-[10px] leading-relaxed font-medium">
+                            <b class="text-blue-900 block mb-1">DL (Deep Learning) : <span class="text-blue-700 underline">알파고의 핵심</span></b> 뇌 구조를 닮은 인공신경망으로 비정형 데이터를 분석.
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-xl border border-red-100 shadow-sm text-[10px] leading-relaxed font-bold">
+                            <b class="text-red-900 block mb-1">Gen AI (Generative AI) : <span class="text-red-700 underline">챗GPT의 핵심</span></b> 학습한 패턴을 바탕으로 새로운 창작물을 자율 생성.
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-10">
-                    <div class="space-y-4">
-                        <div class="p-5 border-l-4 border-blue-500 bg-blue-50/30 rounded-r-xl relative">
-                            <span class="absolute -top-3 left-2 bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">2016년 충격</span>
-                            <h4 class="font-black text-blue-900 mb-2">알파고: "기계가 인간을 구별/판단하다"</h4>
-                            <p class="text-xs text-zinc-600 leading-relaxed">
-                                바둑이라는 <b>닫힌 세계</b>에서 최적의 수를 계산하여 이세돌을 꺾었습니다. 당시 주류 모델은 데이터의 <b>특징을 분류(Classification)</b>하고 정답을 고르는 '특수 지능'에 집중되어 있었습니다.
-                            </p>
-                        </div>
-                        <div class="p-5 border-l-4 border-red-500 bg-red-50/30 rounded-r-xl relative">
-                            <span class="absolute -top-3 left-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">2022년 혁명</span>
-                            <h4 class="font-black text-red-900 mb-2">챗GPT: "기계가 인간과 대화/생성하다"</h4>
-                            <p class="text-xs text-zinc-600 leading-relaxed">
-                                인류의 모든 지식을 학습한 거대 모델이 등장했습니다. 이제 AI는 정답을 고르는 수준을 넘어 <b>문맥을 추론(Reasoning)</b>하고 <b>내용을 창작</b>하는 '범용 지능'의 타이틀을 거머쥐었습니다.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bg-zinc-900 rounded-3xl p-6 flex flex-col justify-center text-white">
-                        <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-chart-line text-red-500"></i> 기술 패러다임의 이동</h4>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <div class="w-1 h-10 bg-zinc-700"></div>
-                                <div><p class="text-[10px] text-zinc-500">PAST (분석 시대)</p><p class="text-xs font-bold text-zinc-300">"이 사진은 고양이인가?" (Yes/No)</p></div>
+                <!-- 하단: 기술 패러다임의 이동 (요청 사항 반영) -->
+                <div class="mt-4 pt-4 border-t border-zinc-100">
+                    <h4 class="font-bold text-zinc-800 text-xs mb-3 flex items-center gap-2"><i class="fa-solid fa-arrows-left-right text-red-700"></i> 기술 패러다임의 이동 (Paradigm Shift)</h4>
+                    <div class="paradigm-mini-grid">
+                        <div class="mini-shift-card past">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 shadow-sm flex-shrink-0"><i class="fa-solid fa-magnifying-glass"></i></div>
+                            <div>
+                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-tighter mb-1">PAST (분석/판단 시대)</p>
+                                <p class="text-[11px] font-bold text-slate-700 leading-tight">"이 사진은 고양이인가?" (Yes/No 판단)</p>
+                                <p class="text-[9px] text-slate-500 mt-1">기존 데이터를 분류하고 선별하는 지능 (알파고 단계)</p>
                             </div>
-                            <div class="flex items-start gap-3">
-                                <div class="w-1 h-10 bg-red-600 shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
-                                <div><p class="text-[10px] text-red-500">NOW (생성 시대)</p><p class="text-xs font-bold text-white">"고양이가 노래하는 이미지를 그려줘" (Creation)</p></div>
+                        </div>
+                        <div class="mini-shift-card now">
+                            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white shadow-sm flex-shrink-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <div>
+                                <p class="text-[9px] font-black text-red-500 uppercase tracking-tighter mb-1">NOW (생성/창조 시대)</p>
+                                <p class="text-[11px] font-bold text-white leading-tight">"고양이가 노래하는 이미지를 그려줘" (Creation 창조)</p>
+                                <p class="text-[9px] text-zinc-400 mt-1">학습한 패턴을 새로 조합해 창작하는 지능 (챗GPT 단계)</p>
                             </div>
                         </div>
                     </div>
@@ -1045,41 +1214,87 @@
                 </div>
             </div>
         </div>
-		<!-- 13: GPT 연대기 (Chronicle) -->
+		<!-- 13: GPT 연대기 (Chronicle) - 대폭 보강 버전 -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">11. The GPT Lineage</div>
+                <div class="page-category">12. The GPT Chronicles</div>
             </div>
-            <div class="fade-in">
-                <h2 class="card-title">단순 앵무새에서 천재로의 진화:<br><span>GPT가 써 내려간 지능의 역사</span></h2>
+            <div class="fade-in text-left">
+                <h2 class="card-title">말하는 앵무새에서 생각하는 박사로:<br><span>GPT가 써 내려간 지능 진화의 4가지 혁신</span></h2>
                 <div class="definition-section">
                     <p class="def-text text-sm">"암기 위주의 학생에서 이미지·소리도 이해하고 스스로 추론하는 박사님으로"</p>
                 </div>
-                <div class="grid grid-cols-2 gap-8 text-zinc-600">
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-layer-group text-blue-500 mr-2"></i> 지능의 규모 (파라미터)</h4>
-                            <p class="text-[11px] leading-relaxed">초창기 모델이 1,750억 개의 뇌세포를 가진 고등학생이었다면, 현재는 <b>조 단위 이상의 세포</b>를 가졌습니다. 단순히 아는 게 많은 게 아니라 맥락 파악 능력이 비약적으로 상승했습니다.</p>
+                
+                <div class="grid grid-cols-2 gap-x-8 gap-y-6 text-zinc-600 mt-2">
+                    <!-- 1. 지능의 규모 -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-book-open text-blue-500"></i>
+                            <h4 class="font-bold text-zinc-800 text-sm">1. 지능의 규모: "도서관의 크기 변화"</h4>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-ear-listen text-blue-500 mr-2"></i> 멀티모달 (Multimodal)</h4>
-                            <p class="text-[11px] leading-relaxed">텍스트만 알던 장님 AI가 <b>눈과 귀</b>를 얻었습니다. 냉장고 사진을 보고 "남은 재료로 요리해줘"가 가능해진 이유입니다. (GPT-4o 등)</p>
-                        </div>
+                        <p class="text-[11px] leading-relaxed">
+                            인공지능의 뇌세포 역할을 하는 <b>'파라미터(매개변수)'</b>가 비약적으로 늘어났습니다.<br>
+                            • <b>초기(GPT-3.5)</b>: 약 1,750억 개 세포. 웬만한 질문엔 답하지만 복잡한 논리에선 엉뚱한 소리(환각)를 하기도 했습니다.<br>
+                            • <b>현재(GPT-4o 이상)</b>: 조 단위 이상의 세포. 지식의 양뿐 아니라 정보 사이의 <b>'맥락'</b>을 파악하는 능력이 박사급으로 상승했습니다.
+                        </p>
                     </div>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-bold text-zinc-800 text-sm mb-1"><i class="fa-solid fa-link text-red-500 mr-2"></i> 추론 방식 (생각의 사슬, o1)</h4>
-                            <p class="text-[11px] leading-relaxed">받은 질문에 바로 답하지 않고 내부적으로 <b>"이렇게 풀어야겠군"하며 검토</b>합니다. 복잡한 물리 문제 풀이 정확도가 90% 이상으로 올라간 비결입니다.</p>
+
+                    <!-- 2. 멀티모달 -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-eye text-blue-500"></i>
+                            <h4 class="font-bold text-zinc-800 text-sm">2. 멀티모달: "눈과 귀가 생겼어요"</h4>
                         </div>
-                        <div class="bg-zinc-50 p-4 rounded-xl border">
-                            <h4 class="font-bold text-zinc-800 text-[11px] mb-2">기억력 (컨텍스트 윈도우)</h4>
-                            <div class="grid grid-cols-2 gap-2 text-[10px]">
-                                <div class="p-2 bg-white rounded border"><b>GPT-3.5</b>: 책 몇 페이지 분량 기억 (앞 내용 금방 까먹음)</div>
-                                <div class="p-2 bg-red-50 rounded border border-red-100"><b>GPT-4o</b>: 전공 서적 한 권 분량 (긴 소설 전체 수정 가능)</div>
-                            </div>
-                        </div>
+                        <p class="text-[11px] leading-relaxed">
+                            텍스트 전용 장님 지능에서 <b>오감 지능</b>으로 확장되었습니다.<br>
+                            • <b>초기</b>: 글자로만 세상을 배워 사진을 보여줘도 그게 뭔지 몰랐습니다.<br>
+                            • <b>현재</b>: 텍스트, 이미지, 음성을 동시에 처리합니다. <b>냉장고 안 사진</b>을 찍어 보내면 "남은 재료로 김치볶음밥 레시피를 짜드릴게요"라고 말해주는 수준입니다.
+                        </p>
                     </div>
+
+                    <!-- 3. 추론 방식 -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-brain text-red-500"></i>
+                            <h4 class="font-bold text-zinc-800 text-sm">3. 추론 방식: "말하기 전에 생각하기"</h4>
+                        </div>
+                        <p class="text-[11px] leading-relaxed">
+                            최신 모델(o1 등)은 <b>'생각의 사슬(Chain of Thought)'</b> 구조를 도입했습니다.<br>
+                            • <b>초기</b>: 질문 즉시 가장 확률 높은 단어를 바로 내뱉었습니다. (직관적 답변)<br>
+                            • <b>현재</b>: 문제를 받으면 내부적으로 <b>"이건 이렇게 풀어야겠군, 아 이건 틀렸나?"</b> 하며 스스로 검토합니다. 복잡한 물리 문제 정답률이 90% 이상으로 올라간 비결입니다.
+                        </p>
+                    </div>
+
+                    <!-- 4. 기억력 -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-memory text-red-500"></i>
+                            <h4 class="font-bold text-zinc-800 text-sm">4. 기억력: "단기 기억 상실증 치료"</h4>
+                        </div>
+                        <table class="night-table !mt-1">
+                            <thead>
+                                <tr class="text-[10px]"><th>구분</th><th>초기 모델 (GPT-3.5)</th><th>현재 모델 (GPT-4o)</th></tr>
+                            </thead>
+                            <tbody class="text-[9px]">
+                                <tr><td class="font-bold">기억 용량</td><td>책 몇 페이지 분량</td><td><b>두꺼운 전공 서적 한 권 분량</b></td></tr>
+                                <tr><td class="font-bold">특징</td><td>대화가 길어지면 앞 내용을 까먹음</td><td><b>아주 긴 코드나 소설 전체를 기억</b></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- GPT-5 언급 -->
+                <div class="mt-6 p-4 bg-zinc-900 rounded-2xl border border-zinc-700 relative overflow-hidden">
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-10 text-white"><i class="fa-solid fa-rocket text-6xl"></i></div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-1 bg-red-600 text-white text-[10px] font-black rounded">COMING UP</span>
+                        <h4 class="text-white font-bold text-sm">초지능으로의 도약: GPT-5 시대</h4>
+                    </div>
+                    <p class="text-zinc-400 text-[10px] mt-2 leading-relaxed">
+                        현재 <b>GPT-5</b> 단계에 진입하며 AI는 더 이상 도구가 아닌 <b>'자율적 해결사'</b>로 진화하고 있습니다. <br>
+                        단순히 정보를 요약하는 수준을 넘어, 복잡한 비즈니스 기획안을 초안부터 실행 전략까지 스스로 수립하는 파트너가 되어가고 있습니다.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1087,7 +1302,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">12. AI Agent vs Agentic AI</div>
+                <div class="page-category">13. AI Agent vs Agentic AI</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">지시하는 시대에서 자율의 시대로:<br><span>AI 에이전트(Agent)의 탄생</span></h2>
@@ -1125,7 +1340,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">13. The Path to Physical AI</div>
+                <div class="page-category">14. The Path to Physical AI</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">지능에서 신체로:<br><span>현대 AI의 최종 목적지</span></h2>
@@ -1167,35 +1382,45 @@
             </div>
         </div>
 		
-		<!-- 16: Hardware Market View (NVIDIA & Tesla) -->
+		<!-- 16: NVIDIA, Tesla & HBM (상세 보강) -->
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">14. Market Insights: Brain & Body</div>
+                <div class="page-caㅏtegory">15. Market Insights: Hardware Alliance</div>
             </div>
             <div class="fade-in">
-                <h2 class="card-title">왜 엔비디아와 테슬라인가:<br><span>주식 시장이 열광하는 AI 골드러시</span></h2>
-                <div class="grid grid-cols-2 gap-10 mt-4">
-                    <div class="space-y-6">
-                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-green-600">
+                <h2 class="card-title">왜 엔비디아! 테슬라! 하이닉스인가!:<br><span>주식시장이 열광하는 AI골드러시</span></h2>
+                <div class="grid grid-cols-2 gap-8 mt-4 text-left">
+                    <div class="space-y-4">
+                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-green-600 shadow-sm">
                             <h4 class="font-black text-sm text-zinc-800 mb-2">엔비디아 (NVIDIA) : 지능의 공장</h4>
                             <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                AI가 생각하려면 엄청난 연산이 필요합니다. <b>GPU</b>는 AI의 뇌세포 역할을 하며, 전 세계 모든 기업이 이 칩을 사기 위해 줄을 서고 있습니다. 지능을 만드는 <b>'삽과 곡괭이'</b>를 독점한 결과 주가가 폭등했습니다.
+                                AI 연산의 뇌세포 역할을 하는 <b>GPU</b> 시장을 지배합니다. 수조 개의 연산을 동시에 처리하는 능력을 독점하여 AI 시대의 <b>'표준 엔진'</b>이 되었습니다.
                             </p>
                         </div>
-                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-red-600">
+                        <div class="p-6 bg-blue-50 rounded-2xl border-l-8 border-l-blue-600 shadow-sm">
+                            <h4 class="font-black text-sm text-zinc-800 mb-2">HBM (고대역폭 메모리) : 지능의 고속도로</h4>
+                            <p class="text-[11px] text-zinc-600 leading-relaxed">
+                                GPU가 아무리 빨라도 데이터를 공급해주는 메모리가 느리면 성능이 안 나옵니다. <b>HBM</b>은 데이터를 수만 개의 통로로 쏟아붓는 <b>'초고속 데이터 고속도로'</b>입니다. SK하이닉스/삼성전자가 주목받는 이유입니다.
+                            </p>
+                        </div>
+                        <div class="p-6 bg-zinc-50 rounded-2xl border-l-8 border-l-red-600 shadow-sm">
                             <h4 class="font-black text-sm text-zinc-800 mb-2">테슬라 (Tesla) : 행동의 신체</h4>
                             <p class="text-[11px] text-zinc-600 leading-relaxed">
-                                뇌(NVIDIA)가 아무리 좋아도 몸이 없으면 소용없습니다. 자율주행 데이터와 로봇 기술을 가진 테슬라는 AI가 현실에서 움직일 수 있는 <b>'가장 정교한 몸'</b>을 만들고 있어 미래 AI 시장의 주역으로 평가받습니다.
+                                뇌(GPU+HBM)가 만든 지능을 <b>현실 세계의 움직임</b>으로 바꾸는 기업입니다. 방대한 자율주행 데이터와 로봇 기술로 AI가 거주할 수 있는 <b>'가장 완벽한 신체'</b>를 설계합니다.
                             </p>
                         </div>
                     </div>
-                    <div class="bg-red-50 p-8 rounded-3xl border border-red-100 flex flex-col justify-center">
-                        <h4 class="font-bold text-red-800 mb-4 text-sm"><i class="fa-solid fa-battery-three-quarters mr-2"></i> 핵심 전쟁터: 에너지와 소형화</h4>
-                        <div class="space-y-4 text-[11px] text-zinc-700 leading-relaxed">
-                            <p>AI가 기기에 붙어 돌아다니려면(Physical AI), 거대한 데이터센터가 아닌 <b>작은 기기 내부</b>에서 연산이 이뤄져야 합니다.</p>
-                            <p>이를 위해 <b>저전력 고효율 GPU</b>와 이를 버티게 해줄 <b>고밀도 배터리</b>가 현대 IT 산업의 가장 귀한 몸이 된 것입니다.</p>
-                            <p class="font-black text-red-900 mt-4">"지능과 신체가 결합된 모바일 AI 시대를 선점하는 곳이 승리합니다."</p>
+                    
+                    <div class="bg-zinc-900 p-8 rounded-3xl text-white flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute right-[-20px] top-[-20px] opacity-10"><i class="fa-solid fa-microchip text-[180px]"></i></div>
+                        <h4 class="font-bold text-red-500 mb-4 text-base"><i class="fa-solid fa-bolt mr-2"></i> 핵심 전쟁터: 소형화와 에너지</h4>
+                        <div class="space-y-6 text-sm text-zinc-300 leading-relaxed">
+                            <p>AI가 기기에 탑재되어 돌아다니려면(Mobile Physical AI), 거대한 데이터센터의 전력이 아닌 <b>내부 연산(On-Device)</b>과 <b>배터리 효율</b>이 핵심입니다.</p>
+                            <p><b>GPU</b>는 연산을, <b>HBM</b>은 전달을, <b>배터리</b>는 생명력을 담당하며 이 셋이 조화를 이룰 때 비로소 <b>'신체를 가진 AI'</b>가 완성됩니다.</p>
+                            <p class="font-black text-white mt-6 text-lg border-t border-zinc-700 pt-6">
+                                "지능(Brain)과 고속도로(HBM), 신체(Body)를 연결하는 생태계가 미래 부의 지도를 바꿉니다."
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1208,7 +1433,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">15. AI Optimization Strategy</div>
+                <div class="page-category">16. AI Optimization Strategy</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">AI 성능 최적화의 3가지 길:<br><span>프롬프트, RAG, 그리고 파인튜닝</span></h2>
@@ -1248,7 +1473,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
-                <div class="page-category">14. Sovereign AI</div>
+                <div class="page-category">17. Sovereign AI</div>
             </div>
             <div class="fade-in">
                 <h2 class="card-title">데이터와 기술의 독립:<br><span>왜 지금 소버린 AI(Sovereign AI)인가?</span></h2>
