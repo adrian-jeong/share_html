@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Connect - 지식 공유 세미나 추진 계획</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fcfbf9; /* Warm neutral background */
+            color: #292524; /* Stone 800 */
+        }
+
+        /* LG-inspired Accent Color */
+        .text-accent { color: #A50034; }
+        .bg-accent { background-color: #A50034; }
+        .border-accent { border-color: #A50034; }
+        .hover-bg-accent:hover { background-color: #8a002b; }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Chart Container Styling - Mandatory per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for Session List if needed */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #d6d3d1; 
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e; 
+        }
+    </style>
+    <!-- Chosen Palette: Warm Professional (Stone/White base with LG Red Accent) -->
+    <!-- Application Structure Plan: 
+         1. Header: Brand & Vision.
+         2. Strategic Framework: Visualizing Phase 1-3 and core strategies using a card layout.
+         3. Analytics Dashboard: Chart.js visualization of the curriculum balance (Tech vs Global vs Soft Skills) to justify the diverse roadmap.
+         4. Interactive Roadmap (Core): A filterable grid system displaying the monthly schedule. Clicking a card updates a "Detail View" panel with speaker info.
+         5. Operations Hub: Tabbed interface for logistical details (Incentives, Time, Archiving) to keep the UI clean.
+         6. Goal: To transform the text-heavy plan into an explorable dashboard that proves the program's structure and readiness.
+    -->
+    <!-- Visualization & Content Choices:
+         - Roadmap: Interactive Grid + Detail Panel. Goal: Organize. Method: HTML/JS Filtering. Justification: Users need to see the "Big Picture" and "Specifics" simultaneously.
+         - Curriculum Balance: Doughnut Chart. Goal: Inform/Analyze. Method: Chart.js. Justification: visually proves the program covers diverse competencies (Global, Tech, Leadership).
+         - Phases: Step Process Visualization. Goal: Inform. Method: CSS/HTML. Justification: Clearly shows the evolution from Launch to Assetization.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased selection:bg-red-100 selection:text-red-900">
+
+    <!-- Header Section -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-accent rounded-sm flex items-center justify-center text-white font-bold text-lg">K</div>
+                <h1 class="text-xl font-bold text-stone-800 tracking-tight">Knowledge <span class="text-accent">Connect</span></h1>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium text-stone-500">
+                <a href="#strategy" class="hover:text-accent transition-colors">추진 전략</a>
+                <a href="#roadmap" class="hover:text-accent transition-colors">연간 로드맵</a>
+                <a href="#operations" class="hover:text-accent transition-colors">운영 계획</a>
+            </nav>
+            <div class="text-xs text-stone-400 font-mono">Ver 1.0 (Draft)</div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Intro & Vision -->
+        <section class="text-center space-y-4 max-w-3xl mx-auto">
+            <div class="inline-block px-3 py-1 bg-red-50 text-accent text-xs font-bold rounded-full mb-2">고객가치혁신부문 JB 주관</div>
+            <h2 class="text-4xl font-bold text-stone-900 leading-tight">조직의 경험을 <br>하나의 <span class="relative inline-block">자산<span class="absolute bottom-1 left-0 w-full h-2 bg-red-100 -z-10"></span></span>으로 연결합니다.</h2>
+            <p class="text-lg text-stone-600">
+                개인의 파편화된 노하우를 조직의 공용 자산으로 전환하고, <br>
+                수평적이고 유연한 학습 문화를 구축하는 <strong>Knowledge Relay</strong> 프로젝트입니다.
+            </p>
+        </section>
+
+        <!-- Strategy Dashboard -->
+        <section id="strategy" class="scroll-mt-20">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-stone-800 flex items-center gap-2">
+                    <i class="fas fa-chess-knight text-accent"></i> 추진 전략 및 단계
+                </h3>
+                <p class="text-stone-500 mt-2">단순한 일회성 행사가 아닌, 지속 가능한 지식 선순환 체계를 구축하기 위한 단계별 접근 방식입니다.</p>
+            </div>
+
+            <!-- Phase Visualization -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Phase 1 -->
+                <div class="bg-white p-6 rounded-xl border-t-4 border-stone-300 card-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-stone-400 text-6xl font-bold group-hover:scale-110 transition-transform">1</div>
+                    <div class="text-sm font-bold text-stone-500 mb-1">Phase 1 : Launching</div>
+                    <h4 class="text-xl font-bold text-stone-800 mb-3">붐업 조성 & 인식 제고</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        기존 검증된 'IT 용어 설명회'를 전 직급으로 확대 리뉴얼하여 초기 참여도를 극대화합니다.
+                    </p>
+                    <ul class="text-sm text-stone-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> <span>IT 용어 설명회 2.0 런칭</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> <span>협업/비즈니스 관점 보강</span></li>
+                    </ul>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-white p-6 rounded-xl border-t-4 border-accent card-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-accent text-6xl font-bold group-hover:scale-110 transition-transform">2</div>
+                    <div class="text-sm font-bold text-accent mb-1">Phase 2 : Regularization</div>
+                    <h4 class="text-xl font-bold text-stone-800 mb-3">지식 릴레이 정착</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        매월 정기 세미나(Knowledge Day) 운영 및 연사 릴레이 추천 시스템을 가동합니다.
+                    </p>
+                    <ul class="text-sm text-stone-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-accent text-xs"></i> <span>월 1회 정기 운영 (3주차 수)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-accent text-xs"></i> <span>내/외부 연사 믹스</span></li>
+                    </ul>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-white p-6 rounded-xl border-t-4 border-stone-300 card-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-stone-400 text-6xl font-bold group-hover:scale-110 transition-transform">3</div>
+                    <div class="text-sm font-bold text-stone-500 mb-1">Phase 3 : Assetization</div>
+                    <h4 class="text-xl font-bold text-stone-800 mb-3">지식 자산화 & 아카이브</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        축적된 콘텐츠를 디지털 아카이브로 구축하여 상시 학습 환경을 제공합니다.
+                    </p>
+                    <ul class="text-sm text-stone-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> <span>Knowledge Hub 구축</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> <span>업무 백과사전화</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Curriculum Analysis Chart -->
+            <div class="bg-white rounded-2xl p-8 card-shadow flex flex-col md:flex-row gap-8 items-center">
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-lg font-bold text-stone-800 mb-2">커리큘럼 구성 비율</h4>
+                    <p class="text-stone-500 text-sm mb-6">전체 10회 세션의 주제별 비중 분석입니다. 직무 전문성, 글로벌 역량, 소프트 스킬의 균형 잡힌 성장을 지향합니다.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
+                            <span class="text-sm font-medium text-stone-600"><i class="fas fa-laptop-code w-5 text-blue-500"></i> 직무/Tech</span>
+                            <span class="font-bold text-stone-800">40%</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
+                            <span class="text-sm font-medium text-stone-600"><i class="fas fa-globe-americas w-5 text-green-500"></i> Global Insight</span>
+                            <span class="font-bold text-stone-800">30%</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
+                            <span class="text-sm font-medium text-stone-600"><i class="fas fa-users w-5 text-orange-500"></i> Leadership/Soft Skill</span>
+                            <span class="font-bold text-stone-800">30%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div class="chart-container">
+                        <canvas id="curriculumChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="scroll-mt-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6 gap-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-stone-800 flex items-center gap-2">
+                        <i class="fas fa-calendar-alt text-accent"></i> 연간 로드맵 (Knowledge Relay)
+                    </h3>
+                    <p class="text-stone-500 mt-2">월별 주제 선정 및 연사 계획안입니다. 클릭하여 상세 내용을 확인하세요.</p>
+                </div>
+                <div class="flex gap-2 bg-white p-1 rounded-lg border border-stone-200 shadow-sm">
+                    <button onclick="filterSchedule('all')" class="filter-btn active px-4 py-1.5 text-sm font-medium rounded-md transition-all" data-filter="all">전체</button>
+                    <button onclick="filterSchedule('tech')" class="filter-btn px-4 py-1.5 text-sm font-medium rounded-md transition-all" data-filter="tech">직무/Tech</button>
+                    <button onclick="filterSchedule('global')" class="filter-btn px-4 py-1.5 text-sm font-medium rounded-md transition-all" data-filter="global">Global</button>
+                    <button onclick="filterSchedule('soft')" class="filter-btn px-4 py-1.5 text-sm font-medium rounded-md transition-all" data-filter="soft">Skill/Leader</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- List / Grid -->
+                <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4" id="scheduleGrid">
+                    <!-- Cards will be injected by JS -->
+                </div>
+
+                <!-- Detail View Sticky Panel -->
+                <div class="lg:w-1/3">
+                    <div class="sticky top-24 bg-white rounded-xl card-shadow border border-stone-100 p-6 h-auto transition-all" id="detailPanel">
+                        <div class="text-center py-10 text-stone-400">
+                            <i class="fas fa-mouse-pointer text-4xl mb-4 opacity-50"></i>
+                            <p>좌측 리스트에서<br>세션을 선택하여 상세 정보를 확인하세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operations Section -->
+        <section id="operations" class="scroll-mt-20">
+             <div class="mb-6">
+                <h3 class="text-2xl font-bold text-stone-800 flex items-center gap-2">
+                    <i class="fas fa-cogs text-accent"></i> 세부 운영 계획
+                </h3>
+                <p class="text-stone-500 mt-2">지속적인 참여 유도와 효율적인 운영을 위한 인프라 및 보상 체계입니다.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden">
+                <div class="flex border-b border-stone-200">
+                    <button onclick="switchTab('ops-format')" class="tab-btn active flex-1 py-4 text-center font-bold text-stone-600 border-b-2 border-transparent hover:bg-stone-50 transition-colors" data-tab="ops-format">운영 포맷</button>
+                    <button onclick="switchTab('ops-reward')" class="tab-btn flex-1 py-4 text-center font-bold text-stone-600 border-b-2 border-transparent hover:bg-stone-50 transition-colors" data-tab="ops-reward">인센티브</button>
+                    <button onclick="switchTab('ops-archive')" class="tab-btn flex-1 py-4 text-center font-bold text-stone-600 border-b-2 border-transparent hover:bg-stone-50 transition-colors" data-tab="ops-archive">아카이빙</button>
+                </div>
+
+                <div class="p-8 min-h-[300px]">
+                    <!-- Format Content -->
+                    <div id="ops-format" class="tab-content block animate-fade-in">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/2 space-y-6">
+                                <h4 class="text-xl font-bold text-stone-800">Hybrid Operation</h4>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-accent flex-shrink-0"><i class="far fa-clock"></i></div>
+                                        <div>
+                                            <div class="font-bold text-stone-800">매월 3주차 수요일</div>
+                                            <div class="text-sm text-stone-600">16:00 ~ 17:00 (60분 집중 세션)</div>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0"><i class="fas fa-map-marker-alt"></i></div>
+                                        <div>
+                                            <div class="font-bold text-stone-800">온/오프라인 동시 진행</div>
+                                            <div class="text-sm text-stone-600">본사 회의실 현장 참여 + Webex 실시간 중계</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="w-full md:w-1/2 bg-stone-100 rounded-xl p-6 flex flex-col items-center justify-center text-center h-48">
+                                <i class="fas fa-broadcast-tower text-4xl text-stone-400 mb-4"></i>
+                                <p class="text-stone-600 font-medium">실시간 질의응답 및 퀴즈를 통한<br>쌍방향 소통 지향</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reward Content -->
+                    <div id="ops-reward" class="tab-content hidden animate-fade-in">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-red-50 rounded-xl p-6 border border-red-100">
+                                <div class="text-accent font-bold mb-2 flex items-center gap-2"><i class="fas fa-microphone-alt"></i> 연사 (Speaker)</div>
+                                <ul class="space-y-3 text-sm text-stone-700">
+                                    <li class="flex items-center gap-2"><i class="fas fa-certificate text-accent"></i> 'Knowledge Leader' 인증서 발급</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-gift text-accent"></i> 소정의 리워드 (기프트카드 등)</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-file-signature text-accent"></i> 인사고과 (조직문화 기여) 반영 건의</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                <div class="text-blue-700 font-bold mb-2 flex items-center gap-2"><i class="fas fa-users"></i> 참가자 (Audience)</div>
+                                <ul class="space-y-3 text-sm text-stone-700">
+                                    <li class="flex items-center gap-2"><i class="fas fa-graduation-cap text-blue-600"></i> 사내 교육 학점 이수 협의</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-trophy text-blue-600"></i> 실시간 퀴즈/베스트 질문자 경품</li>
+                                    <li class="flex items-center gap-2"><i class="fas fa-coffee text-blue-600"></i> 오프라인 참석자 다과 제공</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Archive Content -->
+                    <div id="ops-archive" class="tab-content hidden animate-fade-in">
+                        <div class="flex flex-col items-center justify-center text-center space-y-4 py-4">
+                            <div class="w-16 h-16 bg-stone-800 rounded-full flex items-center justify-center text-white text-2xl mb-2">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-stone-800">Knowledge Hub 구축</h4>
+                            <p class="text-stone-600 max-w-lg">
+                                휘발성 행사가 아닌 자산으로 남기기 위해, <br>
+                                영상 녹화본과 <span class="text-accent font-bold">1-Page 핵심 요약 교안</span>을 사내 게시판(Teams)에 상시 게시합니다.
+                            </p>
+                            <div class="mt-4 p-4 bg-stone-100 rounded-lg text-sm text-stone-500">
+                                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> 활용 방안: 신규 입사자 OJT, 타 부서 전입자 업무 가이드
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-stone-200 pt-8 pb-12 text-center">
+            <p class="text-stone-400 text-sm">LG Electronics Junior Board / Customer Value Innovation Division</p>
+            <p class="text-stone-300 text-xs mt-2">© 202X Knowledge Connect Project. All rights reserved.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Data Store
+        const scheduleData = [
+            { id: 1, month: '3월', category: 'tech', type: 'Kick-off', title: 'IT 용어 2.0 & 트렌드', speaker: '정선영 선임 (본인)', desc: '비전문가를 위한 IT 핵심 용어 및 트렌드 핵심 정리. 기존 세미나 리뉴얼.', icon: 'fa-laptop-code', color: 'blue' },
+            { id: 2, month: '4월', category: 'tech', type: '미래 기술', title: '실무 AI 활용법', speaker: '정선영 선임 (본인)', desc: '생성형 AI란 무엇이며, 실무(메일/자료작성)에 어떻게 쓸 것인가?', icon: 'fa-robot', color: 'blue' },
+            { id: 3, month: '5월', category: 'tech', type: '직무 기본', title: '기획의 정석', speaker: '외부 연사', desc: '원페이퍼 보고서부터 전략 기획안까지, 논리적인 기획서 작성법.', icon: 'fa-pen-nib', color: 'blue' },
+            { id: 4, month: '6월', category: 'global', type: 'Global (1)', title: '유럽 시장과 주재원', speaker: '유럽 주재 경험자', desc: '선진 시장의 CX 트렌드와 유럽 주재원 생활의 실제 경험 공유.', icon: 'fa-globe-europe', color: 'green' },
+            { id: 5, month: '7월', category: 'soft', type: 'Soft Skill', title: '소통의 기술', speaker: '임지원 팀장님', desc: '유관 부서와의 협업을 이끄는 효과적인 커뮤니케이션 방법론.', icon: 'fa-comments', color: 'orange' },
+            { id: 6, month: '8월', category: 'global', type: 'Global (2)', title: '중남미 시장의 열정', speaker: '중남미 주재 경험자', desc: '열정의 시장, 중남미 비즈니스 특성과 현지 적응기.', icon: 'fa-globe-americas', color: 'green' },
+            { id: 7, month: '9월', category: 'soft', type: 'Leadership', title: '리더의 조건', speaker: '외부 연사', desc: '구성원이 생각하는 리더란 무엇인가? 리더십에 대한 새로운 시각.', icon: 'fa-user-tie', color: 'orange' },
+            { id: 8, month: '10월', category: 'global', type: 'Global (3)', title: 'CIS/중앙아시아', speaker: '중아/CIS 주재 경험자', desc: '신흥 시장의 기회와 중앙아시아 주재원 경험기.', icon: 'fa-globe-asia', color: 'green' },
+            { id: 9, month: '11월', category: 'tech', type: '업무 효율', title: 'Work Diet (RPA)', speaker: '외부 연사', desc: 'RPA 및 업무 자동화 툴을 활용한 단순 반복 업무 제거 노하우.', icon: 'fa-bolt', color: 'blue' },
+            { id: 10, month: '12월', category: 'soft', type: 'Wrap-up', title: 'Best Practice', speaker: '우수 연사 및 구성원', desc: '올해의 지식 공유 우수 사례 발표 및 연말 네트워킹.', icon: 'fa-award', color: 'orange' }
+        ];
+
+        // Chart Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('curriculumChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['직무/Tech', 'Global Insight', 'Leadership/Soft Skill'],
+                    datasets: [{
+                        data: [40, 30, 30], // 4 sessions, 3 sessions, 3 sessions
+                        backgroundColor: [
+                            '#3b82f6', // blue-500
+                            '#22c55e', // green-500
+                            '#f97316'  // orange-500
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: { family: "'Noto Sans KR', sans-serif" }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(41, 37, 36, 0.9)',
+                            padding: 12,
+                            titleFont: { size: 14, family: "'Noto Sans KR', sans-serif" },
+                            bodyFont: { size: 13, family: "'Noto Sans KR', sans-serif" }
+                        }
+                    }
+                }
+            });
+
+            // Initial render
+            renderSchedule('all');
+            
+            // Trigger first item detail view
+            showDetail(1);
+        });
+
+        // Schedule Filtering & Rendering
+        function filterSchedule(filter) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('bg-stone-800', 'text-white');
+                    btn.classList.remove('text-stone-600', 'hover:bg-stone-100');
+                } else {
+                    btn.classList.remove('bg-stone-800', 'text-white');
+                    btn.classList.add('text-stone-600', 'hover:bg-stone-100');
+                }
+            });
+
+            renderSchedule(filter);
+        }
+
+        function renderSchedule(filter) {
+            const container = document.getElementById('scheduleGrid');
+            container.innerHTML = '';
+
+            const filteredData = filter === 'all' 
+                ? scheduleData 
+                : scheduleData.filter(item => item.category === filter);
+
+            filteredData.forEach(item => {
+                const colorClass = item.color === 'blue' ? 'text-blue-600 bg-blue-50' : 
+                                   item.color === 'green' ? 'text-green-600 bg-green-50' : 
+                                   'text-orange-600 bg-orange-50';
+                
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg p-4 border border-stone-200 hover:border-accent cursor-pointer transition-all hover:shadow-md flex items-center gap-4 group';
+                card.onclick = () => showDetail(item.id);
+                card.innerHTML = `
+                    <div class="w-14 h-14 rounded-lg ${colorClass} flex flex-col items-center justify-center flex-shrink-0">
+                        <span class="text-xs font-bold opacity-70">${item.month}</span>
+                        <i class="fas ${item.icon} text-lg mt-1"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-xs font-bold text-stone-400 uppercase tracking-wide mb-0.5">${item.type}</div>
+                        <h4 class="text-stone-800 font-bold truncate group-hover:text-accent transition-colors">${item.title}</h4>
+                        <p class="text-stone-500 text-sm truncate">${item.speaker}</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-stone-300 group-hover:text-accent"></i>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Detail View Logic
+        function showDetail(id) {
+            const item = scheduleData.find(d => d.id === id);
+            if (!item) return;
+
+            const colorClass = item.color === 'blue' ? 'text-blue-600 bg-blue-50' : 
+                               item.color === 'green' ? 'text-green-600 bg-green-50' : 
+                               'text-orange-600 bg-orange-50';
+
+            const panel = document.getElementById('detailPanel');
+            panel.innerHTML = `
+                <div class="animate-fade-in">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${colorClass}">${item.type}</span>
+                        <span class="text-4xl font-black text-stone-100">${item.month}</span>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2 leading-snug">${item.title}</h2>
+                    
+                    <div class="flex items-center gap-3 mb-6 pb-6 border-b border-stone-100">
+                        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-stone-400">Speaker</div>
+                            <div class="font-medium text-stone-700">${item.speaker}</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h5 class="text-sm font-bold text-stone-800 flex items-center gap-2">
+                            <i class="fas fa-info-circle text-stone-400"></i> 세션 개요
+                        </h5>
+                        <p class="text-stone-600 leading-relaxed text-sm bg-stone-50 p-4 rounded-lg">
+                            ${item.desc}
+                        </p>
+                    </div>
+
+                    <button class="w-full mt-8 py-3 bg-stone-800 hover:bg-accent text-white rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="far fa-calendar-check"></i> 사전 신청하기
+                    </button>
+                </div>
+            `;
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('text-accent', 'border-accent');
+                    btn.classList.remove('text-stone-600', 'border-transparent');
+                } else {
+                    btn.classList.remove('text-accent', 'border-accent');
+                    btn.classList.add('text-stone-600', 'border-transparent');
+                }
+            });
+
+            // Content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
+    <style>
+        /* Animation Utilities */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        /* Active Filter Button Style Override */
+        .filter-btn.active {
+            background-color: #292524; /* Stone 800 */
+            color: white;
+        }
+    </style>
+</body>
+</html>
