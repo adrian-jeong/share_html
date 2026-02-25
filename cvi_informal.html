@@ -193,6 +193,7 @@
                     group.content.toLowerCase().includes(currentSearch) ||
                     group.chairman.toLowerCase().includes(currentSearch) ||
                     group.description.toLowerCase().includes(currentSearch) ||
+                    group.email.toLowerCase().includes(currentSearch) ||
                     group.location.toLowerCase().includes(currentSearch);
                 
                 const matchesCategory = currentCategory === "전체" || group.cat1 === currentCategory;
@@ -210,7 +211,6 @@
                 emptyState.classList.add('hidden');
                 
                 grid.innerHTML = filtered.map(group => {
-                    // 아웃룩 연동을 위한 mailto 링크 생성 (제목과 본문 자동 포함)
                     const mailSubject = encodeURIComponent(`[인포멀 가입 문의] ${group.name}`);
                     const mailBody = encodeURIComponent(`안녕하세요, ${group.chairman}님.\n\n${group.name} 인포멀 가입과 관련하여 문의드립니다.\n\n감사합니다.`);
                     const mailtoLink = `mailto:${group.email}?subject=${mailSubject}&body=${mailBody}`;
@@ -260,6 +260,16 @@
                                 </div>
 
                                 <div class="flex items-start gap-3">
+                                    <div class="mt-1 bg-gray-50 p-1.5 rounded-lg text-gray-600">
+                                        <i data-lucide="mail" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-400">이메일 주소</p>
+                                        <p class="text-sm font-medium text-blue-600 break-all">${group.email}</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
                                     <div class="mt-1 bg-amber-50 p-1.5 rounded-lg text-amber-600">
                                         <i data-lucide="map-pin" class="w-4 h-4"></i>
                                     </div>
@@ -279,7 +289,7 @@
                                         class="flex items-center justify-center gap-2 w-full py-3 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
                                     >
                                         <i data-lucide="mail" class="w-4 h-4"></i>
-                                        회장님께 가입 문의하기 (Outlook)
+                                        회장님께 가입 문의하기
                                     </a>
                                 </div>
                             ` : ''}
