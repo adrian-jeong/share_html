@@ -133,15 +133,15 @@
         let currentCategory = "전체";
         let currentSearch = "";
 
-        const allCategories = ["전체", "스포츠", "레져", "문화", "자기계발", "환경", "기타"];
+        // '환경'을 제외한 카테고리 리스트
+        const allCategories = ["전체", "스포츠", "레져", "문화", "자기계발", "기타"];
 
         const categoryColors = {
             "스포츠": "bg-blue-100 text-blue-700",
             "레져": "bg-green-100 text-green-700",
             "문화": "bg-purple-100 text-purple-700",
             "자기계발": "bg-orange-100 text-orange-700",
-            "기타": "bg-gray-100 text-gray-700",
-            "환경": "bg-emerald-100 text-emerald-700"
+            "기타": "bg-gray-100 text-gray-700"
         };
 
         function init() {
