@@ -14,126 +14,169 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
         .logo-shadow {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+        }
+        /* LG Heritage Red 기반 그라데이션 */
+        .hero-gradient {
+            background: linear-gradient(135deg, #a50034 0%, #7a0026 100%);
+        }
+        /* 텍스트 가독성을 위한 미세한 쉐도우 */
+        .text-shadow-sm {
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body class="min-h-screen bg-neutral-100 text-slate-900">
+<body class="min-h-screen bg-slate-50 text-slate-900">
 
-    <!-- Hero Section -->
-    <header class="relative bg-[#1a3c34] text-white py-16 px-6 overflow-hidden">
+    <!-- Hero Section (Red Design) -->
+    <header class="relative hero-gradient text-white py-20 px-6 overflow-hidden">
         <div class="absolute top-0 right-0 opacity-10 transform translate-x-1/4 -translate-y-1/4">
-            <i data-lucide="trophy" style="width: 400px; height: 400px;"></i>
+            <i data-lucide="trophy" style="width: 450px; height: 450px;"></i>
         </div>
         
-        <div class="max-w-6xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-8">
+        <div class="max-w-6xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-10">
             <!-- Logo Box -->
-            <div class="w-56 h-56 bg-white rounded-full logo-shadow flex items-center justify-center border-4 border-amber-400 overflow-hidden shrink-0">
-                <img src="http://googleusercontent.com/image_generation_content/2" alt="골때녀 로고" class="w-full h-full object-cover" onerror="this.onerror=null; this.innerHTML='<div class=\'text-[#1a3c34] font-black text-2xl\'>골때녀</div>';">
+            <div class="w-60 h-60 bg-white rounded-full logo-shadow flex items-center justify-center border-4 border-amber-400 overflow-hidden shrink-0 transform hover:scale-105 transition-transform duration-500">
+                <img src="http://googleusercontent.com/image_generation_content/2" 
+                     alt="골때녀 로고" 
+                     class="w-full h-full object-cover" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden w-full h-full flex-col items-center justify-center text-center p-4">
+                    <span class="text-[#a50034] font-black text-3xl block leading-tight">골때녀</span>
+                    <span class="text-slate-500 text-[10px] block uppercase tracking-tighter font-bold">Golf Hitter Guys</span>
+                </div>
             </div>
             
             <div class="text-center md:text-left">
-                <div class="inline-block px-3 py-1 bg-[#a50034] text-white text-xs font-bold rounded-full mb-4 uppercase tracking-widest">
+                <div class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-full mb-6 uppercase tracking-[0.2em] border border-white/30">
                     LGE Customer Value Innovation
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black mb-2 tracking-tight">
-                    골프 때리는 녀석들 <span class="text-amber-400 font-normal">(골때녀)</span>
+                <h1 class="text-4xl md:text-7xl font-black mb-4 tracking-tight text-shadow-sm">
+                    골프 때리는 녀석들 <br class="md:hidden"> <span class="text-amber-300 font-bold">(골때녀)</span>
                 </h1>
-                <p class="text-xl text-slate-300 max-w-2xl leading-relaxed">
-                    LG전자 고객가치혁신부문 스크린골프 인포멀. 
-                    격식은 던지고 드라이버는 휘두르는 우리들의 즐거운 <span class="text-white font-bold underline decoration-amber-400">스크린 라운딩</span>.
+                <p class="text-xl md:text-2xl text-rose-100 max-w-2xl leading-relaxed font-light">
+                    LG전자 고객가치혁신부문 스크린골프 인포멀. <br>
+                    스트레스는 날리고 드라이버는 휘두르는 우리들만의 <span class="text-white font-bold underline decoration-amber-400 underline-offset-8">즐거운 스크린 라운딩</span>.
                 </p>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 -mt-10 pb-20">
-        <!-- Quick Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-4">
-                <div class="p-3 bg-red-50 text-[#a50034] rounded-xl">
-                    <i data-lucide="users"></i>
+    <!-- Content Area with adjusted spacing to prevent truncation -->
+    <main class="max-w-6xl mx-auto px-6 relative z-20 pb-24">
+        
+        <!-- Quick Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 -mt-8">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-white/50 flex items-center gap-5 transform hover:translate-y-[-4px] transition-all">
+                <div class="p-4 bg-rose-50 text-[#a50034] rounded-2xl">
+                    <i data-lucide="users" class="w-8 h-8"></i>
                 </div>
                 <div>
-                    <p class="text-sm text-slate-500 font-medium">현재 멤버</p>
-                    <p class="text-2xl font-bold" id="member-count">6명</p>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">현재 멤버</p>
+                    <p class="text-3xl font-black text-slate-800">6명</p>
                 </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-4">
-                <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
-                    <i data-lucide="award"></i>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-white/50 flex items-center gap-5 transform hover:translate-y-[-4px] transition-all">
+                <div class="p-4 bg-amber-50 text-amber-600 rounded-2xl">
+                    <i data-lucide="award" class="w-8 h-8"></i>
                 </div>
                 <div>
-                    <p class="text-sm text-slate-500 font-medium">최고 G핸디</p>
-                    <p class="text-2xl font-bold">-1.5 (독수리)</p>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">최고 G핸디</p>
+                    <p class="text-3xl font-black text-slate-800">-1.5 <span class="text-lg font-bold text-amber-500">(독수리)</span></p>
                 </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-4">
-                <div class="p-3 bg-green-50 text-green-600 rounded-xl">
-                    <i data-lucide="calendar"></i>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-white/50 flex items-center gap-5 transform hover:translate-y-[-4px] transition-all">
+                <div class="p-4 bg-slate-50 text-slate-600 rounded-2xl">
+                    <i data-lucide="calendar" class="w-8 h-8"></i>
                 </div>
                 <div>
-                    <p class="text-sm text-slate-500 font-medium">창립일</p>
-                    <p class="text-2xl font-bold">2026.01</p>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">창립일</p>
+                    <p class="text-3xl font-black text-slate-800">2026.01</p>
                 </div>
             </div>
         </div>
 
         <!-- Members Section -->
-        <section class="mb-16">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="text-3xl font-bold flex items-center gap-3">
-                    <span class="w-2 h-8 bg-[#a50034] rounded-full"></span>
-                    인포멀 멤버 & G핸디
-                </h2>
-                <button class="text-sm text-slate-500 hover:text-[#a50034] transition flex items-center gap-1 font-semibold">
-                    멤버 추가 요청 <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
+        <section class="mb-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-black flex items-center gap-3 text-slate-800">
+                        <span class="w-2.5 h-10 bg-[#a50034] rounded-full"></span>
+                        인포멀 멤버 & G핸디
+                    </h2>
+                    <p class="text-slate-500 mt-2 font-medium">골프존 G핸디 기준 조류 등급 시스템 적용</p>
+                </div>
+                <div class="text-sm font-bold text-[#a50034] bg-rose-50 px-4 py-2 rounded-lg inline-flex items-center gap-2">
+                    <i data-lucide="info" class="w-4 h-4"></i> 수시 업데이트 진행 중
+                </div>
             </div>
 
-            <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 멤버 카드가 여기에 자바스크립트로 생성됩니다 -->
+            <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JavaScript will populate cards here -->
             </div>
         </section>
 
-        <!-- Club Info & Contact -->
-        <section class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 flex flex-col md:flex-row gap-12 items-center">
+        <!-- Club Info & Contact (Refined Overview) -->
+        <section id="club-overview" class="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl border border-slate-100 flex flex-col md:flex-row gap-16 items-center">
             <div class="flex-1 text-center md:text-left">
-                <h2 class="text-3xl font-black mb-6">함께해요, 골때녀!</h2>
-                <p class="text-slate-600 mb-8 leading-relaxed">
-                    스크린 골프를 사랑하는 고객가치혁신부문 임직원이라면 누구나 환영합니다. 
-                    핸디가 없어도 괜찮습니다. 함께 때리며 스트레스를 날려보세요. 
-                    정기 <span class="font-bold text-emerald-700">스크린 라운딩</span>과 번개 모임이 활발하게 운영되고 있습니다.
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm">
-                    <div class="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-slate-700">
-                        <i data-lucide="mail" class="w-4 h-4"></i> <span>정선영 선임 (sy.jung)</span>
+                <h2 class="text-4xl font-black mb-8 text-[#a50034] italic tracking-tight">"굿~샷! 스트레스도 <br class="hidden md:block"> 시원하게 날려버려!"</h2>
+                <div class="space-y-6 text-slate-600 mb-10 leading-relaxed text-lg">
+                    <p>
+                        스크린 골프를 사랑하는 <span class="font-bold text-slate-800">고객가치혁신부문 임직원</span>이라면 누구나 환영합니다. 
+                        실력이 부족해도, 핸디가 없어도 괜찮습니다. 함께 때리며 웃고 즐기는 <span class="font-bold text-[#a50034]">스크린 인포멀</span>입니다.
+                    </p>
+                    <p>
+                        매월 정기 스크린 라운딩은 물론, 업무 후 가볍게 즐기는 번개 모임까지 활발하게 운영되고 있습니다. 
+                        지금 바로 '골때녀'의 일원이 되어보세요!
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <div class="flex items-center gap-3 px-5 py-3 bg-slate-50 rounded-2xl border border-slate-100 group">
+                        <div class="p-2 bg-amber-100 rounded-lg group-hover:bg-amber-200 transition-colors">
+                            <i data-lucide="crown" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Club President</p>
+                            <p class="font-bold text-slate-700">정선영 선임 (CC&S 전략팀)</p>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-slate-700">
-                        <i data-lucide="mail" class="w-4 h-4"></i> <span>이소민 선임 (sm.lee)</span>
+                    <div class="flex items-center gap-3 px-5 py-3 bg-slate-50 rounded-2xl border border-slate-100 group">
+                        <div class="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                            <i data-lucide="calculator" class="w-5 h-5 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Treasurer</p>
+                            <p class="font-bold text-slate-700">이소민 선임 (CC&S 전략팀)</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="w-full md:w-auto flex flex-col gap-3">
-                <button onclick="window.location.href='mailto:sy.jung@lge.com'" class="flex items-center justify-center gap-2 bg-[#1a3c34] text-white px-8 py-4 rounded-2xl font-bold hover:bg-black transition-colors w-full md:w-64">
-                    가입 신청하기
-                </button>
-                <button class="flex items-center justify-center gap-2 bg-white text-[#1a3c34] border-2 border-[#1a3c34] px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition-colors w-full md:w-64">
-                    공지사항 확인 <i data-lucide="external-link" class="w-4 h-4"></i>
-                </button>
+            
+            <div class="w-full md:w-auto shrink-0">
+                <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 text-center">
+                    <p class="text-slate-500 font-bold mb-6">가입 및 문의</p>
+                    <a href="mailto:seony.jeong@lge.com" class="flex items-center justify-center gap-3 bg-[#a50034] text-white px-10 py-5 rounded-2xl font-black text-xl hover:bg-black transition-all hover:scale-105 shadow-lg shadow-rose-200 w-full md:w-72 mb-4">
+                        <i data-lucide="mail"></i> 가입 신청하기
+                    </a>
+                    <p class="text-xs text-slate-400 font-medium tracking-tight">seony.jeong@lge.com</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 py-12 px-6 text-center">
+    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center border-t border-white/5">
         <div class="max-w-6xl mx-auto">
-            <p class="mb-2 font-bold text-slate-400">© 2026 LG Electronics Customer Value Innovation</p>
-            <p class="text-sm font-medium">골프 때리는 녀석들 (골때녀) Screen Golf Informal Club</p>
+            <div class="flex justify-center mb-8 opacity-30 grayscale contrast-125">
+                 <span class="text-2xl font-black tracking-tighter border-2 border-slate-500 px-4 py-1">골때녀</span>
+            </div>
+            <p class="mb-2 font-bold text-slate-400 tracking-wide">© 2026 LG Electronics Customer Value Innovation</p>
+            <p class="text-sm font-medium text-slate-600">골프 때리는 녀석들 (골때녀) Screen Golf Informal Club</p>
         </div>
     </footer>
 
     <script>
-        // 멤버 데이터 (골프존 등급 체계 반영)
+        // 멤버 데이터 (G핸디 및 등급 반영)
         const members = [
             { name: "정선영", role: "회장", title: "선임", team: "CC&S 전략팀", handi: -1.5, rank: "독수리", icon: "🦅" },
             { name: "이소민", role: "총무", title: "선임", team: "CC&S 전략팀", handi: null, rank: "까치", icon: "🐦" },
@@ -143,49 +186,50 @@
             { name: "박정훈", role: "멤버", title: "책임", team: "CC&S 기준정보관리팀", handi: "TBD", rank: "준비중", icon: "⛳" }
         ];
 
-        // 멤버 그리드 렌더링
         const grid = document.getElementById('members-grid');
         members.forEach(member => {
             const card = document.createElement('div');
-            card.className = "relative overflow-hidden group bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1";
+            card.className = "relative overflow-hidden group bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2";
             
             const isOfficer = member.role === '회장' || member.role === '총무';
             const handiText = member.handi === null ? '기록없음' : (typeof member.handi === 'number' ? (member.handi > 0 ? `+${member.handi}` : member.handi) : member.handi);
 
             card.innerHTML = `
-                <div class="flex justify-between items-start mb-4">
+                <div class="flex justify-between items-start mb-6">
                     <div>
-                        <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-2 uppercase tracking-tighter ${isOfficer ? 'bg-[#a50034] text-white' : 'bg-slate-100 text-slate-500'}">
+                        <span class="inline-block px-3 py-1 rounded-lg text-[10px] font-black mb-3 uppercase tracking-wider ${isOfficer ? 'bg-[#a50034] text-white shadow-md shadow-rose-100' : 'bg-slate-100 text-slate-500'}">
                             ${member.role}
                         </span>
-                        <h3 class="text-2xl font-bold flex items-baseline gap-1">
+                        <h3 class="text-3xl font-black flex items-baseline gap-1 text-slate-800">
                             ${member.name} 
-                            <span class="text-sm font-medium text-slate-400">${member.title}</span>
+                            <span class="text-sm font-bold text-slate-400">${member.title}</span>
                         </h3>
-                        <p class="text-sm text-slate-500 mt-1 font-medium">${member.team}</p>
+                        <p class="text-sm text-slate-500 mt-2 font-bold leading-tight">${member.team}</p>
                     </div>
-                    <div class="text-4xl filter group-hover:scale-110 transition-transform duration-300">
+                    <div class="text-5xl filter group-hover:scale-125 transition-transform duration-500 drop-shadow-sm">
                         ${member.icon}
                     </div>
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div class="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">G핸디</p>
-                        <p class="text-xl font-black text-slate-800">${handiText}</p>
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1.5">G핸디</p>
+                        <p class="text-2xl font-black text-slate-800 tracking-tighter">${handiText}</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">등급</p>
-                        <p class="font-bold ${member.rank === '독수리' ? 'text-amber-600' : 'text-slate-600'}">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1.5">등급</p>
+                        <p class="text-lg font-black ${member.rank === '독수리' ? 'text-amber-600' : 'text-slate-700'}">
                             ${member.rank}
                         </p>
                     </div>
                 </div>
+                
+                <!-- Decorative element -->
+                <div class="absolute -bottom-2 -right-2 w-16 h-16 bg-slate-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
             `;
             grid.appendChild(card);
         });
 
-        // 아이콘 초기화
         window.onload = function() {
             lucide.createIcons();
         };
