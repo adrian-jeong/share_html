@@ -82,7 +82,7 @@
 
         <!-- Empty State -->
         <div id="emptyState" class="hidden text-center py-20 bg-white rounded-xl border border-dashed border-gray-300">
-            <i data-lucide="filter" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+            <i data-lucide="filter" class="w-12 h-12 text-gray-300 mx-auto mb-4" id="emptyIcon"></i>
             <h3 class="text-lg font-semibold text-gray-900">검색 결과가 없습니다</h3>
             <p class="text-gray-500">다른 키워드나 필터를 선택해 보세요.</p>
             <button 
@@ -156,7 +156,7 @@
                 secretary: "신주영 선임", 
                 members: 10, 
                 content: "영화", 
-                cat1: "레져", 
+                cat1: "문화", 
                 cat2: "Staff", 
                 date: "26년 3월",
                 description: "바쁜 일상 잠시 멈춤(Pause), 영화 속에서 다시 재생(Play)"
@@ -229,10 +229,24 @@
                 secretary: "노지혜 선임", 
                 members: 9, 
                 content: "영화감상", 
-                cat1: "레져", 
+                cat1: "문화", 
                 cat2: "Staff", 
                 date: "26년 3월",
                 description: "영화를 매개체로 서로의 생각을 나누며 자연스럽게 연결되는 시간"
+            },
+            { 
+                id: 10, 
+                location: "안양", 
+                name: "안양천 나그네", 
+                chairman: "김병두 책임", 
+                email: "byoungdoo.kim@lge.com", 
+                secretary: "황철호 책임", 
+                members: 10, 
+                content: "트래킹", 
+                cat1: "레져", 
+                cat2: "Staff", 
+                date: "23년 3월",
+                description: "안양천은 총 32.5Km의 긴 거리를 구간별로 나눠서 모든 코스를 돌아보며 주변 경관을 감상하는 일정과 더불어, 건강까지 챙기는 알찬 시간"
             }
         ];
 
@@ -241,7 +255,7 @@
         let currentSearch = "";
 
         const allCategories = ["전체", "스포츠", "레져", "문화", "자기계발", "기타"];
-        const allLocations = ["전체", "트윈", "마곡", "평택", "창원"];
+        const allLocations = ["전체", "트윈", "마곡", "평택", "창원", "안양"];
 
         const categoryColors = {
             "스포츠": "bg-blue-100 text-blue-700",
