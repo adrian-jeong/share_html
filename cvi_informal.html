@@ -173,7 +173,7 @@
                 cat1: "자기계발", 
                 cat2: "Staff", 
                 date: "24년 1월",
-                description: "영어 영화 감상, 프리토킹 등 다양한 활동이 가득! 주재원/영어선생님 출신 회원님들의 조언과 함께 'Hey! You can do it!'을 외쳐보아요."
+                description: "영어영화 감상, 프리토킹, 야외활동 등 재미있는 프로그램이 가득! 주재원, 영어선생님 출신 회원님들의 전문적인 조언도 받을 수 있어요."
             },
             { 
                 id: 6, 
@@ -246,7 +246,91 @@
                 cat1: "레져", 
                 cat2: "Staff", 
                 date: "23년 3월",
-                description: "안양천은 총 32.5Km의 긴 거리를 구간별로 나눠서 모든 코스를 돌아보며 주변 경관을 감상하는 일정과 더불어, 건강까지 챙기는 알찬 시간"
+                description: "안양천 총 32.5Km의 긴 거리를 구간별로 나눠서 모든 코스를 돌아보며 주변 경관을 감상하는 일정과 더불어, 건강까지 챙기는 알찬 시간"
+            },
+            { 
+                id: 11, 
+                location: "평택", 
+                name: "발로차", 
+                chairman: "김재덕 기정", 
+                email: "jaeduk.kim@lge.com", 
+                secretary: "강민구 주임", 
+                members: 36, 
+                content: "족구", 
+                cat1: "스포츠", 
+                cat2: "Staff", 
+                date: "25년 3월",
+                description: "승부에 연연하지 않고 가볍고 즐겁게 족구를 즐기면서 친목과 우의 증진을 목적으로 운영하고 있습니다."
+            },
+            { 
+                id: 12, 
+                location: "대전", 
+                name: "탄방탐방", 
+                chairman: "유선호 주임", 
+                email: "sunho85.yoo@lge.com", 
+                secretary: "심세윤 주임", 
+                members: 21, 
+                content: "영화", 
+                cat1: "레져", 
+                cat2: "Staff", 
+                date: "26년 3월",
+                description: "극장에서 상영하는 최신 개봉작 관람은 물론, OTT 플랫폼을 활용한 명작 감상 등 다양한 문화 활동을 함께 진행"
+            },
+            { 
+                id: 13, 
+                location: "원주", 
+                name: "스포츠가 좋다", 
+                chairman: "문상진 책임", 
+                email: "sangjin.moon@lge.com", 
+                secretary: "임재형 기정", 
+                members: 10, 
+                content: "당구", 
+                cat1: "레져", 
+                cat2: "Staff", 
+                date: "26년 3월",
+                description: "일과 삶의 균형을 위해 스포츠를 즐기는 모임! 누구나 즐겁게 당구를 즐기며 소통합니다."
+            },
+            { 
+                id: 14, 
+                location: "마곡", 
+                name: "여기어때 풋살", 
+                chairman: "김창민 선임", 
+                email: "changmin.kim@lge.com", 
+                secretary: "심창원 총무", 
+                members: 10, 
+                content: "풋살", 
+                cat1: "스포츠", 
+                cat2: "Staff", 
+                date: "22년 7월",
+                description: "마곡에서 즐기는 열정 풋살! 체력 증진과 끈끈한 동료애를 느낄 수 있는 에너제틱한 모임입니다."
+            },
+            { 
+                id: 15, 
+                location: "마곡", 
+                name: "온그린", 
+                chairman: "고청진 기정", 
+                email: "go.chungjin@lge.com", 
+                secretary: "신철희 책임", 
+                members: 11, 
+                content: "골프", 
+                cat1: "레져", 
+                cat2: "Staff", 
+                date: "26년 3월",
+                description: "필드를 목표로 Life's Good on (the) Green! 푸른 잔디밭에서 광합성 Refresh를 위해 모였습니다."
+            },
+            { 
+                id: 16, 
+                location: "트윈", 
+                name: "ABC", 
+                chairman: "박찬혁 선임", 
+                email: "chan.park@lge.com", 
+                secretary: "김안나 책임", 
+                members: 10, 
+                content: "보드게임", 
+                cat1: "레져", 
+                cat2: "Staff", 
+                date: "26년 3월",
+                description: "인생은 혼자(Alone)와 동료(Companion) 사이의 보드게임(Board Game)! 지적 유희와 친목의 시간."
             }
         ];
 
@@ -255,7 +339,7 @@
         let currentSearch = "";
 
         const allCategories = ["전체", "스포츠", "레져", "문화", "자기계발", "기타"];
-        const allLocations = ["전체", "트윈", "마곡", "평택", "창원", "안양"];
+        const allLocations = ["전체", "트윈", "마곡", "평택", "창원", "안양", "대전", "원주"];
 
         const categoryColors = {
             "스포츠": "bg-blue-100 text-blue-700",
