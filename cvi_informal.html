@@ -136,8 +136,8 @@
                 </div>
                 <div class="flex items-center gap-2 px-4 py-2 bg-red-50 rounded-xl border border-red-100">
                     <i data-lucide="info" class="w-3.5 h-3.5 text-[#a50034]"></i>
-                    <p class="text-[11px] md:text-xs font-bold text-[#a50034] leading-tight">
-                        카테고리나 지역 필터를 선택하시면 각 인포멀의 상세 정보(운영진, 소개글 등)가 자동으로 펼쳐집니다.
+                    <p class="text-[11px] md:text-xs font-bold text-[#a50034] leading-tight text-balance">
+                        카테고리나 지역 필터를 선택하시면 각 인포멀의 상세 정보(운영진 연락처, 가입 설명 등)를 바로 확인하실 수 있습니다.
                     </p>
                 </div>
             </div>
@@ -151,7 +151,7 @@
 
                 <!-- Location -->
                 <div>
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">사업장별 필터 (마곡/트윈/평택 우선)</label>
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">사업장별 필터</label>
                     <div id="locationFilters" class="flex flex-wrap gap-1.5"></div>
                 </div>
             </div>
@@ -228,7 +228,8 @@
             { id: 18, location: "광주", name: "서부비거리강화팀", chairman: "이용운 기장", email: "yongwoon7242.lee@lge.com", secretary: "심민재 기장", members: 8, content: "스크린골프", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "시원한 비거리로 스트레스를 날리자! 인원 소수 정예로 활기차게 운영하는 스크린 모임." },
             { id: 19, location: "마곡", name: "맛집검증단", chairman: "김성수 책임", email: "sungsoo86.kim@lge.com", secretary: "김병옥 기정", members: 29, content: "맛집탐방", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "온라인 맛집 정보를 직접 방문하여 분위기, 가격 등 만족도를 확인하고 '찐맛' 집을 확정하는 모임." },
             { id: 20, location: "마곡", name: "마동탁", subName: "마곡 W6동에서 탁구치는 사람들", chairman: "이승현 책임", email: "seunghyeon12.lee@lge.com", secretary: "김봉진 책임", members: 9, content: "탁구", cat1: "스포츠", cat2: "Staff", date: "22년 6월", description: "점심시간에 탁구로 건강을 관리하고, 타본부와의 인맥도 넓힐 수 있는 인포멀그룹입니다." },
-            { id: 21, location: "마곡", name: "놀면뭐하니", chairman: "오수환 기장", email: "oh.suhwan@lge.com", secretary: "김순철 기장", members: 12, content: "보드게임", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "서로의 취향과 즐거움을 나누는 보드게임 장입니다." }
+            { id: 21, location: "마곡", name: "놀면뭐하니", chairman: "오수환 기장", email: "oh.suhwan@lge.com", secretary: "김순철 기장", members: 12, content: "보드게임", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "서로의 취향과 즐거움을 나누는 보드게임 장입니다." },
+            { id: 22, location: "창원", name: "서플라잉", chairman: "김성욱 사원", email: "sungwook24.kim@lge.com", secretary: "이흥재 책임", members: 54, content: "탁구", cat1: "스포츠", cat2: "Staff", date: "26년 3월", description: "탁구공의 스피드로 부품 Supply 까지 완성하는 창원 부품공급팀 신규 인포멀 서플라잉" }
         ];
 
         let currentCategory = "전체";
@@ -236,10 +237,8 @@
         let currentSearch = "";
         let isDetailedMode = false;
 
-        // 분야별 필터 요청 순서 적용
         const allCategories = ["전체", "레져", "문화", "스포츠", "자기계발", "기타"];
-        // 지역 필터 커스텀 순서 (마곡, 트윈, 평택 우선)
-        const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주"];
+        const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주", "창원"];
 
         const categoryStyles = {
             "스포츠": "bg-blue-50 text-blue-700 border-blue-100",
@@ -321,7 +320,6 @@
                 return matchesSearch && matchesCategory && matchesLocation;
             });
 
-            // 가나다 순 정렬
             filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
             totalCount.textContent = filtered.length;
