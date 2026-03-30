@@ -151,7 +151,7 @@
 
                 <!-- Location -->
                 <div>
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">사업장별 필터</label>
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">사업장별 필터 (마곡/트윈/평택 우선)</label>
                     <div id="locationFilters" class="flex flex-wrap gap-1.5"></div>
                 </div>
             </div>
@@ -218,7 +218,7 @@
             { id: 8, location: "트윈", name: "영어09", subName: "영어로 말할때 영구같은데 영구면제를 목표한다", chairman: "김산 책임", email: "mountain.kim@lge.com", secretary: "김정우 선임", members: 10, content: "영어스피킹", cat1: "자기계발", cat2: "Staff", date: "26년 3월", description: "영구면제로 영어고통 벗어나자!" },
             { id: 9, location: "평택", name: "무비커넥트", chairman: "서지현 사원", email: "jihyun82.seo@lge.com", secretary: "노지혜 선임", members: 9, content: "영화감상", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "영화를 매개체로 서로의 생각을 나누며 자연스럽게 연결되는 시간" },
             { id: 10, location: "안양", name: "안양천 나그네", chairman: "김병두 책임", email: "byoungdoo.kim@lge.com", secretary: "황철호 책임", members: 10, content: "트래킹", cat1: "레져", cat2: "Staff", date: "23년 3월", description: "안양천 32.5Km 구간별 트래킹을 통해 경관 감상과 건강을 동시에 챙기는 알찬 일정" },
-            { id: 11, location: "평택", name: "발로차", chairman: "김재덕 기정", email: "jaeduk.kim@lge.com", secretary: "강민구 주임", members: 36, content: "족구", cat1: "스포츠", cat2: "Staff", date: "25년 3월", description: "승부에 연연하지 않고 가볍고 즐겁게 족구를 즐기면서 친목과 우의 증진을 목적으로 활기차게 운영합니다." },
+            { id: 11, location: "평택", name: "발로차", chairman: "김재덕 기정", email: "jaeduk.kim@lge.com", secretary: "강민구 주임", members: 36, content: "족구", cat1: "스포츠", cat2: "Staff", date: "25년 3월", description: "가볍고 즐거운 족구를 통한 친목과 우의 증진을 목적으로 활기차게 운영합니다." },
             { id: 12, location: "대전", name: "탄방탐방", chairman: "유선호 주임", email: "sunho85.yoo@lge.com", secretary: "심세윤 주임", members: 21, content: "영화", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "최신 개봉작 관람 및 OTT 명작 감상 등 다양한 문화 활동을 함께 공유합니다." },
             { id: 13, location: "원주", name: "스포츠가 좋다", chairman: "문상진 책임", email: "sangjin.moon@lge.com", secretary: "임재형 기정", members: 10, content: "당구", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "일과 삶의 균형을 위해 누구나 즐겁게 당구를 즐기며 소통하는 스포츠 모임입니다." },
             { id: 14, location: "마곡", name: "여기어때 풋살", chairman: "김창민 선임", email: "changmin.kim@lge.com", secretary: "심창원 총무", members: 18, content: "풋살", cat1: "스포츠", cat2: "Staff", date: "22년 7월", description: "마곡에서 즐기는 열정 풋살! 체력 증진과 동료애를 위한 에너제틱 그룹." },
@@ -236,8 +236,10 @@
         let currentSearch = "";
         let isDetailedMode = false;
 
-        const allCategories = ["전체", "스포츠", "레져", "문화", "자기계발", "기타"];
-        const allLocations = ["전체", "트윈", "마곡", "평택", "안양", "대전", "원주", "광주", "창원"];
+        // 분야별 필터 요청 순서 적용
+        const allCategories = ["전체", "레져", "문화", "스포츠", "자기계발", "기타"];
+        // 지역 필터 커스텀 순서 (마곡, 트윈, 평택 우선)
+        const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주"];
 
         const categoryStyles = {
             "스포츠": "bg-blue-50 text-blue-700 border-blue-100",
@@ -319,7 +321,7 @@
                 return matchesSearch && matchesCategory && matchesLocation;
             });
 
-            // 가나다 순 정렬 로직 추가
+            // 가나다 순 정렬
             filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
             totalCount.textContent = filtered.length;
