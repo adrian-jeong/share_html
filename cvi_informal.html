@@ -34,6 +34,7 @@
         .informal-card {
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
+            cursor: pointer;
         }
 
         .informal-card:hover {
@@ -82,7 +83,6 @@
         input:checked + .slider { background-color: #a50034; }
         input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -165,9 +165,9 @@
                 </p>
                 <!-- View Mode Toggle -->
                 <div class="flex items-center gap-3 bg-slate-100/50 px-3 py-1.5 rounded-xl border border-slate-200">
-                    <span class="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">상세 정보 보기</span>
+                    <span class="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">전체 상세 보기</span>
                     <label class="switch">
-                        <input type="checkbox" id="viewModeToggle" onchange="toggleViewMode(this.checked)">
+                        <input type="checkbox" id="viewModeToggle" onchange="toggleGlobalViewMode(this.checked)">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -213,7 +213,7 @@
             { id: 3, location: "마곡", name: "마당놀이", chairman: "이의상 기정", email: "293567.lee@lge.com", secretary: "김창수 책임", members: 11, content: "당구", cat1: "레져", cat2: "Staff", date: "25년 5월", description: "일과 즐거움을 함께 추구하는 멋진 당구 모임~ 마.당.놀.이" },
             { id: 4, location: "마곡", name: "P&P", chairman: "한다혜 사원", email: "dahye.han@lge.com", secretary: "신주영 선임", members: 10, content: "영화", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "바쁜 일상 잠시 멈춤(Pause), 영화 속에서 다시 재생(Play)" },
             { id: 5, location: "평택", name: "오버씨스(Overseas)", chairman: "이일영 기정", email: "iylee.ilyoung@lge.com", secretary: "이상범 기장", members: 26, content: "외국어 공부", cat1: "자기계발", cat2: "Staff", date: "24년 1월", description: "영어영화 감상, 프리토킹 등 다양한 프로그램! 주재원 및 영어선생님 출신의 조언과 함께하세요." },
-            { id: 6, location: "마곡", name: "꾸꾸꾸", chairman: "최수진 선임", email: "sujin.choi@lge.com", secretary: "송유빈 사원", members: 6, content: "DIY", cat1: "기타", cat2: "Staff", date: "26년 3월", description: "바쁜 일상 속 귀여운 힐링시간, 볼펜부터 리스까지 매달 새로운 소품을 꾸미는 DIY 모임" },
+            { id: 6, location: "마곡", name: "꾸꾸꾸", chairman: "최수진 선임", email: "sujin.choi@lge.com", secretary: "송유빈 사원", members: 6, content: "DIY", cat1: "기타", cat2: "Staff", date: "26년 3월", description: "바쁜 일상 속 귀여운 힐링시간, 볼펜부터 리스까지 매달 새로운 소품을 직접 꾸미는 DIY 모임" },
             { id: 7, location: "마곡", name: "골때녀", subName: "골프 때리는 녀석들", chairman: "정선영 선임", email: "seony.jeong@lge.com", secretary: "이소민 선임", members: 6, content: "스크린골프", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "스트레스는 날리고 드라이버는 휘두르는 즐거운 스크린 라운딩.", externalLink: "https://adrian-jeong.github.io/share_html/golf_hit.html" },
             { id: 8, location: "트윈", name: "영어09", subName: "영어로 말할때 영구같은데 영구면제를 목표한다", chairman: "김산 책임", email: "mountain.kim@lge.com", secretary: "김정우 선임", members: 10, content: "영어스피킹", cat1: "자기계발", cat2: "Staff", date: "26년 3월", description: "영구면제로 영어고통 벗어나자!" },
             { id: 9, location: "평택", name: "무비커넥트", chairman: "서지현 사원", email: "jihyun82.seo@lge.com", secretary: "노지혜 선임", members: 9, content: "영화감상", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "영화를 매개체로 서로의 생각을 나누며 자연스럽게 연결되는 시간" },
@@ -235,7 +235,8 @@
         let currentCategory = "전체";
         let currentLocation = "전체";
         let currentSearch = "";
-        let isDetailedMode = false;
+        let isGlobalDetailedMode = false;
+        let expandedCardIds = new Set();
 
         const allCategories = ["전체", "레져", "문화", "스포츠", "자기계발", "기타"];
         const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주", "창원"];
@@ -253,7 +254,7 @@
             renderGroups();
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 currentSearch = e.target.value.toLowerCase();
-                if(currentSearch !== "") toggleViewMode(true);
+                if(currentSearch !== "") toggleGlobalViewMode(true);
                 renderGroups();
             });
             lucide.createIcons();
@@ -277,26 +278,37 @@
 
         function handleCategoryChange(cat) {
             currentCategory = cat;
-            if(cat !== "전체") toggleViewMode(true);
+            if(cat !== "전체") toggleGlobalViewMode(true);
             renderFilters(); renderGroups();
         }
 
         function handleLocationChange(loc) {
             currentLocation = loc;
-            if(loc !== "전체") toggleViewMode(true);
+            if(loc !== "전체") toggleGlobalViewMode(true);
             renderFilters(); renderGroups();
         }
 
-        function toggleViewMode(checked) {
-            isDetailedMode = checked;
+        function toggleGlobalViewMode(checked) {
+            isGlobalDetailedMode = checked;
             document.getElementById('viewModeToggle').checked = checked;
+            if (!checked) expandedCardIds.clear();
+            renderGroups();
+        }
+
+        function toggleCardDetail(id) {
+            if (isGlobalDetailedMode) return; // 전체 모드일 때는 작동 무시
+            if (expandedCardIds.has(id)) {
+                expandedCardIds.delete(id);
+            } else {
+                expandedCardIds.add(id);
+            }
             renderGroups();
         }
 
         function resetFilters() {
             document.getElementById('searchInput').value = "";
             currentSearch = ""; currentCategory = "전체"; currentLocation = "전체";
-            toggleViewMode(false);
+            toggleGlobalViewMode(false);
             renderFilters(); renderGroups();
         }
 
@@ -332,17 +344,19 @@
                 emptyState.classList.add('hidden');
                 
                 grid.innerHTML = filtered.map(group => {
-                    if (isDetailedMode) {
+                    const isExpanded = isGlobalDetailedMode || expandedCardIds.has(group.id);
+
+                    if (isExpanded) {
                         return `
-                        <div class="informal-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border-t-[4px] border-t-slate-200">
+                        <div onclick="toggleCardDetail(${group.id})" class="informal-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border-t-[4px] border-t-slate-200">
                             <div class="p-5 flex-grow">
                                 <div class="flex justify-between items-center mb-4">
                                     <span class="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-600 border-slate-200'}">
                                         ${group.cat1}
                                     </span>
                                     <div class="flex items-center gap-1 text-[10px] font-bold text-slate-400">
-                                        <i data-lucide="calendar" class="w-3 h-3"></i>
-                                        ${group.date}
+                                        <i data-lucide="users" class="w-3 h-3"></i>
+                                        총 ${group.members}명 참여
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -351,19 +365,29 @@
                                 </div>
                                 <p class="text-[11px] leading-relaxed text-slate-500 mb-5 font-medium line-clamp-2 min-h-[2.5rem]">"${group.description}"</p>
                                 <div class="space-y-2.5 pt-4 border-t border-slate-50 text-[11px]">
-                                    <div class="flex items-center gap-2.5"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase">Activity</span><span class="font-bold text-slate-700">${group.content}</span></div></div>
-                                    <div class="flex items-center gap-2.5"><i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase">Leaders</span><span class="font-bold text-slate-700">${group.chairman.split(' ')[0]} / ${group.secretary.split(' ')[0]}</span></div></div>
-                                    <div class="flex items-center gap-2.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#a50034]"></i><div class="flex flex-col"><span class="text-[9px] text-[#a50034] font-bold uppercase">Location</span><span class="font-bold text-[#a50034]">${group.location}</span></div></div>
+                                    <div class="flex items-center gap-2.5"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">Main Activity</span><span class="font-bold text-slate-700">${group.content}</span></div></div>
+                                    <div class="flex items-center gap-2.5"><i data-lucide="award" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">Leaders</span><span class="font-bold text-slate-700">${group.chairman} / ${group.secretary}</span></div></div>
+                                    <div class="flex items-center gap-2.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#a50034]"></i><div class="flex flex-col"><span class="text-[9px] text-[#a50034] font-bold uppercase tracking-tighter">Location</span><span class="font-bold text-[#a50034]">${group.location}</span></div></div>
                                 </div>
                             </div>
                             <div class="px-5 py-3 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-[10px] font-bold text-slate-500 truncate select-all hover:text-[#a50034] cursor-pointer" title="${group.email}">${group.email}</span>
-                                ${group.externalLink ? `<a href="${group.externalLink}" target="_blank" class="flex items-center gap-1 text-[10px] font-black text-[#a50034] hover:underline">LINK <i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>` : `<span class="text-[10px] font-bold text-slate-300">${group.members}P</span>`}
+                                <div class="flex items-center gap-1.5 min-w-0 flex-grow pr-2">
+                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400 flex-shrink-0"></i>
+                                    <span class="text-[12px] font-bold text-slate-600 truncate select-all hover:text-[#a50034] transition-colors" title="${group.email}">
+                                        이메일 주소: <span class="font-black">${group.email}</span>
+                                    </span>
+                                </div>
+                                ${group.externalLink ? `
+                                    <a href="${group.externalLink}" target="_blank" onclick="event.stopPropagation()" class="flex-shrink-0 flex items-center gap-1 text-[11px] font-black text-[#a50034] hover:underline decoration-2 underline-offset-4">
+                                        LINK
+                                        <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                                    </a>
+                                ` : ''}
                             </div>
                         </div>`;
                     } else {
                         return `
-                        <div class="informal-card bg-white rounded-xl overflow-hidden flex flex-col h-full border-l-4 border-l-[#a50034] p-4">
+                        <div onclick="toggleCardDetail(${group.id})" class="informal-card bg-white rounded-xl overflow-hidden flex flex-col h-full border-l-4 border-l-[#a50034] p-4">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="text-[9px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-600'}">
                                     ${group.cat1}
