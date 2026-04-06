@@ -11,41 +11,51 @@
         
         body { 
             font-family: 'Inter', 'Noto Sans KR', sans-serif; 
-            background-color: #f8fafc;
+            background-color: #fff5f7; /* Soft pink background */
         }
 
         .filter-btn {
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fce7f3;
         }
 
         .filter-btn:hover {
-            border-color: #cbd5e1;
-            background-color: #f1f5f9;
+            border-color: #f9a8d4;
+            background-color: #fdf2f8;
         }
 
         .filter-btn.active {
-            background-color: #a50034; /* LG Red */
+            background-color: #db2777; /* Pink-600 */
             color: white;
-            border-color: #a50034;
-            box-shadow: 0 4px 12px rgba(165, 0, 52, 0.2);
+            border-color: #db2777;
+            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
         }
 
         .informal-card {
             transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fce7f3;
             cursor: pointer;
         }
 
         .informal-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08);
-            border-color: #a50034;
+            box-shadow: 0 12px 24px -8px rgba(219, 39, 119, 0.1);
+            border-color: #db2777;
         }
 
         .glass-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Modal Animation */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease;
         }
 
         .line-clamp-2 {
@@ -55,48 +65,33 @@
             overflow: hidden;
         }
 
-        /* Toggle Switch */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 22px;
-        }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #cbd5e1;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px; width: 16px;
-            left: 3px; bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider { background-color: #a50034; }
-        input:checked + .slider:before { transform: translateX(22px); }
-
+        /* Scrollbar Design */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-track { background: #fdf2f8; }
+        ::-webkit-scrollbar-thumb { background: #f9a8d4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #db2777; }
     </style>
 </head>
-<body class="min-h-screen text-slate-800">
+<body class="min-h-screen text-slate-800 overflow-x-hidden">
+
+    <!-- Detail Modal -->
+    <div id="groupModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-pink-900/40" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="modal-content bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden pointer-events-auto transform scale-95 opacity-0 transition-all duration-300">
+                <div id="modalBody">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
-    <header class="glass-header border-b sticky top-0 z-30 shadow-sm">
+    <header class="glass-header border-b border-pink-100 sticky top-0 z-30 shadow-sm">
         <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-4">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="flex items-center gap-6">
-                    <div class="flex-shrink-0 border-r border-slate-200 pr-6 hidden md:block">
+                    <div class="flex-shrink-0 border-r border-pink-100 pr-6 hidden md:block">
                         <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-8 md:h-9">
                     </div>
                     <div class="md:hidden">
@@ -104,22 +99,22 @@
                     </div>
                     <div>
                         <h1 class="text-lg md:text-xl font-bold tracking-tight text-slate-900">
-                            고객가치혁신부문 <span class="text-[#a50034]">Staff</span> 인포멀
+                            고객가치혁신부문 <span class="text-[#db2777]">Staff</span> 인포멀
                         </h1>
-                        <p class="text-[11px] md:text-xs text-slate-500 font-medium flex items-center gap-1.5 mt-0.5">
-                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                            사내 공식 소통 및 자기계발 허브
+                        <p class="text-[11px] md:text-xs text-pink-400 font-medium flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 bg-pink-500 rounded-full animate-ping"></span>
+                            함께 웃고 소통하며 성장하는 우리들의 공간
                         </p>
                     </div>
                 </div>
                 
                 <div class="relative w-full md:w-96 group">
-                    <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-[#a50034] transition-colors"></i>
+                    <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-pink-300 group-focus-within:text-[#db2777] transition-colors"></i>
                     <input
                         type="text"
                         id="searchInput"
                         placeholder="인포멀 명칭, 활동 키워드 검색..."
-                        class="w-full pl-11 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#a50034]/20 focus:border-[#a50034] transition-all outline-none text-sm"
+                        class="w-full pl-11 pr-4 py-2.5 bg-pink-50 border border-pink-100 rounded-2xl focus:ring-4 focus:ring-pink-500/10 focus:border-pink-500 transition-all outline-none text-sm"
                     >
                 </div>
             </div>
@@ -128,51 +123,42 @@
 
     <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
         <!-- Control Panel -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+        <div class="bg-white/80 rounded-3xl shadow-sm border border-pink-50 p-6 mb-8 backdrop-blur-sm">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#a50034]"></i>
+                    <div class="p-1.5 bg-pink-100 rounded-lg">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-pink-600"></i>
+                    </div>
                     <h2 class="text-sm font-bold text-slate-700 uppercase tracking-widest">Discovery Filters</h2>
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 bg-red-50 rounded-xl border border-red-100">
-                    <i data-lucide="info" class="w-3.5 h-3.5 text-[#a50034]"></i>
-                    <p class="text-[11px] md:text-xs font-bold text-[#a50034] leading-tight text-balance">
-                        카테고리나 지역 필터를 선택하시면 각 인포멀의 상세 정보(운영진 연락처, 가입 설명 등)를 바로 확인하실 수 있습니다.
+                <div class="flex items-center gap-2 px-4 py-2 bg-pink-50 rounded-xl border border-pink-100">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-pink-500"></i>
+                    <p class="text-[11px] md:text-xs font-bold text-pink-600 leading-tight">
+                        궁금한 인포멀 카드를 클릭하시면 상세 운영 정보(회장/총무 연락처, 소개 등)를 팝업창으로 확인하실 수 있습니다.
                     </p>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                <!-- Category -->
                 <div>
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">분야별 필터</label>
+                    <label class="text-[11px] font-bold text-pink-300 uppercase tracking-wider mb-3 block">분야별 필터</label>
                     <div id="categoryFilters" class="flex flex-wrap gap-1.5"></div>
                 </div>
-
-                <!-- Location -->
                 <div>
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 block">사업장별 필터</label>
+                    <label class="text-[11px] font-bold text-pink-300 uppercase tracking-wider mb-3 block">사업장별 필터</label>
                     <div id="locationFilters" class="flex flex-wrap gap-1.5"></div>
                 </div>
             </div>
         </div>
 
         <!-- Toolbar -->
-        <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
+        <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-pink-100 pb-6">
             <div class="flex items-center gap-6">
                 <p class="text-sm text-slate-500 font-medium">
-                    전체 <span id="totalCount" class="text-[#a50034] font-bold text-lg mx-1">0</span>개의 인포멀 (가나다 순 정렬)
+                    전체 <span id="totalCount" class="text-pink-600 font-black text-xl mx-1">0</span>개의 인포멀 (가나다 순 정렬)
                 </p>
-                <!-- View Mode Toggle -->
-                <div class="flex items-center gap-3 bg-slate-100/50 px-3 py-1.5 rounded-xl border border-slate-200">
-                    <span class="text-[11px] font-bold text-slate-500 uppercase tracking-tighter">전체 상세 보기</span>
-                    <label class="switch">
-                        <input type="checkbox" id="viewModeToggle" onchange="toggleGlobalViewMode(this.checked)">
-                        <span class="slider"></span>
-                    </label>
-                </div>
             </div>
-            <button onclick="resetFilters()" class="text-xs font-bold text-slate-400 hover:text-[#a50034] flex items-center gap-1.5 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+            <button onclick="resetFilters()" class="text-xs font-bold text-pink-400 hover:text-pink-600 flex items-center gap-1.5 transition-colors bg-white px-3 py-2 rounded-xl border border-pink-100 shadow-sm">
                 <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
                 초기화
             </button>
@@ -182,27 +168,22 @@
         <div id="groupGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5"></div>
 
         <!-- Empty State -->
-        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-32 bg-white rounded-3xl border border-dashed border-slate-300">
-            <div class="bg-slate-50 p-6 rounded-full mb-6">
-                <i data-lucide="search-x" class="w-12 h-12 text-slate-300"></i>
+        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-32 bg-white/50 rounded-3xl border border-dashed border-pink-200">
+            <div class="bg-pink-50 p-6 rounded-full mb-6">
+                <i data-lucide="search-x" class="w-12 h-12 text-pink-200"></i>
             </div>
             <h3 class="text-xl font-bold text-slate-900 mb-2">일치하는 결과가 없습니다</h3>
-            <p class="text-slate-500 max-w-xs text-center text-sm mb-6">다른 키워드로 검색하시거나 필터를 변경하여 새로운 그룹을 찾아보세요.</p>
-            <button onclick="resetFilters()" class="px-6 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-[#a50034] transition-all">필터 초기화하기</button>
+            <button onclick="resetFilters()" class="px-6 py-2.5 bg-pink-600 text-white text-sm font-bold rounded-2xl hover:bg-pink-700 transition-all shadow-lg shadow-pink-200">필터 초기화하기</button>
         </div>
     </main>
 
-    <footer class="bg-white border-t mt-20 py-12">
+    <footer class="bg-white border-t border-pink-100 mt-20 py-12">
         <div class="max-w-[1920px] mx-auto px-4 text-center">
             <div class="flex justify-center mb-6">
-                <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-6 grayscale opacity-30">
+                <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-6 grayscale opacity-20">
             </div>
-            <p class="text-slate-400 text-[10px] font-medium tracking-wide uppercase mb-2 text-center">Internal Service for Staff</p>
-            <p class="text-slate-600 text-sm font-bold">© 2024 LG Electronics. All Rights Reserved.</p>
-            <div class="mt-6 inline-flex items-center gap-3 px-4 py-2 bg-slate-50 rounded-full border border-slate-100">
-                <i data-lucide="shield-check" class="w-4 h-4 text-slate-400"></i>
-                <span class="text-[11px] text-slate-400 font-medium tracking-tight">본 사이트의 모든 정보는 사내 보안 규정에 의거하여 관리됩니다.</span>
-            </div>
+            <p class="text-pink-300 text-[10px] font-medium tracking-wide uppercase mb-2">Happiness for Everyone</p>
+            <p class="text-slate-500 text-sm font-bold">© 2024 LG Electronics. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -235,26 +216,34 @@
         let currentCategory = "전체";
         let currentLocation = "전체";
         let currentSearch = "";
-        let isGlobalDetailedMode = false;
-        let expandedCardIds = new Set();
 
         const allCategories = ["전체", "레져", "문화", "스포츠", "자기계발", "기타"];
         const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주", "창원"];
 
-        const categoryStyles = {
-            "스포츠": "bg-blue-50 text-blue-700 border-blue-100",
-            "레져": "bg-emerald-50 text-emerald-700 border-emerald-100",
-            "문화": "bg-indigo-50 text-indigo-700 border-indigo-100",
-            "자기계발": "bg-amber-50 text-amber-700 border-amber-100",
-            "기타": "bg-slate-50 text-slate-700 border-slate-100"
+        const emojiMap = {
+            "꽃꽂이": "🌸", "스크린골프": "🏌️", "당구": "🎱", "영화": "🎬", "외국어 공부": "📚", 
+            "DIY": "🎨", "영어스피킹": "🗣️", "트래킹": "🥾", "족구": "⚽", "영화감상": "🍿",
+            "풋살": "⚽", "골프": "🏌️", "보드게임": "🎲", "맛집탐방": "🍱", "탁구": "🏓"
         };
+
+        const categoryStyles = {
+            "스포츠": "bg-blue-50 text-blue-600 border-blue-100",
+            "레져": "bg-emerald-50 text-emerald-600 border-emerald-100",
+            "문화": "bg-purple-50 text-purple-600 border-purple-100",
+            "자기계발": "bg-orange-50 text-orange-600 border-orange-100",
+            "기타": "bg-slate-50 text-slate-500 border-slate-100"
+        };
+
+        function getEmoji(activity) {
+            if (activity.includes("골프")) return "🏌️";
+            return emojiMap[activity] || "✨";
+        }
 
         function init() {
             renderFilters();
             renderGroups();
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 currentSearch = e.target.value.toLowerCase();
-                if(currentSearch !== "") toggleGlobalViewMode(true);
                 renderGroups();
             });
             lucide.createIcons();
@@ -263,53 +252,123 @@
         function renderFilters() {
             const catContainer = document.getElementById('categoryFilters');
             catContainer.innerHTML = allCategories.map(cat => `
-                <button onclick="handleCategoryChange('${cat}')" class="filter-btn px-3.5 py-1.5 rounded-lg text-[11px] font-bold ${cat === currentCategory ? 'active' : 'bg-white text-slate-500'}">
+                <button onclick="handleCategoryChange('${cat}')" class="filter-btn px-3.5 py-2 rounded-xl text-[11px] font-bold ${cat === currentCategory ? 'active' : 'bg-white text-pink-400'}">
                     ${cat}
                 </button>
             `).join('');
 
             const locContainer = document.getElementById('locationFilters');
             locContainer.innerHTML = allLocations.map(loc => `
-                <button onclick="handleLocationChange('${loc}')" class="filter-btn px-3.5 py-1.5 rounded-lg text-[11px] font-bold ${loc === currentLocation ? 'active' : 'bg-white text-slate-500'}">
+                <button onclick="handleLocationChange('${loc}')" class="filter-btn px-3.5 py-2 rounded-xl text-[11px] font-bold ${loc === currentLocation ? 'active' : 'bg-white text-pink-400'}">
                     ${loc}
                 </button>
             `).join('');
         }
 
-        function handleCategoryChange(cat) {
-            currentCategory = cat;
-            if(cat !== "전체") toggleGlobalViewMode(true);
-            renderFilters(); renderGroups();
+        function handleCategoryChange(cat) { currentCategory = cat; renderFilters(); renderGroups(); }
+        function handleLocationChange(loc) { currentLocation = loc; renderFilters(); renderGroups(); }
+
+        function openModal(id) {
+            const group = informalData.find(g => g.id === id);
+            const modal = document.getElementById('groupModal');
+            const modalContent = modal.querySelector('.modal-content');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-pink-50 flex items-center justify-center text-3xl shadow-inner border border-pink-100">
+                                ${getEmoji(group.content)}
+                            </div>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-500'}">
+                                    ${group.cat1}
+                                </span>
+                                <h2 class="text-2xl font-black text-slate-900 mt-1">${group.name}</h2>
+                            </div>
+                        </div>
+                        <div class="bg-pink-600 text-white px-5 py-2.5 rounded-2xl text-center shadow-lg shadow-pink-100">
+                            <p class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Total Members</p>
+                            <p class="text-2xl font-black">${group.members}명</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-[11px] font-black text-pink-400 uppercase tracking-tighter mb-2 flex items-center gap-1.5">
+                                <i data-lucide="quote" class="w-3 h-3"></i>
+                                Introduction
+                            </p>
+                            <p class="text-slate-600 leading-relaxed font-medium bg-pink-50/30 p-4 rounded-2xl italic border border-pink-50">
+                                "${group.description}"
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">Main Activity</span>
+                                <span class="text-sm font-bold text-slate-700">${group.content}</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">Business Site</span>
+                                <span class="text-sm font-bold text-pink-600 flex items-center gap-1">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                                    ${group.location}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-pink-50 p-6 rounded-3xl">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <i data-lucide="users" class="w-5 h-5 text-pink-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-pink-300 font-bold uppercase">Executive Board</p>
+                                    <p class="text-sm font-black text-slate-800">${group.chairman} (회장) / ${group.secretary} (총무)</p>
+                                </div>
+                            </div>
+                            <div class="pt-4 border-t border-pink-50">
+                                <p class="text-[11px] text-pink-300 font-bold uppercase mb-2">Contact Point</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg font-black text-slate-700 select-all p-3 bg-pink-50 rounded-2xl border border-pink-100 w-full flex items-center gap-2">
+                                        <i data-lucide="mail" class="w-5 h-5 text-pink-500"></i>
+                                        이메일 주소: <span class="text-pink-600 font-black">${group.email}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex gap-3">
+                        <button onclick="closeModal()" class="flex-grow py-4 bg-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-200 transition-all">닫기</button>
+                        ${group.externalLink ? `
+                            <a href="${group.externalLink}" target="_blank" class="flex-[2] py-4 bg-pink-600 text-white font-black rounded-2xl hover:bg-pink-700 transition-all shadow-lg shadow-pink-200 text-center flex items-center justify-center gap-2">
+                                공식 소개 페이지 가기
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            lucide.createIcons();
         }
 
-        function handleLocationChange(loc) {
-            currentLocation = loc;
-            if(loc !== "전체") toggleGlobalViewMode(true);
-            renderFilters(); renderGroups();
-        }
-
-        function toggleGlobalViewMode(checked) {
-            isGlobalDetailedMode = checked;
-            document.getElementById('viewModeToggle').checked = checked;
-            if (!checked) expandedCardIds.clear();
-            renderGroups();
-        }
-
-        function toggleCardDetail(id) {
-            if (isGlobalDetailedMode) return; // 전체 모드일 때는 작동 무시
-            if (expandedCardIds.has(id)) {
-                expandedCardIds.delete(id);
-            } else {
-                expandedCardIds.add(id);
-            }
-            renderGroups();
-        }
-
-        function resetFilters() {
-            document.getElementById('searchInput').value = "";
-            currentSearch = ""; currentCategory = "전체"; currentLocation = "전체";
-            toggleGlobalViewMode(false);
-            renderFilters(); renderGroups();
+        function closeModal() {
+            const modal = document.getElementById('groupModal');
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
         }
 
         function renderGroups() {
@@ -333,7 +392,6 @@
             });
 
             filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
-
             totalCount.textContent = filtered.length;
 
             if (filtered.length === 0) {
@@ -343,68 +401,31 @@
                 grid.classList.remove('hidden');
                 emptyState.classList.add('hidden');
                 
-                grid.innerHTML = filtered.map(group => {
-                    const isExpanded = isGlobalDetailedMode || expandedCardIds.has(group.id);
+                grid.innerHTML = filtered.map(group => `
+                    <div onclick="openModal(${group.id})" class="informal-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border-l-4 border-l-pink-500 p-5 shadow-sm">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="w-8 h-8 rounded-full bg-pink-50 flex items-center justify-center text-sm shadow-inner border border-pink-100">
+                                ${getEmoji(group.content)}
+                            </div>
+                            <div class="flex items-center gap-1 text-[10px] font-black text-pink-600 bg-pink-50/50 px-2 py-0.5 rounded-lg">
+                                <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                ${group.location}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <span class="text-[9px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-500'}">
+                                ${group.cat1}
+                            </span>
+                            <h3 class="text-lg font-bold text-slate-900 leading-tight mt-1.5 truncate" title="${group.name}">${group.name}</h3>
+                        </div>
 
-                    if (isExpanded) {
-                        return `
-                        <div onclick="toggleCardDetail(${group.id})" class="informal-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border-t-[4px] border-t-slate-200">
-                            <div class="p-5 flex-grow">
-                                <div class="flex justify-between items-center mb-4">
-                                    <span class="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-600 border-slate-200'}">
-                                        ${group.cat1}
-                                    </span>
-                                    <div class="flex items-center gap-1 text-[10px] font-bold text-slate-400">
-                                        <i data-lucide="users" class="w-3 h-3"></i>
-                                        총 ${group.members}명 참여
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h3 class="text-lg font-bold text-slate-900 leading-tight mb-0.5">${group.name}</h3>
-                                    ${group.subName ? `<p class="text-[10px] font-medium text-slate-400 line-clamp-1">${group.subName}</p>` : ''}
-                                </div>
-                                <p class="text-[11px] leading-relaxed text-slate-500 mb-5 font-medium line-clamp-2 min-h-[2.5rem]">"${group.description}"</p>
-                                <div class="space-y-2.5 pt-4 border-t border-slate-50 text-[11px]">
-                                    <div class="flex items-center gap-2.5"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">Main Activity</span><span class="font-bold text-slate-700">${group.content}</span></div></div>
-                                    <div class="flex items-center gap-2.5"><i data-lucide="award" class="w-3.5 h-3.5 text-slate-400"></i><div class="flex flex-col"><span class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">Leaders</span><span class="font-bold text-slate-700">${group.chairman} / ${group.secretary}</span></div></div>
-                                    <div class="flex items-center gap-2.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#a50034]"></i><div class="flex flex-col"><span class="text-[9px] text-[#a50034] font-bold uppercase tracking-tighter">Location</span><span class="font-bold text-[#a50034]">${group.location}</span></div></div>
-                                </div>
-                            </div>
-                            <div class="px-5 py-3 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
-                                <div class="flex items-center gap-1.5 min-w-0 flex-grow pr-2">
-                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400 flex-shrink-0"></i>
-                                    <span class="text-[12px] font-bold text-slate-600 truncate select-all hover:text-[#a50034] transition-colors" title="${group.email}">
-                                        이메일 주소: <span class="font-black">${group.email}</span>
-                                    </span>
-                                </div>
-                                ${group.externalLink ? `
-                                    <a href="${group.externalLink}" target="_blank" onclick="event.stopPropagation()" class="flex-shrink-0 flex items-center gap-1 text-[11px] font-black text-[#a50034] hover:underline decoration-2 underline-offset-4">
-                                        LINK
-                                        <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-                                    </a>
-                                ` : ''}
-                            </div>
-                        </div>`;
-                    } else {
-                        return `
-                        <div onclick="toggleCardDetail(${group.id})" class="informal-card bg-white rounded-xl overflow-hidden flex flex-col h-full border-l-4 border-l-[#a50034] p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-[9px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-600'}">
-                                    ${group.cat1}
-                                </span>
-                                <div class="flex items-center gap-1 text-[10px] font-black text-[#a50034]">
-                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
-                                    ${group.location}
-                                </div>
-                            </div>
-                            <h3 class="text-base font-bold text-slate-900 leading-tight mb-1 truncate" title="${group.name}">${group.name}</h3>
-                            <div class="flex items-center gap-1.5 mt-auto">
-                                <i data-lucide="play" class="w-3 h-3 text-[#a50034]"></i>
-                                <span class="text-[11px] font-medium text-slate-600 truncate">${group.content}</span>
-                            </div>
-                        </div>`;
-                    }
-                }).join('');
+                        <div class="flex items-center gap-1.5 mt-auto pt-3 border-t border-pink-50/50">
+                            <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                            <span class="text-[11px] font-bold text-slate-600 truncate">${group.content}</span>
+                        </div>
+                    </div>
+                `).join('');
             }
             lucide.createIcons();
         }
