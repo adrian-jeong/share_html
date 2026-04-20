@@ -3,189 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Semantic Search Demo</title>
-    <!-- Tailwind CSS (인터넷 연결 필수) -->
+    <title>고객가치혁신부문 Staff 인포멀 소개</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; overflow: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
         
-        /* 커스텀 스타일 */
-        .chat-bubble { position: relative; max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; }
-        .chat-user { background-color: #A50034; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        .chat-bot { background-color: #e5e7eb; color: #1f2937; align-self: flex-start; border-bottom-left-radius: 2px; }
-        
-        /* LG Red 색상 정의 */
-        .bg-lg-red { background-color: #A50034; }
-        .text-lg-red { color: #A50034; }
-        .border-lg-red { border-color: #A50034; }
+        body { 
+            font-family: 'Inter', 'Noto Sans KR', sans-serif; 
+            background-color: #fff5f7; /* Soft pink background */
+        }
 
-        /* 스크롤바 커스텀 */
+        .filter-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #fce7f3;
+        }
+
+        .filter-btn:hover {
+            border-color: #f9a8d4;
+            background-color: #fdf2f8;
+        }
+
+        .filter-btn.active {
+            background-color: #db2777; /* Pink-600 */
+            color: white;
+            border-color: #db2777;
+            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
+        }
+
+        .informal-card {
+            transition: all 0.3s ease;
+            border: 1px solid #fce7f3;
+            cursor: pointer;
+        }
+
+        .informal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(219, 39, 119, 0.1);
+            border-color: #db2777;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Modal Animation */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+
+        /* Scrollbar Design */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-
-        /* 애니메이션 */
-        .animate-fade-in { animation: fadeIn 0.5s ease-out; } 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .transition-all { transition: all 0.3s ease; }
+        ::-webkit-scrollbar-track { background: #fdf2f8; }
+        ::-webkit-scrollbar-thumb { background: #f9a8d4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #db2777; }
     </style>
 </head>
-<body class="flex items-center justify-center h-screen bg-gray-200">
+<body class="min-h-screen text-slate-800 overflow-x-hidden">
 
-    <!-- Main Container: PPT 슬라이드에 꽉 차게 보이도록 크기 조정 -->
-    <div class="w-full h-full max-w-5xl max-h-[90vh] bg-gray-900 rounded-xl overflow-hidden shadow-2xl flex flex-col m-4">
-        
-        <!-- Header Window -->
-        <div class="bg-gray-800 px-4 py-3 flex items-center justify-between shrink-0">
-            <span class="text-gray-300 text-sm font-mono font-bold">AI Search Engine Simulator</span>
-            <div class="flex space-x-1.5">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-        </div>
-
-        <!-- Body Content -->
-        <div class="bg-gray-50 flex-grow flex overflow-hidden">
-            <!-- Chat Area -->
-            <div class="flex-grow p-6 flex flex-col space-y-4 overflow-y-auto" id="chat-display">
-                <div class="chat-bubble chat-bot shadow-sm">
-                    안녕하세요! 데이터 탐색 도우미 AI입니다. <br>
-                    찾으시는 데이터가 무엇인가요?
+    <!-- Detail Modal -->
+    <div id="groupModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-pink-900/40" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="modal-content bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden pointer-events-auto transform scale-95 opacity-0 transition-all duration-300">
+                <div id="modalBody">
+                    <!-- Dynamic Content -->
                 </div>
-            </div>
-            
-            <!-- Logic Visualization Panel (우측 로직 화면) -->
-            <div class="w-80 bg-white border-l border-gray-200 p-6 flex flex-col shrink-0">
-                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">System Logic Process</h4>
-                
-                <!-- Step 1 -->
-                <div class="mb-4 opacity-30 transition-all" id="logic-step-1">
-                    <div class="flex items-center mb-1">
-                        <span class="w-2 h-2 rounded-full bg-lg-red mr-2"></span>
-                        <span class="text-sm font-bold">1. Query Analysis</span>
-                    </div>
-                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">질문 의도/키워드 추출 (LLM)</div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="mb-4 opacity-30 transition-all" id="logic-step-2">
-                    <div class="flex items-center mb-1">
-                        <span class="w-2 h-2 rounded-full bg-blue-600 mr-2"></span>
-                        <span class="text-sm font-bold">2. Vector Search</span>
-                    </div>
-                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">유사도 검색 (Embedding)</div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="mb-4 opacity-30 transition-all" id="logic-step-3">
-                    <div class="flex items-center mb-1">
-                        <span class="w-2 h-2 rounded-full bg-green-600 mr-2"></span>
-                        <span class="text-sm font-bold">3. Mapping Result</span>
-                    </div>
-                    <div class="text-xs text-gray-500 bg-gray-100 p-2 rounded">테이블/컬럼 매핑 반환</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Input Area -->
-        <div class="bg-white p-4 border-t border-gray-200 shrink-0">
-            <div class="flex space-x-2">
-                <button onclick="runSimulation('지난달 모델별 불만 접수 건수 알려줘')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-3 px-4 rounded transition-colors text-left border border-gray-300 shadow-sm">
-                    💬 "지난달 모델별 불만 접수 건수..."
-                </button>
-                <button onclick="runSimulation('북미 지역 세탁기 소음 관련 부품 비용은?')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-3 px-4 rounded transition-colors text-left border border-gray-300 shadow-sm">
-                    💬 "북미 지역 세탁기 소음 비용..."
-                </button>
             </div>
         </div>
     </div>
 
-    <script>
-        function runSimulation(query) {
-            const display = document.getElementById('chat-display');
-            
-            // 1. 사용자 질문 표시
-            display.innerHTML += `<div class="chat-bubble chat-user mb-4 animate-fade-in">${query}</div>`;
-            display.scrollTop = display.scrollHeight;
-
-            // 2. Logic Step 1 (0.5초)
-            setTimeout(() => { highlightLogic(1); }, 500);
-
-            // 3. Logic Step 2 (1.5초)
-            setTimeout(() => { highlightLogic(2); }, 1500);
-
-            // 4. Logic Step 3 (2.5초)
-            setTimeout(() => { highlightLogic(3); }, 2500);
-
-            // 5. 봇 응답 (3.5초)
-            setTimeout(() => {
-                let response = "";
-                let details = "";
-
-                if(query.includes("소음")) {
-                    response = "<strong>'세탁기 소음 비용'</strong>과 관련된 최적의 데이터를 찾았습니다.";
-                    details = `
-                        <div class="mt-3 bg-white border border-gray-200 rounded p-3 text-xs text-gray-800">
-                            <div class="font-bold text-lg-red mb-1">🔍 검색 결과 (Similarity: 98%)</div>
-                            <table class="w-full text-left">
-                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Table</th><td>SVC_COST_FACT</td></tr>
-                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Column</th><td>Rpr_Amt (수리비)</td></tr>
-                                <tr><th class="py-1 w-16 text-gray-500">Filter</th><td>Defect_Type = 'Noise'</td></tr>
-                            </table>
-                            <button class="mt-2 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 font-bold">데이터 조회하기</button>
-                        </div>
-                    `;
-                } else {
-                    response = "요청하신 <strong>'모델별 불만 접수'</strong> 데이터 매핑 결과입니다.";
-                    details = `
-                        <div class="mt-3 bg-white border border-gray-200 rounded p-3 text-xs text-gray-800">
-                            <div class="font-bold text-lg-red mb-1">🔍 검색 결과 (Similarity: 95%)</div>
-                            <table class="w-full text-left">
-                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Table</th><td>VOC_MASTER</td></tr>
-                                <tr class="border-b"><th class="py-1 w-16 text-gray-500">Group</th><td>Model_Name</td></tr>
-                                <tr><th class="py-1 w-16 text-gray-500">Measure</th><td>Count(Voc_ID)</td></tr>
-                            </table>
-                            <button class="mt-2 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 font-bold">데이터 조회하기</button>
-                        </div>
-                    `;
-                }
-
-                display.innerHTML += `
-                    <div class="chat-bubble chat-bot mb-4 animate-fade-in">
-                        ${response}
-                        ${details}
+    <!-- Header -->
+    <header class="glass-header border-b border-pink-100 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div class="flex items-center gap-6">
+                    <div class="flex-shrink-0 border-r border-pink-100 pr-6 hidden md:block">
+                        <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-8 md:h-9">
                     </div>
-                `;
-                display.scrollTop = display.scrollHeight;
-                resetLogic();
-            }, 3500);
-        }
+                    <div class="md:hidden">
+                        <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-8">
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-xl font-bold tracking-tight text-slate-900">
+                            고객가치혁신부문 <span class="text-[#db2777]">Staff</span> 인포멀
+                        </h1>
+                        <p class="text-[11px] md:text-xs text-pink-400 font-medium flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 bg-pink-500 rounded-full animate-ping"></span>
+                            함께 웃고 소통하며 성장하는 우리들의 공간
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative w-full md:w-96 group">
+                    <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-pink-300 group-focus-within:text-[#db2777] transition-colors"></i>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="인포멀 명칭, 활동 키워드 검색..."
+                        class="w-full pl-11 pr-4 py-2.5 bg-pink-50 border border-pink-100 rounded-2xl focus:ring-4 focus:ring-pink-500/10 focus:border-pink-500 transition-all outline-none text-sm"
+                    >
+                </div>
+            </div>
+        </div>
+    </header>
 
-        function highlightLogic(step) {
-            // 초기화
-            [1, 2, 3].forEach(i => {
-                const el = document.getElementById(`logic-step-${i}`);
-                el.classList.add('opacity-30');
-                el.classList.remove('opacity-100', 'bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
-            });
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
+        <!-- Control Panel -->
+        <div class="bg-white/80 rounded-3xl shadow-sm border border-pink-50 p-6 mb-8 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <div class="p-1.5 bg-pink-100 rounded-lg">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-pink-600"></i>
+                    </div>
+                    <h2 class="text-sm font-bold text-slate-700 uppercase tracking-widest">Discovery Filters</h2>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-pink-50 rounded-xl border border-pink-100">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-pink-500"></i>
+                    <p class="text-[11px] md:text-xs font-bold text-pink-600 leading-tight">
+                        궁금한 인포멀 카드를 클릭하시면 상세 운영 정보(회장/총무 연락처, 소개 등)를 팝업창으로 확인하실 수 있습니다.
+                    </p>
+                </div>
+            </div>
             
-            // 강조
-            const el = document.getElementById(`logic-step-${step}`);
-            el.classList.remove('opacity-30');
-            el.classList.add('opacity-100', 'bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                <div>
+                    <label class="text-[11px] font-bold text-pink-300 uppercase tracking-wider mb-3 block">분야별 필터</label>
+                    <div id="categoryFilters" class="flex flex-wrap gap-1.5"></div>
+                </div>
+                <div>
+                    <label class="text-[11px] font-bold text-pink-300 uppercase tracking-wider mb-3 block">사업장별 필터</label>
+                    <div id="locationFilters" class="flex flex-wrap gap-1.5"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-pink-100 pb-6">
+            <div class="flex items-center gap-6">
+                <p class="text-sm text-slate-500 font-medium">
+                    전체 <span id="totalCount" class="text-pink-600 font-black text-xl mx-1">0</span>개의 인포멀 (가나다 순 정렬)
+                </p>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div id="groupGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-32 bg-white/50 rounded-3xl border border-dashed border-pink-200">
+            <div class="bg-pink-50 p-6 rounded-full mb-6">
+                <i data-lucide="search-x" class="w-12 h-12 text-pink-200"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">일치하는 결과가 없습니다</h3>
+            <p class="text-sm text-slate-400">다른 키워드로 검색하거나 필터를 변경해 보세요.</p>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-pink-100 mt-20 py-12">
+        <div class="max-w-[1920px] mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-6 grayscale opacity-20">
+            </div>
+            <p class="text-pink-300 text-[10px] font-medium tracking-wide uppercase mb-2">Happiness for Everyone</p>
+            <p class="text-slate-500 text-sm font-bold">© 2024 LG Electronics. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const informalData = [
+            { id: 1, location: "트윈", name: "꽃요일", chairman: "김예니 책임", email: "yenni.kim@lge.com", secretary: "이유진 선임", members: 40, content: "꽃꽂이", cat1: "기타", cat2: "Staff", date: "23년 3월", description: "한 달에 한 번 나만의 꽃다발을 만들며 힐링하는 모임" },
+            { id: 2, location: "평택", name: "CSPGA", chairman: "정봉근 기성", email: "changbeom.park@lge.com", secretary: "박창범 기정", members: 11, content: "스크린골프", cat1: "레져", cat2: "Staff", date: "24년 11월", description: "스크린 스윙 자세 교정과 필드 스킬 공유는 모두 CSPGA에서! 부족한 운동량 보충과 스트레스 해결." },
+            { id: 3, location: "마곡", name: "마당놀이", chairman: "이의상 기정", email: "293567.lee@lge.com", secretary: "김창수 책임", members: 11, content: "당구", cat1: "레져", cat2: "Staff", date: "25년 5월", description: "일과 즐거움을 함께 추구하는 멋진 당구 모임~ 마.당.놀.이" },
+            { id: 4, location: "마곡", name: "P&P", chairman: "한다혜 사원", email: "dahye.han@lge.com", secretary: "신주영 선임", members: 10, content: "영화", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "바쁜 일상 잠시 멈춤(Pause), 영화 속에서 다시 재생(Play)" },
+            { id: 5, location: "평택", name: "오버씨스(Overseas)", chairman: "이일영 기정", email: "iylee.ilyoung@lge.com", secretary: "이상범 기장", members: 26, content: "외국어 공부", cat1: "자기계발", cat2: "Staff", date: "24년 1월", description: "영어영화 감상, 프리토킹, 야외활동 등 재미있는 프로그램! 주재원 및 영어선생님 출신의 조언과 함께하세요." },
+            { id: 6, location: "마곡", name: "꾸꾸꾸", chairman: "최수진 선임", email: "sujin.choi@lge.com", secretary: "송유빈 사원", members: 6, content: "DIY", cat1: "기타", cat2: "Staff", date: "26년 3월", description: "바쁜 일상 속 귀여운 힐링시간, 볼펜부터 리스까지 매달 새로운 소품을 직접 꾸미는 DIY 모임" },
+            { id: 7, location: "마곡", name: "골때녀", subName: "골프 때리는 녀석들", chairman: "정선영 선임", email: "seony.jeong@lge.com", secretary: "이소민 선임", members: 6, content: "스크린골프", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "스트레스는 날리고 드라이버는 휘두르는 즐거운 스크린 라운딩.", externalLink: "https://adrian-jeong.github.io/share_html/golf_hit.html" },
+            { id: 8, location: "트윈", name: "영어09", subName: "영어로 말할때 영구같은데 영구면제를 목표한다", chairman: "김산 책임", email: "mountain.kim@lge.com", secretary: "김정우 선임", members: 10, content: "영어스피킹", cat1: "자기계발", cat2: "Staff", date: "26년 3월", description: "영구면제로 영어고통 벗어나자!" },
+            { id: 9, location: "평택", name: "무비커넥트", chairman: "서지현 사원", email: "jihyun82.seo@lge.com", secretary: "노지혜 선임", members: 9, content: "영화감상", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "영화를 매개체로 서로의 생각을 나누며 자연스럽게 연결되는 시간" },
+            { id: 10, location: "안양", name: "안양천 나그네", chairman: "김병두 책임", email: "byoungdoo.kim@lge.com", secretary: "황철호 책임", members: 10, content: "트래킹", cat1: "레져", cat2: "Staff", date: "23년 3월", description: "안양천 32.5Km 구간별 트래킹을 통해 경관 감상과 건강을 동시에 챙기는 알찬 일정" },
+            { id: 11, location: "평택", name: "발로차", chairman: "김재덕 기정", email: "jaeduk.kim@lge.com", secretary: "강민구 주임", members: 36, content: "족구", cat1: "스포츠", cat2: "Staff", date: "25년 3월", description: "가볍고 즐거운 족구를 통한 친목과 우의 증진을 목적으로 활기차게 운영합니다." },
+            { id: 12, location: "대전", name: "탄방탐방", chairman: "유선호 주임", email: "sunho85.yoo@lge.com", secretary: "심세윤 주임", members: 21, content: "영화", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "최신 개봉작 관람 및 OTT 명작 감상 등 다양한 문화 활동을 함께 공유합니다." },
+            { id: 13, location: "원주", name: "스포츠가 좋다", chairman: "문상진 책임", email: "sangjin.moon@lge.com", secretary: "임재형 기정", members: 10, content: "당구", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "일과 삶의 균형을 위해 누구나 즐겁게 당구를 즐기며 소통하는 스포츠 모임입니다." },
+            { id: 14, location: "마곡", name: "여기어때 풋살", chairman: "김창민 책임", email: "changmin.kim@lge.com", secretary: "심창원 책임", members: 18, content: "풋살", cat1: "스포츠", cat2: "Staff", date: "22년 7월", description: "마곡에서 즐기는 열정 풋살! 체력 증진과 동료애를 위한 에너제틱 그룹." },
+            { id: 15, location: "마곡", name: "온그린", chairman: "고청진 기정", email: "go.chungjin@lge.com", secretary: "신철희 책임", members: 12, content: "골프", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "Life's Good on (the) Green! 푸른 잔디밭에서 필드 라운딩과 광합성 리프레시." },
+            { id: 16, location: "트윈", name: "ABC", chairman: "박찬혁 선임", email: "chan.park@lge.com", secretary: "김안나 책임", members: 10, content: "보드게임", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "인생은 Alone과 Companion 사이의 보드게임! 지적 유희와 친목의 시간." },
+            { id: 17, location: "광주", name: "전라도 밥상", chairman: "한길수 책임", email: "gilsu.han@lge.com", secretary: "심용석 기장", members: 9, content: "맛집탐방", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "지역 서비스명가 3승의 공신! 전라도의 찐 맛집 밥상을 소개하고 공유합니다." },
+            { id: 18, location: "광주", name: "서부비거리강화팀", chairman: "이용운 기장", email: "yongwoon7242.lee@lge.com", secretary: "심민재 기장", members: 8, content: "스크린골프", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "시원한 비거리로 스트레스를 날리자! 인원 소수 정예로 활기차게 운영하는 스크린 모임." },
+            { id: 19, location: "마곡", name: "맛집검증단", chairman: "김성수 책임", email: "sungsoo86.kim@lge.com", secretary: "김병옥 기정", members: 29, content: "맛집탐방", cat1: "문화", cat2: "Staff", date: "26년 3월", description: "온라인 맛집 정보를 직접 방문하여 분위기, 가격 등 만족도를 확인하고 '찐맛' 집을 확정하는 모임." },
+            { id: 20, location: "마곡", name: "마동탁", subName: "마곡 W6동에서 탁구치는 사람들", chairman: "이승현 책임", email: "seunghyeon12.lee@lge.com", secretary: "김봉진 책임", members: 9, content: "탁구", cat1: "스포츠", cat2: "Staff", date: "22년 6월", description: "점심시간에 탁구로 건강을 관리하고, 타본부와의 인맥도 넓힐 수 있는 인포멀그룹입니다." },
+            { id: 21, location: "마곡", name: "놀면뭐하니", chairman: "오수환 기장", email: "oh.suhwan@lge.com", secretary: "김순철 기장", members: 12, content: "보드게임", cat1: "레져", cat2: "Staff", date: "26년 3월", description: "서로의 취향과 즐거움을 나누는 보드게임 장입니다." },
+            { id: 22, location: "창원", name: "서플라잉", chairman: "김성욱 사원", email: "sungwook24.kim@lge.com", secretary: "이흥재 책임", members: 54, content: "탁구", cat1: "스포츠", cat2: "Staff", date: "26년 3월", description: "탁구공의 스피드로 부품 Supply 까지 완성하는 창원 부품공급팀 신규 인포멀 서플라잉" },
+            { id: 23, location: "마곡", name: "영케이", chairman: "김민 책임", email: "min1.kim@lge.com", secretary: "서수민 사원", members: 7, content: "슬로우 조깅", cat1: "레져", cat2: "Staff", date: "26년 4월", description: "여유롭게 달리고, 0K(c)aI로 퇴근하는 우리들!" }
+        ];
+
+        let currentCategory = "전체";
+        let currentLocation = "전체";
+        let currentSearch = "";
+
+        const allCategories = ["전체", "레져", "문화", "스포츠", "자기계발", "기타"];
+        const allLocations = ["전체", "마곡", "트윈", "평택", "광주", "대전", "안양", "원주", "창원"];
+
+        const emojiMap = {
+            "꽃꽂이": "🌸", "스크린골프": "🏌️", "당구": "🎱", "영화": "🎬", "외국어 공부": "📚", 
+            "DIY": "🎨", "영어스피킹": "🗣️", "트래킹": "🥾", "족구": "⚽", "영화감상": "🍿",
+            "풋살": "⚽", "골프": "🏌️", "보드게임": "🎲", "맛집탐방": "🍱", "탁구": "🏓",
+            "슬로우 조깅": "👟"
+        };
+
+        const categoryStyles = {
+            "스포츠": "bg-blue-50 text-blue-600 border-blue-100",
+            "레져": "bg-emerald-50 text-emerald-600 border-emerald-100",
+            "문화": "bg-purple-50 text-purple-600 border-purple-100",
+            "자기계발": "bg-orange-50 text-orange-600 border-orange-100",
+            "기타": "bg-slate-50 text-slate-500 border-slate-100"
+        };
+
+        function getEmoji(activity) {
+            if (activity.includes("골프")) return "🏌️";
+            return emojiMap[activity] || "✨";
         }
 
-        function resetLogic() {
-             [1, 2, 3].forEach(i => {
-                const el = document.getElementById(`logic-step-${i}`);
-                 el.classList.remove('bg-red-50', 'border-l-4', 'border-lg-red', 'p-2', 'rounded-r');
-                 el.classList.add('opacity-30');
+        function init() {
+            renderFilters();
+            renderGroups();
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                currentSearch = e.target.value.toLowerCase();
+                renderGroups();
             });
+            lucide.createIcons();
         }
+
+        function renderFilters() {
+            const catContainer = document.getElementById('categoryFilters');
+            catContainer.innerHTML = allCategories.map(cat => `
+                <button onclick="handleCategoryChange('${cat}')" class="filter-btn px-3.5 py-2 rounded-xl text-[11px] font-bold ${cat === currentCategory ? 'active' : 'bg-white text-pink-400'}">
+                    ${cat}
+                </button>
+            `).join('');
+
+            const locContainer = document.getElementById('locationFilters');
+            locContainer.innerHTML = allLocations.map(loc => `
+                <button onclick="handleLocationChange('${loc}')" class="filter-btn px-3.5 py-2 rounded-xl text-[11px] font-bold ${loc === currentLocation ? 'active' : 'bg-white text-pink-400'}">
+                    ${loc}
+                </button>
+            `).join('');
+        }
+
+        function handleCategoryChange(cat) { currentCategory = cat; renderFilters(); renderGroups(); }
+        function handleLocationChange(loc) { currentLocation = loc; renderFilters(); renderGroups(); }
+
+        function openModal(id) {
+            const group = informalData.find(g => g.id === id);
+            const modal = document.getElementById('groupModal');
+            const modalContent = modal.querySelector('.modal-content');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-pink-50 flex items-center justify-center text-3xl shadow-inner border border-pink-100">
+                                ${getEmoji(group.content)}
+                            </div>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-500'}">
+                                    ${group.cat1}
+                                </span>
+                                <h2 class="text-2xl font-black text-slate-900 mt-1">${group.name}</h2>
+                            </div>
+                        </div>
+                        <div class="bg-pink-600 text-white px-5 py-2.5 rounded-2xl text-center shadow-lg shadow-pink-100">
+                            <p class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Total Members</p>
+                            <p class="text-2xl font-black">${group.members}명</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-[11px] font-black text-pink-400 uppercase tracking-tighter mb-2 flex items-center gap-1.5">
+                                <i data-lucide="quote" class="w-3 h-3"></i>
+                                Introduction
+                            </p>
+                            <p class="text-slate-600 leading-relaxed font-medium bg-pink-50/30 p-4 rounded-2xl italic border border-pink-50">
+                                "${group.description}"
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">Main Activity</span>
+                                <span class="text-sm font-bold text-slate-700">${group.content}</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">Business Site</span>
+                                <span class="text-sm font-bold text-pink-600 flex items-center gap-1">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                                    ${group.location}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-pink-50 p-6 rounded-3xl">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <i data-lucide="users" class="w-5 h-5 text-pink-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-pink-300 font-bold uppercase">Executive Board</p>
+                                    <p class="text-sm font-black text-slate-800">${group.chairman} (회장) / ${group.secretary} (총무)</p>
+                                </div>
+                            </div>
+                            <div class="pt-4 border-t border-pink-50">
+                                <p class="text-[11px] text-pink-300 font-bold uppercase mb-2">Contact Point</p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg font-black text-slate-700 select-all p-3 bg-pink-50 rounded-2xl border border-pink-100 w-full flex items-center gap-2">
+                                        <i data-lucide="mail" class="w-5 h-5 text-pink-500"></i>
+                                        이메일 주소: <span class="text-pink-600 font-black">${group.email}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex gap-3">
+                        <button onclick="closeModal()" class="flex-grow py-4 bg-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-200 transition-all">닫기</button>
+                        ${group.externalLink ? `
+                            <a href="${group.externalLink}" target="_blank" class="flex-[2] py-4 bg-pink-600 text-white font-black rounded-2xl hover:bg-pink-700 transition-all shadow-lg shadow-pink-200 text-center flex items-center justify-center gap-2">
+                                공식 소개 페이지 가기
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('groupModal');
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function renderGroups() {
+            const grid = document.getElementById('groupGrid');
+            const emptyState = document.getElementById('emptyState');
+            const totalCount = document.getElementById('totalCount');
+
+            let filtered = informalData.filter(group => {
+                const matchesSearch = 
+                    group.name.toLowerCase().includes(currentSearch) ||
+                    (group.subName && group.subName.toLowerCase().includes(currentSearch)) ||
+                    group.content.toLowerCase().includes(currentSearch) ||
+                    group.chairman.toLowerCase().includes(currentSearch) ||
+                    group.description.toLowerCase().includes(currentSearch) ||
+                    group.location.toLowerCase().includes(currentSearch);
+                
+                const matchesCategory = currentCategory === "전체" || group.cat1 === currentCategory;
+                const matchesLocation = currentLocation === "전체" || group.location === currentLocation;
+                
+                return matchesSearch && matchesCategory && matchesLocation;
+            });
+
+            filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+            totalCount.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                grid.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                
+                grid.innerHTML = filtered.map(group => `
+                    <div onclick="openModal(${group.id})" class="informal-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border-l-4 border-l-pink-500 p-5 shadow-sm">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="w-8 h-8 rounded-full bg-pink-50 flex items-center justify-center text-sm shadow-inner border border-pink-100">
+                                ${getEmoji(group.content)}
+                            </div>
+                            <div class="flex items-center gap-1 text-[10px] font-black text-pink-600 bg-pink-50/50 px-2 py-0.5 rounded-lg">
+                                <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                ${group.location}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <span class="text-[9px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded border ${categoryStyles[group.cat1] || 'bg-slate-50 text-slate-500'}">
+                                ${group.cat1}
+                            </span>
+                            <h3 class="text-lg font-bold text-slate-900 leading-tight mt-1.5 truncate" title="${group.name}">${group.name}</h3>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 mt-auto pt-3 border-t border-pink-50/50">
+                            <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                            <span class="text-[11px] font-bold text-slate-600 truncate">${group.content}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        window.onload = init;
     </script>
 </body>
 </html>
