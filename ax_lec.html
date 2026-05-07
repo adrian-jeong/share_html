@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC&S AX 교육 운영방안 보고</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --lge-red: #A50034;
+            --lge-dark: #333333;
+            --lge-gray: #666666;
+            --lge-bg: #F4F4F4;
+            --border-color: #D1D1D1;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; background-color: #E2E8F0; font-family: 'Noto Sans KR', sans-serif; }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 50px;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            page-break-after: always;
+        }
+
+        /* LGE Header Style */
+        .header {
+            border-bottom: 2px solid var(--lge-red);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .slide-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--lge-dark);
+            margin: 0;
+        }
+
+        .header-meta {
+            font-size: 12px;
+            color: var(--lge-gray);
+            text-align: right;
+        }
+
+        /* Layouts */
+        .grid-wrapper {
+            display: grid;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .row-2 { grid-template-columns: 1fr 1fr; }
+
+        .content-box {
+            background-color: var(--lge-bg);
+            border-top: 3px solid var(--lge-gray);
+            padding: 12px 18px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-box h3 {
+            font-size: 17px;
+            color: var(--lge-red);
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content-box h4 {
+            font-size: 14px;
+            margin: 0 0 6px 0;
+            color: #000;
+            border-left: 3px solid var(--lge-red);
+            padding-left: 8px;
+            background: rgba(165, 0, 52, 0.03);
+        }
+
+        ul { padding-left: 15px; margin: 0; }
+        li { font-size: 13px; margin-bottom: 3px; line-height: 1.4; color: #222; text-align: justify; }
+
+        .highlight { color: var(--lge-red); font-weight: 700; }
+        .bold { font-weight: 700; }
+
+        /* Terminology Box (Bottom Section) */
+        .term-section {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            font-size: 11.5px;
+            color: #444;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        .term-item b { color: var(--lge-red); }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 5px; table-layout: fixed; }
+        th { background-color: #444; color: white; padding: 6px; border: 1px solid #ccc; font-weight: 500; }
+        td { padding: 6px 8px; border: 1px solid #ccc; vertical-align: middle; line-height: 1.3; }
+        .t-center { text-align: center; }
+        .bg-dim { background-color: #e9e9e9; font-weight: 700; }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding-top: 5px;
+            border-top: 1px solid #EEE;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* Nav */
+        .nav-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .btn {
+            background: var(--lge-red);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn:hover { background: #820029; }
+
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Cover -->
+<div class="slide-container" id="slide1" style="justify-content: center; align-items: flex-start; background-color: #fff; border-left: 30px solid var(--lge-red);">
+    <div style="padding-left: 50px;">
+        <h2 style="font-size: 26px; color: var(--lge-gray); font-weight: 300; margin-bottom: 5px; letter-spacing: 2px;">CC&S 전략담당 보고</h2>
+        <h1 style="font-size: 60px; color: var(--lge-dark); font-weight: 700; margin: 0; line-height: 1.1; letter-spacing: -2px;">고객가치혁신부문 Staff<br>AX 실행 역량 내재화 계획</h1>
+        <div style="width: 150px; height: 5px; background-color: var(--lge-red); margin: 35px 0;"></div>
+        <p style="font-size: 22px; color: var(--lge-dark); font-weight: 500; line-height: 1.6;">
+            CC&S 전략팀 정선영 선임<br>
+            <span style="font-size: 16px; color: var(--lge-gray); font-weight: 400;">2024. 05. 24 (v1.5)</span>
+        </p>
+    </div>
+    <div style="position: absolute; bottom: 50px; right: 50px; text-align: right;">
+        <img src="https://www.lg.com/lg5-common/images/common/header/logo.png" alt="LG Logo" style="width: 180px; margin-bottom: 8px;"><br>
+        <span style="font-size: 13px; color: #999; font-weight: 700; letter-spacing: 1px;">Life's Good</span>
+    </div>
+</div>
+
+<!-- Slide 2: 운영 전략 및 인프라 최적화 -->
+<div class="slide-container" id="slide2">
+    <div class="header">
+        <h2 class="slide-title">1. 운영 전략 및 인프라 최적화 방안</h2>
+        <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+    </div>
+    <div class="grid-wrapper" style="grid-template-rows: auto 1fr auto;">
+        <div class="content-box" style="border: none; background: #fff; padding: 0 0 10px 0;">
+            <p style="font-size: 15.5px; margin: 0; line-height: 1.5; text-align: justify;">본 교육은 전사 AX 확산 기조에 발맞추어, 부문 Staff의 <span class="highlight">현업 문제 해결 중심의 'Builder' 역량</span>을 확보하는 것을 최우선 과제로 삼음. 이론적 교육을 배제하고 실습 밀착 가이드를 통해 즉각적인 성과 창출 환경을 조성함.</p>
+        </div>
+        <div class="grid-wrapper row-2">
+            <div class="content-box">
+                <h3><i class="fa-solid fa-users"></i> 대상자 및 교육 운영 규모</h3>
+                <h4>고객가치혁신부문 Staff 약 350명 전원</h4>
+                <ul>
+                    <li><span class="bold">교육 타겟팅:</span> 현업 부서 내 실무를 주도하는 Staff 직군 전체 (AX 적용 파급력 고려)</li>
+                    <li><span class="bold">제외 대상:</span> 임원(담당/실장/팀장) 및 JB (본사 AX 리더 과정 이수자들과의 중복 방지 및 역할 분담)</li>
+                    <li><span class="bold">차수 편성:</span> 총 10~12차수 운영 (1일 7H 집중 교육, 차수당 30명 내외의 소수 정예 운영)</li>
+                    <li><span class="bold">운영 목적:</span> 대규모 강의가 아닌 개별 실습 결과물(에이전트/대시보드)의 완성도 보장</li>
+                    <li><span class="bold">성과 관리:</span> 교육 전후 실무 적용 예정 과제 제출 및 교육 후 실행 현황 모니터링</li>
+                </ul>
+                <div style="margin-top:10px; font-size: 12px; color: #666; font-style: italic;">※ 부문 내 AX 엠버서더 육성을 통해 교육 종료 후에도 지속적인 부서별 전파 교육 유도</div>
+            </div>
+            <div class="content-box">
+                <h3><i class="fa-solid fa-building-circle-check"></i> 장소 전략 및 보안 인프라 대응</h3>
+                <h4>마곡 회의실 중심의 현업 밀착형 교육장 운영</h4>
+                <ul>
+                    <li><span class="bold">1순위 - 마곡 회의실:</span> Staff 접근성 및 현업 긴급 대응 가용성 고려 (마곡 내 전용 공간 확보 추진)</li>
+                    <li><span class="bold">2순위 - 평택 러닝센터:</span> 마곡 내 장소 가용성 불가 또는 대규모 네트워크 예외 처리가 필요한 경우의 대안</li>
+                    <li><span class="bold">보안 예외 처리:</span> Gen AI 툴 및 외부 개발 라이브러리 접속을 위한 <span class="highlight">당일 보안 정책 한시 해제</span> 협의</li>
+                    <li><span class="bold">ISC동 활용 검토:</span> 외부망 접속 환경이 구비된 ISC동(마곡) 가용성 및 교육 진행 가능 여부 EXG팀 협의</li>
+                    <li><span class="bold">장비 준비:</span> 개인용 노트북(사전 준비) 외 외부망 접속용 Wi-Fi 인프라 및 실습용 유료 API 크레딧 사전 확보</li>
+                </ul>
+            </div>
+        </div>
+        <div class="term-section">
+            <div class="term-item"><b>※ ISC동:</b> LG마곡사이언스파크 내 정보시스템 센터로, 외부망과의 데이터 교신이 비교적 유연하도록 설계된 공간임.</div>
+            <div class="term-item"><b>※ 네트워크 예외 처리:</b> 사내 보안망(Intranet) 환경에서 Gen AI 도구(Copilot, Gemini 등)의 API 호출 및 웹 접속 차단을 일시 해제하는 조치.</div>
+            <div class="term-item"><b>※ JB(Junior Board):</b> 본사 AX 교육을 이미 수료한 주니어 핵심 인력으로, 본 교육에서는 실습 보조 멘토(Tutor) 역할 수행을 협의 중임.</div>
+        </div>
+    </div>
+    <div class="footer"><span>LGE Confidential | CC&S Strategy</span><span>2 / 4</span></div>
+</div>
+
+<!-- Slide 3: 실무 중심 커리큘럼 및 발표 프로젝트 -->
+<div class="slide-container" id="slide3">
+    <div class="header">
+        <h2 class="slide-title">2. 실무 밀착형 커리큘럼 및 프로젝트 설계</h2>
+        <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+    </div>
+    <div class="grid-wrapper">
+        <div class="content-box">
+            <h3><i class="fa-solid fa-graduation-cap"></i> 원데이(7H) 집중 역량 강화 모듈</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="12%">구분</th>
+                        <th width="10%">시간</th>
+                        <th width="33%">핵심 커리큘럼 (실무 Shortcut 중심)</th>
+                        <th width="45%">세부 실습 및 기대 결과물 (Output)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="t-center bg-dim">기본 활용<br>(오전)</td>
+                        <td class="t-center">2.0H</td>
+                        <td><b>Copilot & Gemini 실무 연계</b><br><span style="font-size:11px; color:#555;">(기능 정의/프롬프트 이론 제외)</span></td>
+                        <td>- <b>비즈니스 문서 자동화:</b> 부문 표준 양식 기반 보고서 초안/메일 1분 완성<br>- <b>데이터 추출/정제:</b> 비정형 텍스트(VOC 등) 내 핵심 수치 자동 추출 및 구조화<br>- <b>실무 팁:</b> '프롬프트' 용어 정의 대신 '질문 템플릿' 바로 활용 중심 가이드</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="t-center bg-dim">심화 과정<br>(오후)</td>
+                        <td class="t-center">2.0H</td>
+                        <td><b>Agent & Dashboard 제작 교육</b><br><span style="font-size:11px; color:#555;">(업무 과업별 특화 도구 설계)</span></td>
+                        <td>- <b>Custom Agent:</b> 부서별 가이드라인, 매뉴얼 학습 기반 전문 비서 생성 실습<br>- <b>Visual DB:</b> HTML 기반 정적 대시보드 구축을 통한 지표 관리 시각화 역량 확보</td>
+                    </tr>
+                    <tr>
+                        <td class="t-center">3.0H</td>
+                        <td><b>[조별] AX 프로젝트 및 발표</b><br><span style="font-size:11px; color:#555;">(부서별 현안 해결 결과물 도출)</span></td>
+                        <td>- <b>조 편성:</b> 동일 업무 또는 유관 부서 Staff 5~6인 1조 구성<br>- <b>현업 과제 해결:</b> 사전에 정의된 부서별 Pain Point를 AX 도구로 해결하는 실습<br>- <b>데모 시연:</b> 실제 작동하는 Agent 또는 대시보드 페이지 결과물 상호 시연</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid-wrapper row-2" style="gap:15px;">
+            <div class="content-box">
+                <h4>조별 프로젝트(Team-based) 가이드</h4>
+                <ul>
+                    <li><span class="bold">구성:</span> 개별 실습의 한계를 극복하기 위해 조별 협업형 프로젝트로 진행하여 집단 지성 발휘</li>
+                    <li><span class="bold">프로세스:</span> [문제 정의] → [도구 선정] → [프롬프트 고도화/코드 구현] → [결과 시연]</li>
+                    <li><span class="bold">핵심 결과물:</span> 실제 업무 환경(HTML/Python 등)에서 구동 가능한 실전형 도구 확보</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h4>강사 운영 및 서포트 체계</h4>
+                <ul>
+                    <li><span class="bold">강사 믹스:</span> 외부 전문 기술 강사(EXG팀 주관 섭외)와 부문 내 사내 강사(Staff급 전문가) 콜라보</li>
+                    <li><span class="bold">사내 강사 역할:</span> 외부 강사가 알기 어려운 CC&S 부문의 업무 맥락과 전문 용어 기반 실습 지도</li>
+                    <li><span class="bold">실시간 튜터링:</span> JB 멘토단을 각 조에 배치하여 실시간 기술 병목(Error) 해결 지원</li>
+                </ul>
+            </div>
+        </div>
+        <div class="term-section">
+            <div class="term-item"><b>※ Agent(에이전트):</b> 특정 데이터(매뉴얼 등)를 학습하여 질문에 답하거나 업무를 대행하는 독립적 AI 기능 단위.</div>
+            <div class="term-item"><b>※ Shortcut(숏컷):</b> 복잡한 이론 학습 없이 실무 상황에서 바로 복사하여 사용할 수 있는 검증된 프롬프트 모음.</div>
+            <div class="term-item"><b>※ 정적/동적 환경:</b> HTML 기반의 단순 시각화(정적)와 Python/React 연동을 통한 데이터 처리(동적) 환경의 구분 실습.</div>
+        </div>
+    </div>
+    <div class="footer"><span>CC&S Strategic Planning Report</span><span>3 / 4</span></div>
+</div>
+
+<!-- Slide 4: 사후 관리 및 성과 확산 전략 -->
+<div class="slide-container" id="slide4">
+    <div class="header">
+        <h2 class="slide-title">3. 사후 관리 및 성과 확산 전략</h2>
+        <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+    </div>
+    <div class="grid-wrapper row-2">
+        <div class="content-box">
+            <h3><i class="fa-solid fa-comments-nodes"></i> AX 커뮤니티 기능 고도화</h3>
+            <h4>실무 지식의 자산화 및 상시 지원 시스템 구축</h4>
+            <ul>
+                <li><span class="bold highlight">프롬프트 자산화 (Prompt Library):</span>
+                    <br>&nbsp;&nbsp; - 교육 과정 중 도출된 우수 프롬프트를 부문 표준 라이브러리로 등록
+                    <br>&nbsp;&nbsp; - 부서별 맞춤형 프롬프트 검색 및 즉시 복제(One-click Copy) 기능 지원
+                </li>
+                <li><span class="bold highlight">실시간 Q&A 운영 (AX Helpdesk):</span>
+                    <br>&nbsp;&nbsp; - Teams 채널 내 전문가/강사 상주형 기술 지원 스레드 운영
+                    <br>&nbsp;&nbsp; - 실무 적용 중 발생하는 보안 정책 충돌 및 기술적 문제 상시 해결
+                </li>
+                <li><span class="bold highlight">베스트 사례 공유 (Insight Portal):</span>
+                    <br>&nbsp;&nbsp; - 매주 1건 이상의 실무 적용 성공 사례를 카드뉴스 형태로 전파
+                    <br>&nbsp;&nbsp; - 우수 활용 Staff의 노하우 인터뷰 및 프롬프트 로직 상세 공개
+                </li>
+            </ul>
+        </div>
+        <div class="content-box">
+            <h3><i class="fa-solid fa-trophy"></i> AX BP 컨테스트 및 보상 설계</h3>
+            <h4>형평성 중심의 리그제 운영으로 전사 참여 유도</h4>
+            <ul>
+                <li><span class="bold">전문가 리그:</span> IT/데이터 유관 조직 대상, 기술적 난이도 및 완성도 중심 평가</li>
+                <li><span class="bold">일반 Staff 리그:</span> 일반 실무 조직 대상, 실질적 업무 시간 단축 및 효율성 위주 평가</li>
+                <li><span class="bold">평가 지표:</span> Efficiency(업무 효율), Scalability(타 부서 확산 가능성), Innovation(혁신성)</li>
+                <li><span class="bold">인센티브 강화:</span> 상무님 공식 포상, 부문 내 AX 선도 인력 가점 부여 및 전사 전시</li>
+            </ul>
+            <div style="margin-top: auto; padding: 12px; background: #FFF3F3; border-radius: 5px; border: 1px solid var(--lge-red);">
+                <h4 style="border:none; margin:0; padding:0; background:transparent; font-size: 14px;">[Next Step]</h4>
+                <p style="font-size: 12.5px; margin: 8px 0 0 0; line-height: 1.4;">
+                    1) <b>EXG팀 최종 협의:</b> 마곡 회의실 예약 및 ISC동 외부망 가용성 체크 (5.W4)<br>
+                    2) <b>교육 인프라 세팅:</b> 보안 예외 신청 및 실습용 크레딧 확보 완료 (6.W1)<br>
+                    3) <b>교육 시행:</b> 1차 차수 운영 및 커뮤니티(Teams) 공식 런칭 (6.W2)
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="term-section">
+        <div class="term-item"><b>※ BP(Best Practice):</b> 실제 업무에 적용하여 가시적인 성과(시간 단축 등)를 낸 우수 활용 사례.</div>
+        <div class="term-item"><b>※ Prompt Library:</b> 단순한 질문 모음이 아닌, 사내 보안 및 품질 가이드가 검증된 '표준 프롬프트' 저장소.</div>
+        <div class="term-item"><b>※ Efficiency Index:</b> AX 도입 전후 업무 수행 시간의 정량적 비교를 통해 산출되는 생산성 혁신 지표.</div>
+    </div>
+    <div class="footer"><span>CC&S Strategic Planning Report</span><span>4 / 4</span></div>
+</div>
+
+<!-- Navigation -->
+<div class="nav-btn">
+    <div class="btn" onclick="document.getElementById('slide1').scrollIntoView({behavior: 'smooth'})">1</div>
+    <div class="btn" onclick="document.getElementById('slide2').scrollIntoView({behavior: 'smooth'})">2</div>
+    <div class="btn" onclick="document.getElementById('slide3').scrollIntoView({behavior: 'smooth'})">3</div>
+    <div class="btn" onclick="document.getElementById('slide4').scrollIntoView({behavior: 'smooth'})">4</div>
+</div>
+
+</body>
+</html>
