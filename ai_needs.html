@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객가치혁신부문 AI 툴 수요조사 결과 및 활성화 계획</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #f3f4f6;
+            color: #334155;
+        }
+        .report-container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            padding: 2.2rem 2.8rem;
+        }
+        .section-title {
+            color: #FD005A; /* LG Active Red */
+            border-bottom: 2px solid #fecdd3;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.8rem;
+            margin-top: 1.6rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.4rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+        }
+        th {
+            background-color: #f8fafc;
+            color: #334155;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.4rem;
+            border-top: 2px solid #cbd5e1;
+            border-bottom: 1px solid #cbd5e1;
+        }
+        td {
+            padding: 0.4rem;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .highlight-row { background-color: #fff1f2; font-weight: 700; }
+        
+        /* LG Logo Style */
+        .lg-logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: #A50034;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+        .lg-logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FD005A;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        /* A4 출력 최적화 */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 8mm 10mm;
+            }
+            html { font-size: 11px !important; }
+            body { background-color: #ffffff; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .report-container { margin: 0; padding: 0; box-shadow: none; max-width: 100%; }
+            .section-title { margin-top: 1.2rem !important; margin-bottom: 0.5rem !important; }
+            header { margin-bottom: 1rem !important; }
+            header h1 { font-size: 1.5rem !important; }
+            .mb-6 { margin-bottom: 1rem !important; }
+            section, footer, table, tr { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="report-container">
+        
+        <!-- Header -->
+        <header class="mb-6 mt-2 text-center border-b pb-4">
+            <div class="flex justify-center items-center mb-1">
+                <div class="lg-logo"><div class="lg-logo-dot"></div> LG Electronics</div>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900 leading-tight">고객가치혁신부문 AI 툴 수요조사 결과 및 활성화 계획</h1>
+        </header>
+
+        <!-- 1. 재보고 배경 및 수요 변경 사유 -->
+        <section>
+            <h2 class="section-title">1. 재보고 배경 및 수요 변경 사유</h2>
+            <ul class="list-disc pl-5 space-y-1.5 text-gray-700 leading-relaxed text-sm">
+                <li><span class="font-bold text-gray-900">Claude 계약 관련:</span> 초기 도입 불가 판정이었던 Claude 솔루션의 6월 계약 승인이 급작스럽게 가능해짐에 따라 부서별 수요 재조사 및 3차 취합 전면 실시</li>
+                <li><span class="font-bold text-gray-900">도입 계약 조건 확정:</span> 모든 외부 AI 솔루션의 계약 기간이 <b>1년 고정</b>으로 확정됨 (지급 수수료는 월별 정산 처리 원칙이나, GPT 솔루션의 경우 1년 선지급 필수 조건)</li>
+                <li><span class="font-bold text-gray-900">부서별 예산 확인 절차 착수:</span> 1년 장기 계약 묶임에 따른 리스크 방지를 위해 <b>부서별 자체 예산 확보 여부 검증 작업</b> 진행 중 (예산 미확보 부서는 자체 취소)</li>
+            </ul>
+        </section>
+
+        <!-- 2. 수요조사 결과 및 부서별 현황 -->
+        <section>
+            <h2 class="section-title">2. 조직별 AI 라이선스 수요조사 결과 (1차 vs 3차 대조)</h2>
+            
+            <!-- 요약 카드 (비교형) -->
+            <div class="grid grid-cols-3 gap-3 mb-3">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-center">
+                    <p class="text-gray-500 font-medium text-[10px] mb-0.5">1차 수요조사</p>
+                    <p class="text-base font-bold text-gray-700">158개 <span class="text-xs font-normal">/ 월 1,194만원</span></p>
+                </div>
+                <div class="bg-rose-50 border border-rose-100 rounded-lg p-2.5 text-center shadow-sm">
+                    <p class="text-[#A50034] font-semibold text-[10px] mb-0.5">3차 수요조사 (최종)</p>
+                    <p class="text-base font-bold text-[#A50034]">197개 <span class="text-xs font-normal">/ 월 1,225만원</span></p>
+                </div>
+                <div class="bg-rose-100/40 border border-[#fecdd3] rounded-lg p-2.5 text-center">
+                    <p class="text-[#FD005A] font-semibold text-[10px] mb-0.5">최종 증감</p>
+                    <p class="text-base font-bold text-[#FD005A]">+39개 <span class="text-xs font-normal">/ 월 +31만원</span></p>
+                </div>
+            </div>
+
+            <div class="mb-3 text-[10px] text-gray-500 bg-gray-50 p-1.5 rounded-md border border-gray-100 flex items-center justify-center">
+                <span class="font-bold text-gray-700 mr-2">※ 비용 계산 기준 (월 단가):</span>
+                Claude 15.5만원 <span class="mx-2 text-gray-300">|</span> GPT 5.6만원 <span class="mx-2 text-gray-300">|</span> Gemini 3.5만원 <span class="mx-2 text-gray-300">|</span> Copilot 3.4만원
+            </div>
+
+            <!-- 대조 테이블 (3차 최종 비용 내림차순 정렬) -->
+            <table class="w-full text-center border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 border-t-2 border-b border-gray-300">
+                        <th rowspan="2" class="w-[28%] p-2 border-r border-gray-200 text-left pl-3">담당 (조직명)</th>
+                        <th colspan="3" class="w-[36%] p-1 border-b border-r border-gray-200 bg-gray-50/50">1차 버전</th>
+                        <th colspan="3" class="w-[36%] p-1 border-b bg-rose-50/30">3차 버전 (최종)</th>
+                    </tr>
+                    <tr class="bg-gray-100 border-b border-gray-300">
+                        <th class="p-1 border-r border-gray-200 text-gray-600 font-semibold">개수</th>
+                        <th class="p-1 border-r border-gray-200 text-gray-600 font-semibold">비용(월)</th>
+                        <th class="p-1 border-r border-gray-200 text-gray-600 font-semibold">비용(연간)</th>
+                        <th class="p-1 border-r border-gray-200 text-rose-700 font-semibold">개수</th>
+                        <th class="p-1 border-r border-gray-200 text-rose-700 font-semibold">비용(월)</th>
+                        <th class="p-1 text-rose-700 font-semibold">비용(연간)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">CC&S역량개발담당</td>
+                        <td class="border-r border-gray-200">10</td><td class="border-r border-gray-200">35</td><td class="border-r border-gray-200">420</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">53</td><td class="border-r border-gray-200 font-semibold text-rose-600">267</td><td class="font-semibold text-rose-600">3,206</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">고객가치혁신HR담당</td>
+                        <td class="border-r border-gray-200">19</td><td class="border-r border-gray-200">154</td><td class="border-r border-gray-200">1,848</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">29</td><td class="border-r border-gray-200 font-semibold text-rose-600">239</td><td class="font-semibold text-rose-600">2,863</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">고객가치혁신담당</td>
+                        <td class="border-r border-gray-200">24</td><td class="border-r border-gray-200">156</td><td class="border-r border-gray-200">1,872</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">28</td><td class="border-r border-gray-200 font-semibold text-rose-600">176</td><td class="font-semibold text-rose-600">2,107</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">Contact Center운영지원실</td>
+                        <td class="border-r border-gray-200">16</td><td class="border-r border-gray-200">96</td><td class="border-r border-gray-200">1,152</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">14</td><td class="border-r border-gray-200 font-semibold text-rose-600">130</td><td class="font-semibold text-rose-600">1,562</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">CC&S전략담당</td>
+                        <td class="border-r border-gray-200">13</td><td class="border-r border-gray-200">148</td><td class="border-r border-gray-200">1,776</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">16</td><td class="border-r border-gray-200 font-semibold text-rose-600">128</td><td class="font-semibold text-rose-600">1,536</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">한국CC&S담당</td>
+                        <td class="border-r border-gray-200">36</td><td class="border-r border-gray-200">274</td><td class="border-r border-gray-200">3,288</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">25</td><td class="border-r border-gray-200 font-semibold text-rose-600">107</td><td class="font-semibold text-rose-600">1,289</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">해외CC&S담당</td>
+                        <td class="border-r border-gray-200">16</td><td class="border-r border-gray-200">142</td><td class="border-r border-gray-200">1,704</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">17</td><td class="border-r border-gray-200 font-semibold text-rose-600">86</td><td class="font-semibold text-rose-600">1,027</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">경영관리담당</td>
+                        <td class="border-r border-gray-200">7</td><td class="border-r border-gray-200">51</td><td class="border-r border-gray-200">612</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">6</td><td class="border-r border-gray-200 font-semibold text-rose-600">37</td><td class="font-semibold text-rose-600">444</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">CC&S부품실</td>
+                        <td class="border-r border-gray-200">14</td><td class="border-r border-gray-200">115</td><td class="border-r border-gray-200">1,380</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">6</td><td class="border-r border-gray-200 font-semibold text-rose-600">33</td><td class="font-semibold text-rose-600">396</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left pl-3 font-medium text-gray-700 border-r border-gray-200">부문직속</td>
+                        <td class="border-r border-gray-200">3</td><td class="border-r border-gray-200">23</td><td class="border-r border-gray-200">276</td>
+                        <td class="border-r border-gray-200 font-semibold text-rose-600">3</td><td class="border-r border-gray-200 font-semibold text-rose-600">22</td><td class="font-semibold text-rose-600">266</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="highlight-row text-[#A50034] border-t border-b-2 border-rose-200">
+                        <td class="text-left pl-3 border-r border-gray-200">합계</td>
+                        <td class="border-r border-gray-200">158</td><td class="border-r border-gray-200">1,194</td><td class="border-r border-gray-200">14,328</td>
+                        <td class="border-r border-gray-200">197</td><td class="border-r border-gray-200">1,225</td><td>14,698</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="text-[9px] text-gray-400 text-right pr-2 font-normal mt-0.5">* 비용 단위: 만원 (연간 비용 = 월 비용 × 12개월 기준)</div>
+        </section>
+
+        <!-- 3. 향후 추진 및 운영 계획 -->
+        <section>
+            <h2 class="section-title">3. 향후 추진 및 운영 계획</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 로드맵 -->
+                <div class="bg-white border border-gray-200 rounded-lg p-3.5 shadow-sm">
+                    <h3 class="font-bold text-[#FD005A] mb-1.5 text-[12px]">ㅇ 배포 및 라이선스 고도화 일정</h3>
+                    <ul class="list-none space-y-1 text-[11px] text-gray-700">
+                        <li><b>• 6월 초 ~ :</b> 예산 확인 완료 부서 대상 외부 AI 라이선스 일괄 배포 및 <b>본격 사용 기동</b></li>
+                        <li><b>• 6월 중 :</b> 전사 <b>Staff 직무 전원 대상 맞춤형 AI 역량 강화 교육</b> 진행</li>
+                        <li><b>• 사용성 분석 :</b> 실 사용량 추이를 실시간 모니터링하여 <b>IN/OUT 프로세스</b> 가동</li>
+                    </ul>
+                </div>
+
+                <!-- 프로그램 -->
+                <div class="bg-white border border-gray-200 rounded-lg p-3.5 shadow-sm">
+                    <h3 class="font-bold text-[#FD005A] mb-1.5 text-[12px]">ㅇ AX 내재화 및 활성화 프로그램</h3>
+                    <ul class="list-none space-y-1 text-[11px] text-gray-700">
+                        <li><b>• BP Contest 전개 :</b> 고객 가치 혁신 사례 발굴을 위한 <b>AX 해커톤 진행 및 시상식 연계</b></li>
+                        <li><b>• 전문가풀 커뮤니티 활성화 :</b> 부문 내 핵심 우수 고수 인력 중심의 사내 커뮤니티를 통한 <b>실무 트러블슈팅 및 비결 상시 공유 체계 확립</b></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-4 bg-rose-50 border-l-4 border-[#FD005A] p-3 rounded-r-lg">
+            <p class="text-gray-700 text-[11px] leading-relaxed">
+                위 운영 계획 및 활성화 프로그램은 <b>HR 부서와 긴밀히 협의하여</b> 부문 임직원들의 실무 중심 AX 역량을 효과적으로 강화할 수 있도록 체계적으로 구성하여 가동하겠습니다.
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
