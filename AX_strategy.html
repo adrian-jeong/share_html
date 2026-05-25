@@ -833,6 +833,43 @@
             margin-top: auto;
             align-self: flex-start;
         }
+
+        /* 6페이지 전용 스타일 */
+        .exec-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+
+        .exec-matrix th {
+            background-color: #333333;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 1px solid #CBD5E1;
+            font-size: 13.5px;
+        }
+
+        .exec-matrix td {
+            padding: 12px 18px;
+            border: 1px solid #CBD5E1;
+            vertical-align: middle;
+        }
+
+        .exec-badge {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            text-align: center;
+            min-width: 130px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 
@@ -841,7 +878,7 @@
     <div class="nav-arrow left disabled" id="prevArrow" onclick="changeSlide(-1)"><i
             class="fa-solid fa-chevron-left"></i></div>
     <div class="nav-arrow right" id="nextArrow" onclick="changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></div>
-    <div class="page-indicator" id="pageIndicator">1 / 8</div>
+    <div class="page-indicator" id="pageIndicator">1 / 7</div>
 
     <div id="deck">
 
@@ -1201,7 +1238,7 @@
             <div class="footer"><span>CC&S Strategic Planning Report | Page 3</span></div>
         </div>
 
-        <!-- Slide 4: [인프라] CS Datamart 데이터 연동 및 공공 지식 자산화 체계 (개편 완료) -->
+        <!-- Slide 4: [인프라] CS Datamart 데이터 연동 및 공공 지식 자산화 체계 -->
         <div class="slide-container" id="slide4">
             <div class="header">
                 <h2 class="slide-title">3. [인프라] CS Datamart 데이터 연동 및 공공 지식 자산화 체계</h2>
@@ -1422,14 +1459,14 @@
                                 </table>
                             </div>
 
-                            <!-- 아래쪽 조 편성 글 (안전 마진 확보로 안 잘리게 레이아웃 구성) -->
+                            <!-- 아래쪽 조 편성 글 -->
                             <div style="font-size: 9px; color: #555; line-height: 1.35; border-top: 1px dashed #cbd5e1; padding-top: 4px; flex-shrink: 0; margin-top: 2px;">
                                 <b>※ 실무 연계형 협업 조 편성:</b> 서베이 결과를 기초로 부서 내 레벨을 전략적으로 배정하여, LV 3~4 전문가가 LV 1~2 초급자를 이끌며 실무를 해결하는 '소그룹 멘토링 조'를 구성하여 교육에 참여하도록 설계.
                             </div>
                         </div>
                     </div>
 
-                    <!-- 우측 블록: 실무 맞춤형 교육 커리큘럼 (동일 높이 정비) -->
+                    <!-- 우측 블록: 실무 맞춤형 교육 커리큘럼 -->
                     <div class="info-box" style="padding: 8px 10px; border-top: 3px solid var(--lge-dark); display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                         <div style="display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
                             <div style="flex-shrink: 0;">
@@ -1438,7 +1475,7 @@
                                 </h3>
                             </div>
 
-                            <!-- 커리큘럼 정보 테이블 (높이 및 패딩 일관성 조율) -->
+                            <!-- 커리큘럼 정보 테이블 -->
                             <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-bottom: 4px;">
                                 <table style="width: 100%; border-collapse: collapse; font-size: 9.5px; line-height: 1.25;">
                                     <thead>
@@ -1493,7 +1530,7 @@
 
                 </div>
 
-                <!-- 하단부: 전사 역량 내재화 추진 일정 (컴팩트 간격) -->
+                <!-- 하단부: 전사 역량 내재화 추진 일정 -->
                 <div style="background: #fafafa; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); flex-shrink: 0;">
                     <h3 style="margin: 0 0 5px 0; font-size: 12px; color: var(--lge-red); display: flex; align-items: center; gap: 6px; border: none; padding: 0; background: none; font-weight: bold;">
                         <i class="fa-solid fa-calendar-check"></i> 전사 역량 내재화 추진 일정
@@ -1529,367 +1566,235 @@
             <div class="footer"><span>CC&S Strategic Planning Report | Page 5</span></div>
         </div>
 
-            <!-- Slide 6: [지속성] 부문 AX 콘테스트 세부 실행안 (기존 Slide 7에서 순서 및 카테고리 변경: 6페이지로 전진, [지속성]➔[실행]) -->
-            <div class="slide-container" id="slide6">
-                <div class="header">
-                    <h2 class="slide-title">5. [실행] 담당별 AX Talk 및 부문 AX 콘테스트 운영 안</h2>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
-                </div>
-                <div class="content-area">
-                    <div
-                        style="padding: 6px 0; border-left: 5px solid var(--innovation-color); padding-left: 15px; margin-bottom: 5px; background: rgba(22, 101, 52, 0.02); display: flex; justify-content: space-between; align-items: center;">
-                        <p style="font-size: 14.5px; margin: 0; font-weight: 500; color: #111;">
-                            "참여 장벽을 낮춘 <b>담당내 AX Talk</b>을 통해 활용 사례를 상시 발굴하고, 이를 <b>부문 AX 콘테스트</b>로 연계하여 성과를 확산합니다."
-                        </p>
-                        <div
-                            style="background: white; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--innovation-color); font-size: 11px; font-weight: bold; color: var(--innovation-color);">
-                            현업 주도 AX 성공 모델(Quick-Win) 조기 발굴 및 수평 확산 목적
-                        </div>
-                    </div>
-                    <div class="grid-2">
-                        <div class="info-box innovation-box">
-                            <h3><i class="fa-solid fa-comments"></i> 1. 담당별 AX Talk 운영 안 (상시/가볍게)</h3>
-                            <h4>One Talk 툴킷 활용 및 캐주얼한 AX 노하우 공유</h4>
-                            <ul>
-                                <li><span class="bold">추진 배경:</span> 부문 AX 콘테스트는 다소 무겁게 느껴져 적극적인 참여가 어려울 수 있으므로, 담당 단위의
-                                    친숙한
-                                    소통 자리를 활용하여 참여 장벽 완화.</li>
-                                <li><span class="bold">운영 방식:</span> 담당 내 정기 모임(One Talk 행사 등) 자리에서 실무진의 AX 활용 경험 및 노하우를
-                                    가볍게
-                                    공유하는 세션 마련 (One Talk 툴킷에 AX 공유 시간 추가하여 가볍게 진행).</li>
-                                <li><span class="bold">우수작 연계:</span> AX Talk을 통해 발굴된 참신하고 효과적인 우수작들을 부문 AX 콘테스트 출품 후보로
-                                    자연스럽게 추천/연계.</li>
-                            </ul>
-                        </div>
-                        <div class="info-box strategy-box">
-                            <h3><i class="fa-solid fa-trophy"></i> 2. 부문 AX 콘테스트(AX Contest) 세부 실행안</h3>
-                            <h4>10월 진행 예정 | 우수 성과 포상 및 성공 모델(BP) 아카이빙</h4>
-                            <ul>
-                                <li><span class="bold">공모 대상 및 단위:</span> 고객가치혁신부문 Staff 전 구성원 (개인 또는 3인 이하 팀)</li>
-                                <li><span class="bold">시상 내역 및 상금:</span>
-                                    <br>- <b>대상 (1팀):</b> 상금 및 부문장 표창 제공 (해외 Tech 전시 참관 기회 없음)
-                                    <br>- <b>아이디어 혁신상:</b> 창의적 AX 시나리오 구현팀 대상, 상금 제공
-                                    <br>- <b>실무 적용상:</b> 현업 적용성과 생산성 기여도가 높은 팀, 상금 제공
-                                    <br>- <b>솔루션 완성상:</b> 완성도 높은 에이전트/대시보드 구현팀, 상금 제공
-                                    <br>- <b>인기상:</b> 수상에서 제외되었으나 구성원 반응/인기가 높은 팀, 상품권 제공
-                                </li>
-                                <li><span class="bold">운영 정책:</span>
-                                    <br>- <b>수상팀 후속 지원:</b> 별도 후속 지원 없음
-                                    <br>- <b>BP 전파 및 아카이빙:</b> 선정된 우수 사례들을 부문 내 Best Practice(BP)로 적극 공유하고 지속 활용을 위해 EP
-                                    Space에 아카이빙 처리함
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer"><span>CC&S Strategic Planning Report | Page 6</span></div>
+        <!-- Slide 6: [실행] AX 실행 내재화 및 성과 보상 체계 (통합 장표 / 6페이지에 보상 연계 구현) -->
+        <div class="slide-container" id="slide6">
+            <div class="header">
+                <h2 class="slide-title">5. [실행] AX 실행 내재화 및 성과 보상 체계</h2>
+                <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
             </div>
-
-            <!-- Slide 7: [실행] AX과제 인센티브 운영안 (기존 Slide 8에서 순서 변경: 7페이지로 전진, 3번(커뮤니티 밀착대응) 삭제 후 1,2번 영역 넓게 병합) -->
-            <div class="slide-container" id="slide7">
-                <div class="header">
-                    <h2 class="slide-title">6. [실행] AX과제 인센티브 운영안</h2>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+            <div class="content-area">
+                <div style="padding: 8px 0; border-left: 5px solid var(--innovation-color); padding-left: 15px; margin-bottom: 5px; background: rgba(22, 101, 52, 0.02);">
+                    <p style="font-size: 14.5px; margin: 0; font-weight: 500; color: #111;">
+                        "참여 허들을 극소화한 <b>월간 Quick-Win 루틴</b>과 비즈니스 생산성을 견인하는 <b>부문 핵심 과제</b> 투트랙 보상 체계를 가동합니다."
+                    </p>
                 </div>
-                <div class="content-area">
-                    <div
-                        style="padding: 10px 0; border-left: 5px solid var(--innovation-color); padding-left: 15px; margin-bottom: 10px; background: rgba(22, 101, 52, 0.05);">
-                        <p style="font-size: 15px; margin: 0; font-weight: 500; color: #111;">
-                            "실행 중심의 2대 성과 과제를 강력 추진하며, 인센티브 대상자는 일반 역량 레벨(Level) 체계와 <span class="highlight"
-                                style="color:var(--innovation-color)">별도의 트랙</span>으로 분리하여 파격적인 거버닝을 실행합니다."
-                        </p>
-                    </div>
 
-                    <!-- 기존 grid-3에서 grid-2로 가로 레이아웃 확대 -->
-                    <div class="grid-2" style="gap: 15px; flex-grow: 1;">
-                        <div class="info-box innovation-box" style="padding: 18px 25px;">
-                            <h3><i class="fa-solid fa-list-check"></i> 1. 실행 중심 핵심 과제 및 심사 정립</h3>
-                            <h4 style="font-size: 15px; margin-bottom: 12px; padding-left: 10px;">업무 밀착형 AX 과제 추진을 통한
-                                실질적 성과
-                                도출</h4>
-                            <ul style="gap: 8px; display: flex; flex-direction: column;">
-                                <li style="font-size: 13.5px;"><span class="bold">업무 지원형 AX 과제 추진:</span> 단순 보고용 대시보드가
-                                    아닌
-                                    실무에 직접적 도움이 되는 AI 과제를 추진하고, AI 기반으로 가시적인 성과를 낼 수 있도록 적극 지원</li>
-                                <li style="font-size: 13.5px;"><span class="bold">핵심 3대 평가 기준:</span>
-                                    <br>- <b>생산성 (30%):</b> 실무 프로세스 자동화율 및 리드타임 단축 임팩트
-                                    <br>- <b>파급성 (30%):</b> 타 조직/부서로의 수평 전개 및 공용화 비중
-                                    <br>- <b>실행도 (20%):</b> 현장의 실사용율 및 적용도 (접속/호출 빈도)
-                                </li>
-                                <li style="font-size: 13.5px;"><span class="bold">확실한 재원 보상:</span> 성과 기여 과제에 대해 파격적인 추가
-                                    인센티브를 부여하는 차별화 체계</li>
-                            </ul>
-                        </div>
+                <!-- 고가혁 AX 실행 거버닝 체계 매트릭스 -->
+                <table class="exec-matrix">
+                    <colgroup>
+                        <col style="width: 22%;">
+                        <col style="width: 28%;">
+                        <col style="width: 28%;">
+                        <col style="width: 22%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>항목 (실행 하이라키)</th>
+                            <th>추진 목적 (Why)</th>
+                            <th>실행 및 운영 방식 (How)</th>
+                            <th>보상 및 인센티브 (Reward)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1단계: 담당 AX Talk -->
+                        <tr>
+                            <td style="text-align: center;">
+                                <div class="exec-badge" style="background-color: var(--other-dept);"><i class="fa-solid fa-comments"></i> 1. 담당 AX Talk</div>
+                            </td>
+                            <td style="font-weight: 500; color: #111;">
+                                담당 단위 캐주얼 소통 자리를 활용한 부담 없는 실무 활용 노하우 상시 발굴 및 공유
+                            </td>
+                            <td style="color: #444;">
+                                • 담당별 수시/상시 운영<br>
+                                • 담당 내 기존 정기 교류회(One Talk 등) 세션 내 10분 Mini-sharing으로 부담 없이 연계
+                            </td>
+                            <td style="font-weight: bold; color: var(--lge-red); text-align: center; background-color: #FAF5F5;">
+                                <i class="fa-solid fa-gift"></i> 수시 즉시 포상<br>
+                                <span style="font-weight: normal; font-size: 11px; color: #666; display: block; margin-top: 3px;">커피 쿠폰 / 모바일 상품권 등 현장 즉시 배부</span>
+                            </td>
+                        </tr>
 
-                        <div class="info-box innovation-box" style="padding: 18px 25px;">
-                            <h3><i class="fa-solid fa-robot"></i> 2. AI 평가 에이전트 개발</h3>
-                            <h4 style="font-size: 15px; margin-bottom: 12px; padding-left: 10px;">정립된 평가 기준 기반 정량적 자동 검증
-                                모델
-                                구축 (7월 착수 예정)</h4>
-                            <div
-                                style="background: #fff; padding: 15px; border-left: 4px solid var(--innovation-color); border-radius: 4px; margin-bottom: 12px;">
-                                <p
-                                    style="margin: 0; font-size: 13.5px; font-weight: bold; color: var(--innovation-color);">
-                                    ★ "정성 평가 보조를 위한 AI 분석"
-                                </p>
-                                <p style="margin: 6px 0 0 0; font-size: 12.5px; color: #555; line-height: 1.5;">
-                                    최종 평가는 심사위원단이 종합적으로 진행하되, 과제의 소스코드 구조, API 연동 현황, 데이터 적합성을 AI가 사전 분석하여 정량 보고서를 제공하는
-                                    <b>평가 에이전트 개발을 7월 중 착수하여 추가 검증 수단으로 운영</b>해 볼 계획입니다.
-                                </p>
-                            </div>
-                            <ul style="gap: 8px; display: flex; flex-direction: column;">
-                                <li style="font-size: 13.5px;"><span class="bold">에이전트 개발 목표:</span> 평가의 객관성을 보조하고, 수동
-                                    분석
-                                    리소스를 최소화하여 심사위원의 빠른 의사결정 지원</li>
-                            </ul>
-                        </div>
-                    </div>
+                        <!-- 2단계: 고가혁 AX Star -->
+                        <tr style="background-color: rgba(165, 0, 52, 0.01);">
+                            <td style="text-align: center;">
+                                <div class="exec-badge" style="background-color: var(--lge-red);"><i class="fa-solid fa-star"></i> 2. 고가혁 AX Star</div>
+                            </td>
+                            <td style="font-weight: bold; color: var(--lge-red);">
+                                개인/소수정예 중심의 신속한 Quick-Win 과제 도출 및 자발적 월간 공모 문화 활성화
+                            </td>
+                            <td style="color: #111; font-weight: 500;">
+                                • <b>매월 정기 공모전 운영</b><br>
+                                • <b>대상</b>: 개인 또는 2인 이하 참여<br>
+                                • <b>제한</b>: 1개월 이내 도출 가능 결과물 타겟<br>
+                                • <b>의무</b>: 각 담당별 매월 1~2개 과제 제출<br>
+                                • HR 부서와 공동 심사 및 검증
+                            </td>
+                            <td style="font-weight: bold; color: var(--lge-red); text-align: center; background-color: #FAF5F5;">
+                                <i class="fa-solid fa-trophy"></i> 월간 포상 & 시상<br>
+                                <span style="font-weight: normal; font-size: 11px; color: #444; display: block; margin-top: 4px; text-align: left; padding-left: 10px;">
+                                    • 매월 우수작 <b>'AX Star'</b> 공식 선정<br>
+                                    • 즉각적인 월간 포상금 지급<br>
+                                    • 연말 부문 <b>'AX Gold Star'</b> 최종 콘테스트 연계 출품 자격 부여
+                                </span>
+                            </td>
+                        </tr>
 
-                    <!-- 과제 인센티브 및 평가 에이전트 개발 일정 -->
-                    <div
-                        style="margin-top: 10px; background: #fafafa; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); min-height: 90px;">
-                        <h3
-                            style="margin: 0 0 10px 0; font-size: 13.5px; color: var(--innovation-color); display: flex; align-items: center; gap: 8px; border: none; padding: 0; background: none;">
-                            <i class="fa-solid fa-calendar-check"></i> 과제 인센티브 운영 및 AI 평가 에이전트 개발 일정
-                        </h3>
-                        <div
-                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; position: relative;">
-                            <!-- Step 1 -->
-                            <div
-                                style="background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                                <div
-                                    style="font-size: 10.5px; font-weight: bold; color: var(--lge-red); margin-bottom: 2px;">
-                                    5월</div>
-                                <div style="font-size: 12.5px; font-weight: 700; color: #111;">재원 확보 검토</div>
-                                <div style="font-size: 11px; color: #666; margin-top: 2px; line-height: 1.3;">인센티브 예산 수립
-                                    및
-                                    부문 재정 방안 검토</div>
-                            </div>
-                            <!-- Step 2 -->
-                            <div
-                                style="background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                                <div
-                                    style="font-size: 10.5px; font-weight: bold; color: var(--innovation-color); margin-bottom: 2px;">
-                                    6월</div>
-                                <div style="font-size: 12.5px; font-weight: 700; color: #111;">심사기준 정립</div>
-                                <div style="font-size: 11px; color: #666; margin-top: 2px; line-height: 1.3;">과제 인센티브 세부
-                                    지급
-                                    기준 및 정량 평가 지표 정밀 설계</div>
-                            </div>
-                            <!-- Step 3 -->
-                            <div
-                                style="background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                                <div
-                                    style="font-size: 10.5px; font-weight: bold; color: var(--innovation-color); margin-bottom: 2px;">
-                                    7월</div>
-                                <div style="font-size: 12.5px; font-weight: 700; color: #111;">에이전트 개발 착수</div>
-                                <div style="font-size: 11px; color: #666; margin-top: 2px; line-height: 1.3;">정량 평가 및 사전
-                                    코드
-                                    검증을 위한 AI 에이전트 시범 개발 착수</div>
-                            </div>
-                            <!-- Step 4 -->
-                            <div
-                                style="background: rgba(22, 101, 52, 0.02); border: 1.5px solid var(--innovation-color); border-radius: 6px; padding: 8px 10px; box-shadow: 0 1px 3px rgba(22,101,52,0.05);">
-                                <div
-                                    style="font-size: 10.5px; font-weight: bold; color: var(--innovation-color); margin-bottom: 2px;">
-                                    10월</div>
-                                <div
-                                    style="font-size: 12.5px; font-weight: 700; color: var(--innovation-color); display: flex; align-items: center; gap: 4px;">
-                                    최종 심의 및 지급 <span
-                                        style="background: var(--innovation-color); color: white; font-size: 8.5px; padding: 0.5px 3.5px; border-radius: 3px; font-weight: normal;">단축</span>
-                                </div>
-                                <div
-                                    style="font-size: 11px; color: #444; margin-top: 2px; line-height: 1.3; font-weight: 500;">
-                                    심사위원단 최종 심의를 당겨 진행하고 성과 기반 인센티브 지급 완료</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="terminology-footer" style="margin-top: 10px;">
-                        <div class="term-item"><b>※ 과제 평가 에이전트:</b> 정립된 평가 기준을 기반으로 제출 과제의 코드 구조, 데이터 연계성, 실사용 빈도 등을 사전
-                            정량화하여 심사위원단에 레포트로 제공하는 시범 개발 AI 시스템.</div>
-                    </div>
-                </div>
-                <div class="footer"><span>CC&S Strategic Planning Report | Page 7</span></div>
+                        <!-- 3단계: 부문 AX 핵심 과제 -->
+                        <tr>
+                            <td style="text-align: center;">
+                                <div class="exec-badge" style="background-color: var(--innovation-color);"><i class="fa-solid fa-cubes"></i> 3. 부문 AX 핵심 과제</div>
+                            </td>
+                            <td style="font-weight: 500; color: #111;">
+                                비즈니스 성과 임팩트 및 고객 가치 혁신 기여도가 높은 정예 추진 대형 전략 과제 발굴
+                            </td>
+                            <td style="color: #444;">
+                                • 부문 AX 핵심 과제 상시 지정<br>
+                                • <b>AX Committee</b>를 통한 수시/정기 진척 현황 정밀 추적 관리 및 마일스톤 심의<br>
+                                • 개발 공수가 큰 고난도 성과 과제 집중 리딩
+                            </td>
+                            <td style="font-weight: bold; color: var(--innovation-color); text-align: center; background-color: #F5FAF6;">
+                                <i class="fa-solid fa-sack-dollar"></i> AX 과제 성과 인센티브<br>
+                                <span style="font-weight: normal; font-size: 11px; color: #444; display: block; margin-top: 4px; text-align: left; padding-left: 10px;">
+                                    • <b>공식 업적 평가 최고 등급 반영</b><br>
+                                    • 성과 기여 임팩트 비례 특별 추가 인센티브 지급<br>
+                                    • 연말 우수 성과자 부문장 표창 상정
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <div class="footer"><span>CC&S Strategic Planning Report | Page 6</span></div>
+        </div>
 
-            <!-- Slide 8: AX Community & Knowledge Management (기존 Slide 6에서 순서 변경: 8페이지로 이동) -->
-            <div class="slide-container" id="slide8">
-                <div class="header">
-                    <h2 class="slide-title">7. [지속성] 소통 채널(Teams/EP) 및 사내강사 운영</h2>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
-                </div>
-                <div class="content-area">
-                    <div class="grid-2">
-                        <div class="info-box">
-                            <h3><i class="fa-solid fa-network-wired"></i> 운영 플랫폼 및 기능 아키텍처</h3>
-                            <h4>상시 소통용 MS Teams와 지식 축적용 EP Space의 이원화 구조</h4>
-                            <ul>
-                                <li><span class="bold highlight">실시간 소통 및 정보 전파 (MS Teams):</span>
-                                    <br>- 전용 AX 소통 채널 개설을 통한 정보 공유 및 신속 질의대응
-                                    <br>- <span class="bold highlight">AX 뉴스레터 정기 발행:</span> 채널 내 전용 스레드(Thread) 형태로 외부
-                                    AI
-                                    개발 동향/트렌드 등 신규 AI 소식, 부문 임직원의 우수 활용 사례, 각 조직별 업무 효율화 핵심 팁을 상시 전파 <span
-                                        class="highlight">(전략팀 주관)</span>
-                                </li>
-                                <li><span class="bold highlight">데이터 자산화 파이프라인 (EP Space 전용 게시판):</span>
-                                    <br>- 휘발성 정보 극복을 위해 사내 표준 협업 공간인 <b>EP Space 내 전용 게시판</b> 개설
-                                    <br>- 검증된 실무 프롬프트를 향후 RAG 연동을 위한 데이터로 카테고리별 정밀 아카이빙 (Prompt Library)
-                                </li>
-                                <li><span class="bold highlight">상시 3대 프로그램 가동:</span>
-                                    <br>- <b>AX 헬프데스크:</b> 실무 에러 대처를 위한 전담 강사 상주 스레드
-                                    <br>- <b>위클리 AX 인사이트:</b> 매주 우수작을 간결하게 가공하여 스레드로 전파
-                                    <br>- <b>실패 디버깅방:</b> 작동하지 않는 프롬프트를 개조해주는 피드백 공간
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="info-box strategy-box">
-                            <h3><i class="fa-solid fa-chalkboard-user"></i> 사내강사 육성 및 실무 전진 배치</h3>
-                            <h4>보상이 아닌 필수 업무 할당을 통한 전문 강사 풀(Pool) 가동</h4>
-                            <ul>
-                                <li><span class="bold highlight">사내강사 선발 및 외부 교육:</span>
-                                    <br>- 부문 내 실무 이해도가 높은 인원을 사내강사로 공식 선정
-                                    <br>- 해당 인원에게 외부 전문 교육 이수를 의무화하여 부문 내 AX 최고 전문가로 집중 육성 (강제 육성 트랙)
-                                </li>
-                                <li><span class="bold highlight">강사 풀(Pool) 운영 및 맞춤형 배치:</span>
-                                    <br>- 육성된 사내강사들을 각 소속 담당 및 직무 특성에 맞춰 전진 배치하여 현업의 AX 내재화 리딩
-                                </li>
-                                <li><span class="bold highlight">실무 연계 필수 과업 부여:</span>
-                                    <br>- 포상이나 추가 혜택 개념이 아닌, 부문 AX 전환을 위한 공식 업무(Task)로 할당하여 책임감 있는 기술 지원 및 코칭 수행
-                                </li>
-                            </ul>
-                        </div>
+        <!-- Slide 7: [지속성] 소통 채널(Teams/EP) 및 사내강사 운영 -->
+        <div class="slide-container" id="slide8">
+            <div class="header">
+                <h2 class="slide-title">7. [지속성] 소통 채널(Teams/EP) 및 사내강사 운영</h2>
+                <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+            </div>
+            <div class="content-area">
+                <div class="grid-2">
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-network-wired"></i> 운영 플랫폼 및 기능 아키텍처</h3>
+                        <h4>상시 소통용 MS Teams와 지식 축적용 EP Space의 이원화 구조</h4>
+                        <ul>
+                            <li><span class="bold highlight">실시간 소통 및 정보 전파 (MS Teams):</span>
+                                <br>- 전용 AX 소통 채널 개설을 통한 정보 공유 및 신속 질의대응
+                                <br>- <span class="bold highlight">AX 뉴스레터 정기 발행:</span> 채널 내 전용 스레드(Thread) 형태로 외부 AI 개발 동향/트렌드 등 신규 AI 소식, 부문 임직원의 우수 활용 사례, 각 조직별 업무 효율화 핵심 팁을 상시 전파 <span class="highlight">(전략팀 주관)</span>
+                            </li>
+                            <li><span class="bold highlight">데이터 자산화 파이프라인 (EP Space 전용 게시판):</span>
+                                <br>- 휘발성 정보 극복을 위해 사내 표준 협업 공간인 <b>EP Space 내 전용 게시판</b> 개설
+                                <br>- 검증된 실무 프롬프트를 향후 RAG 연동을 위한 데이터로 카테고리별 정밀 아카이빙 (Prompt Library)
+                            </li>
+                            <li><span class="bold highlight">상시 3대 프로그램 가동:</span>
+                                <br>- <b>AX 헬프데스크:</b> 실무 에러 대처를 위한 전담 강사 상주 스레드
+                                <br>- <b>위클리 AX 인사이트:</b> 매주 우수작을 간결하게 가공하여 스레드로 전파
+                                <br>- <b>실패 디버깅방:</b> 작동하지 않는 프롬프트를 개조해주는 피드백 공간
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="info-box strategy-box"
-                        style="margin-top: 2px; padding: 8px 15px; flex-grow: 0; min-height: 110px;">
-                        <h4
-                            style="font-size: 12px; margin: 0 0 5px 0; border-left: 4px solid var(--lge-red); padding-left: 8px; background: transparent; color: var(--lge-red);">
-                            <i class="fa-solid fa-square-check"></i> [커뮤니티 및 자산화 운영 기대효과 (Effectiveness)]
-                        </h4>
-                        <ul style="list-style-type: none; padding-left: 0; margin: 0;">
-                            <li
-                                style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
-                                <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>휘발성
-                                    정보의
-                                    한계 극복:</b> Teams 실시간 소통 및 EP Space 전용 게시판의 유기적 이원화로 소멸되기 쉬운 고가치 지식과 프롬프트 자산을
-                                반영구적·안정적으로
-                                아카이빙합니다.
+                    <div class="info-box strategy-box">
+                        <h3><i class="fa-solid fa-chalkboard-user"></i> 사내강사 육성 및 실무 전진 배치</h3>
+                        <h4>보상이 아닌 필수 업무 할당을 통한 전문 강사 풀(Pool) 가동</h4>
+                        <ul>
+                            <li><span class="bold highlight">사내강사 선발 및 외부 교육:</span>
+                                <br>- 부문 내 실무 이해도가 높은 인원을 사내강사로 공식 선정
+                                <br>- 해당 인원에게 외부 전문 교육 이수를 의무화하여 부문 내 AX 최고 전문가로 집중 육성 (강제 육성 트랙)
                             </li>
-                            <li
-                                style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
-                                <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>수평
-                                    벤치마킹
-                                    생태계 활성화:</b> 캐주얼한 뉴스레터 스레드 전파를 통해 우수 사례가 타 조직으로 자연스럽게 복제·확산되며 부문 전체의 AX 성숙도를 지속
-                                자극합니다.
+                            <li><span class="bold highlight">강사 풀(Pool) 운영 및 맞춤형 배치:</span>
+                                <br>- 육성된 사내강사들을 각 소속 담당 및 직무 특성에 맞춰 전진 배치하여 현업의 AX 내재화 리딩
                             </li>
-                            <li
-                                style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
-                                <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>현업
-                                    상시
-                                    서포트 가동:</b> 기술적 병목을 해결하는 실시간 헬프데스크 및 실패 디버깅방 운영을 통해 실무 적용 과정에서의 AX 이탈률을 선제 차단하고 활용
-                                성과를
-                                견인합니다.
+                            <li><span class="bold highlight">실무 연계 필수 과업 부여:</span>
+                                <br>- 포상이나 추가 혜택 개념이 아닌, 부문 AX 전환을 위한 공식 업무(Task)로 할당하여 책임감 있는 기술 지원 및 코칭 수행
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="footer"><span>CC&S Strategic Planning Report | Page 8</span></div>
-            </div>
 
+                <div class="info-box strategy-box"
+                    style="margin-top: 2px; padding: 8px 15px; flex-grow: 0; min-height: 110px;">
+                    <h4
+                        style="font-size: 12px; margin: 0 0 5px 0; border-left: 4px solid var(--lge-red); padding-left: 8px; background: transparent; color: var(--lge-red);">
+                        <i class="fa-solid fa-square-check"></i> [커뮤니티 및 자산화 운영 기대효과 (Effectiveness)]
+                    </h4>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0;">
+                        <li
+                            style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
+                            <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>휘발성 정보의 한계 극복:</b> Teams 실시간 소통 및 EP Space 전용 게시판의 유기적 이원화로 소멸되기 쉬운 고가치 지식과 프롬프트 자산을 반영구적·안정적으로 아카이빙합니다.
+                        </li>
+                        <li
+                            style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
+                            <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>수평 벤치마킹 생태계 활성화:</b> 캐주얼한 뉴스레터 스레드 전파를 통해 우수 사례가 타 조직으로 자연스럽게 복제·확산되며 부문 전체의 AX 성숙도를 지속 자극합니다.
+                        </li>
+                        <li
+                            style="font-size: 11.5px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; color: #333;">
+                            <i class="fa-solid fa-circle" style="font-size: 4px; color: var(--lge-red);"></i> <b>현업 상시 서포트 가동:</b> 기술적 병목을 해결하는 실시간 헬프데스크 및 실패 디버깅방 운영을 통해 실무 적용 과정에서의 AX 이탈률을 선제 차단하고 활용 성과를 견인합니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer"><span>CC&S Strategic Planning Report | Page 7</span></div>
         </div>
 
-        <script>
-            // 16:9 슬라이드 자동 스케일링 스크립트 (화면 크기에 비례하여 슬라이드 리사이징)
-            function resizeDeck() {
-                const deck = document.getElementById('deck');
-                const targetWidth = 1280;
-                const targetHeight = 720;
+    </div>
 
-                const windowWidth = window.innerWidth;
-                const windowHeight = window.innerHeight;
+    <script>
+        // 16:9 슬라이드 자동 스케일링
+        function resizeDeck() {
+            const deck = document.getElementById('deck');
+            const targetWidth = 1280;
+            const targetHeight = 720;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const scale = Math.min(windowWidth / targetWidth, windowHeight / targetHeight) * 0.95;
+            deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }
 
-                const scale = Math.min(windowWidth / targetWidth, windowHeight / targetHeight) * 0.95;
+        window.addEventListener('resize', resizeDeck);
+        resizeDeck();
 
-                deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
-            }
+        // 슬라이드 네비게이션
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        const indicator = document.getElementById('pageIndicator');
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
 
-            window.addEventListener('resize', resizeDeck);
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            slides[currentSlide].classList.add('active');
+            updateUI();
+        }
+
+        function updateUI() {
+            indicator.innerText = `${currentSlide + 1} / ${slides.length}`;
+            prevArrow.classList.toggle('disabled', currentSlide === 0);
+            nextArrow.classList.toggle('disabled', currentSlide === slides.length - 1);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowLeft' && currentSlide > 0) changeSlide(-1);
+            else if ((event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') && currentSlide < slides.length - 1) changeSlide(1);
+        });
+
+        // 모바일 스와이프
+        let touchstartX = 0;
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX, { passive: true });
+        document.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchendX < touchstartX - 50 && currentSlide < slides.length - 1) changeSlide(1);
+            if (touchendX > touchstartX + 50 && currentSlide > 0) changeSlide(-1);
+        }, { passive: true });
+
+        window.onload = function () {
             resizeDeck();
-
-            // 슬라이드 네비게이션 로직 (0-indexed)
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide-container');
-            const indicator = document.getElementById('pageIndicator');
-            const prevArrow = document.getElementById('prevArrow');
-            const nextArrow = document.getElementById('nextArrow');
-
-            function changeSlide(direction) {
-                slides[currentSlide].classList.remove('active');
-
-                currentSlide += direction;
-
-                if (currentSlide < 0) currentSlide = 0;
-                if (currentSlide >= slides.length) currentSlide = slides.length - 1;
-
-                slides[currentSlide].classList.add('active');
-
-                updateUI();
-            }
-
-            function updateUI() {
-                indicator.innerText = `${currentSlide + 1} / ${slides.length}`;
-
-                if (currentSlide === 0) {
-                    prevArrow.classList.add('disabled');
-                } else {
-                    prevArrow.classList.remove('disabled');
-                }
-
-                if (currentSlide === slides.length - 1) {
-                    nextArrow.classList.add('disabled');
-                } else {
-                    nextArrow.classList.remove('disabled');
-                }
-            }
-
-            // 키보드 방향키 조작 이벤트 바인딩
-            document.addEventListener('keydown', function (event) {
-                if (event.key === 'ArrowLeft' && currentSlide > 0) {
-                    changeSlide(-1);
-                } else if ((event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') && currentSlide < slides.length - 1) {
-                    changeSlide(1);
-                }
-            });
-
-            // 모바일 터치 스와이프 제어
-            let touchstartX = 0;
-            let touchendX = 0;
-
-            document.addEventListener('touchstart', e => {
-                touchstartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            document.addEventListener('touchend', e => {
-                touchendX = e.changedTouches[0].screenX;
-                handleGesture();
-            }, { passive: true });
-
-            function handleGesture() {
-                if (touchendX < touchstartX - 50 && currentSlide < slides.length - 1) {
-                    changeSlide(1); // 왼쪽으로 쓸기 -> 다음 슬라이드
-                }
-                if (touchendX > touchstartX + 50 && currentSlide > 0) {
-                    changeSlide(-1); // 오른쪽으로 쓸기 -> 이전 슬라이드
-                }
-            }
-
-            // 초기 실행
-            window.onload = function () {
-                resizeDeck();
-                updateUI();
-            };
-        </script>
+            updateUI();
+        };
+    </script>
 
 </body>
 
