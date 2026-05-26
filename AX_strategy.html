@@ -796,10 +796,10 @@
             </div>
         </div>
 
-        <!-- Slide 2: 고객가치혁신부문 AX운영체계 (수정본) -->
+        <!-- Slide 2: 고객가치혁신부문 AX운영체계 -->
         <div class="slide-container" id="slide2">
             <div class="header" style="margin-bottom: 8px;">
-                <h2 class="slide-title">1. 고객가치혁신부문 AX운영체계</h2>
+                <h2 class="slide-title">고객가치혁신부문 AX운영체계</h2>
                 <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
             </div>
             <div class="content-area">
@@ -901,7 +901,7 @@
         <!-- Slide 3: [인프라] AI Tool 수요조사 결과 및 활성화 계획 (연간 비용 분기 업데이트 반영) -->
         <div class="slide-container" id="slide3">
             <div class="header" style="margin-bottom: 8px;">
-                <h2 class="slide-title">2. [인프라] AI Tool 수요조사 결과 및 활성화 계획</h2>
+                <h2 class="slide-title">1-1. [인프라] AI Tool 수요조사 결과 및 활성화 계획</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i> </button>
                     <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
@@ -1159,7 +1159,7 @@
         <!-- Slide 4: [인프라] CS Datamart 데이터 연동 및 공공 지식 자산화 체계 -->
         <div class="slide-container" id="slide4">
             <div class="header">
-                <h2 class="slide-title" style="font-size: 26px;">3. [인프라] CS 데이터 연동 및 전용 개발 환경(플레이그라운드) 구축</h2>
+                <h2 class="slide-title">1-2. [인프라] 데이터 연동 및 운영 거버넌스 체계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
                     <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
@@ -1173,116 +1173,203 @@
                     </p>
                 </div>
 
-                <div class="grid-2" style="gap: 15px; align-items: flex-start; margin-top: 5px; height: auto !important;">
+                <div class="grid-2"
+                    style="gap: 15px; align-items: flex-start; margin-top: 5px; height: auto !important;">
                     <!-- Left Block: Data Acquisition & Pipeline -->
                     <div class="info-box"
-                        style="padding: 20px 24px; border-top: 3px solid var(--lge-red); display: flex; flex-direction: column; gap: 12px; height: auto !important;">
-                        <div>
-                            <h3 style="font-size: 18px; margin: 0 0 12px 0; color: var(--lge-red);">
-                                <i class="fa-solid fa-database"></i> 1. 고객 서비스(CS) 데이터 확보 및 안전한 연동
-                            </h3>
+                        style="padding: 16px 20px; border-top: 3px solid var(--lge-red); display: flex; flex-direction: column; gap: 10px; height: auto !important; border-radius: 8px;">
+                        <h3
+                            style="font-size: 17.5px; margin: 0 0 4px 0; color: var(--lge-red); display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-database"></i> 1. CS 데이터마트 기반 AI 에이전트 데이터 파이프라인 연동
+                        </h3>
 
-                            <!-- Procedure Timeline (Moved to Top) -->
-                            <div
-                                style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; margin-bottom: 12px;">
-                                <div
-                                    style="font-size: 13.5px; font-weight: 700; color: #333; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <!-- Section: Data Catalog & Background -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
+                            <span
+                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
+                                <i class="fa-solid fa-list-check" style="color: var(--lge-red);"></i> 데이터마트 카탈로그 구축
+                                (~6월)
+                            </span>
+                            <p style="font-size: 11.5px; color: #555; margin: 0; line-height: 1.45;">
+                                AI 활용을 위한 데이터 제공 중이나, 구성원들의 정보 비대칭 해결을 위해 6월까지 <b>보유 데이터 테이블/컬럼 카탈로그</b> 구축 예정 (데이터
+                                탐색 및 자가 확인 지원)
+                            </p>
+                        </div>
+
+                        <!-- Section: Process Pipeline -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
+                            <span
+                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 6px;">
+                                <i class="fa-solid fa-route" style="color: var(--lge-red);"></i> 사용자 중심 데이터 파이프라인 연동 절차
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px;">
                                     <span
-                                        style="width: 6px; height: 6px; background: var(--lge-dark); border-radius: 50%;"></span>
-                                    데이터 요청 및 제공 프로세스 (쉬운 3단계 절차)
+                                        style="background: var(--lge-red); color: white; border-radius: 3px; font-size: 10px; padding: 1px 4px; font-weight: bold; flex-shrink: 0; margin-top: 2px;">1단계</span>
+                                    <span style="color: #333; line-height: 1.35;"><b>데이터 탐색</b>: 카탈로그를 조회하여 테이블 및 필요한 특정
+                                        컬럼 파악</span>
                                 </div>
+                                <div style="display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px;">
+                                    <span
+                                        style="background: var(--lge-red); color: white; border-radius: 3px; font-size: 10px; padding: 1px 4px; font-weight: bold; flex-shrink: 0; margin-top: 2px;">2단계</span>
+                                    <div
+                                        style="display: flex; flex-direction: column; gap: 4px; color: #333; line-height: 1.35; width: 100%;">
+                                        <b>데이터 상태별 신청 및 연동 작업 진행:</b>
+                                        <div
+                                            style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 6px; display: flex; flex-direction: column; gap: 4px; font-size: 11px;">
+                                            <div>🟢 <b>[데이터 존재 시]</b> 담당자(정선영/오현민 선임) 사용 신청 ➔ EAP 아웃바운딩 연동</div>
+                                            <div>🟡 <b>[구조화 필요 시]</b> 데이터 요구사항 정의 및 추가 가공/구조화 논의 작업 추가 진행</div>
+                                            <div>🔴 <b>[데이터 미존재 시]</b> 원천시스템 담당자와 연동 협의 ➔ 시스템 연동 후 파이프라인 구축작업 추가 진행
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section: Data Inventory Summary -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 10px;">
+                            <span
+                                style="font-size: 12px; font-weight: 700; color: #111; display: block; margin-bottom: 5px;">
+                                <i class="fa-solid fa-folder-open" style="color: #475569;"></i>CS 데이터마트 보유 데이터 (요약)
+                            </span>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                                <!-- 1. 상담/서비스 -->
                                 <div
-                                    style="display: grid; grid-template-columns: 1fr auto 1.2fr auto 1fr; align-items: center; text-align: center;">
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
                                     <div
-                                        style="background: white; border: 1px solid #cbd5e1; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
-                                        <b style="color:var(--lge-red);">1. 전략팀에 문의</b><br><span
-                                            style="font-size: 10px; color:#555;">CC&S 전략팀 연락<br>(정선영/오현민 선임)</span>
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        상담/서비스</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">콜, 상담, 수리, 부품, DR 등
                                     </div>
-                                    <div style="padding: 0 2px; color: #94a3b8;"><i class="fa-solid fa-angle-right" style="font-size: 11px;"></i>
-                                    </div>
+                                </div>
+                                <!-- 2. CS공통 -->
+                                <div
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
                                     <div
-                                        style="background: white; border: 1px solid #cbd5e1; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
-                                        <b>2. 데이터 다듬기</b><br><span style="font-size: 10px; color:#555;">개인정보를 제외한<br>안전한
-                                            데이터 가공</span>
-                                    </div>
-                                    <div style="padding: 0 2px; color: #94a3b8;"><i class="fa-solid fa-angle-right" style="font-size: 11px;"></i>
-                                    </div>
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        CS 공통</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">컨텐츠, 마스터 등</div>
+                                </div>
+                                <!-- 3. 피드백 -->
+                                <div
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
                                     <div
-                                        style="background: #1e293b; color: white; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
-                                        <b>3. 안전하게 전달</b><br><span style="font-size: 10px; color: #cbd5e1;">사내 표준
-                                            보안망을<br>이용한 안전 연계</span>
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        피드백</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">VOC, NPS 등</div>
+                                </div>
+                                <!-- 4. OBS여정 -->
+                                <div
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                    <div
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        OBS여정</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">쿠폰정보, 구매, 반품, 배송/설치, 구독
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Connection Status & Message -->
-                            <div style="background-color: #FFF3F3; border: 1px solid rgba(165, 0, 52, 0.15); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px;">
-                                <p style="margin: 0; font-size: 12px; font-weight: bold; color: var(--lge-red); line-height: 1.45;">
-                                    <i class="fa-solid fa-circle-info"></i> 현재 큐봇은 부품 추천 정보 연계 중이며, CS 챗봇은 수리 정보 추가 연계를 진행 중입니다.
-                                </p>
-                                <p style="margin: 6px 0 0 0; font-size: 11px; color: #333; line-height: 1.45; font-weight: 500;">
-                                    그 외에 우리는 데이터가 아래와 같이 준비되어 있으니 필요한 정보가 있고 시스템 연계가 필요하다면 언제든지 연락주세요.
-                                </p>
-                            </div>
-
-                            <!-- Data Inventory Rounded Card List -->
-                            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
-                                <!-- 접점 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">접점</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">구매, 배송/설치, 구독, 에어</div>
+                                <!-- 5. 홈페이지 -->
+                                <div
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                    <div
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        홈페이지</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">LG.COM</div>
                                 </div>
-                                <!-- OBS여정 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">OBS여정</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">쿠폰정보, 구매, 반품, 배송/설치, 구독</div>
-                                </div>
-                                <!-- 홈페이지 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">홈페이지</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">LG.COM</div>
-                                </div>
-                                <!-- CS 상담/서비스 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">CS 상담/서비스</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">콜, 상담, 수리, 부품, DR</div>
-                                </div>
-                                <!-- CS 공통 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">CS 공통</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">증상/고장코드마스터, DataSet 컨텐츠, SVC Bulletin, 소모품 (마스터), CS Portal, LGTA</div>
-                                </div>
-                                <!-- 고객피드백 -->
-                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
-                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">고객피드백</div>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">오프라인VOC, T-NPS</div>
+                                <!-- 6. 접점 -->
+                                <div
+                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                    <div
+                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                        접점</div>
+                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">구매, 배송/설치, 구독, 에어</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Block: Governance (Operation & Security) -->
-                    <div style="display: flex; flex-direction: column; gap: 12px; height: auto !important;">
-                        <!-- Operational Governance Card -->
-                        <div class="info-box"
-                            style="padding: 20px 24px; border-top: 3px solid var(--innovation-color); display: flex; flex-direction: column; justify-content: flex-start; gap: 12px; height: auto !important;">
-                            <h3 style="font-size: 18px; margin: 0 0 10px 0; color: var(--innovation-color);">
-                                <i class="fa-solid fa-cubes"></i> 2. 인프라 플레이그라운드 구축 검토 및 운영 관리
-                            </h3>
-                            <ul
-                                style="padding-left: 15px; display: flex; flex-direction: column; gap: 15px; margin-top: 12px;">
-                                <li style="font-size: 14px; color: #333; line-height: 1.55;">
-                                    <b style="font-size: 14.5px;">인프라 플레이그라운드 구축 검토 <span
-                                            style="font-size:11.5px; background: #e2e8f0; color: #475569; padding: 3px 6px; border-radius:4px; font-weight:bold;">업무혁신팀
-                                            협의 예정</span></b><br>
-                                    개인이 만든 AI 프로그램(에이전트나 대시보드 화면 등)을 부서에 쉽게 배포하고 서로 공유하여 같이 사용할 수 있도록 안전한 전용 테스트
-                                    서버(샌드박스) 환경 구성을 공동으로 준비합니다.
-                                </li>
-                                <li style="font-size: 14px; color: #333; line-height: 1.55;">
-                                    <b style="font-size: 14.5px;">보안 가이드라인 제작 및 지속 관리:</b><br>
-                                    전사 보안 수칙을 준수하며 안전하게 AI를 활용할 수 있도록 '부문 전용 보안 가이드'를 배포하고, 보안 준수 여부를 지속 관리합니다.
-                                </li>
-                            </ul>
+                    <!-- Right Block: Playground & Governance -->
+                    <div class="info-box"
+                        style="padding: 16px 20px; border-top: 3px solid var(--innovation-color); display: flex; flex-direction: column; gap: 10px; height: auto !important; border-radius: 8px;">
+                        <h3
+                            style="font-size: 17.5px; margin: 0 0 4px 0; color: var(--innovation-color); display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-cubes"></i> 2. 플레이그라운드 운영 및 지식 자산화
+                        </h3>
+
+                        <!-- Section: Concept & EAP Sandbox -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
+                            <span
+                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
+                                <i class="fa-solid fa-server" style="color: var(--innovation-color);"></i> 본사 업무혁신팀 EAP
+                                샌드박스 플랫폼 활용
+                            </span>
+                            <p style="font-size: 11.5px; color: #555; margin: 0; line-height: 1.45;">
+                                VM(가상머신) 기반의 별도 서버 인프라를 제공하여, 로컬 PC 구동 한계를 극복하고 <b>개발된 대시보드, 에이전트, 웹페이지 등을
+                                    활용처에 배포 및 공유</b>할 수 있도록 환경 지원
+                            </p>
+                        </div>
+
+                        <!-- Section: Detailed Plan -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
+                            <span
+                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 6px;">
+                                <i class="fa-solid fa-calendar-days" style="color: var(--innovation-color);"></i> 상세 실행
+                                및 거버넌스 로드맵
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                    <span
+                                        style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">6월</span>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
+                                        <b>분석 과제 생성 및 분석 환경 세팅</b><br>
+                                        CC&S전략팀에서 과제 개설 ➔ 권한 요청을 통해 환경 가이드 제공 및 개인 계정 권한 부여
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                    <span
+                                        style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">7월</span>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
+                                        <b>운영 거버넌스 및 그라운드 룰 배포</b><br>
+                                        사용 규칙, 환경 매뉴얼, AI 산출물 자산화 관리 규칙 정의 ➔ 리소스 사용 효율화 및 결과물 자산화 체계 정립
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                    <span
+                                        style="background: #475569; color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">상시</span>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
+                                        <b>활용성 모니터링 및 VM 자원 최적화</b><br>
+                                        주기적으로 가동 상태 및 활용 효율을 점검하여 비용 및 운영 효율 개선
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section: Knowledge Assetization & Sharing -->
+                        <div
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
+                            <span
+                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
+                                <i class="fa-solid fa-box-archive" style="color: var(--innovation-color);"></i> 지식 자산화
+                                체계 구축 및 공유
+                            </span>
+                            <p style="font-size: 11px; color: #333; margin: 0; line-height: 1.45;">
+                                📂 <b>결과물 자산화</b>: 운영에 등록된 에이전트 등 결과물 자산화 ➔ <b>EP 스페이스(고객가치혁신부문)</b> 요약 공유<br>
+                                💡 <b>노하우 전파</b>: 업무 과정에서 생성된 노하우/고가치 프롬프트도 EP 스페이스에 정기적으로 정리 및 공유 예정
+                            </p>
+                        </div>
+
+                        <!-- Section: Security & Integration Rules (Footnote Style) -->
+                        <div
+                            style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 10px; margin-top: auto;">
+                            <p style="font-size: 9.5px; color: #666; margin: 0; line-height: 1.4;">
+                                <i class="fa-solid fa-shield-halved" style="color: #64748B; margin-right: 4px;"></i>
+                                <b>보안 및 데이터 연동 거버넌스 준수</b>: 전사 보안 가이드라인 준수 및 EAP 공식 연동 규격에 부합하는 보안 체제 기반 운영
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1293,7 +1380,7 @@
         <!-- Slide 5: [역량] 수준 분석 및 교육 연계 -->
         <div class="slide-container" id="slide5">
             <div class="header">
-                <h2 class="slide-title">4. [역량] 수준 분석 및 교육 연계</h2>
+                <h2 class="slide-title">2. [역량] 수준 분석 및 교육 연계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
                     <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
@@ -1709,7 +1796,7 @@
         <!-- Slide 6: [실행] AX 실행 내재화 및 성과 보상 체계 (통합 장표) -->
         <div class="slide-container" id="slide6">
             <div class="header">
-                <h2 class="slide-title">5. [실행] AX 실행 내재화 및 성과 보상 체계</h2>
+                <h2 class="slide-title">3. [실행] AX 실행 내재화 및 성과 보상 체계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
                     <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
@@ -1950,8 +2037,7 @@
         <!-- Slide 7: [문화] AX 조직 문화 확보 -->
         <div class="slide-container" id="slide7">
             <div class="header">
-                <h2 class="slide-title">6. [문화] AX Boom-up을 위한 추진 동력 및 조직 문화 확보
-                </h2>
+                <h2 class="slide-title">4. [문화] AX Boom-up을 위한 추진 동력 및 조직 문화 확보</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i> </button>
                     <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
@@ -1967,7 +2053,8 @@
                     </p>
                 </div>
 
-                <div class="grid-3" style="align-items: flex-start; margin-top: 5px; gap: 15px; height: auto !important;">
+                <div class="grid-3"
+                    style="align-items: flex-start; margin-top: 5px; gap: 15px; height: auto !important;">
                     <!-- 카드 1: 데이터 자산화 및 축적 -->
                     <div class="info-box"
                         style="padding: 18px 22px; border-top: 4px solid var(--lge-dark); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: auto !important;">
