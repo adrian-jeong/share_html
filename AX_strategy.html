@@ -1173,46 +1173,20 @@
                     </p>
                 </div>
 
-                <div class="grid-2" style="gap: 15px; flex-grow: 1; min-height: 0;">
+                <div class="grid-2" style="gap: 15px; align-items: flex-start; margin-top: 5px; height: auto !important;">
                     <!-- Left Block: Data Acquisition & Pipeline -->
                     <div class="info-box"
-                        style="padding: 20px 24px; border-top: 3px solid var(--lge-red); display: flex; flex-direction: column; justify-content: space-between;">
+                        style="padding: 20px 24px; border-top: 3px solid var(--lge-red); display: flex; flex-direction: column; gap: 12px; height: auto !important;">
                         <div>
                             <h3 style="font-size: 18px; margin: 0 0 12px 0; color: var(--lge-red);">
                                 <i class="fa-solid fa-database"></i> 1. 고객 서비스(CS) 데이터 확보 및 안전한 연동
                             </h3>
 
-                            <!-- Data Info Panel -->
+                            <!-- Procedure Timeline (Moved to Top) -->
                             <div
-                                style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                                style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; margin-bottom: 12px;">
                                 <div
                                     style="font-size: 13.5px; font-weight: 700; color: #333; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                                    <span
-                                        style="width: 6px; height: 6px; background: var(--lge-red); border-radius: 50%;"></span>
-                                    활용 가능한 글로벌 고객 데이터 종류
-                                </div>
-                                <div
-                                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; margin-bottom: 10px;">
-                                    <div
-                                        style="background: #FFF3F3; border: 1px solid #F8D7DA; padding: 8px 6px; border-radius: 4px; font-size: 12.5px; font-weight: bold; color: var(--lge-red);">
-                                        글로벌 상담 데이터</div>
-                                    <div
-                                        style="background: #FFF3F3; border: 1px solid #F8D7DA; padding: 8px 6px; border-radius: 4px; font-size: 12.5px; font-weight: bold; color: var(--lge-red);">
-                                        제품 수리 정보</div>
-                                    <div
-                                        style="background: #FFF3F3; border: 1px solid #F8D7DA; padding: 8px 6px; border-radius: 4px; font-size: 12.5px; font-weight: bold; color: var(--lge-red);">
-                                        제품 구매 정보</div>
-                                </div>
-                                <div style="font-size: 12px; color: #666; line-height: 1.45;">
-                                    ※ 각 부서 업무에 맞는 데이터 셋을 맞춤형으로 추출·지원하여 데이터 부족으로 일에 차질이 생기는 일을 방지합니다.
-                                </div>
-                            </div>
-
-                            <!-- Procedure Timeline -->
-                            <div
-                                style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px;">
-                                <div
-                                    style="font-size: 13.5px; font-weight: 700; color: #333; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                                     <span
                                         style="width: 6px; height: 6px; background: var(--lge-dark); border-radius: 50%;"></span>
                                     데이터 요청 및 제공 프로세스 (쉬운 3단계 절차)
@@ -1220,34 +1194,78 @@
                                 <div
                                     style="display: grid; grid-template-columns: 1fr auto 1.2fr auto 1fr; align-items: center; text-align: center;">
                                     <div
-                                        style="background: white; border: 1px solid #cbd5e1; padding: 8px 6px; border-radius: 4px; font-size: 12px; line-height: 1.4;">
+                                        style="background: white; border: 1px solid #cbd5e1; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
                                         <b style="color:var(--lge-red);">1. 전략팀에 문의</b><br><span
-                                            style="font-size: 11px; color:#555;">CC&S 전략팀 연락<br>(정선영/오현민 선임)</span>
+                                            style="font-size: 10px; color:#555;">CC&S 전략팀 연락<br>(정선영/오현민 선임)</span>
                                     </div>
-                                    <div style="padding: 0 4px; color: #94a3b8;"><i class="fa-solid fa-angle-right"></i>
+                                    <div style="padding: 0 2px; color: #94a3b8;"><i class="fa-solid fa-angle-right" style="font-size: 11px;"></i>
                                     </div>
                                     <div
-                                        style="background: white; border: 1px solid #cbd5e1; padding: 8px 6px; border-radius: 4px; font-size: 12px; line-height: 1.4;">
-                                        <b>2. 데이터 다듬기</b><br><span style="font-size: 11px; color:#555;">개인정보를 제외한<br>안전한
+                                        style="background: white; border: 1px solid #cbd5e1; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
+                                        <b>2. 데이터 다듬기</b><br><span style="font-size: 10px; color:#555;">개인정보를 제외한<br>안전한
                                             데이터 가공</span>
                                     </div>
-                                    <div style="padding: 0 4px; color: #94a3b8;"><i class="fa-solid fa-angle-right"></i>
+                                    <div style="padding: 0 2px; color: #94a3b8;"><i class="fa-solid fa-angle-right" style="font-size: 11px;"></i>
                                     </div>
                                     <div
-                                        style="background: #1e293b; color: white; padding: 8px 6px; border-radius: 4px; font-size: 12px; line-height: 1.4;">
-                                        <b>3. 안전하게 전달</b><br><span style="font-size: 11px; color: #cbd5e1;">사내 표준
+                                        style="background: #1e293b; color: white; padding: 6px 4px; border-radius: 4px; font-size: 11px; line-height: 1.35;">
+                                        <b>3. 안전하게 전달</b><br><span style="font-size: 10px; color: #cbd5e1;">사내 표준
                                             보안망을<br>이용한 안전 연계</span>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Connection Status & Message -->
+                            <div style="background-color: #FFF3F3; border: 1px solid rgba(165, 0, 52, 0.15); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px;">
+                                <p style="margin: 0; font-size: 12px; font-weight: bold; color: var(--lge-red); line-height: 1.45;">
+                                    <i class="fa-solid fa-circle-info"></i> 현재 큐봇은 부품 추천 정보 연계 중이며, CS 챗봇은 수리 정보 추가 연계를 진행 중입니다.
+                                </p>
+                                <p style="margin: 6px 0 0 0; font-size: 11px; color: #333; line-height: 1.45; font-weight: 500;">
+                                    그 외에 우리는 데이터가 아래와 같이 준비되어 있으니 필요한 정보가 있고 시스템 연계가 필요하다면 언제든지 연락주세요.
+                                </p>
+                            </div>
+
+                            <!-- Data Inventory Rounded Card List -->
+                            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+                                <!-- 접점 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">접점</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">구매, 배송/설치, 구독, 에어</div>
+                                </div>
+                                <!-- OBS여정 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">OBS여정</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">쿠폰정보, 구매, 반품, 배송/설치, 구독</div>
+                                </div>
+                                <!-- 홈페이지 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">홈페이지</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">LG.COM</div>
+                                </div>
+                                <!-- CS 상담/서비스 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">CS 상담/서비스</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">콜, 상담, 수리, 부품, DR</div>
+                                </div>
+                                <!-- CS 공통 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">CS 공통</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">증상/고장코드마스터, DataSet 컨텐츠, SVC Bulletin, 소모품 (마스터), CS Portal, LGTA</div>
+                                </div>
+                                <!-- 고객피드백 -->
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="background: #475569; color: white; border-radius: 4px; padding: 3px 6px; font-weight: 700; font-size: 10.5px; min-width: 90px; text-align: center; flex-shrink: 0;">고객피드백</div>
+                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">오프라인VOC, T-NPS</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Right Block: Governance (Operation & Security) -->
-                    <div style="display: flex; flex-direction: column; gap: 12px; height: 100%;">
+                    <div style="display: flex; flex-direction: column; gap: 12px; height: auto !important;">
                         <!-- Operational Governance Card -->
                         <div class="info-box"
-                            style="padding: 20px 24px; border-top: 3px solid var(--innovation-color); flex: 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 10px; height: 100%;">
+                            style="padding: 20px 24px; border-top: 3px solid var(--innovation-color); display: flex; flex-direction: column; justify-content: flex-start; gap: 12px; height: auto !important;">
                             <h3 style="font-size: 18px; margin: 0 0 10px 0; color: var(--innovation-color);">
                                 <i class="fa-solid fa-cubes"></i> 2. 인프라 플레이그라운드 구축 검토 및 운영 관리
                             </h3>
@@ -1949,10 +1967,10 @@
                     </p>
                 </div>
 
-                <div class="grid-3" style="flex-grow: 1; align-items: stretch; margin-top: 5px;">
+                <div class="grid-3" style="align-items: flex-start; margin-top: 5px; gap: 15px; height: auto !important;">
                     <!-- 카드 1: 데이터 자산화 및 축적 -->
                     <div class="info-box"
-                        style="padding: 18px 22px; border-top: 4px solid var(--lge-dark); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: 100%;">
+                        style="padding: 18px 22px; border-top: 4px solid var(--lge-dark); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: auto !important;">
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <h3
                                 style="font-size: 20px; color: var(--lge-dark); margin: 0; display: flex; align-items: center; gap: 8px;">
@@ -1989,7 +2007,7 @@
 
                     <!-- 카드 2: 실시간 소통 및 전파 -->
                     <div class="info-box"
-                        style="padding: 18px 22px; border-top: 4px solid var(--lge-red); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: 100%;">
+                        style="padding: 18px 22px; border-top: 4px solid var(--lge-red); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: auto !important;">
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <h3
                                 style="font-size: 20px; color: var(--lge-red); margin: 0; display: flex; align-items: center; gap: 8px;">
@@ -2026,7 +2044,7 @@
 
                     <!-- 카드 3: 상시 3대 핵심 프로그램 -->
                     <div class="info-box"
-                        style="padding: 18px 22px; border-top: 4px solid var(--innovation-color); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: 100%;">
+                        style="padding: 18px 22px; border-top: 4px solid var(--innovation-color); border-radius: 8px; display: flex; flex-direction: column; gap: 18px; height: auto !important;">
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <h3
                                 style="font-size: 20px; color: var(--innovation-color); margin: 0; display: flex; align-items: center; gap: 8px;">
