@@ -501,15 +501,95 @@
         }
 
         /* Slide 3 Bar Chart Keyframe Animations */
-        @keyframes grow-dev { from { height: 0; } to { height: 30px; } }
-        @keyframes grow-hr  { from { height: 0; } to { height: 18px; } }
-        @keyframes grow-val { from { height: 0; } to { height: 17px; } }
-        @keyframes grow-kor { from { height: 0; } to { height: 15px; } }
-        @keyframes grow-mgt { from { height: 0; } to { height: 11px; } }
-        @keyframes grow-ovs { from { height: 0; } to { height: 10px; } }
-        @keyframes grow-str { from { height: 0; } to { height: 10px; } }
-        @keyframes grow-ops { from { height: 0; } to { height: 9px; } }
-        @keyframes grow-prt { from { height: 0; } to { height: 4px; } }
+        @keyframes grow-dev {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 30px;
+            }
+        }
+
+        @keyframes grow-hr {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 18px;
+            }
+        }
+
+        @keyframes grow-val {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 17px;
+            }
+        }
+
+        @keyframes grow-kor {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 15px;
+            }
+        }
+
+        @keyframes grow-mgt {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 11px;
+            }
+        }
+
+        @keyframes grow-ovs {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 10px;
+            }
+        }
+
+        @keyframes grow-str {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 10px;
+            }
+        }
+
+        @keyframes grow-ops {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 9px;
+            }
+        }
+
+        @keyframes grow-prt {
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 4px;
+            }
+        }
 
         .chart-bar {
             width: 32px;
@@ -520,16 +600,51 @@
             animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
             animation-fill-mode: forwards;
         }
-        
-        #slide3.active .bar-dev { animation-name: grow-dev; animation-delay: 0.1s; }
-        #slide3.active .bar-hr  { animation-name: grow-hr;  animation-delay: 0.18s; }
-        #slide3.active .bar-val { animation-name: grow-val; animation-delay: 0.26s; }
-        #slide3.active .bar-kor { animation-name: grow-kor; animation-delay: 0.34s; }
-        #slide3.active .bar-mgt { animation-name: grow-mgt; animation-delay: 0.42s; }
-        #slide3.active .bar-ovs { animation-name: grow-ovs; animation-delay: 0.5s; }
-        #slide3.active .bar-str { animation-name: grow-str; animation-delay: 0.58s; }
-        #slide3.active .bar-ops { animation-name: grow-ops; animation-delay: 0.66s; }
-        #slide3.active .bar-prt { animation-name: grow-prt; animation-delay: 0.74s; }
+
+        #slide3.active .bar-dev {
+            animation-name: grow-dev;
+            animation-delay: 0.1s;
+        }
+
+        #slide3.active .bar-hr {
+            animation-name: grow-hr;
+            animation-delay: 0.18s;
+        }
+
+        #slide3.active .bar-val {
+            animation-name: grow-val;
+            animation-delay: 0.26s;
+        }
+
+        #slide3.active .bar-kor {
+            animation-name: grow-kor;
+            animation-delay: 0.34s;
+        }
+
+        #slide3.active .bar-mgt {
+            animation-name: grow-mgt;
+            animation-delay: 0.42s;
+        }
+
+        #slide3.active .bar-ovs {
+            animation-name: grow-ovs;
+            animation-delay: 0.5s;
+        }
+
+        #slide3.active .bar-str {
+            animation-name: grow-str;
+            animation-delay: 0.58s;
+        }
+
+        #slide3.active .bar-ops {
+            animation-name: grow-ops;
+            animation-delay: 0.66s;
+        }
+
+        #slide3.active .bar-prt {
+            animation-name: grow-prt;
+            animation-delay: 0.74s;
+        }
 
         .rule-box {
             margin-top: 6px;
@@ -927,7 +1042,6 @@
         <div class="slide-container" id="slide2">
             <div class="header" style="margin-bottom: 8px;">
                 <h2 class="slide-title">고객가치혁신부문 AX운영체계</h2>
-                <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
             </div>
             <div class="content-area">
                 <div
@@ -959,7 +1073,7 @@
                             <li><span class="bold">AI 활용 데이터 연동:</span> CS 데이터마트 데이터 파이프라인 연동 지원 및 보유 데이터 카탈로그 배포 <span
                                     style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;"></span>
                             </li>
-                            <li><span class="bold">운영 거버넌스 체계 및 자산화:</span> 샌드박스 플레이그라운드 지원 및 에이전트/노하우 자산화 <span
+                            <li><span class="bold">운영 거버넌스 체계 및 자산화:</span> AI 공용 작업 공간 운영 및 에이전트/노하우 자산화 <span
                                     style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;"></span>
                             </li>
                         </ul>
@@ -1049,7 +1163,6 @@
                 <h2 class="slide-title">1-1. [인프라] AI Tool 수요조사 결과 및 활성화 계획</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i> </button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
                 </div>
             </div>
             <div class="content-wrapper">
@@ -1299,72 +1412,111 @@
                     </div>
 
                     <!-- 담당별 수요 수량 비교 그래프 (하단 배치, 애니메이션 탑재) -->
-                    <div style="background: white; border: 1px solid #CBD5E1; border-radius: 6px; padding: 6px 14px; margin-top: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 3px;">
-                        <div style="font-size: 11px; font-weight: 700; color: #1E293B; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 3px;">
+                    <div
+                        style="background: white; border: 1px solid #CBD5E1; border-radius: 6px; padding: 6px 14px; margin-top: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 3px;">
+                        <div
+                            style="font-size: 11px; font-weight: 700; color: #1E293B; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 3px;">
                             <span>📊 담당별 라이선스 수요 수량 비교</span>
                             <span style="font-size: 9px; color: #64748B; font-weight: normal;">(단위: 개, 총 205개)</span>
                         </div>
-                        
+
                         <!-- Chart Area (높이를 72px로 설정하고 패딩과 바 높이를 조절하여 오버플로우 방지) -->
-                        <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 72px; padding: 15px 10px 6px 10px; background: #F8FAFC; border-radius: 4px; border: 1px solid #E2E8F0; margin-top: 1px; box-sizing: border-box;">
+                        <div
+                            style="display: flex; justify-content: space-around; align-items: flex-end; height: 72px; padding: 15px 10px 6px 10px; background: #F8FAFC; border-radius: 4px; border: 1px solid #E2E8F0; margin-top: 1px; box-sizing: border-box;">
                             <!-- CC&S역량개발담당 (49개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">49</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">49</span>
                                 <div class="chart-bar bar-dev"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S역량개발담당">역량개발</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="CC&S역량개발담당">역량개발</span>
                             </div>
                             <!-- 고객가치혁신HR담당 (29개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">29</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">29</span>
                                 <div class="chart-bar bar-hr"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신HR담당">HR담당</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="고객가치혁신HR담당">HR담당</span>
                             </div>
                             <!-- 고객가치혁신담당 (28개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">28</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">28</span>
                                 <div class="chart-bar bar-val"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신담당">고객가치혁신</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="고객가치혁신담당">고객가치혁신</span>
                             </div>
                             <!-- 한국CC&S담당 (25개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">25</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">25</span>
                                 <div class="chart-bar bar-kor"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="한국CC&S담당">한국CC&S</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="한국CC&S담당">한국CC&S</span>
                             </div>
                             <!-- 고객가치혁신경영관리담당 (18개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">18</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">18</span>
                                 <div class="chart-bar bar-mgt"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신경영관리담당">경영관리</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="고객가치혁신경영관리담당">경영관리</span>
                             </div>
                             <!-- 해외CC&S담당 (17개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">17</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">17</span>
                                 <div class="chart-bar bar-ovs"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="해외CC&S담당">해외CC&S</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="해외CC&S담당">해외CC&S</span>
                             </div>
                             <!-- CC&S전략담당 (16개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">16</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">16</span>
                                 <div class="chart-bar bar-str"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S전략담당">CC&S전략</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="CC&S전략담당">CC&S전략</span>
                             </div>
                             <!-- Contact Center운영지원실 (14개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">14</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">14</span>
                                 <div class="chart-bar bar-ops"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="Contact Center운영지원실">운영지원</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="Contact Center운영지원실">운영지원</span>
                             </div>
                             <!-- CC&S부품실 (6개) -->
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
-                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">6</span>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span
+                                    style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">6</span>
                                 <div class="chart-bar bar-prt"></div>
-                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S부품실">부품실</span>
+                                <span
+                                    style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;"
+                                    title="CC&S부품실">부품실</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
             <div class="footer"><span>CC&S Strategic Planning Report | Page 3</span></div>
         </div>
@@ -1375,7 +1527,6 @@
                 <h2 class="slide-title">1-2. [인프라] 데이터 연동 및 운영 거버넌스 체계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
                 </div>
             </div>
             <div class="content-area">
@@ -1605,7 +1756,7 @@
                 <h2 class="slide-title">2. [역량] 수준 분석 및 교육 연계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+                    <div class="header-meta">HR담당 협업</div>
                 </div>
             </div>
             <div class="content-area"
@@ -1633,7 +1784,7 @@
                             style="font-size: 11px; color: #333; line-height: 1.4; border-top: 1px solid #E2E8F0; padding-top: 5px; display: flex; align-items: center; gap: 8px;">
                             <span style="font-weight: 700; color: var(--lge-red); min-width: 75px;"><i
                                     class="fa-regular fa-calendar-check" style="margin-right: 4px;"></i> 추진 일정:</span>
-                            <span>• <b>발송일:</b> 5월 18일(일)</span>
+                            <span>• <b>발송일:</b> 5월 18일(월)</span>
                             <span style="margin-left: 10px;">• <b>취합일:</b> 5월 28일(목)까지</span>
                         </div>
 
@@ -1919,7 +2070,7 @@
                 <h2 class="slide-title">3. [실행] AX 실행 내재화 및 성과 보상 체계</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
+                    <div class="header-meta">HR담당 협업</div>
                 </div>
             </div>
             <div class="content-area" style="gap: 15px; padding-top: 5px;">
@@ -2108,7 +2259,6 @@
                         style="background: #475569; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: background 0.2s;"><i
                             class="fa-solid fa-arrow-left"></i> 돌아가기</button>
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
                 </div>
             </div>
             <div class="content-area" style="padding-top: 5px; gap: 10px;">
@@ -2303,7 +2453,6 @@
                         style="background: #475569; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: background 0.2s;"><i
                             class="fa-solid fa-arrow-left"></i> 3.실행 장표로 돌아가기</button>
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
                 </div>
             </div>
             <div class="content-area" style="padding-top: 5px; gap: 8px; display: flex; flex-direction: column;">
@@ -2660,7 +2809,6 @@
                 <h2 class="slide-title">4. [문화] AX가 지속되는 조직 문화 만들기</h2>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button class="btn-back-to-main" onclick="goToSlide(1)"><i class="fa-solid fa-house"></i></button>
-                    <div class="header-meta">고객가치혁신부문 CC&S 전략팀</div>
                 </div>
             </div>
             <div class="content-area"
