@@ -761,6 +761,102 @@
         .btn-back-to-main i {
             font-size: 11px;
         }
+
+        /* EAP 샌드박스 설명 모달 스타일 (Deck 내부 Absolute 배치 및 스케일링 동기화) */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 720px;
+            background-color: rgba(0, 0, 0, 0.65);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            border-radius: 8px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 820px;
+            /* 가로 크기를 넓혀 시각적 크기를 확대 */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+            border-top: 6px solid var(--innovation-color);
+            padding: 32px 36px;
+            position: relative;
+            font-family: 'Noto Sans KR', sans-serif;
+            transform: scale(0.9);
+            transition: transform 0.2s ease-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            /* 타이틀 폰트 크기 확대 */
+            font-weight: 700;
+            color: var(--innovation-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 26px;
+            /* 닫기 버튼 확대 */
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        .modal-close-btn:hover {
+            color: #475569;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .modal-section {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 14px 18px;
+        }
+
+        .modal-section-title {
+            font-size: 15px;
+            /* 타이틀 폰트 확대 */
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
 
@@ -826,9 +922,15 @@
                         </h3>
                         <ul>
                             <li><span class="bold">AI 툴 도입:</span> 수요조사 기반 4대 AI 툴(Copilot, ChatGPT, Gemini, Claude)
-                                라이선스 205개 확보 및 운영 기준 수립</li>
-                            <li><span class="bold">AI 활용 데이터 연동:</span> CS 데이터마트 데이터 파이프라인 연동 지원 및 보유 데이터 카탈로그 배포</li>
-                            <li><span class="bold">운영 거버넌스 체계 및 자산화:</span> 샌드박스 플레이그라운드 지원 및 에이전트/노하우 자산화</li>
+                                라이선스 205개 확보 및 운영 기준 수립 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">('26.
+                                    5월~)</span></li>
+                            <li><span class="bold">AI 활용 데이터 연동:</span> CS 데이터마트 데이터 파이프라인 연동 지원 및 보유 데이터 카탈로그 배포 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(~6월)</span>
+                            </li>
+                            <li><span class="bold">운영 거버넌스 체계 및 자산화:</span> 샌드박스 플레이그라운드 지원 및 에이전트/노하우 자산화 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(6~7월)</span>
+                            </li>
                         </ul>
                     </div>
 
@@ -844,9 +946,17 @@
                             </button>
                         </h3>
                         <ul>
-                            <li><span class="bold">역량 수준 분석:</span> 전 구성원 수준 진단(LV 1~4) 및 수준별 실무 맞춤형 교육 설계</li>
-                            <li><span class="bold">기본 교육 트랙:</span> 즉각 현업 적용 가능한 템플릿 기반 실무/프롬프트 과정 집중 운영</li>
-                            <li><span class="bold">전문가 및 강사 육성:</span> 사내강사 선별 및 전수 교육, 외부 심화 교육 진행 및 과제 참여 연계</li>
+                            <li><span class="bold">역량 수준 분석:</span> 전 구성원 수준 진단(LV 1~4) 및 수준별 실무 맞춤형 교육 설계 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(5월)</span>
+                            </li>
+                            <li><span class="bold">기본 교육 트랙:</span> 즉각 현업 적용 가능한 템플릿 기반 실무/프롬프트 과정 집중 운영 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(6월
+                                    중순~7월 중순)</span></li>
+                            <li><span class="bold">전문가 및 강사 육성:</span> 사내강사 선별 및 전수 교육 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(6월
+                                    초)</span>, 외부 심화 교육 진행 및 과제 참여 연계 <span
+                                    style="color: var(--lge-red); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(8월)</span>
+                            </li>
                         </ul>
                     </div>
 
@@ -862,8 +972,16 @@
                                     class="fa-solid fa-paperclip"></i></button>
                         </h3>
                         <ul>
-                            <li><span class="bold">AX 공유회 & 콘테스트:</span> 담당 AX Talk 및 부문 AX Star 연계 운영으로 사례 발굴 및 시상</li>
-                            <li><span class="bold">핵심 과제 & 인센티브:</span> 부문 핵심 과제 추진 점검 및 평가 기반 성과 보상 운영</li>
+                            <li><span class="bold">AX 공유회 & 콘테스트:</span> 담당 AX Talk <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(6월~,
+                                    월 1회)</span> 및 부문 AX Star <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(7/9/11월,
+                                    격월)</span> 연계 운영</li>
+                            <li><span class="bold">핵심 과제 & 인센티브:</span> 부문 핵심 과제 추진 점검 <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(~6월
+                                    KPI 설정)</span> 및 평가 기반 성과 보상 운영 <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(8~9월)</span>
+                            </li>
                         </ul>
                     </div>
 
@@ -879,10 +997,13 @@
                                     class="fa-solid fa-paperclip"></i></button>
                         </h3>
                         <ul>
-                            <li><span class="bold">심리적 안정감:</span> 실패 사례 공유 게시판 운영 및 우수작 외 피드백을 통해 실패를 두려워 하지 않는 분위기 조성
+                            <li><span class="bold">심리적 안정감:</span> 실패 사례 공유 게시판 운영 및 피드백 <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(상시)</span>
                             </li>
                             <li><span class="bold">리더의 방향성 정립:</span> 실무 업무 AI 선반영 적극 지시, 과제 인센티브에 AX 평가 지표 반영</li>
                             <li><span class="bold">일상 업무 체화:</span> 주간 보고 AI 초안 생성, 회의록 자동 작성 등 기존 업무 루틴에 AX 상시 활용/체화
+                                <span
+                                    style="color: var(--innovation-color); font-weight: bold; font-size: 11.5px; margin-left: 2px;">(상시)</span>
                             </li>
                         </ul>
                     </div>
@@ -1176,77 +1297,78 @@
                             <i class="fa-solid fa-database"></i> 1. CS 데이터마트 기반 AI 에이전트 데이터 파이프라인 연동
                         </h3>
 
-                        <!-- Section: Data Catalog & Background -->
+                        <!-- Section: Data Catalog & Inventory Summary (Combined Container) -->
                         <div
-                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
-                            <span
-                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
-                                <i class="fa-solid fa-list-check" style="color: var(--lge-red);"></i> 데이터마트 카탈로그 구축
-                                (~6월)
-                            </span>
-                            <p style="font-size: 11.5px; color: #555; margin: 0; line-height: 1.45;">
-                                AI 활용을 위한 데이터 제공 중이나, 구성원들의 정보 비대칭 해결을 위해 6월까지 <b>보유 데이터 테이블/컬럼 카탈로그</b> 구축 예정 (데이터
-                                탐색 및 자가 확인 지원)
-                            </p>
-                        </div>
-
-                        <!-- Section: Data Inventory Summary -->
-                        <div
-                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 10px;">
-                            <span
-                                style="font-size: 12px; font-weight: 700; color: #111; display: block; margin-bottom: 5px;">
-                                <i class="fa-solid fa-folder-open" style="color: #475569;"></i> CS 데이터마트 보유 데이터 (요약)
-                            </span>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
-                                <!-- 1. 상담/서비스 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px;">
+                            <div>
+                                <span
+                                    style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
+                                    <i class="fa-solid fa-list-check" style="color: var(--lge-red);"></i> 데이터마트 카탈로그 구축
+                                    (~6월)
+                                </span>
+                                <p style="font-size: 11.5px; color: #555; margin: 0; line-height: 1.45;">
+                                    AI 활용을 위한 데이터 제공 중이나, 구성원들의 정보 비대칭 해결을 위해 6월까지 <b>보유 데이터 테이블/컬럼 카탈로그</b> 구축 예정 (데이터
+                                    탐색 및 자가 확인 지원)
+                                </p>
+                            </div>
+                            <div style="border-top: 1px dashed #CBD5E1; padding-top: 8px;">
+                                <span
+                                    style="font-size: 12px; font-weight: 700; color: #111; display: block; margin-bottom: 6px;">
+                                    <i class="fa-solid fa-folder-open" style="color: #475569;"></i> CS 데이터마트 보유 데이터 (요약)
+                                </span>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                                    <!-- 1. 상담/서비스 -->
                                     <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        상담/서비스</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">콜, 상담, 수리, 부품, DR 등
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            상담/서비스</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">콜, 상담, 수리, 부품, DR 등
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- 2. CS공통 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                    <!-- 2. CS공통 -->
                                     <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        CS 공통</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">컨텐츠, 마스터 등</div>
-                                </div>
-                                <!-- 3. 피드백 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
-                                    <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        피드백</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">VOC, NPS 등</div>
-                                </div>
-                                <!-- 4. OBS여정 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
-                                    <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        OBS여정</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">쿠폰정보, 구매, 반품, 배송/설치, 구독
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            CS 공통</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">컨텐츠, 마스터 등</div>
                                     </div>
-                                </div>
-                                <!-- 5. 홈페이지 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                    <!-- 3. 피드백 -->
                                     <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        홈페이지</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">LG.COM</div>
-                                </div>
-                                <!-- 6. 접점 -->
-                                <div
-                                    style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            피드백</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">VOC, NPS 등</div>
+                                    </div>
+                                    <!-- 4. OBS여정 -->
                                     <div
-                                        style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
-                                        접점</div>
-                                    <div style="font-size: 10px; color: #333; line-height: 1.2;">구매, 배송/설치, 구독, 에어</div>
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            OBS여정</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">쿠폰정보, 구매, 반품,
+                                            배송/설치, 구독
+                                        </div>
+                                    </div>
+                                    <!-- 5. 홈페이지 -->
+                                    <div
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            홈페이지</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">LG.COM</div>
+                                    </div>
+                                    <!-- 6. 접점 -->
+                                    <div
+                                        style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; gap: 6px;">
+                                        <div
+                                            style="background: #475569; color: white; border-radius: 3px; padding: 1px 4px; font-weight: 700; font-size: 9px; min-width: 60px; text-align: center; flex-shrink: 0;">
+                                            접점</div>
+                                        <div style="font-size: 10px; color: #333; line-height: 1.2;">구매, 배송/설치, 구독, 에어
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1293,51 +1415,56 @@
                             <i class="fa-solid fa-cubes"></i> 2. 플레이그라운드 운영 및 지식 자산화
                         </h3>
 
-                        <!-- Section: Concept & EAP Sandbox -->
+                        <!-- Combined Sandbox & Roadmap Box -->
                         <div
-                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
-                            <span
-                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 4px;">
-                                <i class="fa-solid fa-server" style="color: var(--innovation-color);"></i> EAP 샌드박스
-                                플랫폼 활용
-                            </span>
-                            <p style="font-size: 11.5px; color: #555; margin: 0; line-height: 1.45;">
-                                VM(가상머신) 기반의 별도 서버 인프라를 제공하여, 로컬 PC 구동 한계를 극복하고 <b>개발된 대시보드, 에이전트, 웹페이지 등을
-                                    활용처에 공유</b>할 수 있도록 환경 지원
-                            </p>
-                        </div>
+                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px;">
+                            <!-- Concept & EAP Sandbox (Layman version) -->
+                            <div>
+                                <span
+                                    style="font-size: 12.5px; font-weight: 700; color: #111; display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                    <span><i class="fa-solid fa-server" style="color: var(--innovation-color);"></i> EAP
+                                        샌드박스 플랫폼 활용</span>
+                                    <button class="attachment-btn green-theme" onclick="openSandboxModal()"
+                                        style="margin: 0; font-size: 10px; padding: 2px 6px; display: inline-flex; align-items: center; gap: 3px; border-radius: 4px; cursor: pointer; border: none; font-family: inherit;"><i
+                                            class="fa-solid fa-circle-info"></i> 설명 보기</button>
+                                </span>
+                                <div style="font-size: 11px; color: #555; line-height: 1.45;">
+                                    <div>💡 <b>도입 목적:</b> 개인 PC 느려짐 방지 및 24시간 중단 없는 AI 서비스 가동</div>
+                                    <div style="margin-top: 3px; color: #333;">개인 PC 전원을 끄더라도 24시간 안정적으로 가동되며, 직접 만든 AI
+                                        비서(에이전트)나 화면(대시보드)을 부서원들과 안전하게 공유할 수 있는 <b>전용 가상 PC(VM) 공간</b>을 지원합니다.</div>
+                                </div>
+                            </div>
 
-                        <!-- Section: Detailed Plan -->
-                        <div
-                            style="background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px;">
-                            <span
-                                style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 6px;">
-                                <i class="fa-solid fa-calendar-days" style="color: var(--innovation-color);"></i> 상세 실행
-                                및 거버넌스 로드맵
-                            </span>
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
-                                <div style="display: flex; gap: 8px; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">6월</span>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
-                                        <b>분석 과제 생성 및 분석 환경 세팅</b><br>
-                                        CC&S전략팀에서 과제 개설 ➔ 권한 요청을 통해 환경 가이드 제공 및 개인 계정 권한 부여
+                            <div style="border-top: 1px dashed #CBD5E1; padding-top: 8px;">
+                                <span
+                                    style="font-size: 12.5px; font-weight: 700; color: #111; display: block; margin-bottom: 6px;">
+                                    <i class="fa-solid fa-calendar-days" style="color: var(--innovation-color);"></i> 상세
+                                    실행 및 거버넌스 로드맵
+                                </span>
+                                <div style="display: flex; flex-direction: column; gap: 8px;">
+                                    <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                        <span
+                                            style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">6월</span>
+                                        <div style="font-size: 11px; color: #333; line-height: 1.4;">
+                                            <b>샌드박스 내 고객가치혁신부문 환경 세팅 완료</b><br>
+                                            과제 개설 및 전용 인프라 환경 구축 ➔ 권한 부여 및 가이드 제공
+                                        </div>
                                     </div>
-                                </div>
-                                <div style="display: flex; gap: 8px; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">7월</span>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
-                                        <b>운영 거버넌스 및 그라운드 룰 배포</b><br>
-                                        사용 규칙, 환경 매뉴얼, AI 산출물 자산화 관리 규칙 정의 ➔ 리소스 사용 효율화 및 결과물 자산화 체계 정립
+                                    <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                        <span
+                                            style="background: var(--innovation-color); color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">7월</span>
+                                        <div style="font-size: 11px; color: #333; line-height: 1.4;">
+                                            <b>운영 거버넌스 및 그라운드 룰 배포</b><br>
+                                            사용 규칙, 환경 매뉴얼, AI 산출물 자산화 관리 규칙 정의 ➔ 리소스 사용 효율화 및 결과물 자산화 체계 정립
+                                        </div>
                                     </div>
-                                </div>
-                                <div style="display: flex; gap: 8px; align-items: flex-start;">
-                                    <span
-                                        style="background: #475569; color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">상시</span>
-                                    <div style="font-size: 11.5px; color: #333; line-height: 1.4;">
-                                        <b>활용성 모니터링 및 VM 자원 최적화</b><br>
-                                        주기적으로 가동 상태 및 활용 효율을 점검하여 비용 및 운영 효율 개선
+                                    <div style="display: flex; gap: 8px; align-items: flex-start;">
+                                        <span
+                                            style="background: #475569; color: white; border-radius: 4px; font-size: 10px; font-weight: bold; padding: 2px 6px; flex-shrink: 0; width: 45px; text-align: center;">상시</span>
+                                        <div style="font-size: 11px; color: #333; line-height: 1.4;">
+                                            <b>활용성 모니터링 및 VM 자원 최적화</b><br>
+                                            주기적으로 가동 상태 및 활용 효율을 점검하여 비용 및 운영 효율 개선
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2528,6 +2655,70 @@
             <div class="footer"><span>CC&S Strategic Planning Report | Page 7</span></div>
         </div>
 
+        <!-- EAP 샌드박스 플랫폼 설명 모달 (Deck 내부에서 스케일링됨) -->
+        <div id="sandboxModal" class="modal-overlay" onclick="closeSandboxModal()">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="fa-solid fa-server"></i> EAP 샌드박스 플랫폼 소개
+                    </h4>
+                    <button class="modal-close-btn" onclick="closeSandboxModal()"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 플랫폼 정의 -->
+                    <div class="modal-section" style="border-left: 5px solid var(--innovation-color);">
+                        <div class="modal-section-title">
+                            <i class="fa-solid fa-circle-info" style="color: var(--innovation-color);"></i> EAP 샌드박스란?
+                        </div>
+                        <div style="font-size: 13.5px; color: #1e293b; line-height: 1.55; text-align: justify;">
+                            사내 데이터 분석가와 실무자들이 보안 정책을 준수하면서 안전하게 <b>대용량 데이터를 수집/분석하고,AI를 개발·검증</b>할 수 있도록 전사 차원에서 제공하는
+                            <b>클라우드 기반 가상 컴퓨터 환경</b>입니다.
+                        </div>
+                    </div>
+
+                    <!-- 주요 기능 및 혜택 -->
+                    <div class="modal-section">
+                        <div class="modal-section-title" style="color: var(--lge-red);">
+                            주요 제공 기능 및 혜택
+                        </div>
+                        <div style="font-size: 13px; color: #334155; line-height: 1.6;">
+                            • <b>분석 및 실습 전용 공간:</b> 개인 PC 성능이나 회사 보안 정책에 지장을 주지 않는 완전히 분리된 독립 개발 영역<br>
+                            • <b>개발 인프라 기본 탑재:</b> Python 언어, Jupyter Lab, VS Code Web 등 데이터 분석에 최적화된 최신 도구 제공<br>
+                            • <b>데이터 직접 연동:</b> CS 데이터마트를 포함한 내부 정형/비정형 원천 데이터를 안전하게 연결하여 실시간 처리 가능
+                        </div>
+                    </div>
+
+                    <!-- 접속 경로 및 주체 -->
+                    <div class="modal-section">
+                        <div class="modal-section-title">
+                            운영 주체 및 접속 경로
+                        </div>
+                        <div
+                            style="font-size: 13px; color: #334155; line-height: 1.5; display: flex; flex-direction: column; gap: 6px;">
+                            <div><b>운영 주체:</b> AX업무혁신담당 데이터플랫폼실</div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span><b>접속 경로:</b></span>
+                                <span style="font-weight: 700; color: #1e293b;">EAP</span>
+                                <i class="fa-solid fa-chevron-right" style="font-size: 9px; color: #94a3b8;"></i>
+                                <span style="font-weight: 700; color: #1e293b;">데이터분석</span>
+                                <i class="fa-solid fa-chevron-right" style="font-size: 9px; color: #94a3b8;"></i>
+                                <span style="font-weight: 700; color: var(--innovation-color);">Sandbox MLDL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox 란? (간단 설명) -->
+                    <div
+                        style="font-size: 11.5px; color: #64748B; line-height: 1.45; padding: 4px 6px; border-top: 1px solid #f1f5f9; padding-top: 10px;">
+                        💡 <b>참고 (Sandbox 개념):</b><br>
+                        어린아이들이 노는 모래통(Sandbox)에서 유래하여, 외부 실제 환경이나 운영 중인 시스템에 나쁜 영향을 주지 않고 안전하게 여러 기능을 만들어보고 테스트해 볼 수 있도록
+                        격리된 공간을 의미합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -2594,6 +2785,15 @@
             resizeDeck();
             updateUI();
         };
+
+        // EAP 샌드박스 모달 제어
+        function openSandboxModal() {
+            document.getElementById('sandboxModal').classList.add('active');
+        }
+
+        function closeSandboxModal() {
+            document.getElementById('sandboxModal').classList.remove('active');
+        }
     </script>
 
 </body>
