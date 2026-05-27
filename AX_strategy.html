@@ -500,6 +500,37 @@
             border-bottom: 1.5px solid var(--lge-red);
         }
 
+        /* Slide 3 Bar Chart Keyframe Animations */
+        @keyframes grow-dev { from { height: 0; } to { height: 30px; } }
+        @keyframes grow-hr  { from { height: 0; } to { height: 18px; } }
+        @keyframes grow-val { from { height: 0; } to { height: 17px; } }
+        @keyframes grow-kor { from { height: 0; } to { height: 15px; } }
+        @keyframes grow-mgt { from { height: 0; } to { height: 11px; } }
+        @keyframes grow-ovs { from { height: 0; } to { height: 10px; } }
+        @keyframes grow-str { from { height: 0; } to { height: 10px; } }
+        @keyframes grow-ops { from { height: 0; } to { height: 9px; } }
+        @keyframes grow-prt { from { height: 0; } to { height: 4px; } }
+
+        .chart-bar {
+            width: 32px;
+            height: 0px;
+            background: linear-gradient(180deg, #E6004C, #A50034);
+            border-radius: 2px 2px 0 0;
+            animation-duration: 1.2s;
+            animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+            animation-fill-mode: forwards;
+        }
+        
+        #slide3.active .bar-dev { animation-name: grow-dev; animation-delay: 0.1s; }
+        #slide3.active .bar-hr  { animation-name: grow-hr;  animation-delay: 0.18s; }
+        #slide3.active .bar-val { animation-name: grow-val; animation-delay: 0.26s; }
+        #slide3.active .bar-kor { animation-name: grow-kor; animation-delay: 0.34s; }
+        #slide3.active .bar-mgt { animation-name: grow-mgt; animation-delay: 0.42s; }
+        #slide3.active .bar-ovs { animation-name: grow-ovs; animation-delay: 0.5s; }
+        #slide3.active .bar-str { animation-name: grow-str; animation-delay: 0.58s; }
+        #slide3.active .bar-ops { animation-name: grow-ops; animation-delay: 0.66s; }
+        #slide3.active .bar-prt { animation-name: grow-prt; animation-delay: 0.74s; }
+
         .rule-box {
             margin-top: 6px;
             background-color: #F8FAFC;
@@ -1194,67 +1225,69 @@
                         </div>
 
                         <!-- 오른쪽 표: 가격 정보 및 라이선스 운영 원칙 -->
-                        <div class="table-col-right">
-                            <div class="table-header-row">
-                                <div class="table-caption">AI Tool 가격 정보 및 운영 기준</div>
+                        <div class="table-col-right" style="display: flex; flex-direction: column; gap: 8px;">
+                            <div>
+                                <div class="table-header-row">
+                                    <div class="table-caption">AI Tool 가격 정보 및 운영 기준</div>
+                                </div>
+                                <table class="lg-table">
+                                    <colgroup>
+                                        <col style="width: 20%;">
+                                        <col style="width: 20%;">
+                                        <col style="width: 20%;">
+                                        <col style="width: 20%;">
+                                        <col style="width: 20%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>AI Tool</th>
+                                            <th>M365 Copilot</th>
+                                            <th>ChatGPT Ent.</th>
+                                            <th>Gemini Ent.</th>
+                                            <th>Claude Ent.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>계약방식</th>
+                                            <td>연간(15개월)</td>
+                                            <td>연간</td>
+                                            <td>연간</td>
+                                            <td>연간</td>
+                                        </tr>
+                                        <tr>
+                                            <th>계약 기간</th>
+                                            <td class="font-small">26.08~27.10</td>
+                                            <td class="font-small">26.05~27.04</td>
+                                            <td class="font-small">26.05~27.04</td>
+                                            <td class="font-small">26.06~27.05</td>
+                                        </tr>
+                                        <tr class="bg-gray">
+                                            <th>비용(월)</th>
+                                            <td class="align-right weight-600">3.4만원</td>
+                                            <td class="align-right weight-600">4.8만원</td>
+                                            <td class="align-right weight-600">3.6만원</td>
+                                            <td class="align-right weight-600">15.0만원</td>
+                                        </tr>
+                                        <tr class="bg-gray">
+                                            <th>비용(년)</th>
+                                            <td class="align-right weight-600">51.0만원</td>
+                                            <td class="align-right weight-600">57.6만원</td>
+                                            <td class="align-right weight-600">43.2만원</td>
+                                            <td class="align-right weight-600">180.0만원</td>
+                                        </tr>
+                                        <tr>
+                                            <th>비고</th>
+                                            <td class="font-small">사용제한 있음</td>
+                                            <td class="font-small">사용제한 있음</td>
+                                            <td class="font-small">사용제한 있음</td>
+                                            <td class="font-small">Seat+종량제</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table class="lg-table" style="margin-bottom: 6px;">
-                                <colgroup>
-                                    <col style="width: 20%;">
-                                    <col style="width: 20%;">
-                                    <col style="width: 20%;">
-                                    <col style="width: 20%;">
-                                    <col style="width: 20%;">
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th>AI Tool</th>
-                                        <th>M365 Copilot</th>
-                                        <th>ChatGPT Ent.</th>
-                                        <th>Gemini Ent.</th>
-                                        <th>Claude Ent.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>계약방식</th>
-                                        <td>연간(15개월)</td>
-                                        <td>연간</td>
-                                        <td>연간</td>
-                                        <td>연간</td>
-                                    </tr>
-                                    <tr>
-                                        <th>계약 기간</th>
-                                        <td class="font-small">26.08~27.10</td>
-                                        <td class="font-small">26.05~27.04</td>
-                                        <td class="font-small">26.05~27.04</td>
-                                        <td class="font-small">26.06~27.05</td>
-                                    </tr>
-                                    <tr class="bg-gray">
-                                        <th>비용(월)</th>
-                                        <td class="align-right weight-600">3.4만원</td>
-                                        <td class="align-right weight-600">4.8만원</td>
-                                        <td class="align-right weight-600">3.6만원</td>
-                                        <td class="align-right weight-600">15.0만원</td>
-                                    </tr>
-                                    <tr class="bg-gray">
-                                        <th>비용(년)</th>
-                                        <td class="align-right weight-600">51.0만원</td>
-                                        <td class="align-right weight-600">57.6만원</td>
-                                        <td class="align-right weight-600">43.2만원</td>
-                                        <td class="align-right weight-600">180.0만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>비고</th>
-                                        <td class="font-small">사용제한 있음</td>
-                                        <td class="font-small">사용제한 있음</td>
-                                        <td class="font-small">사용제한 있음</td>
-                                        <td class="font-small">Seat+종량제</td>
-                                    </tr>
-                                </tbody>
-                            </table>
 
-                            <div class="rule-box">
+                            <div class="rule-box" style="margin-top: 0;">
                                 <div class="rule-title">AI Tool 라이선스 운영 원칙</div>
                                 <ul class="rule-list">
                                     <li>1인 1개 AI Tool 사용 원칙 (중복 사용 불가)</li>
@@ -1264,9 +1297,75 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- 담당별 수요 수량 비교 그래프 (하단 배치, 애니메이션 탑재) -->
+                    <div style="background: white; border: 1px solid #CBD5E1; border-radius: 6px; padding: 6px 14px; margin-top: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 3px;">
+                        <div style="font-size: 11px; font-weight: 700; color: #1E293B; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 3px;">
+                            <span>📊 담당별 라이선스 수요 수량 비교</span>
+                            <span style="font-size: 9px; color: #64748B; font-weight: normal;">(단위: 개, 총 205개)</span>
+                        </div>
+                        
+                        <!-- Chart Area (높이를 72px로 설정하고 패딩과 바 높이를 조절하여 오버플로우 방지) -->
+                        <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 72px; padding: 15px 10px 6px 10px; background: #F8FAFC; border-radius: 4px; border: 1px solid #E2E8F0; margin-top: 1px; box-sizing: border-box;">
+                            <!-- CC&S역량개발담당 (49개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">49</span>
+                                <div class="chart-bar bar-dev"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S역량개발담당">역량개발</span>
+                            </div>
+                            <!-- 고객가치혁신HR담당 (29개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">29</span>
+                                <div class="chart-bar bar-hr"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신HR담당">HR담당</span>
+                            </div>
+                            <!-- 고객가치혁신담당 (28개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">28</span>
+                                <div class="chart-bar bar-val"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신담당">고객가치혁신</span>
+                            </div>
+                            <!-- 한국CC&S담당 (25개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">25</span>
+                                <div class="chart-bar bar-kor"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="한국CC&S담당">한국CC&S</span>
+                            </div>
+                            <!-- 고객가치혁신경영관리담당 (18개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">18</span>
+                                <div class="chart-bar bar-mgt"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="고객가치혁신경영관리담당">경영관리</span>
+                            </div>
+                            <!-- 해외CC&S담당 (17개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">17</span>
+                                <div class="chart-bar bar-ovs"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="해외CC&S담당">해외CC&S</span>
+                            </div>
+                            <!-- CC&S전략담당 (16개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">16</span>
+                                <div class="chart-bar bar-str"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S전략담당">CC&S전략</span>
+                            </div>
+                            <!-- Contact Center운영지원실 (14개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">14</span>
+                                <div class="chart-bar bar-ops"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="Contact Center운영지원실">운영지원</span>
+                            </div>
+                            <!-- CC&S부품실 (6개) -->
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0;">
+                                <span style="font-size: 9px; font-weight: 700; color: #334155; margin-bottom: 2px;">6</span>
+                                <div class="chart-bar bar-prt"></div>
+                                <span style="font-size: 9px; color: #475569; margin-top: 3px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; text-align: center;" title="CC&S부품실">부품실</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
-            </div>
             <div class="footer"><span>CC&S Strategic Planning Report | Page 3</span></div>
         </div>
 
