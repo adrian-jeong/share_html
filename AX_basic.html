@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LG전자 AX 기초 과정: MS Copilot 실무 활용 가이드 | CC&S전략팀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --lge-red: #C10933;
+            --lge-red-hover: #A00728;
+            --lge-dark: #1F1F1F;
+            --lge-gray: #4A4A4A;
+            --lge-light-bg: #F9FAFB;
+            --lge-border: #E5E7EB;
+            --ms-blue: #0078D4;
+            --copilot-purple: #624BFF;
+            --cowork-orange: #F97316;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--lge-dark);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+            background-color: var(--lge-light-bg);
+        }
+
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 340px;
+            background: #ffffff;
+            border-right: 1px solid var(--lge-border);
+            padding: 40px 24px;
+            z-index: 100;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .main-content {
+            margin-left: 340px;
+            padding: 0;
+            background: #ffffff;
+        }
+
+        .section-header {
+            border-left: 5px solid var(--lge-red);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--lge-dark);
+        }
+
+        .curriculum-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: var(--lge-gray);
+            font-weight: 500;
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .curriculum-item:hover {
+            background: rgba(193, 9, 51, 0.05);
+            color: var(--lge-red);
+        }
+
+        .curriculum-item.active {
+            background: var(--lge-red);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(193, 9, 51, 0.2);
+        }
+
+        .content-section {
+            padding: 80px 60px;
+            max-width: 1200px;
+            border-bottom: 1px solid var(--lge-border);
+        }
+
+        .info-box {
+            background: rgba(193, 9, 51, 0.02);
+            border-left: 4px solid var(--lge-red);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .free-box {
+            background: rgba(0, 120, 212, 0.02);
+            border-left: 4px solid var(--ms-blue);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .cowork-box {
+            background: rgba(249, 115, 22, 0.02);
+            border-left: 4px solid var(--cowork-orange);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .prompt-container {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .prompt-header {
+            background: #EDF2F7;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #4A5568;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .prompt-body {
+            padding: 20px 24px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            color: #1A202C;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+
+        .ui-mockup {
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            background: #fff;
+        }
+
+        .ui-mockup-header {
+            background: #F3F4F6;
+            border-bottom: 1px solid #E5E7EB;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #EF4444; }
+        .dot-yellow { background-color: #FBBF24; }
+        .dot-green { background-color: #10B981; }
+
+        .btn-hover-effect {
+            transition: all 0.2s ease;
+        }
+
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(193, 9, 51, 0.2);
+        }
+
+        @media (max-width: 1150px) {
+            .nav-sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Sidebar Navigation -->
+    <nav class="nav-sidebar">
+        <div class="mb-10 text-center">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="font-outfit text-2xl font-extrabold tracking-wider text-[#C10933]">LG Electronics</span>
+            </div>
+            <div class="bg-red-50 text-[#C10933] text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">CS 전략팀 AX 기초 교육</div>
+            <h1 class="text-lg font-bold text-gray-800">CC&amp;S 실무자 맞춤형<br>Copilot 활용 A to Z</h1>
+            <p class="text-xs text-gray-400 mt-2">브라우저와 웹으로 즉시 적용하는 업무 공식</p>
+        </div>
+
+        <div class="space-y-1">
+            <a href="#curriculum" class="curriculum-item active">
+                <i class="fa-solid fa-list-check w-5 text-center"></i> 01. 교육 로드맵 &amp; 커리큘럼
+            </a>
+            <a href="#welcome" class="curriculum-item">
+                <i class="fa-solid fa-handshake w-5 text-center"></i> 02. 똑똑한 비서 '코파일럿' 마인드
+            </a>
+            <a href="#free-feature-map" class="curriculum-item">
+                <i class="fa-solid fa-circle-info w-5 text-center"></i> 03. Copilot 핵심 기능 도감
+            </a>
+            <a href="#access-method" class="curriculum-item">
+                <i class="fa-solid fa-sliders w-5 text-center"></i> 04. 업무 생산성을 높이는 2대 접속 공식
+            </a>
+            <a href="#scenario-edge" class="curriculum-item">
+                <i class="fa-solid fa-globe w-5 text-center"></i> 05. [실무 A to Z] 웹/PDF 정보 요약
+            </a>
+            <a href="#scenario-outlook" class="curriculum-item">
+                <i class="fa-solid fa-envelope w-5 text-center"></i> 06. [실무 A to Z] 아웃룩 이메일 연동
+            </a>
+            <a href="#scenario-excel" class="curriculum-item">
+                <i class="fa-solid fa-file-excel w-5 text-center"></i> 07. [실무 A to Z] 엑셀 데이터 분석
+            </a>
+            <a href="#ms-cowork" class="curriculum-item">
+                <i class="fa-solid fa-file-lines w-5 text-center"></i> 08. [실무 A to Z] 주간보고 요약자료 만들기
+            </a>
+            <a href="#prompt-builder" class="curriculum-item">
+                <i class="fa-solid fa-gears w-5 text-center"></i> 09. CC&amp;S 맞춤형 프롬프트 빌더
+            </a>
+            <a href="#security-quiz" class="curriculum-item">
+                <i class="fa-solid fa-shield-halved w-5 text-center"></i> 10. 사내 AI 보안 퀴즈 &amp; 에티켓
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- 동아일보 기사 도입 배너 -->
+    <div style="background: linear-gradient(135deg, #1F1F1F 0%, #2d2d2d 100%); padding: 36px 60px; border-bottom: 4px solid #C10933;">
+        <div style="max-width:1100px; display:flex; align-items:center; gap:40px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:260px;">
+                <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(193,9,51,0.2); border:1px solid rgba(193,9,51,0.4); border-radius:999px; padding:4px 14px; margin-bottom:14px;">
+                    <span style="width:8px;height:8px;background:#C10933;border-radius:50%;display:inline-block;"></span>
+                    <span style="font-size:11px; font-weight:700; color:#ff8fa3; letter-spacing:0.05em;">동아일보 · 2026년 5월 12일</span>
+                </div>
+                <h2 style="font-family:'Outfit',sans-serif; font-size:1.55rem; font-weight:800; color:#ffffff; line-height:1.35; margin-bottom:12px;">
+                    "AI가 아니라 <span style="color:#ff6b6b;">'AI 잘 쓰는 사람'</span>이<br>일자리를 대체한다"
+                </h2>
+                <p style="font-size:13px; color:#b0b0b0; line-height:1.7; margin-bottom:16px;">
+                    엔비디아 젠슨 황 CEO가 카네기멜런대 졸업 연설에서 강조한 메시지입니다.<br>
+                    AI 자체가 사람을 대체하는 것이 아니라, <strong style="color:#ffffff;">AI를 잘 활용하는 능력이 곧 경쟁력</strong>이 되는 시대입니다.<br>
+                    이 교육이 바로 그 출발점입니다.
+                </p>
+                <a href="https://www.donga.com/news/People/article/all/20260512/133902362/2" target="_blank" rel="noopener noreferrer"
+                   style="display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#93c5fd; font-weight:600; text-decoration:none;">
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px;"></i> 기사 전문 보기
+                </a>
+            </div>
+            <div style="flex:0 0 auto; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px 24px; min-width:220px;">
+                <p style="font-size:11px; font-weight:700; color:#9ca3af; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.08em;">오늘 교육 후 할 수 있게 되는 것</p>
+                <ul style="list-style:none; padding:0; margin:0; space-y:4px;">
+                    <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb; margin-bottom:8px;">
+                        <span style="color:#4ade80; font-size:14px;">✓</span> 영문 보고서를 3분 만에 한글 요약
+                    </li>
+                    <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb; margin-bottom:8px;">
+                        <span style="color:#4ade80; font-size:14px;">✓</span> 해외 법인 회신 메일 초안 자동 생성
+                    </li>
+                    <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb; margin-bottom:8px;">
+                        <span style="color:#4ade80; font-size:14px;">✓</span> VOC 데이터 → 보고서 표 즉시 변환
+                    </li>
+                    <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb;">
+                        <span style="color:#4ade80; font-size:14px;">✓</span> 주간보고 요약자료 반자동화
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 01. 교육 안내 & 커리큘럼 -->
+        <section id="curriculum" class="content-section">
+            <h2 class="section-header">01. 실무 중심의 2시간 완성 커리큘럼</h2>
+            <p class="text-gray-600 text-lg mb-8">
+                본 교육은 사내 기본 계정과 브라우저만 있으면 <strong>오늘 바로</strong> 활용 가능한 실습으로 설계되었습니다.
+                별도 플러그인이나 추가 구매 없이, <strong>Copilot Web과 Edge 사이드바를 연동하여 이메일·엑셀·보고서 작업을 빠르게 처리하는 '3가지 실무 공식'</strong>을 익힙니다.
+                AI 도구가 낯선 분도 괜찮습니다. 복사(Ctrl+C) → 붙여넣기(Ctrl+V) → 전송, 이 세 단계만 할 수 있으면 충분합니다.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <span class="text-xs font-bold text-[#C10933] uppercase">브라우저 연동 공식</span>
+                    <h3 class="font-bold text-gray-800 mt-1 mb-2">텍스트/데이터 연동</h3>
+                    <p class="text-xs text-gray-500">아웃룩, 엑셀 앱 내부에서 직접 실행하지 않고, Copilot Web과 Edge 사이드바를 연결 통로로 활용하는 효율적 실무 팁</p>
+                </div>
+                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <span class="text-xs font-bold text-blue-600 uppercase">Edge 브라우저 활용</span>
+                    <h3 class="font-bold text-gray-800 mt-1 mb-2">Edge PDF/웹 요약</h3>
+                    <p class="text-xs text-gray-500">대용량 영문 보고서, 경쟁사 웹사이트 핵심 내용을 3초 만에 정리하는 브라우저 밀착 기능</p>
+                </div>
+                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <span class="text-xs font-bold text-orange-600 uppercase">보고서 자동화</span>
+                    <h3 class="font-bold text-gray-800 mt-1 mb-2">주간보고 요약자료</h3>
+                    <p class="text-xs text-gray-500">팀별 원문 내용을 붙여넣으면 Copilot이 보고체 2줄로 압축 후 CC&S 주간보고 A4 양식으로 자동 조립</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                    <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-regular fa-clock text-[#C10933]"></i> 실무 최적화 120분 로드맵
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead>
+                            <tr class="bg-gray-100/50 text-gray-600 font-bold border-b border-gray-200 text-xs uppercase">
+                                <th class="px-6 py-3 w-1/6">시간</th>
+                                <th class="px-6 py-3 w-2/6">학습 주제</th>
+                                <th class="px-6 py-3 w-2/6">세부 내용 및 연동 실습</th>
+                                <th class="px-6 py-3 w-1/6">비고 (도구)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 text-gray-700">
+                            <tr>
+                                <td class="px-6 py-4 font-bold text-[#C10933]">15분</td>
+                                <td><strong class="text-gray-900">기본 접속 공식 &amp; 설정</strong></td>
+                                <td class="text-xs text-gray-500">M365 상용 보안 계정 활용법 및 Edge 사이드바 세팅</td>
+                                <td>Edge Browser / Web</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold text-[#C10933]">45분</td>
+                                <td><strong class="text-gray-900">Copilot 실무 연동 3종 마스터</strong></td>
+                                <td class="text-xs text-gray-500">
+                                    1) PDF/웹 문서 요약 (Edge Sidebar)<br>
+                                    2) Outlook 메일 복사 &amp; 다국어 답장 빌드 (Copilot Web)<br>
+                                    3) Excel 데이터 복사 &amp; 수식 추출 및 분석 (Copilot Web)
+                                </td>
+                                <td class="text-blue-600 font-bold">전원 개별 실습</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold text-[#C10933]">45분</td>
+                                <td><strong class="text-gray-900">주간보고 요약자료 만들기</strong></td>
+                                <td class="text-xs text-gray-500">
+                                    - 팀별 원문 내용 → Copilot으로 보고체 2줄 압축<br>
+                                    - 전체 팀 취합 → A4 주간보고 양식 자동 조립
+                                </td>
+                                <td class="text-orange-600 font-bold">그룹 실습</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold text-[#C10933]">15분</td>
+                                <td><strong class="text-gray-900">보안 가이드 &amp; 마무리 Q&amp;A</strong></td>
+                                <td class="text-xs text-gray-500">기밀 데이터 입력 범위 경계선 숙지 및 팩트 체크 요령</td>
+                                <td>보안 자가 퀴즈</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. 똑똑한 비서 마인드 -->
+        <section id="welcome" class="content-section">
+            <h2 class="section-header">02. Copilot, 어떻게 쓰는 건가요?</h2>
+
+            <!-- 한 줄 핵심 정의 -->
+            <div class="bg-red-50 border border-red-200 rounded-2xl p-6 mb-8 text-center">
+                <p class="text-lg font-bold text-[#C10933] mb-1">"Copilot = 회사 계정으로 로그인한 AI 채팅 서비스"</p>
+                <p class="text-sm text-gray-600">ChatGPT처럼 말을 걸면 대답하는데, <strong>사내 보안이 적용된 Microsoft 공식 서비스</strong>입니다.<br>
+                별도 설치 없이 브라우저에서 바로 씁니다. → <span class="font-bold text-[#0078D4]">m365.cloud.microsoft/chat</span></p>
+            </div>
+
+            <!-- 3단계 시작법 -->
+            <h3 class="font-bold text-lg text-gray-800 mb-4">🚀 처음이라면 이 3단계만 기억하세요</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                <div class="bg-white border-2 border-[#C10933] rounded-xl p-5 text-center relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <i class="fa-solid fa-copy text-3xl text-gray-400 mt-3 mb-3 block"></i>
+                    <h4 class="font-bold text-gray-800 mb-1">복사 (Ctrl+C)</h4>
+                    <p class="text-xs text-gray-500">이메일 본문, 엑셀 표, PDF 내용 등<br>필요한 텍스트를 복사합니다</p>
+                </div>
+                <div class="bg-white border-2 border-[#C10933] rounded-xl p-5 text-center relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <i class="fa-solid fa-paste text-3xl text-gray-400 mt-3 mb-3 block"></i>
+                    <h4 class="font-bold text-gray-800 mb-1">붙여넣기 + 지시</h4>
+                    <p class="text-xs text-gray-500">Copilot 입력창에 붙여넣고<br>"이걸 한글로 요약해줘"처럼 말합니다</p>
+                </div>
+                <div class="bg-white border-2 border-[#C10933] rounded-xl p-5 text-center relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <i class="fa-solid fa-check-double text-3xl text-gray-400 mt-3 mb-3 block"></i>
+                    <h4 class="font-bold text-gray-800 mb-1">결과 확인 후 활용</h4>
+                    <p class="text-xs text-gray-500">AI 답변을 그대로 쓰지 말고<br>반드시 내용을 검토 후 수정하세요</p>
+                </div>
+            </div>
+
+            <!-- NG/OK 비교 -->
+            <h3 class="font-bold text-lg text-gray-800 mb-4">💡 이것만 바꿔도 답변 품질이 달라집니다</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-5 rounded-xl border border-red-200">
+                    <div class="flex items-center gap-2 mb-3 text-red-500">
+                        <i class="fa-solid fa-circle-xmark text-lg"></i>
+                        <h4 class="font-bold text-sm">이렇게 물으면 → 두루뭉술한 답변</h4>
+                    </div>
+                    <div class="bg-red-50 rounded-lg p-3 font-mono text-xs text-red-800 mb-2">"이메일 써줘"</div>
+                    <div class="bg-red-50 rounded-lg p-3 font-mono text-xs text-red-800">"이 데이터 분석해줘"</div>
+                    <p class="text-xs text-gray-400 mt-2">누구에게, 어떤 목적으로, 어떤 어조로 쓸지 정보가 없어 엉뚱한 결과가 나옵니다.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-green-200">
+                    <div class="flex items-center gap-2 mb-3 text-green-600">
+                        <i class="fa-solid fa-circle-check text-lg"></i>
+                        <h4 class="font-bold text-sm">이렇게 물으면 → 바로 쓸 수 있는 답변</h4>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-3 font-mono text-xs text-green-800 mb-2">"브라질 법인 담당자에게 수리 지연 사과와 보증 연장 제안을 담은 영문 메일 초안 써줘"</div>
+                    <div class="bg-green-50 rounded-lg p-3 font-mono text-xs text-green-800">"아래 CSAT 데이터에서 점수가 가장 낮은 카테고리 3개를 표로 정리해줘 [데이터 붙여넣기]"</div>
+                    <p class="text-xs text-gray-400 mt-2"><strong>목적 + 조건 + 데이터</strong>를 함께 넣으면 바로 사용 가능한 결과가 나옵니다.</p>
+                </div>
+            </div>
+
+            <!-- 자주 묻는 질문 -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+                <h4 class="font-bold text-yellow-800 text-sm mb-3"><i class="fa-solid fa-circle-question mr-2"></i>처음 쓰는 분들이 자주 묻는 질문</h4>
+                <div class="space-y-3 text-xs text-gray-700">
+                    <div class="flex gap-3">
+                        <span class="font-bold text-yellow-700 shrink-0">Q.</span>
+                        <div><span class="font-bold">Copilot에 입력한 내용이 외부로 새나가지 않나요?</span><br>
+                        사내 M365 계정으로 로그인한 상태에서는 입력 내용이 AI 학습에 활용되지 않습니다. 단, 미인증 개인 계정 사용 시에는 주의가 필요합니다.</div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="font-bold text-yellow-700 shrink-0">Q.</span>
+                        <div><span class="font-bold">AI가 틀린 정보를 줄 수도 있나요?</span><br>
+                        네, 있습니다. Copilot은 확률적으로 답하기 때문에 수치·날짜·고유명사는 반드시 직접 검토하고 사용하세요.</div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="font-bold text-yellow-700 shrink-0">Q.</span>
+                        <div><span class="font-bold">원하는 답이 안 나오면 어떻게 하나요?</span><br>
+                        포기하지 말고 "더 짧게 줄여줘", "불렛포인트로 바꿔줘", "이 부분을 구체적으로 써줘"처럼 <strong>추가 요청(Follow-up)</strong>을 해보세요.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Copilot 핵심 기능 도감 (fix: ** markdown → <strong> tags) -->
+        <section id="free-feature-map" class="content-section">
+            <h2 class="section-header">03. 브라우저 기반 Copilot 핵심 기능 도감</h2>
+            <p class="text-gray-600 mb-8">
+                아래 정리된 기능들은 MS Edge 브라우저와 웹 페이지만 열려 있다면 별도의 복잡한 절차 없이 상시 사용 가능한 실무 핵심 기능들입니다.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Edge Sidebar 요약 -->
+                <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4 text-[#0078D4]">
+                            <i class="fa-solid fa-window-restore text-2xl"></i>
+                            <h3 class="font-bold text-gray-800">Edge 사이드바 문서 요약</h3>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-3">Edge 브라우저 오른쪽 화면에 Copilot을 띄워 현재 탭을 분석하는 기능</p>
+                        <div class="bg-blue-50 rounded-lg px-3 py-2 mb-3 text-xs text-blue-700"><span class="font-bold">🔰 이런 분께 추천:</span> 영문 보고서나 긴 PDF를 빠르게 파악해야 할 때</div>
+                        <!-- FIX ③: ** 마크다운 → <strong> HTML 태그로 교체 -->
+                        <ul class="space-y-2 text-xs text-gray-600 border-t pt-3">
+                            <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <strong>PDF/Word/웹 페이지 분석</strong>: 마케팅 트렌드 보고서, 뉴스, 사내 웹 문서를 스크롤 내리지 않고 즉시 요약.</li>
+                            <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <strong>영문 문서 즉시 번역</strong>: 해외 시장 조사 보고서 등의 핵심 지표만 골라내 한글 보고서용으로 재가공.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copilot Web 초안 작성 -->
+                <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4 text-[#624BFF]">
+                            <i class="fa-solid fa-pen-fancy text-2xl"></i>
+                            <h3 class="font-bold text-gray-800">Copilot Web 초안 빌더</h3>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-3">m365.cloud.microsoft/chat 웹 포털을 켜서 복사해 온 데이터로 텍스트를 창작하는 기능</p>
+                        <div class="bg-purple-50 rounded-lg px-3 py-2 mb-3 text-xs text-purple-700"><span class="font-bold">🔰 이런 분께 추천:</span> 영문 메일이나 보고서 초안 작성에 시간이 많이 걸릴 때</div>
+                        <!-- FIX ③: ** 마크다운 → <strong> HTML 태그로 교체 -->
+                        <ul class="space-y-2 text-xs text-gray-600 border-t pt-3">
+                            <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <strong>비즈니스 메일 초안</strong>: "단가 15% 인하 거절, 대신 보증기간 1년 연장" 등 키워드만 던져도 공손한 영문/다국어 이메일 생성.</li>
+                            <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <strong>보고서 뼈대 구성</strong>: 아이디어나 개요 메모를 붙여넣고 공식 보고서 톤으로 변환 및 목차 구성.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copilot Web 데이터 분석 도우미 -->
+                <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4 text-emerald-600">
+                            <i class="fa-solid fa-calculator text-2xl"></i>
+                            <h3 class="font-bold text-gray-800">엑셀 수식 &amp; 데이터 도우미</h3>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-3">엑셀 파일 내 수식 설계 및 복사해 온 데이터 테이블 가공</p>
+                        <div class="bg-emerald-50 rounded-lg px-3 py-2 mb-3 text-xs text-emerald-700"><span class="font-bold">🔰 이런 분께 추천:</span> 엑셀 수식이 헷갈리거나, 데이터를 빨리 표로 정리해야 할 때</div>
+                        <!-- FIX ③: ** 마크다운 → <strong> HTML 태그로 교체 -->
+                        <ul class="space-y-2 text-xs text-gray-600 border-t pt-3">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <strong>대화형 수식 제안</strong>: 원하는 동작을 한글로 입력하면 XLOOKUP, INDEX-MATCH 등 난이도 높은 수식 제작 및 작동법 설명.</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <strong>텍스트 테이블 분석</strong>: 엑셀 표 영역을 긁어서 입력창에 붙여넣으면 평균, 이상치, 단순 트렌드 도출.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. 업무 생산성을 높이는 2대 접속 공식 -->
+        <section id="access-method" class="content-section">
+            <h2 class="section-header">04. 업무 효율을 극대화하는 2대 접속 공식</h2>
+            <p class="text-gray-600 mb-8">
+                사내 PC에서 가장 신속하고 범용적으로 Copilot을 호출하는 두 가지 대표 경로입니다. 
+                이 두 경로를 통해 오피스 문서 및 웹 정보를 끊김 없이 연동할 수 있습니다.
+            </p>
+
+            <!-- 처음 접속 안내 -->
+            <div class="mb-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex items-start gap-3">
+                <i class="fa-solid fa-circle-info text-yellow-500 mt-0.5 shrink-0"></i>
+                <p class="text-xs text-gray-700"><strong>처음 접속 시 로그인 확인:</strong> 접속 후 오른쪽 상단 프로필 아이콘을 클릭하여 <strong>사내 계정(@lge.com)으로 로그인</strong>되어 있는지 반드시 확인하세요. 개인 계정으로 로그인된 경우 보안 이슈가 발생할 수 있습니다.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm">
+                    <div class="absolute top-0 right-0 bg-[#0078D4] text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                        브라우저 연동</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fa-brands fa-edge text-[#0078D4] mr-2"></i>공식 1: MS Edge 브라우저 사이드바</h3>
+                    <p class="text-xs text-gray-500 mb-4">웹서핑이나 사내 그룹웨어(메일, 결재), PDF를 읽으며 실시간으로 조작할 때 가장 강력합니다.</p>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                        <div><strong>[실행법]</strong></div>
+                        <ol class="list-decimal pl-4 space-y-1">
+                            <li><strong>MS Edge</strong> 브라우저를 실행합니다.</li>
+                            <li>브라우저 오른쪽 최상단 구석에 위치한 파란색 <strong>Copilot 아이콘</strong>을 마우스로 클릭합니다.</li>
+                            <!-- FIX ⑥: Edge 단축키 버전 주의 문구 추가 -->
+                            <li>또는 키보드 단축키 <kbd class="bg-white border px-1.5 py-0.5 rounded text-xs shadow-sm font-mono font-bold">Ctrl</kbd> + <kbd class="bg-white border px-1.5 py-0.5 rounded text-xs shadow-sm font-mono font-bold">Shift</kbd> + <kbd class="bg-white border px-1.5 py-0.5 rounded text-xs shadow-sm font-mono font-bold">.</kbd> (마침표)를 동시에 누릅니다. <span class="text-yellow-600 font-semibold">※ Edge 버전에 따라 단축키가 다를 수 있습니다. 아이콘 직접 클릭을 권장합니다.</span></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm">
+                    <div class="absolute top-0 right-0 bg-[#624BFF] text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                        독립형 웹 포털</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fa-solid fa-globe text-[#624BFF] mr-2"></i>공식 2: Copilot 전용 웹 포털 접속</h3>
+                    <p class="text-xs text-gray-500 mb-4">대량의 텍스트 복사-붙여넣기, 수식 작성을 요청할 때 넓고 쾌적한 화면에서 실행 가능합니다.</p>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                        <div><strong>[실행법]</strong></div>
+                        <ol class="list-decimal pl-4 space-y-1">
+                            <li>크롬(Chrome)이나 에지 브라우저에서 아래 전용 웹 주소에 접속합니다.</li>
+                            <!-- FIX ⑦: rel="noopener noreferrer" 보안 속성 추가 -->
+                            <li><a href="https://m365.cloud.microsoft/chat/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline block my-1"><i class="fas fa-external-link-alt mr-1"></i> m365.cloud.microsoft/chat</a></li>
+                            <li>사내 계정(또는 개인 Microsoft 계정)으로 로그인하면, 상용 수준의 AI 엔진을 넓은 화면에서 조작할 수 있습니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. 실전 1단계: 웹 & PDF 요약 -->
+        <section id="scenario-edge" class="content-section">
+            <h2 class="section-header">05. [실전 A to Z] PDF 및 웹 문서 요약하기</h2>
+            
+            <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
+                <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
+                <p class="text-xs text-gray-700">
+                    글로벌 CS 운영팀이 공유한 <strong>'2026_Global_AfterService_Trend_Report.pdf' (영문 38페이지)</strong> 파일이 팀즈에 업로드되었습니다. 
+                    LG전자 수리/상담 서비스 개선 방향 수립을 위해 핵심 인사이트를 파악해야 하지만, 전문 영문 보고서를 전부 읽을 여유가 없습니다.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <h3 class="font-bold text-gray-800 text-md">PDF 문서 열기</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        바탕화면에 있는 PDF 파일을 마우스로 클릭하여 <strong>MS Edge 브라우저</strong> 화면 안으로 끌어다 놓습니다. (Edge에서 PDF 뷰어가 실행됩니다.)
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <h3 class="font-bold text-gray-800 text-md">Edge Copilot 사이드바 호출</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Edge 브라우저 우측 상단의 파란색 <span class="font-bold text-[#0078D4]"><i class="fa-solid fa-circle-notch mr-1"></i>Copilot 아이콘</span>을 클릭하거나, 단축키 <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">Ctrl</kbd> + <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">Shift</kbd> + <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">.</kbd>을 눌러 우측 채팅창을 활성화합니다.
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <h3 class="font-bold text-gray-800 text-md">웹 모드 선택 및 프롬프트 전송</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        사이드바 채팅 입력창에 아래의 프롬프트를 복사하여 붙여넣고 전송합니다. Edge 사이드바는 현재 브라우저 탭에 활성화된 문서의 맥락을 스스로 인식하여 분석해 주는 뛰어난 연동 능력을 제공합니다.
+                    </p>
+                    
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트</span>
+                            <button onclick="copyPrompt('prompt-pdf')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-pdf" class="prompt-body">현재 브라우저 화면에 열려있는 PDF 문서 전체를 정독하고, 다음 세 가지 기준에 맞춰 보고서 핵심 내용을 국문(한글)으로 요약해 줘.
+
+1. 이 보고서가 말하고자 하는 글로벌 AS/수리 서비스 트렌드 핵심 결론 1줄.
+2. LG전자 CC&S(고객가치혁신) 전략 수립에 참고할 수 있는 중요 수치 데이터(%, 건수, 만족도 점수 등)와 트렌드 3가지.
+3. 경쟁사(삼성 서비스, Whirlpool 등) 고객 서비스·수리 부문 성과나 혁신 사례가 언급된 경우 해당 내용 요약.
+
+답변은 간결하게 불렛포인트로 작성해 줄래?</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. [실전 A to Z] 아웃룩 이메일 연동 -->
+        <section id="scenario-outlook" class="content-section">
+            <h2 class="section-header">06. [실전 A to Z] Outlook 이메일 연동 작성법</h2>
+            
+            <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
+                <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
+                <p class="text-xs text-gray-700">
+                    해외법인 CS 담당자(Maria Santos, 브라질 법인)로부터 특정 제품 수리 처리 지연에 대한 강한 항의 이메일이 접수되었습니다. 
+                    해당 건은 부품 수급 지연이 원인이며, <strong>무상 연장 보증(+6개월) 및 우선 처리 약속</strong>을 제안하며 정중하게 상황을 해명하는 영문 회신을 작성해야 합니다.
+                </p>
+            </div>
+
+            <!-- 아웃룩 코파일럿 핵심 안내 박스 -->
+            <div class="mb-6 bg-amber-50 border border-amber-300 rounded-xl p-5">
+                <h4 class="font-bold text-amber-900 text-sm mb-3"><i class="fa-solid fa-star mr-2 text-amber-500"></i>꼭 알아야 할 아웃룩 Copilot 핵심 규칙</h4>
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">①</span>
+                        <p class="text-xs text-gray-800 leading-relaxed">
+                            <strong>아웃룩 이메일 데이터는 '아웃룩 코파일럿'에서만 연동됩니다.</strong><br>
+                            아웃룩 앱이 열려 있을 때 <strong>아웃룩 화면 좌측 사이드바에 있는 Copilot 버튼</strong>을 눌러야만 메일함 데이터가 AI와 연동됩니다.
+                            Copilot Web(m365.cloud.microsoft)이나 Edge 사이드바 코파일럿에서는 아웃룩 메일 데이터에 <strong>직접 접근이 불가</strong>합니다.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 w-5 h-5 bg-red-400 text-white rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">②</span>
+                        <p class="text-xs text-gray-800 leading-relaxed">
+                            <strong>무료 버전 사용자는 아웃룩 코파일럿만 사용 가능합니다.</strong><br>
+                            M365 무료(기본) 계정 사용자는 Copilot Web 등 다른 코파일럿에서 아웃룩 이메일 데이터가 연동되지 않습니다.
+                            따라서 <span class="font-bold text-red-700">아웃룩 앱 내 사이드바 Copilot 버튼</span>이 유일한 이메일 AI 연동 경로입니다.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 w-5 h-5 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">✦</span>
+                        <p class="text-xs text-gray-800 leading-relaxed">
+                            <strong class="text-purple-700">🔥 아웃룩 Copilot에서만 가능한 숨겨진 기능: Claude 모델 선택!</strong><br>
+                            현재 아웃룩 Copilot에서는 다른 코파일럿과 달리 <strong>AI 모델을 Claude(클로드)로 변경</strong>할 수 있습니다.
+                            아웃룩 Copilot을 열면 <strong>좌측 상단에 '자동'</strong>이라고 표시된 버튼이 있는데, 이 버튼을 눌러 Claude로 모델을 변경하면
+                            더 자연스럽고 풍부한 이메일 답변 초안을 얻을 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8 bg-blue-50 border border-blue-200 rounded-xl p-5">
+                <h4 class="font-bold text-blue-900 text-sm mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>브라우저 기반 이메일 연동 워크플로우 (중요)</h4>
+                <p class="text-xs text-gray-700 leading-relaxed">
+                    아웃룩 이메일 데이터 직접 연동이 필요 없는 경우, <strong>[아웃룩 수신 메일 본문 복사 ➡️ Copilot Web 또는 Edge 사이드바 입력 ➡️ 이메일 초안 생성/번역 ➡️ 완성 텍스트 복사 ➡️ 아웃룩 답장창에 붙여넣기]</strong>의 흐름도 유효합니다. 이 방식은 어조를 한눈에 통제하기에 유리합니다.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <h3 class="font-bold text-gray-800 text-md">아웃룩 메일 텍스트 복사</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        아웃룩을 실행해 수신된 John Smith의 메일 본문을 드래그한 다음 <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">Ctrl</kbd> + <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">C</kbd>를 눌러 복사합니다.
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <h3 class="font-bold text-gray-800 text-md">Copilot Web 페이지로 이동</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <!-- FIX ⑦: rel="noopener noreferrer" 추가 -->
+                        Edge 브라우저에서 전용 웹 포털(<a href="https://m365.cloud.microsoft/chat/" target="_blank" rel="noopener noreferrer" class="text-[#C10933] font-bold underline">m365.cloud.microsoft/chat</a>)을 실행하거나 Edge 사이드바를 엽니다.
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <h3 class="font-bold text-gray-800 text-md">프롬프트와 수신 메일 내용 입력</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        질문창에 복사한 메일 텍스트와 함께 아래 프롬프트 양식을 결합하여 전송합니다.
+                    </p>
+                    
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트</span>
+                            <button onclick="copyPrompt('prompt-email')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-email" class="prompt-body">아래 해외법인 담당자의 항의 이메일에 대해, 다음 조건을 바탕으로 격식 있고 정중한 비즈니스 영문 답장 이메일(English Business Email) 초안을 작성해 줘.
+
+[해명 사유 및 제안 내용]
+1. 해당 수리 건 처리가 지연된 이유는 특정 부품(part)의 글로벌 수급 지연 때문이며, 당사의 귀책이 아닌 공급망 이슈임을 정중하게 설명.
+2. 고객 불편에 대한 진심 어린 사과와 함께, 무상 보증 기간을 6개월 추가 연장하는 보상안 제시.
+3. 해당 수리 건을 최우선(Priority) 처리 대상으로 지정하여 빠른 시일 내 완료하겠다는 약속 포함.
+4. 추가 문의 사항은 직접 연락 요망 (담당자 직통 연락처 포함 안내).
+
+[어조 및 포맷]
+- 격식 있고 전문적인(Formal, Professional) 영미권 비즈니스 레터 스타일.
+- 알맞은 인사말(Dear Maria,)과 맺음말(Best regards,)을 포함할 것.
+
+[Maria Santos 수신 메일 본문]
+(여기에 복사해 둔 이메일 내용을 붙여넣으세요)</div>
+                    </div>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                    <h3 class="font-bold text-gray-800 text-md">결과물 복사 및 아웃룩 회신 적용</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Copilot이 완성해 준 자연스러운 비즈니스 거절 메일 텍스트를 드래그하여 복사한 뒤, 아웃룩 답장 쓰기 창에 붙여넣고 세부 인적사항을 수정하여 발송합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. [실전 A to Z] 엑셀 데이터 분석 -->
+        <section id="scenario-excel" class="content-section">
+            <h2 class="section-header">07. [실전 A to Z] Excel 수식 제작 및 데이터 연동 분석법</h2>
+            
+            <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
+                <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
+                <p class="text-xs text-gray-700">
+                    글로벌 VOC 현황 데이터에서 상담 접수일(A열)과 처리 완료일(B열) 사이의 실제 처리 소요 일수를 구해야 합니다. 
+                    날짜 차이 수식이 헷갈리는 상황에서 Copilot으로 수식을 받고, 카테고리별 CSAT(고객만족도) 데이터를 복사하여 보고서용 통계 요약을 즉석에서 뽑아내고자 합니다.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <h3 class="font-bold text-gray-800 text-md">엑셀 시트 열 구조 확인 및 질문 준비</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        분석하고자 하는 엑셀 파일의 정확한 열 이름과 알파벳(A열, B열 등)을 확인합니다.
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <h3 class="font-bold text-gray-800 text-md">Copilot Web에 수식 짜기 질문 전송</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        코파일럿 웹 페이지를 켜고, 엑셀 열 이름을 명시하여 어떤 조건의 수식을 짜야 하는지 설명하고 복사 가능한 수식을 요청합니다.
+                    </p>
+                    
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트 1</span>
+                            <button onclick="copyPrompt('prompt-excel-formula')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-excel-formula" class="prompt-body">다음 요청에 맞는 엑셀 함수 수식을 만들어 주고 원리를 쉽게 설명해 줘.
+
+[요청 사항]
+- 현재 내 엑셀 데이터의 A열은 '상담 접수일자' (예: 2026-06-01), B열은 '처리 완료일자' (예: 2026-06-05)가 입력되어 있어.
+- C열의 각 셀에 '처리 완료일자'에서 '상담 접수일자'를 빼서 순수한 처리 소요 기간(일수)을 숫자로만 보여주는 수식을 만들어 줘.
+- B열(처리 완료일)이 아직 공란인 경우(미완료 건)에는 "처리중"이라는 텍스트를 표시하는 IF 조건도 함께 넣어 줘.
+- 날짜 서식 오류나 문자 데이터형으로 인한 에러를 방지하는 IFERROR 처리도 포함해 줘.
+
+수식은 바로 복사할 수 있게 해주고, 적용법도 짧게 불렛포인트로 알려줘.</div>
+                    </div>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <h3 class="font-bold text-gray-800 text-md">소량 데이터 직접 복사로 요약 시각화 얻기</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        데이터가 수백 줄 이내로 크지 않다면, 엑셀 시트에서 필요한 영역을 마우스로 드래그 복사(<kbd class="bg-gray-100 border px-1 py-0.5 rounded text-xs shadow-sm font-mono">Ctrl+C</kbd>)하여 Copilot Web 채팅창에 바로 붙여넣기(<kbd class="bg-gray-100 border px-1 py-0.5 rounded text-xs shadow-sm font-mono">Ctrl+V</kbd>)한 후 분석과 보고용 요약 결과 도출을 요구합니다.
+                    </p>
+                    
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트 2</span>
+                            <button onclick="copyPrompt('prompt-excel-analysis')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-excel-analysis" class="prompt-body">아래 붙여넣은 표는 LG전자 제품 카테고리별 글로벌 고객 만족도(CSAT) 및 수리 처리 현황 통계 데이터야. 이 데이터를 읽어줘.
+
+1. 고객 만족도(CSAT) 점수가 가장 낮은 취약 제품 카테고리가 무엇이고, 해당 카테고리의 평균 처리 소요 일수와 만족도 점수를 같이 추출해 줘.
+2. 전체 카테고리 중 처리 소요 일수가 평균 대비 20% 이상 긴 항목을 찾아 개선이 필요한 항목으로 표시해 줘.
+3. 이 데이터를 활용해 CC&S 주간보고에 삽입할 수 있는 제품별 CSAT 비교 표(Table)로 가독성 있게 정리해 줘.
+
+[붙여넣을 데이터 표]
+(여기에 엑셀에서 드래그해서 복사해 온 표 데이터 붙여넣기)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. 주간보고 요약자료 만들기 -->
+        <section id="ms-cowork" class="content-section">
+            <h2 class="section-header">08. [실무 A to Z] 주간보고 요약자료 만들기</h2>
+
+            <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
+                <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
+                <p class="text-xs text-gray-700">
+                    매주 각 팀에서 취합된 진척 현황 내용을 Copilot에 붙여넣으면, <strong>CC&S전략팀 W주차 주간업무 보고</strong> 형식의 깔끔한 A4 보고 양식으로 자동 변환해 줍니다.
+                    팀별 내용을 2~3줄로 핵심만 압축하여 경영진 보고용 요약자료를 빠르게 완성하세요.
+                </p>
+            </div>
+
+            <!-- 아웃룩 Copilot + Claude 활용 추천 박스 -->
+            <div class="mb-6 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-xl p-5">
+                <h4 class="font-bold text-purple-900 text-sm mb-3"><i class="fa-solid fa-wand-magic-sparkles mr-2 text-purple-500"></i>주간보고 요약 시 추천: 아웃룩 Copilot + Claude 모델 조합</h4>
+                <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                    주간보고 이메일이 아웃룩에 모여 있다면, <strong>아웃룩 Copilot을 활용하는 것이 가장 효과적</strong>입니다.
+                    아웃룩 코파일럿은 메일함 데이터를 직접 읽어 요약할 수 있으며, 특히 <strong>Claude 모델로 변경 시 더 자연스럽고 정교한 요약</strong>이 가능합니다.
+                </p>
+                <div class="bg-white border border-purple-200 rounded-lg p-4 space-y-2">
+                    <p class="text-xs font-bold text-purple-800 mb-2"><i class="fa-solid fa-list-ol mr-1"></i> 아웃룩 Copilot + Claude 실행 순서</p>
+                    <div class="flex items-start gap-2">
+                        <span class="bg-purple-500 text-white text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0">Step 1</span>
+                        <p class="text-xs text-gray-700">아웃룩 앱을 열고 <strong>좌측 사이드바의 Copilot 버튼</strong>을 클릭하여 아웃룩 Copilot을 실행합니다.</p>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="bg-purple-500 text-white text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0">Step 2</span>
+                        <p class="text-xs text-gray-700">코파일럿 창 <strong>좌측 상단의 '자동'</strong> 버튼을 클릭합니다.</p>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="bg-purple-500 text-white text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0">Step 3</span>
+                        <p class="text-xs text-gray-700">모델 선택 목록에서 <strong>Claude(클로드)</strong>를 선택하여 변경합니다.</p>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="bg-purple-500 text-white text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0">Step 4</span>
+                        <p class="text-xs text-gray-700">아래 프롬프트를 입력하거나, 주간보고 관련 이메일을 열고 내용 요약을 요청합니다.</p>
+                    </div>
+                    <div class="mt-2 bg-amber-50 border border-amber-200 rounded p-2">
+                        <p class="text-xs text-amber-800"><i class="fa-solid fa-circle-info mr-1"></i><strong>참고:</strong> 아웃룩 Copilot의 Claude 모델 선택은 현재 아웃룩 코파일럿에서만 가능한 기능입니다. 다른 코파일럿(Copilot Web, Edge 사이드바 등)에서는 지원되지 않을 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 워크플로우 안내 -->
+            <div class="mb-8 bg-blue-50 border border-blue-200 rounded-xl p-5">
+                <h4 class="font-bold text-blue-900 text-sm mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>주간보고 요약자료 제작 워크플로우 (3단계)</h4>
+                <p class="text-xs text-gray-700 leading-relaxed">
+                    <strong>[각 팀 원문 내용 복사] ➡️ [아웃룩 Copilot(좌측 사이드바) 실행 → Claude 모델 변경 → 프롬프트 + 원문 붙여넣기 전송] ➡️ [완성된 요약 텍스트를 Word/PPT에 붙여넣기]</strong><br>
+                    팀별 내용이 길더라도 Copilot이 핵심 진척 사항과 다음 계획을 2줄 내외로 압축해 드립니다.
+                </p>
+            </div>
+
+            <!-- Steps -->
+            <div class="space-y-8">
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <h3 class="font-bold text-gray-800 text-md">각 팀 원문 업무 내용 복사</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        팀즈 채팅, 이메일, 문서에서 각 팀이 제출한 이번 주 업무 진척 내용 전체를 드래그하여 <kbd class="bg-gray-100 border px-1.5 py-0.5 rounded text-xs shadow-sm font-bold font-mono">Ctrl+C</kbd>로 복사합니다.
+                    </p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <h3 class="font-bold text-gray-800 text-md">아웃룩 Copilot 실행 → Claude 모델 변경 → 프롬프트 + 원문 입력</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        아웃룩 앱에서 <strong>좌측 사이드바의 Copilot 버튼</strong>을 클릭해 아웃룩 Copilot을 실행합니다.
+                        이후 <strong>좌측 상단의 '자동' 버튼</strong>을 눌러 모델을 <strong>Claude(클로드)</strong>로 변경한 뒤,
+                        아래 프롬프트 뒤에 복사한 원문 내용을 붙여넣어 함께 전송합니다.
+                    </p>
+
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트 — 팀별 내용 요약</span>
+                            <button onclick="copyPrompt('prompt-weekly-team')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-weekly-team" class="prompt-body">아래 [원문 내용]을 읽고, 다음 형식에 맞춰 해당 팀의 CC&S 주간보고 항목을 요약해 줘.
+
+[요약 형식]
+• (진행 중인 핵심 업무 또는 완료 사항을 1문장으로) 
+  ① (세부 진척 내용 — 구체적 수치나 일정 포함, 1~2줄)
+  ② (다음 주 주요 계획 또는 후속 조치, 1줄)
+※ (특이사항, 리스크, 상위 검토 필요 사항이 있으면 1줄, 없으면 생략)
+
+[작성 조건]
+- 원문의 내용을 임의로 추가하거나 과장하지 말 것.
+- 간결하고 명확한 보고체(~함, ~예정, ~완료) 문장으로 작성.
+- 날짜·수치·시스템명 등 고유명사는 원문 그대로 유지.
+
+[원문 내용]
+(여기에 복사해 온 팀 업무 내용을 붙여넣으세요)</div>
+                    </div>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <h3 class="font-bold text-gray-800 text-md">전체 팀 취합 후 보고서 전체 양식 완성</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        모든 팀 요약이 완성되면, 아래 프롬프트로 전체를 한 번에 A4 보고 양식으로 조립합니다.
+                    </p>
+
+                    <div class="prompt-container">
+                        <div class="prompt-header">
+                            <span><i class="fa-regular fa-clipboard mr-1"></i> 복사해서 바로 쓰는 프롬프트 — 전체 보고서 조립</span>
+                            <button onclick="copyPrompt('prompt-weekly-full')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> 복사하기
+                            </button>
+                        </div>
+                        <div id="prompt-weekly-full" class="prompt-body">아래 [팀별 요약 내용]을 바탕으로 공식 CC&S 주간보고 문서 양식에 맞게 완성해 줘.
+
+[보고서 양식]
+─────────────────────────────────
+CC&S전략팀 W__ 주간업무 보고               구분: 서면 보고 요약
+                                          보고서 작성일: 2026년 __월 __주차
+─────────────────────────────────
+1. (팀명) | 담당팀: ___   협업: ___       상태: 진행중 / 완료
+• (핵심 업무 요약 1줄)
+  ① (세부 진척)
+  ② (다음 주 계획)
+※ (특이사항, 없으면 생략)
+
+2. (팀명) | ...
+(이하 동일 패턴 반복)
+─────────────────────────────────
+
+[작성 조건]
+- 각 항목은 번호(1, 2, 3…) 순서로 나열하고, 항목 간 빈 줄로 구분.
+- 상태 표시는 내용을 보고 '진행중' 또는 '완료'로 자동 판단.
+- 전체 분량은 A4 1~2페이지 내외로 조절.
+- 문체는 간결한 보고체(~함, ~예정, ~완료).
+
+[팀별 요약 내용]
+(여기에 각 팀별 요약 내용을 순서대로 붙여넣으세요)</div>
+                    </div>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                    <h3 class="font-bold text-gray-800 text-md">결과 복사 후 Word 또는 PPT에 붙여넣기</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Copilot이 완성해 준 보고서 텍스트를 복사하여 Word 또는 PowerPoint 보고 양식에 붙여넣고, 날짜·담당자·협업 부서를 최종 확인 후 배포합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 예시 결과물 미리보기 -->
+            <div class="mt-10">
+                <h3 class="font-bold text-lg text-gray-800 mb-4">■ 실제 입력 예시 및 요약 결과 미리보기</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+                        <p class="text-xs font-bold text-gray-500 mb-2 uppercase">원문 입력 예시 (기준정보관리팀)</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">Global 품질코드 통합 표준화 관련, 본격적인 개발을 진행할 예정입니다. ① Task Kick Off (6월 2주차): 현재 CNS 개발 PM 확정, 개발인력 투입, 세부일정 계획을 수립 중에 있습니다. 차주에 유관부서와 개발자가 참여하는 Kick-off 미팅을 실시하여 개발 항목별 세부 일정을 확정하고, 해외 지역/법인 대상으로 변경 Point 및 유관 시스템 개발 일정을 안내하겠습니다. ② Phase1(Global 표준품질코드 적용) 완료 및 해외 수리통계 연계 (9월 완료 목표): NERP/N-GSFS 아시아 지역 Roll-in에 따른 Freezing 일정을 고려하여 오는 9월 Phase1을 완료할 예정…</p>
+                    </div>
+                    <div class="bg-white border-2 border-[#C10933] rounded-xl p-5">
+                        <p class="text-xs font-bold text-[#C10933] mb-2 uppercase">Copilot 요약 결과 예시</p>
+                        <p class="text-xs text-gray-700 leading-relaxed font-medium">
+                            • Global 품질코드 표준화 본격 개발 착수 — 9월 Phase1 완료 목표<br>
+                            ① CNS 개발 PM 확정·인력 투입 완료. 6월 2주차 유관부서 Kick-off 미팅 후 항목별 세부 일정 확정 및 해외 법인 안내 예정<br>
+                            ② Phase1 완료 후 표준코드 기반 해외 수리통계 연계·STT 적용 추진<br>
+                            ※ NERP/N-GSFS Freezing 일정 감안한 9월 완료 일정 관리 필요
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. CC&S 맞춤형 프롬프트 빌더 -->
+        <section id="prompt-builder" class="content-section">
+            <h2 class="section-header">09. CC&amp;S 맞춤형 프롬프트 빌더 (Interactive)</h2>
+            <p class="text-gray-600 mb-8">
+                수리·상담·VOC·주간보고 등 CC&amp;S전략팀 실무 상황에 맞는 프롬프트를 바로 조립할 수 있습니다.
+                실행 경로와 업무 유형을 선택하면 복사 가능한 프롬프트가 즉시 완성됩니다.
+            </p>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">1. 실행 경로 선택</label>
+                        <select id="builder-tool" onchange="updatePromptBuilder(true)" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm">
+                            <option value="edge">Edge 사이드바 (화면/PDF 요약)</option>
+                            <option value="web_mail">Copilot Web (해외법인 이메일 연동 작성)</option>
+                            <option value="web_excel">Copilot Web (VOC/CSAT 데이터 분석)</option>
+                            <option value="weekly">Copilot Web (주간보고 요약자료 작성)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">2. 세부 실무 시나리오</label>
+                        <select id="builder-scenario" onchange="updatePromptBuilder(false)" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm">
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">3. 어조 및 분량 (Tone)</label>
+                        <select id="builder-tone" onchange="updatePromptBuilder(false)" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm">
+                            <option value="formal">정중하고 격식 있는 비즈니스 어조 (Professional)</option>
+                            <option value="brief">간결한 핵심 불렛포인트 위주 (Concise)</option>
+                            <option value="report">보고체 요약 문체 (Report Style)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-300 rounded-xl overflow-hidden">
+                    <div class="bg-gray-100 px-4 py-2 border-b border-gray-200 flex justify-between items-center">
+                        <span class="text-xs font-bold text-gray-600">완성된 마법의 프롬프트 (실무 적용형)</span>
+                        <button onclick="copyPrompt('builder-result-text')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1 rounded transition flex items-center gap-1 font-bold">
+                            <i class="fa-regular fa-copy"></i> 클립보드 복사
+                        </button>
+                    </div>
+                    <div id="builder-result-text" class="p-5 font-mono text-sm text-gray-800 whitespace-pre-wrap leading-relaxed min-h-[120px]">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 사내 AI 보안 퀴즈 (FIX ①: 퀴즈 정답 로직 수정) -->
+        <section id="security-quiz" class="content-section">
+            <h2 class="section-header">10. 자가 진단: 사내 AI 보안 &amp; 에티켓 퀴즈</h2>
+            <p class="text-gray-600 mb-8">
+                브라우저와 웹 환경에서 Copilot을 사용할 때 특히 준수해야 할 사내 보안 관련 O/X 문항입니다. 문제를 풀고 올바른 보안 수칙을 마음에 새기세요.
+            </p>
+
+            <div class="space-y-6">
+                <!-- Quiz 1 -->
+                <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <span class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-700 flex-shrink-0">Q1</span>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-gray-800">외부 개방형 범용 웹 버전(m365.cloud.microsoft/chat)을 이용할 때, 외부 공개되지 않은 LG전자 신제품 개발 기획서 텍스트를 그대로 복사해 붙여넣어 요약을 시도해도 보안상 안전할까?</h4>
+                            <!-- FIX ①: 버튼 라벨과 전달값 일치 수정 (O=안전, X=위험) -->
+                            <div class="flex gap-4 mt-4">
+                                <button onclick="checkQuiz(1, 'O')" class="px-6 py-2 bg-gray-100 hover:bg-green-50 text-gray-800 hover:text-green-700 font-bold border border-gray-300 hover:border-green-300 rounded-lg text-sm transition">문제없다 (O)</button>
+                                <button onclick="checkQuiz(1, 'X')" class="px-6 py-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 font-bold border border-gray-300 hover:border-red-300 rounded-lg text-sm transition">기밀유출 위험이 있다 (X)</button>
+                            </div>
+                            <div id="quiz-ans-1" class="hidden mt-4 p-4 bg-gray-50 border-l-4 border-gray-300 text-xs text-gray-600"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz 2 -->
+                <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <span class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-700 flex-shrink-0">Q2</span>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-gray-800">엑셀 수식을 짤 때 실제 임직원 이름과 고객 개인정보가 들어있는 데이터 표를 웹 코파일럿 입력창에 통째로 붙여넣었다. 어떻게 대처해야 할까?</h4>
+                            <!-- FIX ①: 버튼 라벨과 전달값 일치 수정 -->
+                            <div class="flex gap-4 mt-4">
+                                <button onclick="checkQuiz(2, 'O')" class="px-6 py-2 bg-gray-100 hover:bg-green-50 text-gray-800 hover:text-green-700 font-bold border border-gray-300 hover:border-green-300 rounded-lg text-sm transition">상관없다 (O)</button>
+                                <button onclick="checkQuiz(2, 'X')" class="px-6 py-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 font-bold border border-gray-300 hover:border-red-300 rounded-lg text-sm transition">개인정보는 절대 제외해야 한다 (X)</button>
+                            </div>
+                            <div id="quiz-ans-2" class="hidden mt-4 p-4 bg-gray-50 border-l-4 border-gray-300 text-xs text-gray-600"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz-toast" class="fixed bottom-10 right-10 bg-gray-800 text-white text-sm font-bold py-3 px-6 rounded-lg shadow-xl transform translate-y-20 opacity-0 transition-all duration-300">
+                답변이 복사되었습니다!
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="content-section bg-gray-50 text-center py-20 rounded-t-3xl border-t border-gray-200">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-4 font-outfit">Life's Good with AI</h2>
+            <p class="text-gray-600 mb-2 max-w-xl mx-auto">
+                <strong>"AI가 아니라, AI 잘 쓰는 사람이 경쟁력을 갖는 시대"</strong>
+            </p>
+            <p class="text-gray-500 mb-8 max-w-xl mx-auto text-sm">
+                오늘 배운 Copilot 실무 공식을 내일 업무에 바로 적용해 보세요.<br>
+                프롬프트 한 줄이 여러분의 하루를 바꿉니다.
+            </p>
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="bg-[#C10933] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#A00728] shadow-lg transition btn-hover-effect">
+                강의 처음으로 이동하기
+            </button>
+        </section>
+    </main>
+
+    <script>
+        function copyPrompt(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("프롬프트가 클립보드에 복사되었습니다!");
+            }).catch(err => {
+                console.error("복사 실패: ", err);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("quiz-toast");
+            toast.innerText = message;
+            toast.classList.remove("translate-y-20", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+            setTimeout(() => {
+                toast.classList.add("translate-y-20", "opacity-0");
+                toast.classList.remove("translate-y-0", "opacity-100");
+            }, 2000);
+        }
+
+        // FIX ①: 퀴즈 정답 로직 수정
+        // 정답: Q1 → X (기밀유출 위험 있음), Q2 → X (개인정보 제외해야 함)
+        const quizData = {
+            1: {
+                correct: 'X',
+                correctMsg: '✅ 정답입니다! 비인증 외부 개방형 계정으로 웹 코파일럿을 이용 시, 입력한 내용이 외부 AI 학습 데이터로 피딩되어 유출될 위험이 있습니다. 사내 기밀 업무는 반드시 회사 보안 인증이 완료된 로그인 상태(Work 모드 등)에서만 수행해야 하며, 비인증 상태에서는 기밀 정보를 절대 입력해서는 안 됩니다.',
+                wrongMsg: '❌ 오답입니다. 비인증 외부 개방형 계정으로 웹 코파일럿을 이용 시, 입력한 내용이 외부 AI 학습 데이터로 피딩되어 유출될 위험이 있습니다. 기밀유출 위험이 있습니다(X)가 정답입니다.'
+            },
+            2: {
+                correct: 'X',
+                correctMsg: '✅ 정답입니다! 고객의 성함, 연락처 등 개인정보보호법에 위반되는 데이터 항목은 연동 시 반드시 사전에 삭제하거나 비식별화(예: 홍길동 → 고객A)하여 입력창에 넣어야 합니다.',
+                wrongMsg: '❌ 오답입니다. 고객의 성함, 연락처 등 개인정보보호법에 위반되는 데이터 항목은 연동 시 반드시 사전에 삭제하거나 비식별화(예: 홍길동 → 고객A)하여 입력창에 넣어야 합니다.'
+            }
+        };
+
+        function checkQuiz(qNum, selected) {
+            const ansDiv = document.getElementById(`quiz-ans-${qNum}`);
+            ansDiv.classList.remove('hidden');
+            const isCorrect = selected === quizData[qNum].correct;
+            if (isCorrect) {
+                ansDiv.innerHTML = `<span class="text-green-600 font-bold">정답!</span> ${quizData[qNum].correctMsg}`;
+                ansDiv.style.borderLeftColor = "#10B981";
+            } else {
+                ansDiv.innerHTML = `<span class="text-red-600 font-bold">오답.</span> ${quizData[qNum].wrongMsg}`;
+                ansDiv.style.borderLeftColor = "#EF4444";
+            }
+        }
+
+        // CC&S전략팀 맞춤 프롬프트 빌더 데이터
+        const builderData = {
+            edge: [
+                { value: 'as_report', text: '글로벌 AS 트렌드 PDF 보고서 요약', prompt: '현재 브라우저에 열려있는 글로벌 AS/수리 서비스 관련 영문 보고서를 검토하고 아래 형식으로 요약해 줘.\n\n[조건]\n- 글로벌 AS/수리 서비스 시장의 핵심 트렌드 3가지\n- LG전자 CC&S 전략 수립에 참고할 수 있는 경쟁사 사례 및 수치\n- 국문(한글) 불렛포인트로 작성\n\n어조: {tone}' },
+                { value: 'voc_web', text: '해외법인 VOC 이슈 웹페이지 요약', prompt: '현재 브라우저에 열려있는 해외 고객 VOC 관련 웹페이지 내용을 읽고 핵심 내용을 국문으로 정리해 줘.\n\n[조건]\n- 주요 불만 유형 및 발생 제품 카테고리\n- LG전자 서비스 개선에 즉시 반영 가능한 시사점 2~3가지\n\n어조: {tone}' }
+            ],
+            web_mail: [
+                { value: 'complaint_reply', text: '해외법인 수리 지연 항의 회신', prompt: '해외법인 CS 담당자로부터 받은 수리 처리 지연 항의 이메일에 대해 정중한 영문 회신 메일을 작성해 줘.\n\n[조건]\n- 부품 수급 지연으로 인한 처리 지연 사유 설명\n- 무상 보증 기간 연장(+6개월) 보상안 제시\n- 해당 건 우선 처리 약속 포함\n\n어조: {tone}' },
+                { value: 'data_request', text: '해외법인 데이터 제출 요청 메일', prompt: 'CC&S 글로벌 VOC 취합을 위해, 각 해외법인 서비스 담당자께 수리/상담 실적 데이터 제출을 요청하는 영문 메일 초안을 작성해 줘.\n\n[조건]\n- 제출 마감: 다음 주 금요일 18:00 (현지시간)\n- 첨부된 표준 Excel 양식(Template) 준수 요청\n- 미제출 시 본사 취합 보고에 누락됨을 안내\n\n어조: {tone}' },
+                { value: 'policy_guide', text: '글로벌 품질코드 정책 변경 안내 메일', prompt: '글로벌 표준 품질코드 전환 관련 정책 변경 사항을 해외 지역/법인에 안내하는 영문 메일 초안을 작성해 줘.\n\n[조건]\n- 변경 내용 요약 및 적용 일정(Phase1: 9월 목표) 명시\n- 유관 시스템(NERP/N-GSFS) 연동 일정 안내\n- 문의 사항은 본사 기준정보관리팀으로 연락 요망\n\n어조: {tone}' }
+            ],
+            web_excel: [
+                { value: 'voc_days', text: 'VOC 처리 소요 일수 수식', prompt: '엑셀 VOC 데이터 분석에 쓸 수식을 짜줘.\n\n[조건]\n- A열: 상담 접수일, B열: 처리 완료일 → C열에 소요 일수(숫자) 계산\n- B열이 공란(미완료)이면 "처리중" 표시하는 IF 조건 포함\n- IFERROR 예외처리로 오류 방지\n- 수식 바로 복사 가능하게 제시 + 적용법 불렛포인트\n\n어조: {tone}' },
+                { value: 'csat_analysis', text: '카테고리별 CSAT 데이터 분석', prompt: '아래 붙여넣은 표는 LG전자 제품 카테고리별 CSAT 및 수리 처리 현황 데이터야.\n\n[조건]\n1. CSAT 점수 최하위 카테고리와 해당 평균 처리 소요 일수 추출\n2. 처리 소요 일수가 평균 대비 20% 이상 긴 항목을 개선 필요 항목으로 표시\n3. CC&S 주간보고용 제품별 CSAT 비교 표로 가독성 있게 정리\n\n[데이터]\n(여기에 엑셀 표 데이터 붙여넣기)\n\n어조: {tone}' },
+                { value: 'repair_stats', text: '수리 실적 지표 요약 및 통계', prompt: '아래 붙여넣은 글로벌 수리 실적 데이터를 분석하여 보고서용 요약 통계를 뽑아줘.\n\n[조건]\n1. 지역별/법인별 수리 건수 및 완료율 비교\n2. 전주 대비 처리 건수 증감률 계산\n3. 보고서 삽입용 요약 표로 정리\n\n[데이터]\n(여기에 엑셀 표 데이터 붙여넣기)\n\n어조: {tone}' }
+            ],
+            weekly: [
+                { value: 'team_summary', text: '팀별 업무 내용 2줄 요약', prompt: '아래 [원문 내용]을 읽고 다음 형식에 맞춰 해당 팀의 CC&S 주간보고 항목을 요약해 줘.\n\n[요약 형식]\n• (핵심 업무 또는 완료 사항 1문장)\n  ① (세부 진척, 수치/일정 포함, 1~2줄)\n  ② (다음 주 계획 또는 후속 조치, 1줄)\n※ (특이사항·리스크 있으면 1줄, 없으면 생략)\n\n[작성 조건]\n- 원문 내용을 임의로 추가·과장 금지\n- 간결한 보고체(~함, ~예정, ~완료)\n- 날짜·수치·시스템명 원문 그대로 유지\n\n[원문 내용]\n(여기에 팀 업무 내용을 붙여넣으세요)\n\n어조: {tone}' },
+                { value: 'full_report', text: '전체 팀 취합 → A4 보고서 조립', prompt: '아래 [팀별 요약 내용]을 바탕으로 공식 CC&S 주간보고 문서 양식으로 완성해 줘.\n\n[보고서 양식]\n────────────────────────────\nCC&S전략팀 W__ 주간업무 보고   구분: 서면 보고 요약\n                               보고서 작성일: 2026년 __월 __주차\n────────────────────────────\n1. (팀명) | 담당팀: ___  협업: ___   상태: 진행중/완료\n• (핵심 업무 1줄)\n  ① (세부 진척)\n  ② (다음 주 계획)\n※ (특이사항)\n\n[작성 조건]\n- 항목 번호 순서 나열, 항목 간 빈 줄 구분\n- 상태는 내용 보고 자동 판단(진행중/완료)\n- A4 1~2페이지 분량 조절\n- 간결한 보고체\n\n[팀별 요약 내용]\n(여기에 각 팀별 요약 내용을 붙여넣으세요)\n\n어조: {tone}' }
+            ]
+        };
+
+        const toneDescriptions = {
+            formal: '정중하고 공손한 비즈니스 전용 격식적 문체',
+            brief: '단답 및 불렛포인트 위주의 짧고 명료한 문체',
+            report: '간결한 보고체(~함, ~예정, ~완료) 요약 문체'
+        };
+
+        function updatePromptBuilder(toolChanged) {
+            const tool = document.getElementById('builder-tool').value;
+            const scenarioSelect = document.getElementById('builder-scenario');
+            const toneSelect = document.getElementById('builder-tone');
+
+            // 주간보고 선택 시 보고체 어조로 자동 전환
+            if (toolChanged) {
+                if (tool === 'weekly') {
+                    toneSelect.value = 'report';
+                } else {
+                    toneSelect.value = 'formal';
+                }
+            }
+
+            const currentScenarios = builderData[tool];
+            const prevSelectedVal = scenarioSelect.value;
+
+            scenarioSelect.innerHTML = '';
+            currentScenarios.forEach(sc => {
+                const opt = document.createElement('option');
+                opt.value = sc.value;
+                opt.text = sc.text;
+                scenarioSelect.appendChild(opt);
+            });
+
+            const matched = currentScenarios.find(sc => sc.value === prevSelectedVal);
+            if (matched) {
+                scenarioSelect.value = prevSelectedVal;
+            }
+
+            const activeScenario = currentScenarios.find(sc => sc.value === scenarioSelect.value);
+            if (activeScenario) {
+                let prompt = activeScenario.prompt;
+                prompt = prompt.replace('{tone}', toneDescriptions[toneSelect.value]);
+                document.getElementById('builder-result-text').innerText = prompt;
+            }
+        }
+
+        // Active link scrolling highlight
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.curriculum-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePromptBuilder(false);
+            
+            document.querySelectorAll('.curriculum-item').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+
+                    document.querySelectorAll('.curriculum-item').forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+
+                    window.scrollTo({
+                        top: target.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
