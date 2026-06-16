@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX 기본 교육 과정: Copilot 실무 혁신 | CC&S전략팀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --lge-red: #C10933;
+            --lge-dark: #222222;
+            --lge-gray: #555555;
+            --lge-light-bg: #F8F8F8;
+            --lge-border: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--lge-dark);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid var(--lge-border);
+            padding: 40px 20px;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 0;
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--lge-red);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--lge-red);
+        }
+
+        .curriculum-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--lge-gray);
+        }
+
+        .curriculum-item:hover {
+            background: var(--lge-light-bg);
+            color: var(--lge-red);
+        }
+
+        .curriculum-item.active {
+            background: var(--lge-red);
+            color: white;
+            font-weight: 500;
+        }
+
+        /* 아코디언 사이드바 스타일 */
+        .part-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            padding: 10px 12px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            margin-top: 12px;
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .part-header:hover {
+            background: #f9f9f9;
+            color: var(--lge-red);
+            border-color: #e0e0e0;
+        }
+
+        .part-content {
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s;
+            max-height: 1000px;
+            opacity: 1;
+            overflow: hidden;
+            padding-left: 8px;
+            margin-top: 4px;
+        }
+
+        .part-content.collapsed {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .part-header i.fa-chevron-down {
+            transition: transform 0.3s ease;
+        }
+
+        .part-header.collapsed i.fa-chevron-down {
+            transform: rotate(-90deg);
+        }
+
+        .content-section {
+            padding: 100px 80px;
+            max-width: 1100px;
+            border-bottom: 1px solid var(--lge-border);
+        }
+
+        .info-box {
+            background: var(--lge-light-bg);
+            border-left: 5px solid var(--lge-red);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .prompt-box {
+            background: #2D2D2D;
+            color: #E0E0E0;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+            margin: 25px 0;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+        }
+
+        .prompt-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--lge-red);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: 'Noto Sans KR';
+        }
+
+        .step-badge {
+            background: #333;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: var(--lge-red);
+            font-weight: 700;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .table-custom th {
+            background: #f4f4f4;
+            border-top: 2px solid #333;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table-custom td {
+            border-bottom: 1px solid var(--lge-border);
+            padding: 15px;
+            vertical-align: top;
+        }
+
+        .token-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .token-tag {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 2px 6px;
+            margin: 2px;
+            border-radius: 4px;
+            font-family: monospace;
+            border: 1px solid #ced4da;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav-sidebar">
+        <div class="mb-10">
+            <img src="https://www.lge.co.kr/lg5-common/images/header/lg_logo_new.svg" alt="LG Logo" class="h-8 md:h-9">
+            <p class="text-xs text-gray-400">고객가치혁신부문 AX 기본 교육</p>
+        </div>
+        <div class="space-y-2">
+            <!-- PART 1 -->
+            <div class="part-group">
+                <button class="part-header" id="btn-part1" onclick="togglePart('part1')">
+                    <span>PART 1. 기본기</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="part-content" id="part1">
+                    <a href="#intro" class="curriculum-item block active">1-1. AX 마인드셋</a>
+                    <a href="#prompt" class="curriculum-item block">1-2. 프롬프트 엔지니어링</a>
+                    <a href="#security" class="curriculum-item block">1-3. 보안 & 할루시네이션</a>
+                    <a href="#copilot-access" class="curriculum-item block">1-4. Copilot 접속 및 실행법</a>
+                </div>
+            </div>
+
+            <!-- PART 2 -->
+            <div class="part-group">
+                <button class="part-header collapsed" id="btn-part2" onclick="togglePart('part2')">
+                    <span>PART 2. Copilot 활용</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="part-content collapsed" id="part2">
+                    <a href="#copilot-email" class="curriculum-item block">2-1. Outlook 이메일 관리</a>
+                    <a href="#copilot-pdf" class="curriculum-item block">2-2. PDF 요약 & 보고서 작성</a>
+                    <a href="#copilot-excel" class="curriculum-item block">2-3. Excel 데이터 분석</a>
+                </div>
+            </div>
+
+            <!-- PART 3 -->
+            <div class="part-group">
+                <button class="part-header collapsed" id="btn-part3" onclick="togglePart('part3')">
+                    <span>PART 3. 발표자료/대시보드 만들기</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="part-content collapsed" id="part3">
+                    <a href="#mvp-concept" class="curriculum-item block">3-1. MVP 프로토타입 개념</a>
+                    <a href="#mvp-dashboard" class="curriculum-item block">3-2. 대시보드 프로토타입 제작</a>
+                    <a href="#mvp-ppt" class="curriculum-item block">3-3. HTML 발표자료 제작</a>
+                    <a href="#mvp-deploy" class="curriculum-item block">3-4. HTML 배포의 의미 & 방법</a>
+                    <a href="#copilot-ppt" class="curriculum-item block">3-5. Outlook Copilot으로 PPT 만들기</a>
+                    <a href="#lg-template" class="curriculum-item block">3-6. LG스타일 프롬프트 템플릿</a>
+                </div>
+            </div>
+
+            <!-- PART 4 -->
+            <div class="part-group">
+                <button class="part-header collapsed" id="btn-part4" onclick="togglePart('part4')">
+                    <span>PART 4. AI 에이전트 만들기</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="part-content collapsed" id="part4">
+                    <a href="#cowork-intro" class="curriculum-item block">4-1. MS Cowork 소개 & 실습</a>
+                    <a href="#agent-build" class="curriculum-item block">4-2. 나만의 에이전트 만들기</a>
+                    <a href="#agent-deploy" class="curriculum-item block">4-3. 에이전트 배포하기</a>
+                </div>
+            </div>
+
+            <!-- PART 5 -->
+            <div class="part-group">
+                <button class="part-header collapsed" id="btn-part5" onclick="togglePart('part5')">
+                    <span>PART 5. 조별 실습 과제</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="part-content collapsed" id="part5">
+                    <a href="#group-lab" class="curriculum-item block">5-1. 조별 실습 과제</a>
+                    <a href="#closing" class="curriculum-item block">5-2. 마무리 & Q&A</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+
+        <section id="intro" class="content-section">
+            <h2 class="section-header">1-1. AX 개념 이해와 실습 환경 정의</h2>
+
+            <!-- 교육 실습 도구 선정 안내 -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-xl mb-8">
+                <h3 class="font-bold text-amber-800 text-sm mb-2"><i class="fas fa-info-circle mr-2"></i>[안내] 실습 도구로
+                    Microsoft Copilot을 선정한 이유</h3>
+                <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                    본 교육의 실습 도구는 <strong>Microsoft Copilot</strong>을 활용합니다. 사내망 내에서 Gemini를 사용하려면 개별 권한 신청이 필요했으나, 최근 보안
+                    정책 변경으로 인해 개인이 사내망 내 Gemini 권한을 직접 신청하는 것이 제한되었습니다. 또한, 모든 인원이 Gemini Enterprise(유료 라이선스) 권한을 균일하게
+                    가지고 있는 상황도 아닙니다.
+                </p>
+                <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                    반면, <strong>Microsoft Copilot은 사내 계정(@lge.com)으로 로그인하면 LG전자 임직원 누구나 제한 없이 즉시 사용 가능한 환경이
+                        제공</strong>되므로 모든 교육생이 동일한 실습을 완수할 수 있는 최적의 도구로 선정되었습니다.
+                </p>
+                <div class="bg-white p-4 rounded-lg border border-amber-200 text-xs text-gray-600 space-y-1.5">
+                    <p class="font-bold text-gray-800">💡 꼭 기억하세요! AI는 '껍데기(UI)'보다 '프롬프트 논리'가 본질입니다.</p>
+                    <p>시중에 제공되는 수많은 대형 언어 모델(LLM)들은 서비스 껍데기(UI)와 브랜드 이름만 다를 뿐, <strong>질문의 논리 구조(맥락 설정, 구체적 지시, 제약 사항)는
+                            거의 동일</strong>합니다. 본 교육에서 다루는 프롬프트 엔지니어링과 에이전트 연동 논리는 향후 권한을 부여받은 Gemini나 ChatGPT, Claude 등
+                        어떤 다른 AI 환경에도 100% 동일하게 이식하여 적용할 수 있습니다.</p>
+                    <p class="text-[#C10933] font-semibold mt-1">※ 아울러, MS Copilot 역시 Outlook 이메일 연동, PDF 자동 요약, Excel
+                        데이터 분석 등 실무에 즉시 활용할 수 있는 강력한 기능들을 갖추고 있어 업무 생산성을 혁신적으로 높여줍니다.</p>
+                </div>
+            </div>
+
+            <!-- 베이스 모델 vs AI 에이전트 이론 -->
+            <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fas fa-brain text-[#C10933] mr-2"></i>핵심 이론: 베이스
+                모델 vs AI 에이전트</h3>
+            <p class="text-xs text-gray-600 mb-6">
+                현재 사내 아웃룩 Copilot 등을 실행하면 내부 모델을 GPT나 Claude로 선택해서 쓸 수 있는 기능이 제공됩니다. 그렇다면 공식 사이트(ChatGPT, Claude.ai)에 직접
+                접속해 사용하는 것과 Copilot에서 사용하는 것은 어떤 차이가 있을까요?
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-10 text-xs">
+                <!-- 베이스 모델 -->
+                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-3 text-blue-600">
+                            <i class="fas fa-microchip text-lg"></i>
+                            <h4 class="font-bold text-gray-800">기본 베이스 모델 (Base Model / LLM)</h4>
+                        </div>
+                        <p class="text-gray-500 mb-2">예: GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro 등</p>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            인공지능의 <strong>순수한 '두뇌' 엔진</strong>입니다. 독자적인 대규모 학습 데이터를 기초로 추론, 요약, 코딩 등의 순수 연산 작업을 처리합니다.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-lg text-blue-900 space-y-1">
+                        <p class="font-bold">⚠️ 공식 웹사이트 직접 접속의 특징:</p>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li>해당 모델 본연의 지능과 성능을 가장 빠르게 테스트할 수 있습니다.</li>
+                            <li><strong>사내 시스템(이메일, 파일, 캘린더 등)과 자동으로 연동되지 않아</strong> 일일이 복사해서 입력해야 합니다.</li>
+                            <li>개인 계정으로 입력한 데이터는 AI 학습에 쓰여 <strong>사내 기밀 유출 리스크</strong>가 매우 높습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- AI 에이전트 -->
+                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-3 text-purple-600">
+                            <i class="fas fa-user-cog text-lg"></i>
+                            <h4 class="font-bold text-gray-800">AI 에이전트 / 시스템 통합형 (Copilot)</h4>
+                        </div>
+                        <p class="text-gray-500 mb-2">예: M365 Copilot, Chat GPT, Perplexity 등</p>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            베이스 모델을 두뇌로 삼되, <strong>내 업무 데이터(이메일, 일정, 파일)와 유기적으로 연결되어 동작(Action)을 자동 수행</strong>하도록 사내
+                            보안망 내에 구축된 지능형 시스템입니다.
+                        </p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded-lg text-purple-900 space-y-1">
+                        <p class="font-bold">✨ Copilot(에이전트 서비스) 활용의 특징:</p>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><strong>사내 보안 확보:</strong> 사내 계정으로 로그인되어 입력 내용이 외부 학습에 절대 사용되지 않습니다.</li>
+                            <li><strong>업무 환경 결합:</strong> 별도 텍스트 복사 없이 내 아웃룩 메일함, 캘린더 데이터를 AI가 직접 조회하여 요약하거나 보고서로
+                                가공합니다.</li>
+                            <li>보안망 내에서 검증된 GPT/Claude의 능력을 가져와 내 사내 데이터에 직접 안전하게 결합시킵니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3 class="font-bold text-xl mb-3">AX(AI Transformation)는 "도구"가 아니라 "동료"입니다.</h3>
+                <p>과거의 IT가 인간의 명령(Command)을 수행하는 계산기였다면, AX 시대의 AI는 인간과 대화(Conversation)하며 맥락을 이해하고 결과물을 함께 만들어가는
+                    <strong>협업 파트너</strong>입니다.
+                </p>
+            </div>
+
+            <h4 class="font-bold text-lg mt-10 mb-4">■ AX 시대의 3대 핵심 역량</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-5 border rounded-lg bg-white">
+                    <div class="text-red-700 text-2xl mb-3"><i class="fas fa-comment-dots"></i></div>
+                    <p class="font-bold mb-2">프롬프트 구성 역량</p>
+                    <p class="text-sm text-gray-600">AI에게 배경, 역할, 목표를 얼마나 구체적으로 전달하는가?</p>
+                </div>
+                <div class="p-5 border rounded-lg bg-white">
+                    <div class="text-red-700 text-2xl mb-3"><i class="fas fa-sync"></i></div>
+                    <p class="font-bold mb-2">반복 수정(Iteration) 역량</p>
+                    <p class="text-sm text-gray-600">AI의 답변을 비판적으로 검토하고 다시 질문하며 고도화하는가?</p>
+                </div>
+                <div class="p-5 border rounded-lg bg-white">
+                    <div class="text-red-700 text-2xl mb-3"><i class="fas fa-shield-alt"></i></div>
+                    <p class="font-bold mb-2">보안 및 윤리 의식</p>
+                    <p class="text-sm text-gray-600">사내 기밀 데이터 유출을 방지하고 결과의 정확성을 검증하는가?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 신규 추가: 01. 차세대 프롬프트 엔지니어링 가이드 -->
+        <section id="prompt" class="content-section">
+            <h2 class="section-header">1-2. 프롬프트 엔지니어링: 페르소나보다 논리</h2>
+            <p class="text-lg mb-8">모델이 똑똑해졌습니다. 이제 "너는 20년 차 마케팅 전문가야"라고 최면을 걸기보다, <strong>'어떻게 사고할지(Chain of
+                    Thought)'</strong> 단계를 설계하는 것이 핵심입니다.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="p-6 bg-white border border-gray-200 rounded-xl">
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-history mr-2"></i>과거의 방식 (Legacy)</h3>
+                    <ul class="text-sm space-y-3 text-gray-500">
+                        <li>- <strong>장황한 페르소나:</strong> "너는 세계 최고의 전략가이며..." (이제는 모델 기본 지능이 높아져 큰 차이가 없음)</li>
+                        <li>- <strong>모호한 지시:</strong> "최대한 멋지게 써줘"</li>
+                        <li>- <strong>단답형 요구:</strong> 과정 없이 결과만 바로 도출 시도</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-red-50 border border-red-200 rounded-xl">
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-rocket mr-2"></i>차세대 방식 (Modern CoT)</h3>
+                    <ul class="text-sm space-y-3 text-gray-700">
+                        <li>- <strong>CoT (Chain of Thought):</strong> "단계별로 생각해서 논리를 전개해 줘"</li>
+                        <li>- <strong>맥락(Context) 집중:</strong> 모델에게 역할극을 시키기보다 현재 상황의 데이터를 정확히 전달</li>
+                        <li>- <strong>구조적 제약:</strong> "첫째, 둘째... 순서로 분석하고 마지막에 표로 정리해"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 class="font-bold mb-3"><i class="fas fa-brain text-red-600 mr-2"></i>핵심 기술: Chain of Thought (생각의
+                    사슬)</h4>
+                <p class="text-sm mb-4">최신 모델(Gemini 1.5 Pro, GPT-4o 등)은 스스로 추론할 수 있는 능력이 비약적으로 상승했습니다. 결과만 묻지 말고
+                    <strong>'생각하는 단계'</strong>를 지시하세요.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-3 bg-white border rounded shadow-sm">
+                        <p class="font-bold mb-1 text-blue-600">Step 1. 관점 정의</p>
+                        "먼저 고객 관점과 기술 관점에서 각각 분석해."
+                    </div>
+                    <div class="p-3 bg-white border rounded shadow-sm">
+                        <p class="font-bold mb-1 text-blue-600">Step 2. 근거 나열</p>
+                        "그 분석을 뒷받침할 구체적인 근거를 데이터에서 찾아."
+                    </div>
+                    <div class="p-3 bg-white border rounded shadow-sm">
+                        <p class="font-bold mb-1 text-blue-600">Step 3. 결론 도출</p>
+                        "두 관점을 종합하여 최종 제안서를 요약해."
+                    </div>
+                </div>
+            </div>
+
+            <div class="prompt-box">
+                <span class="prompt-label">MODERN LOGIC PROMPT</span>
+                "다음 신제품 기획 초안을 검토해 줘. 장황한 칭찬이나 페르소나 설정은 생략하고 바로 다음 단계에 따라 추론을 전개해.
+
+                1. 먼저 이 기획안의 논리적 모순점 3가지를 찾아내.
+                2. 각 모순점을 해결하기 위한 대안을 LG전자의 핵심 가치와 연결해 제안해.
+                3. 이 모든 과정을 거쳐 최종적으로 수정된 기획안의 뼈대를 목차 형태로 보여줘.
+
+                **단계별로 생각(Step by step)해서 가장 합리적인 답변을 도출해.**"
+            </div>
+
+            <p class="text-xs text-center text-gray-400 mt-4 italic">※ 팁: 모델에게 "천천히 단계별로 생각해 봐"라고 한 문장만 추가해도 정답률이 20% 이상
+                올라갑니다.</p>
+        </section>
+
+        <section id="security" class="content-section">
+            <h2 class="section-header">1-3. AI 보안 & 할루시네이션 대처법</h2>
+
+            <!-- 핵심 경고 박스 -->
+            <div class="p-6 rounded-xl mb-8" style="background:#7f1d1d;color:#fff">
+                <h3 class="font-bold text-xl mb-3"><i class="fas fa-exclamation-triangle mr-2 text-yellow-300"></i>AI를
+                    잘못 쓰면 오히려 독이 됩니다</h3>
+                <p class="text-sm" style="color:#fca5a5">AI가 생성한 내용을 검토 없이 그대로 보고·배포하거나, 기밀 데이터를 외부 AI에 입력하는 순간 <strong
+                        style="color:#fde047">개인·조직 모두에게 심각한 리스크</strong>가 발생합니다. 이 섹션은 AI를 <strong
+                        style="color:#86efac">안전하고 정확하게 쓰는 방법</strong>을 다룹니다.</p>
+            </div>
+
+            <!-- PART A: 보안 -->
+            <h3 class="font-bold text-2xl mb-5 mt-2" style="color:#991b1b"><i class="fas fa-shield-alt mr-2"></i>PART A.
+                AI 보안 수칙</h3>
+
+            <h4 class="font-bold text-lg mb-3">① 절대 입력하면 안 되는 정보</h4>
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="p-5 border-2 border-red-400 rounded-xl bg-red-50">
+                    <p class="font-bold text-red-800 mb-3"><i class="fas fa-user-shield mr-1"></i>개인정보</p>
+                    <ul class="text-xs text-gray-700 space-y-1 list-disc pl-4">
+                        <li>고객 이름·연락처·주소</li>
+                        <li>주민등록번호·사원번호</li>
+                        <li>이메일 주소 원본</li>
+                        <li>구매 이력·상담 내용 원문</li>
+                    </ul>
+                    <div class="mt-3 p-2 bg-red-100 rounded text-xs text-red-800 font-bold">→ 반드시 마스킹 후 사용<br>예: 홍○○,
+                        010-****-****</div>
+                </div>
+                <div class="p-5 border-2 border-orange-400 rounded-xl bg-orange-50">
+                    <p class="font-bold text-orange-800 mb-3"><i class="fas fa-lock mr-1"></i>사내 기밀</p>
+                    <ul class="text-xs text-gray-700 space-y-1 list-disc pl-4">
+                        <li>미공개 매출·실적 데이터</li>
+                        <li>신제품 출시 일정·스펙</li>
+                        <li>M&A·투자 관련 내용</li>
+                        <li>임원 인사·조직 개편 정보</li>
+                    </ul>
+                    <div class="mt-3 p-2 bg-orange-100 rounded text-xs text-orange-800 font-bold">→ 사내 승인된 시스템 전용<br>(MS
+                        Copilot 사내 계정)</div>
+                </div>
+                <div class="p-5 border-2 border-yellow-400 rounded-xl bg-yellow-50">
+                    <p class="font-bold text-yellow-800 mb-3"><i class="fas fa-copyright mr-1"></i>법적 리스크</p>
+                    <ul class="text-xs text-gray-700 space-y-1 list-disc pl-4">
+                        <li>타사 저작권 자료 원문</li>
+                        <li>계약서·NDA 내용</li>
+                        <li>법률·소송 관련 문서</li>
+                        <li>특허 출원 전 기술 내용</li>
+                    </ul>
+                    <div class="mt-3 p-2 bg-yellow-100 rounded text-xs text-yellow-800 font-bold">→ 법무팀 사전 협의 필수</div>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">② 사내 AI 사용 원칙</h4>
+            <div class="p-6 bg-gray-50 border border-gray-200 rounded-xl mb-8">
+                <table class="table-custom text-sm w-full">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>허용</th>
+                            <th>주의</th>
+                            <th>금지</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>이메일 작성</td>
+                            <td class="text-green-700 font-bold">✓ 일반 업무 내용</td>
+                            <td class="text-orange-600">△ 협력사 계약 조건</td>
+                            <td class="text-red-700 font-bold">✗ 기밀 조건 포함</td>
+                        </tr>
+                        <tr>
+                            <td>데이터 분석</td>
+                            <td class="text-green-700 font-bold">✓ 공개 통계·수치</td>
+                            <td class="text-orange-600">△ 익명화된 내부 데이터</td>
+                            <td class="text-red-700 font-bold">✗ 개인식별 가능 데이터</td>
+                        </tr>
+                        <tr>
+                            <td>보고서 작성</td>
+                            <td class="text-green-700 font-bold">✓ 공개 자료 기반</td>
+                            <td class="text-orange-600">△ 실적 요약(검토 후)</td>
+                            <td class="text-red-700 font-bold">✗ 미공개 실적 원본</td>
+                        </tr>
+                        <tr>
+                            <td>PDF 업로드</td>
+                            <td class="text-green-700 font-bold">✓ 외부 공개 문서</td>
+                            <td class="text-orange-600">△ 일반 사내 문서</td>
+                            <td class="text-red-700 font-bold">✗ 기밀·NDA 문서</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">③ AI 생성물 사용 에티켓</h4>
+            <div class="grid md:grid-cols-2 gap-4 mb-10">
+                <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-sm">
+                    <p class="font-bold text-green-800 mb-2"><i class="fas fa-check-circle mr-1"></i>올바른 활용</p>
+                    <ul class="space-y-1 text-gray-700 list-disc pl-4">
+                        <li>AI 초안 → 반드시 사람이 검토·수정 → 배포</li>
+                        <li>"AI를 활용하여 작성한 초안입니다" 명시</li>
+                        <li>수치·사실은 원본 출처로 재확인</li>
+                        <li>최종 보고서에는 전문가 판단 반영</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-red-50 border border-red-200 rounded-xl text-sm">
+                    <p class="font-bold text-red-800 mb-2"><i class="fas fa-times-circle mr-1"></i>위험한 활용</p>
+                    <ul class="space-y-1 text-gray-700 list-disc pl-4">
+                        <li>AI 출력물을 검토 없이 그대로 임원 보고</li>
+                        <li>AI가 생성한 수치를 원본처럼 인용</li>
+                        <li>고객·임원 앞에서 실시간 AI 답변 그대로 발표</li>
+                        <li>외부 공개 문서에 AI 생성 팩트 무검증 사용</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PART B: 할루시네이션 -->
+            <h3 class="font-bold text-2xl mb-5" style="color:#991b1b"><i class="fas fa-brain mr-2"></i>PART B.
+                할루시네이션(Hallucination) 대처법</h3>
+
+            <div class="info-box mb-6">
+                <h4 class="font-bold text-lg mb-2">할루시네이션이란?</h4>
+                <p class="text-sm text-gray-700">AI가 학습 데이터에 없거나 불확실한 내용을 <strong class="highlight">마치 사실인 것처럼 자신 있게
+                        생성</strong>하는 현상입니다. 특히 <strong>수치, 날짜, 사람 이름, 통계</strong>에서 자주 발생하며, 출력 문장이 매우 자연스럽고 그럴듯해서 발견하기
+                    어렵습니다.</p>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">① 유형별 할루시네이션 사례</h4>
+            <div class="grid md:grid-cols-2 gap-5 mb-8">
+                <div class="p-5 border rounded-xl bg-red-50 border-red-200">
+                    <p class="font-bold text-red-700 mb-2"><i class="fas fa-times-circle mr-1"></i>유형 1: 가짜 통계 & 수치</p>
+                    <p class="text-xs text-gray-500 mb-1">프롬프트: "글로벌 에어컨 시장 점유율 알려줘"</p>
+                    <div class="p-2 bg-white border rounded text-xs text-gray-700 mb-2">"2024년 LG전자 점유율은 18.7%로
+                        다이킨(22.1%)에 이어 2위입니다."</div>
+                    <p class="text-xs text-red-600 font-bold">⚠ 출처 없이 AI가 만들어낸 그럴듯한 숫자!</p>
+                </div>
+                <div class="p-5 border rounded-xl bg-red-50 border-red-200">
+                    <p class="font-bold text-red-700 mb-2"><i class="fas fa-times-circle mr-1"></i>유형 2: 존재하지 않는 정책·법규
+                    </p>
+                    <p class="text-xs text-gray-500 mb-1">프롬프트: "개인정보보호법 35조 내용 알려줘"</p>
+                    <div class="p-2 bg-white border rounded text-xs text-gray-700 mb-2">"35조에 따르면 기업은 연 1회 이상 개인정보 영향평가를
+                        의무 수행해야 합니다."</div>
+                    <p class="text-xs text-red-600 font-bold">⚠ 실제 법조문과 다른 내용일 수 있음!</p>
+                </div>
+                <div class="p-5 border rounded-xl bg-red-50 border-red-200">
+                    <p class="font-bold text-red-700 mb-2"><i class="fas fa-times-circle mr-1"></i>유형 3: 없는 사람·사건</p>
+                    <p class="text-xs text-gray-500 mb-1">프롬프트: "LG전자 CS 관련 사례 알려줘"</p>
+                    <div class="p-2 bg-white border rounded text-xs text-gray-700 mb-2">"2023년 박○○ 부사장이 발표한 CS 혁신 전략에
+                        따르면..."</div>
+                    <p class="text-xs text-red-600 font-bold">⚠ 실제 존재하지 않는 임원·발표 내용!</p>
+                </div>
+                <div class="p-5 border rounded-xl bg-red-50 border-red-200">
+                    <p class="font-bold text-red-700 mb-2"><i class="fas fa-times-circle mr-1"></i>유형 4: 날짜·버전 오류</p>
+                    <p class="text-xs text-gray-500 mb-1">프롬프트: "최신 규정 기준 알려줘"</p>
+                    <div class="p-2 bg-white border rounded text-xs text-gray-700 mb-2">"2024년 개정된 최신 기준에 따르면 ..."</div>
+                    <p class="text-xs text-red-600 font-bold">⚠ AI 학습 데이터 기준일 이후 정보는 부정확!</p>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">② 할루시네이션 예방 프롬프트 전략</h4>
+            <div class="space-y-4 mb-8">
+                <div class="p-4 bg-white border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">전략 1</span>
+                        <p class="font-bold text-gray-800">범위를 문서로 한정하기</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded text-xs text-gray-700 font-mono">"첨부한 이 문서 안의 내용만 기반으로 정리해 줘. 문서에
+                        없는 정보는 '확인 필요'라고 표시해."</div>
+                </div>
+                <div class="p-4 bg-white border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">전략 2</span>
+                        <p class="font-bold text-gray-800">모르면 모른다고 하게 만들기</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded text-xs text-gray-700 font-mono">"확실하지 않은 정보는 추측하지 말고 '정확한 출처 확인
+                        필요'라고 명시해줘."</div>
+                </div>
+                <div class="p-4 bg-white border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">전략 3</span>
+                        <p class="font-bold text-gray-800">출처 함께 요청하기</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded text-xs text-gray-700 font-mono">"각 수치마다 어떤 문서/페이지를 근거로 했는지 괄호 안에
+                        표시해줘."</div>
+                </div>
+                <div class="p-4 bg-white border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">전략 4</span>
+                        <p class="font-bold text-gray-800">자기 검증 요청</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded text-xs text-gray-700 font-mono">"위 내용을 작성한 뒤, 스스로 팩트체크해서 불확실한
+                        부분을 [검증필요] 태그로 표시해줘."</div>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">③ 팩트체크 5단계 프로세스</h4>
+            <div class="grid grid-cols-5 gap-3 text-center text-xs mb-8">
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-2xl font-bold text-red-700">①</p>
+                    <p class="font-bold mt-1">숫자 의심</p>
+                    <p class="text-gray-500 mt-1">모든 수치는 원본 자료와 대조</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-2xl font-bold text-red-700">②</p>
+                    <p class="font-bold mt-1">출처 요구</p>
+                    <p class="text-gray-500 mt-1">"이 내용의 출처가 뭐야?" 추가 질문</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-2xl font-bold text-red-700">③</p>
+                    <p class="font-bold mt-1">교차 검증</p>
+                    <p class="text-gray-500 mt-1">다른 AI 또는 공식 사이트로 재확인</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-2xl font-bold text-red-700">④</p>
+                    <p class="font-bold mt-1">범위 제한</p>
+                    <p class="text-gray-500 mt-1">"이 문서만 기반으로" 범위 명시</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-2xl font-bold text-red-700">⑤</p>
+                    <p class="font-bold mt-1">용도 구분</p>
+                    <p class="text-gray-500 mt-1">초안용 vs 최종 보고용 엄격히 구분</p>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-3">④ 업무별 AI 활용 위험도 가이드</h4>
+            <div class="p-5 bg-white border border-gray-200 rounded-xl">
+                <table class="table-custom text-sm w-full">
+                    <thead>
+                        <tr>
+                            <th>업무 유형</th>
+                            <th>AI 활용 위험도</th>
+                            <th>필수 검증 사항</th>
+                            <th>권장 활용 범위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>이메일 초안 작성</td>
+                            <td><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">낮음</span>
+                            </td>
+                            <td>어조·내용 적합성 확인</td>
+                            <td>초안 → 검토 → 발송</td>
+                        </tr>
+                        <tr>
+                            <td>내부 보고서 요약</td>
+                            <td><span
+                                    class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-bold">중간</span>
+                            </td>
+                            <td>수치·날짜 원본 대조</td>
+                            <td>문서 첨부 후 요약 요청</td>
+                        </tr>
+                        <tr>
+                            <td>시장·경쟁사 분석</td>
+                            <td><span
+                                    class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-bold">높음</span>
+                            </td>
+                            <td>모든 수치 공식 출처 재확인</td>
+                            <td>초안용으로만, 반드시 검증</td>
+                        </tr>
+                        <tr>
+                            <td>법규·정책 해석</td>
+                            <td><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">매우 높음</span>
+                            </td>
+                            <td>법무팀 반드시 최종 확인</td>
+                            <td>참고용으로만 사용</td>
+                        </tr>
+                        <tr>
+                            <td>임원 보고용 자료</td>
+                            <td><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">매우 높음</span>
+                            </td>
+                            <td>전체 내용 담당자 검토 필수</td>
+                            <td>구성안 작성 후 전면 검토</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 1-4. Copilot 접속 및 실행법 -->
+        <section id="copilot-access" class="content-section">
+            <h2 class="section-header">1-4. Copilot 접속 및 실행법</h2>
+
+            <div class="bg-red-50 border border-red-200 rounded-2xl p-6 mb-8 text-center">
+                <p class="text-lg font-bold text-[#C10933] mb-1">"Copilot = 회사 계정으로 로그인한 AI 채팅 서비스"</p>
+                <p class="text-sm text-gray-600">ChatGPT처럼 말을 걸면 대답하는데, <strong>사내 보안이 적용된 Microsoft 공식
+                        서비스</strong>입니다.<br>
+                    별도 프로그램 설치 없이 웹 브라우저에서 바로 사용합니다.</p>
+            </div>
+
+            <!-- 처음 시작 3단계 -->
+            <h3 class="font-bold text-xl text-gray-800 mb-4"><i class="fas fa-play-circle text-red-600 mr-2"></i>처음이라면 이
+                3단계만 기억하세요</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white border-2 border-red-100 rounded-xl p-5 text-center relative shadow-sm">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        1</div>
+                    <div class="text-3xl text-gray-400 mt-3 mb-3"><i class="fas fa-copy"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-1">복사 (Ctrl + C)</h4>
+                    <p class="text-xs text-gray-500 mt-2">이메일 본문, 엑셀 데이터, PDF 내용 등<br>분석할 대상 텍스트를 복사합니다.</p>
+                </div>
+                <div class="bg-white border-2 border-red-100 rounded-xl p-5 text-center relative shadow-sm">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        2</div>
+                    <div class="text-3xl text-gray-400 mt-3 mb-3"><i class="fas fa-keyboard"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-1">붙여넣기 + 지시</h4>
+                    <p class="text-xs text-gray-500 mt-2">Copilot 입력창에 붙여넣고<br>"이걸 한글로 요약해줘"와 같이 명령합니다.</p>
+                </div>
+                <div class="bg-white border-2 border-red-100 rounded-xl p-5 text-center relative shadow-sm">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        3</div>
+                    <div class="text-3xl text-gray-400 mt-3 mb-3"><i class="fas fa-check-double"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-1">결과 확인 후 보완</h4>
+                    <p class="text-xs text-gray-500 mt-2">AI 답변을 그대로 사용하지 말고<br>업무 목적에 맞게 검토 후 보완합니다.</p>
+                </div>
+            </div>
+
+            <!-- 2대 접속 공식 -->
+            <h3 class="font-bold text-xl text-gray-800 mb-4"><i class="fas fa-link text-red-600 mr-2"></i>업무 효율을 극대화하는
+                2대 접속 공식</h3>
+
+            <div class="mb-6 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+                <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0"></i>
+                <p class="text-xs text-gray-700"><strong>⚠️ 로그인 계정 확인 필수:</strong> 접속 후 오른쪽 상단 프로필 아이콘을 클릭하여 <strong>사내
+                        계정(@lge.com)으로 로그인</strong>되어 있는지 확인하세요. 사내 보안(상용 데이터 보호)이 적용되어 입력한 대화가 외부 학습에 사용되지 않습니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 공식 1 -->
+                <div
+                    class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                            브라우저 연동</div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-3"><i
+                                class="fab fa-edge text-blue-600 mr-2"></i>공식 1: MS Edge 브라우저 사이드바</h3>
+                        <p class="text-xs text-gray-500 mb-4">웹서핑 중이거나 사내 시스템(LGE 그룹웨어), PDF 문서를 보면서 실시간으로 질문할 때 가장
+                            유용합니다.</p>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                            <div><strong>[실행 방법]</strong></div>
+                            <ol class="list-decimal pl-4 space-y-2">
+                                <li><strong>MS Edge</strong> 브라우저를 켭니다.</li>
+                                <li>브라우저 우측 상단 모서리에 있는 파란색 <strong>Copilot 아이콘</strong>을 클릭합니다.</li>
+                                <li>또는 단축키 <kbd class="bg-white border px-1 rounded text-2xs font-bold">Ctrl</kbd> +
+                                    <kbd class="bg-white border px-1 rounded text-2xs font-bold">Shift</kbd> + <kbd
+                                        class="bg-white border px-1 rounded text-2xs font-bold">.</kbd> (마침표)를 누릅니다.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공식 2 -->
+                <div
+                    class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                            독립형 웹 포털</div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-3"><i
+                                class="fas fa-globe text-purple-600 mr-2"></i>공식 2: Copilot 전용 웹 포털</h3>
+                        <p class="text-xs text-gray-500 mb-4">긴 이메일이나 문서 초안을 넓은 창에서 편집하고 장문의 텍스트를 분석할 때 쾌적하게 쓸 수 있습니다.
+                        </p>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                            <div><strong>[실행 방법]</strong></div>
+                            <ol class="list-decimal pl-4 space-y-2">
+                                <li>브라우저(Chrome/Edge 등) 주소창에 아래 전용 웹 주소를 입력해 접속합니다.</li>
+                                <li>
+                                    <a href="https://m365.cloud.microsoft/chat" target="_blank"
+                                        class="text-blue-600 font-bold hover:underline block my-1">
+                                        <i class="fas fa-external-link-alt mr-1"></i> m365.cloud.microsoft/chat
+                                    </a>
+                                </li>
+                                <li>사내 계정으로 로그인한 상태에서 자유롭게 대화를 시작합니다.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="copilot-email" class="content-section">
+            <h2 class="section-header">2-1. Outlook Copilot: 이메일 지능형 관리</h2>
+            <div class="info-box">
+                <p><strong>우리 사내에서 MS 365를 사용 중</strong>이기 때문에, Copilot은 Outlook 받은편지함 데이터에 <strong>직접 접근</strong>하여 메일을
+                    분류·요약할 수 있습니다.</p>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-calendar-check mr-2"></i>시나리오: 주말 동안 온 메일 한눈에 정리
+            </h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "지난 금요일 오후 6시부터 현재까지 나에게 온 이메일들을 분석해 줘.
+                1. 🔴 즉시 확인이 필요한 긴급 사항
+                2. 🟡 이번 주 내에 내가 결정해야 할 안건
+                3. 🟢 단순 공유 사항
+                각 메일마다 [발신자 | 제목 | 핵심 1줄 요약] 형태로 정리.
+                특히 김철수 상무님이 언급된 메일이 있다면 최우선으로 알려줘."
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-pen mr-2"></i>시나리오: 격식 있는 업무 이메일 작성</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "다음 내용으로 업무 이메일 초안을 작성해 줘.
+                - 수신: 협력업체 담당자
+                - 목적: 다음 주 미팅 일정 조율
+                - 톤: 정중하면서 간결 (LG전자 사내 메일 스타일)
+                - 포함: 3개 후보 일시 제안, 안건 사전 공유 요청
+                - 분량: 10줄 이내, 회신 기한 명시"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-language mr-2"></i>시나리오: 외국어 번역 및 현지화 메일 작성</h3>
+            <p class="text-sm text-gray-600 mb-2">기존에는 구글번역기에 한국어를 입력하여 어색한 직역 문장으로 메일을 보냈다면, 이제는 다국어 번역 메일을 메일 창 안에서 쉽게
+                작성할 수 있습니다. 단순한 기계식 번역이 아니라, <strong>상대 국가의 비즈니스 문화와 상황에 어울리는 현지 표현(Localization)으로 자연스럽게 문장을 다듬어
+                    줍니다.</strong></p>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "아래 한국어 내용을 자연스러운 [영어/일본어/중국어 등] 비즈니스 메일로 변환해 줘.
+
+                [작성 가이드]
+                1. 단순 직역을 지양하고, 해당 언어권의 격식 있는 비즈니스 서신 형태로 구성해 줘.
+                2. 상대방의 비즈니스 문화에 적합한 인사말과 맺음말을 포함해 줘.
+                3. 수신인과의 관계: [협력사 담당자 / 파트너사 임원 / 고객사]
+
+                [한국어 원문]
+                이곳에 한국어 메일 초안을 작성하여 입력하세요."
+            </div>
+        </section>
+
+        <section id="copilot-pdf" class="content-section">
+            <h2 class="section-header">2-2. PDF 요약 & 보고서 작성</h2>
+
+            <div class="info-box">
+                <h3 class="font-bold text-xl mb-2"><i class="fas fa-file-pdf mr-2 text-red-600"></i>Copilot에 PDF를 직접 올려서
+                    분석할 수 있습니다</h3>
+                <p class="text-sm text-gray-700">아웃룩 Copilot(Claude 모델) 또는 Microsoft Copilot 채팅창에 <strong>PDF 파일을
+                        첨부</strong>하면, 문서 내용을 읽고 요약·분석·보고서 초안까지 즉시 생성합니다. 긴 보고서, 정책 문서, 외부 리서치 자료를 빠르게 소화하는 데 매우 효과적입니다.
+                </p>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-upload mr-2 text-red-600"></i>PDF 연동 및 요약 실행법 (2가지
+                방법)</h3>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- 방법 A -->
+                <div class="p-5 bg-gray-50 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-paperclip text-[#C10933] mr-1"></i>방법 A:
+                        아웃룩 & 웹 포털에서 직접 첨부</h4>
+                    <ol class="list-decimal pl-4 space-y-1.5 text-xs text-gray-700">
+                        <li>아웃룩 또는 웹 포털(<code class="bg-gray-100 px-1 rounded">m365.cloud.microsoft/chat</code>) 접속</li>
+                        <li>채팅 입력창 하단의 <strong>📎 클립(첨부) 버튼</strong> 클릭</li>
+                        <li>내 PC의 PDF 파일을 선택하여 업로드</li>
+                        <li>업로드 완료 후 프롬프트를 입력하여 요약 지시</li>
+                    </ol>
+                </div>
+                <!-- 방법 B -->
+                <div class="p-5 bg-gray-50 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-gray-800 mb-3"><i class="fab fa-edge text-[#0078D4] mr-1"></i>방법 B: Edge
+                        브라우저 드래그 앤 드롭 (추천)</h4>
+                    <ol class="list-decimal pl-4 space-y-1.5 text-xs text-gray-700">
+                        <li>내 PC 폴더에 있는 PDF 파일을 마우스로 클릭합니다.</li>
+                        <li>클릭한 상태로 <strong>MS Edge 브라우저 화면 안으로 드래그</strong>해 놓습니다.</li>
+                        <li>단축키 <kbd class="bg-white border px-1 rounded text-2xs font-bold">Ctrl</kbd>+<kbd
+                                class="bg-white border px-1 rounded text-2xs font-bold">Shift</kbd>+<kbd
+                                class="bg-white border px-1 rounded text-2xs font-bold">.</kbd>을 눌러 우측 <strong>Copilot
+                                사이드바</strong>를 켭니다.</li>
+                        <li>채팅창에 "현재 페이지를 기반으로 요약해줘"라고 입력합니다.</li>
+                    </ol>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mb-6">💡 한 번에 여러 PDF를 분석할 때는 [방법 A]의 다중 첨부를 권장하며, 열려 있는 개별 문서를 즉시 분석할 때는 [방법
+                B]가 간편합니다.</p>
+
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-compress-alt mr-2"></i>시나리오 ①: 긴 보고서 핵심만 추출</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "첨부된 보고서를 분석해서 다음을 정리해 줘. (문서에 없는 내용은 절대 추가하지 마.)
+
+                1. 이 문서의 핵심 주제 1문장 요약
+                2. 핵심 내용 TOP 5 (불렛 형태, 각 항목 2줄 이내)
+                3. 주요 수치·데이터 정리 (표로)
+                4. 우리 팀 업무에 관련 있는 내용 별도 표시
+                5. 경영진 보고용 1페이지 요약 초안 (현상→시사점→제언 구조)"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-chart-bar mr-2"></i>시나리오 ②: 여러 PDF 비교 분석 후 보고서 작성
+            </h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT (PDF 2개 이상 첨부 시)</span>
+                "첨부한 두 문서를 비교 분석해서 보고서 초안을 작성해 줘.
+
+                [비교 항목]
+                1. 두 문서의 공통점과 차이점 (표 형태)
+                2. 각 문서의 핵심 주장 요약
+                3. 상충되는 내용이 있다면 명확히 표시
+                4. 종합 결론 및 우리 팀 적용 방향 제언
+
+                [출력 형태]: A4 1~2장 분량, 현상→원인→시사점→제언 구조
+                [어조]: 간결하고 공식적인 내부 보고서 스타일"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-pen-alt mr-2"></i>시나리오 ③: 외부 자료 → 사내 보고서 변환</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "첨부된 외부 자료(리서치/뉴스/분석 보고서)를 우리 팀 사내 보고서 형식으로 재작성해 줘.
+
+                [조건]
+                - LG전자 CS사업부 관점에서 재해석
+                - 핵심 수치와 트렌드는 반드시 포함
+                - 경쟁사 언급이 있으면 별도 섹션으로 정리
+                - 마지막에 '우리 팀 Action Item 제안' 3가지 추가
+                - 분량: A4 1장, 빽빽하게 구성"
+            </div>
+
+            <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                <h4 class="font-bold text-amber-900 mb-2"><i
+                        class="fas fa-exclamation-triangle mr-2 text-amber-500"></i>보안 주의</h4>
+                <p class="text-xs text-gray-700">기밀 문서(미공개 실적, 개인정보 포함 자료 등)는 외부 AI에 업로드 금지. 공개 자료 또는 보안 등급 확인 후 활용하세요.
+                </p>
+            </div>
+        </section>
+
+        <section id="copilot-excel" class="content-section">
+            <h2 class="section-header">2-3. Excel 데이터 분석: 수식 제작 및 데이터 연동</h2>
+
+            <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
+                <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
+                <p class="text-xs text-gray-700">
+                    글로벌 VOC 현황 데이터에서 상담 접수일(A열)과 처리 완료일(B열) 사이의 실제 처리 소요 일수를 구해야 합니다.
+                    날짜 차이 수식이 헷갈리는 상황에서 Copilot으로 수식을 받고, 카테고리별 CSAT(고객만족도) 데이터를 복사하여 보고서용 통계 요약을 즉석에서 뽑아내고자 합니다.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Step 1 -->
+                <div class="relative pl-10">
+                    <div
+                        class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        1</div>
+                    <h3 class="font-bold text-gray-800 text-md">엑셀 시트 열 구조 확인 및 질문 준비</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        분석하고자 하는 엑셀 파일의 정확한 열 이름과 알파벳(A열, B열 등)을 확인합니다.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative pl-10">
+                    <div
+                        class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        2</div>
+                    <h3 class="font-bold text-gray-800 text-md">Copilot Web에 수식 짜기 질문 전송</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        코파일럿 웹 페이지를 켜고, 엑셀 열 이름을 명시하여 어떤 조건의 수식을 짜야 하는지 설명하고 복사 가능한 수식을 요청합니다.
+                    </p>
+
+                    <div class="prompt-box">
+                        <span class="prompt-label">BEST PROMPT (엑셀 함수 수식 제작)</span>
+                        "다음 요청에 맞는 엑셀 함수 수식을 만들어 주고 원리를 쉽게 설명해 줘.
+
+                        [요청 사항]
+                        - 현재 내 엑셀 데이터의 A열은 '상담 접수일자' (예: 2026-06-01), B열은 '처리 완료일자' (예: 2026-06-05)가 입력되어 있어.
+                        - C열의 각 셀에 '처리 완료일자'에서 '상담 접수일자'를 빼서 순수한 처리 소요 기간(일수)을 숫자로만 보여주는 수식을 만들어 줘.
+                        - B열(처리 완료일)이 아직 공란인 경우(미완료 건)에는 \"처리중\"이라는 텍스트를 표시하는 IF 조건도 함께 넣어 줘.
+                        - 날짜 서식 오류나 문자 데이터형으로 인한 에러를 방지하는 IFERROR 처리도 포함해 줘.
+
+                        수식은 바로 복사할 수 있게 해주고, 적용법도 짧게 불렛포인트로 알려줘."
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative pl-10">
+                    <div
+                        class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        3</div>
+                    <h3 class="font-bold text-gray-800 text-md">소량 데이터 직접 복사로 요약 시각화 얻기</h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        데이터가 수백 줄 이내로 크지 않다면, 엑셀 시트에서 필요한 영역을 마우스로 드래그 복사(Ctrl+C)하여 Copilot Web 채팅창에 바로 붙여넣기(Ctrl+V)한 후
+                        분석과 보고용 요약 결과 도출을 요구합니다.
+                    </p>
+
+                    <div class="prompt-box">
+                        <span class="prompt-label">BEST PROMPT (데이터 표 직접 요약)</span>
+                        "아래 붙여넣은 표는 LG전자 제품 카테고리별 글로벌 고객 만족도(CSAT) 및 수리 처리 현황 통계 데이터야. 이 데이터를 읽어줘.
+
+                        1. 고객 만족도(CSAT) 점수가 가장 낮은 취약 제품 카테고리가 무엇이고, 해당 카테고리의 평균 처리 소요 일수와 만족도 점수를 같이 추출해 줘.
+                        2. 전체 카테고리 중 처리 소요 일수가 평균 대비 20% 이상 긴 항목을 찾아 개선이 필요한 항목으로 표시해 줘.
+                        3. 이 데이터를 활용해 CC&S 주간보고에 삽입할 수 있는 제품별 CSAT 비교 표(Table)로 가독성 있게 정리해 줘.
+
+                        [붙여넣을 데이터 표]
+                        (여기에 엑셀에서 드래그해서 복사해 온 표 데이터 붙여넣기)"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mvp-concept" class="content-section">
+            <h2 class="section-header">3-1. 즉시 실행하는 MVP 개념</h2>
+            <p class="text-lg mb-8"><strong>MVP (Minimum Viable Prototype)</strong>는 회의실에서 말로만 요구사항을 전달하는 한계를 극복하기
+                위해, AI를 통해 <strong>실제 브라우저에서 동작하는 인터랙티브 샘플</strong>을 즉시 생성하여 협업하는 방식입니다.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="p-6 bg-white border-2 border-dashed border-red-200 rounded-xl">
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-times-circle mr-2"></i>전통적인 방식 (동상이몽)</h3>
+                    <ul class="text-sm space-y-3 text-gray-600">
+                        <li>- 텍스트 기획서만 보고 개발/디자인 진행</li>
+                        <li>- 결과물이 완성된 후 생각했던 것과 달라 전면 수정 반복</li>
+                        <li>- 소통 오류 및 프로젝트 일정 지연 발생</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-red-50 border-2 border-red-600 rounded-xl">
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-check-circle mr-2"></i>MVP 프로토타이핑 (시각적 협업)
+                    </h3>
+                    <ul class="text-sm space-y-3 text-gray-700">
+                        <li>- 아웃룩 Copilot(Claude)을 활용해 <strong>5분 만에 실제 작동 HTML 생성</strong></li>
+                        <li>- 화면 설계와 동적 인터랙션을 회의 중 실시간 눈으로 확인</li>
+                        <li>- 개발팀에 <strong>"이 샘플 코드 그대로 구축해주세요"</strong>라고 명확한 의사전달</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 class="font-bold mb-3"><i class="fas fa-sitemap text-red-600 mr-2"></i>MVP 활용 가능한 업무 영역</h4>
+                <div class="grid md:grid-cols-3 gap-4 text-sm mt-4">
+                    <div class="p-4 bg-white border rounded-lg text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <p class="font-bold text-gray-800">CS 대시보드</p>
+                        <p class="text-xs text-gray-500 mt-1">VOC·CSAT 데이터를 실시간 시각화하는 웹 대시보드 시안</p>
+                    </div>
+                    <div class="p-4 bg-white border rounded-lg text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <p class="font-bold text-gray-800">보고용 슬라이드</p>
+                        <p class="text-xs text-gray-500 mt-1">키보드로 넘기는 인터랙티브 HTML 발표자료</p>
+                    </div>
+                    <div class="p-4 bg-white border rounded-lg text-center">
+                        <div class="text-3xl mb-2">🔧</div>
+                        <p class="font-bold text-gray-800">업무 도구 시안</p>
+                        <p class="text-xs text-gray-500 mt-1">신규 시스템·서비스 기획 단계의 UI 프로토타입</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mvp-dashboard" class="content-section">
+            <h2 class="section-header">3-2. 대시보드 MVP 제작</h2>
+            <p class="mb-6">코딩 지식 없이도 <strong>아웃룩 Copilot(Claude 모델)</strong>으로 실제 브라우저에서 작동하는 대시보드를 즉시 만들고 회의에서 시연할 수
+                있습니다.</p>
+
+            <div class="p-6 bg-gray-50 rounded-lg mb-8">
+                <h4 class="font-bold text-lg text-red-700 mb-3"><i class="fas fa-cogs mr-2"></i>대시보드 MVP 제작 4단계</h4>
+                <ol class="list-decimal pl-6 space-y-3 text-sm text-gray-700">
+                    <li><strong>아웃룩 앱 실행:</strong> 아웃룩을 열고 <strong>좌측 사이드바의 Copilot 버튼</strong>을 클릭합니다.</li>
+                    <li><strong>Claude 모델 선택:</strong> 코파일럿 창 좌측 상단의 <strong>'자동' 버튼</strong>을 클릭하여
+                        <strong>Claude(클로드)</strong>로 변경합니다.
+                    </li>
+                    <li><strong>데이터와 함께 프롬프트 전송:</strong> 아래 프롬프트에 분석할 데이터(엑셀 복사본 등)를 붙여 함께 전송합니다.</li>
+                    <li><strong>HTML 저장 & 시연:</strong> 생성된 코드를 복사 → 메모장에 붙여넣기 → <strong>파일명.html</strong>로 저장 → 더블클릭하여
+                        브라우저에서 바로 시연합니다.</li>
+                </ol>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-chart-bar mr-2 text-red-600"></i>시나리오: CS 현황 대시보드 즉석 제작
+            </h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "아래 CS 현황 데이터를 기반으로 브라우저에서 바로 실행되는 HTML 대시보드를 만들어 줘.
+
+                ■ 시각화 요소:
+                1. 상단: KPI 카드 4개 — 총 접수건, 완료건, 평균 처리일수, CSAT 점수 (각 수치 크게 표시)
+                2. 중앙: 제품별 CSAT 점수 막대 차트 (색상: LG 레드 계열, 낮은 항목은 강조)
+                3. 하단: 주차별 접수 추이 꺾은선 그래프
+
+                ■ 디자인:
+                - 배경: 흰색, 포인트 컬러: #C10933 (LG 레드)
+                - 폰트: Noto Sans KR
+                - 반응형 레이아웃, 카드 그림자 효과
+
+                ■ 기능: 차트에 마우스 오버 시 수치 툴팁 표시
+
+                [붙여넣을 데이터]
+                (여기에 엑셀에서 복사한 데이터 붙여넣기)"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-play-circle mr-2 text-green-600"></i>시연 가이드: 회의에서
+                MVP 보여주기</h3>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div class="p-5 border rounded-lg bg-white">
+                    <h4 class="font-bold mb-3"><i class="fas fa-file-code mr-2 text-red-700"></i>방법 A: 로컬 파일 공유 (가장 빠름)
+                    </h4>
+                    <p class="text-xs text-gray-500 mb-3">사내 메신저나 메일로 즉시 공유하는 방법</p>
+                    <ol class="space-y-2 text-gray-600 text-xs">
+                        <li>1. Copilot이 생성한 코드 전체를 <strong>복사(Ctrl+A → Ctrl+C)</strong></li>
+                        <li>2. 메모장을 열고 붙여넣기 후 <strong>파일명.html</strong>로 저장</li>
+                        <li>3. 파일을 더블클릭하면 브라우저에서 즉시 실행 — <strong>회의 중 시연 가능</strong></li>
+                        <li>4. 팀즈 채팅이나 메일에 html 파일 첨부 공유</li>
+                    </ol>
+                </div>
+                <div class="p-5 border rounded-lg bg-red-50 border-red-200">
+                    <h4 class="font-bold mb-3"><i class="fas fa-wand-magic-sparkles mr-2 text-red-700"></i>MVP 시연의 핵심 가치
+                    </h4>
+                    <ul class="space-y-2 text-gray-700 text-xs">
+                        <li>✓ 기획 단계에서 <strong>"이렇게 보여주면 어떨까요?"</strong> 즉석 확인</li>
+                        <li>✓ 회의 참석자 모두가 같은 화면을 보며 피드백 제공 가능</li>
+                        <li>✓ <strong>"조금 바꿔줘"</strong>를 Copilot에 요청하면 실시간 수정도 가능</li>
+                        <li>✓ 개발팀에 명확한 기준 화면 전달 → 커뮤니케이션 비용 대폭 절감</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="mvp-ppt" class="content-section">
+            <h2 class="section-header">3-3. HTML 발표자료 제작</h2>
+            <p class="mb-6">전통적인 PPT 대신, 웹 브라우저에서 실행되고 키보드 방향키로 슬라이드가 넘어가는 <strong>인터랙티브 웹 슬라이드</strong>를 만듭니다.
+                Copilot이 제공하는 CSS 애니메이션과 깔끔한 구조를 통해 템플릿보다 세련된 보고서를 즉시 완성할 수 있습니다.</p>
+
+            <div class="prompt-box">
+                <span class="prompt-label">COPY & USE</span>
+                "다음 내용으로 HTML 발표자료를 만들어 줘.
+                ■ 내용: [보고 내용 붙여넣기]
+                ■ 슬라이드: 8~12장
+                ■ 디자인 조건:
+                - 테마: 흰색 배경 + LG 레드(#C10933) 포인트
+                - 폰트: Noto Sans KR, 작은 글씨 OK
+                - 정보 밀도 높게 (빽빽하게, 다단 구조)
+                - 데이터는 반드시 표·차트로 시각화
+                - 첫 슬라이드: 제목 + 핵심결론 1줄
+                - 마지막: 요청사항/Next Step
+                ■ 키보드 좌우 화살표로 넘기는 방식"
+            </div>
+
+            <div class="mt-6 p-5 bg-blue-50 border border-blue-200 rounded-xl">
+                <h4 class="font-bold text-blue-900 mb-3"><i class="fas fa-lightbulb mr-2 text-blue-500"></i>HTML 슬라이드 vs
+                    일반 PPT 비교</h4>
+                <table class="table-custom text-sm">
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>HTML 슬라이드 (MVP)</th>
+                            <th>PowerPoint</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>제작 시간</td>
+                            <td class="text-green-700 font-bold">5~10분 (Copilot)</td>
+                            <td class="text-gray-500">1~2시간</td>
+                        </tr>
+                        <tr>
+                            <td>인터랙션</td>
+                            <td class="text-green-700 font-bold">차트 클릭, 애니메이션</td>
+                            <td class="text-gray-500">제한적</td>
+                        </tr>
+                        <tr>
+                            <td>공유 방법</td>
+                            <td class="text-green-700 font-bold">html 파일 or 링크</td>
+                            <td class="text-gray-500">pptx 파일</td>
+                        </tr>
+                        <tr>
+                            <td>수정 방법</td>
+                            <td class="text-green-700 font-bold">Copilot에 추가 요청</td>
+                            <td class="text-gray-500">수동 편집</td>
+                        </tr>
+                        <tr>
+                            <td>적합 용도</td>
+                            <td>MVP 시안, 현황 공유</td>
+                            <td>최종 공식 보고서</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </section>
+
+        <!-- 3-4. HTML 배포의 의미 & 방법 -->
+        <section id="mvp-deploy" class="content-section">
+            <h2 class="section-header">3-4. HTML 배포의 의미 & 방법</h2>
+
+            <!-- 배포의 의미 설명 박스 -->
+            <div class="p-6 bg-red-50 border border-red-200 rounded-xl mb-6">
+                <h4 class="font-bold text-red-900 mb-2"><i class="fas fa-network-wired mr-2 text-red-700"></i>HTML
+                    배포(Deploy)란 무엇이며 왜 필요할까요?</h4>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    <strong>배포(Deployment)</strong>란 로컬 PC에서 혼자 보던 HTML 문서나 애플리케이션 코드를 다른 사람들도 접속해서 사용할 수 있도록
+                    <strong>웹상에 띄우고 접근 권한을 부여하는 과정</strong>을 의미합니다.
+                </p>
+                <ul class="text-xs text-gray-600 space-y-2 pl-4 list-disc">
+                    <li><strong>정적 자산 시각화:</strong> HTML/CSS로 구성된 대시보드나 발표 자료는 실행 가능한 서버나 경로가 있어야 동적 데이터나 클릭 이벤트가 브라우저에서
+                        정상 작동합니다.</li>
+                    <li><strong>동상이몽 해결:</strong> URL 링크 하나 혹은 공유 서버 경로를 통해 팀원이나 경영진이 동일한 결과물을 실시간으로 보며 즉각적으로 소통할 수 있게
+                        합니다.</li>
+                    <li><strong>사내 환경의 대안:</strong> 별도의 상용 호스팅이나 복잡한 사내 서버 인프라를 승인받지 않더라도, 간단한 임시/대안 배포 방식을 통해 MVP(최소 기능
+                        제품) 수준의 기획 검증을 현업에서 즉각 진행할 수 있습니다.</li>
+                </ul>
+            </div>
+
+            <p class="mb-8 text-sm text-gray-600">Copilot으로 만든 대시보드나 발표자료(HTML)를 팀원, 경영진, 외부 파트너에게 공유하는 <strong>3가지 실전
+                    배포 방법</strong>을 안내합니다.</p>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <!-- 방법 A -->
+                <div class="p-6 border-2 border-red-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2"><i
+                                class="fas fa-file-code text-red-700 text-xl"></i></div>
+                        <h3 class="font-bold text-lg text-gray-800">방법 A: HTML 파일 직접 전송</h3>
+                        <p class="text-xs text-green-600 font-bold mt-1">⚡ 가장 빠름 (30초)</p>
+                    </div>
+                    <ol class="text-sm space-y-2 text-gray-600">
+                        <li>1. Copilot이 생성한 코드 전체를 <strong>복사</strong></li>
+                        <li>2. 메모장을 열고 붙여넣기</li>
+                        <li>3. <strong>파일명.html</strong>로 저장</li>
+                        <li>4. 팀즈 채팅·메일에 파일 첨부 공유</li>
+                        <li>5. 받은 사람은 더블클릭으로 바로 실행</li>
+                    </ol>
+                    <div class="mt-3 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
+                        <i class="fas fa-circle-info mr-1"></i>가장 간편하지만, 파일을 받아야만 볼 수 있는 제한이 있습니다.
+                    </div>
+                </div>
+
+                <!-- 방법 B -->
+                <div class="p-6 border-2 border-blue-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2"><i
+                                class="fab fa-github text-gray-800 text-xl"></i></div>
+                        <h3 class="font-bold text-lg text-gray-800">방법 B: GitHub Pages 배포</h3>
+                        <p class="text-xs text-blue-600 font-bold mt-1">🔗 URL 링크로 공유</p>
+                    </div>
+                    <ol class="text-sm space-y-2 text-gray-600">
+                        <li>1. <a href="https://github.com" target="_blank"
+                                class="text-blue-600 underline">github.com</a> 회원가입 후 <strong>Public Repository</strong>
+                            생성</li>
+                        <li>2. 저장소에 <strong>index.html</strong> 파일 업로드</li>
+                        <li>3. Settings > Pages > Branch: main 선택 후 Save</li>
+                        <li>4. 생성된 <strong>https://username.github.io/repo/</strong> 링크로 공유</li>
+                    </ol>
+                    <div class="mt-3 p-2 bg-blue-50 rounded text-xs text-blue-800">
+                        <i class="fas fa-circle-info mr-1"></i>인터넷만 되면 누구나 접근 가능. 모바일에서도 열람 가능합니다.
+                    </div>
+                </div>
+
+                <!-- 방법 C -->
+                <div class="p-6 border-2 border-purple-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-server text-purple-700 text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800">방법 C: 내 PC를 서버로 사용</h3>
+                        <p class="text-xs text-purple-600 font-bold mt-1">🖥️ 사내 실시간 시연 최적</p>
+                    </div>
+                    <ol class="text-sm space-y-2 text-gray-600">
+                        <li>1. HTML 파일을 바탕화면에 저장</li>
+                        <li>2. <kbd class="bg-gray-100 border px-1 py-0.5 rounded text-xs font-mono">Win+R</kbd> →
+                            <strong>cmd</strong> 입력 후 실행
+                        </li>
+                        <li>3. 아래 명령어 입력:<br>
+                            <code
+                                class="bg-gray-900 text-green-400 px-2 py-1 rounded text-xs block mt-1">cd Desktop && python -m http.server 8080</code>
+                        </li>
+                        <li>4. 브라우저에서 <strong class="text-purple-700">http://localhost:8080</strong> 접속</li>
+                        <li>5. 같은 네트워크 PC에서 <strong>내 IP:8080</strong>으로도 접근 가능</li>
+                    </ol>
+                    <div class="mt-3 p-2 bg-purple-50 rounded text-xs text-purple-800">
+                        <i class="fas fa-circle-info mr-1"></i>Python이 없으면 <code class="font-mono">npx serve .</code>
+                        명령어로도 가능합니다. 사내 서버가 없어도 회의 시연에 최적입니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 class="font-bold mb-2"><i class="fas fa-lightbulb text-red-600 mr-2"></i>어떤 방법을 선택해야 할까?</h4>
+                <table class="table-custom text-sm">
+                    <thead>
+                        <tr>
+                            <th>상황</th>
+                            <th>추천 방법</th>
+                            <th>이유</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>팀즈·메일로 빠르게 공유</td>
+                            <td class="font-bold text-red-700">A. 파일 전송</td>
+                            <td>30초 만에 완료</td>
+                        </tr>
+                        <tr>
+                            <td>외부·모바일 공유 필요</td>
+                            <td class="font-bold text-blue-600">B. GitHub Pages</td>
+                            <td>URL 하나로 어디서든 접근</td>
+                        </tr>
+                        <tr>
+                            <td>회의실에서 실시간 시연</td>
+                            <td class="font-bold text-purple-700">C. 로컬 PC 서버</td>
+                            <td>인터넷 없이도 동작</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3-5. Outlook Copilot으로 PPT 만들기 -->
+        <section id="copilot-ppt" class="content-section">
+            <h2 class="section-header">3-5. Outlook Copilot(Claude)으로 PPT 만들기</h2>
+
+            <div class="info-box">
+                <p><strong>아웃룩 Copilot</strong>에서는 다른 코파일럿과 달리 <strong>AI 모델을 Claude(클로드)로 변경</strong>할 수 있습니다.
+                    Claude 모델은 문서 구조화와 자연스러운 문장 생성에 특히 뛰어나, <strong>PowerPoint 발표자료 초안 제작</strong>에 최적화되어 있습니다.</p>
+            </div>
+
+            <div class="p-6 bg-amber-50 border border-amber-300 rounded-xl mb-8">
+                <h4 class="font-bold text-amber-900 mb-3"><i class="fas fa-star mr-2 text-amber-500"></i>아웃룩 Copilot +
+                    Claude 모델 선택법</h4>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white rounded-lg p-4 border border-amber-200">
+                        <div
+                            class="w-7 h-7 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold text-xs mb-2">
+                            ①</div>
+                        <p class="font-bold text-gray-800 mb-1">아웃룩 앱 → Copilot</p>
+                        <p class="text-xs text-gray-600">아웃룩을 열고 <strong>좌측 사이드바의 Copilot 버튼</strong>을 클릭합니다.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-amber-200">
+                        <div
+                            class="w-7 h-7 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold text-xs mb-2">
+                            ②</div>
+                        <p class="font-bold text-gray-800 mb-1">'자동' → Claude 변경</p>
+                        <p class="text-xs text-gray-600">좌측 상단 <strong>'자동'</strong> 클릭 → <strong>Claude</strong> 선택</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-amber-200">
+                        <div
+                            class="w-7 h-7 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xs mb-2">
+                            ③</div>
+                        <p class="font-bold text-gray-800 mb-1">프롬프트 전송</p>
+                        <p class="text-xs text-gray-600">아래 프롬프트를 입력하거나 업무 내용을 붙여넣어 전송합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-file-powerpoint mr-2 text-red-600"></i>시나리오: 업무 내용 → PPT
+                슬라이드 구성안</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT (Claude 모델)</span>
+                "아래 이번 주 업무 내용을 바탕으로 경영진 보고용 PowerPoint 슬라이드 구성안을 만들어 줘.
+
+                [슬라이드 구성 요건]
+                1. 슬라이드 수: 5~7장
+                2. 각 슬라이드마다 [제목 / 핵심 메시지 1줄 / 세부 내용 불렛 3개] 형식
+                3. 첫 슬라이드: 이번 주 핵심 성과 요약 (제목형 결론)
+                4. 데이터·수치가 있으면 표 또는 비교 형태로 표현
+                5. 마지막 슬라이드: Next Step / 요청 사항
+
+                [어조]: 간결하고 공식적인 임원 보고 스타일 (~함, ~예정, ~완료)
+
+                [이번 주 업무 내용]
+                (여기에 이메일 또는 업무 내용을 붙여넣으세요)"
+            </div>
+        </section>
+        <!-- PART 3 끝 -->
+        <section id="lg-template" class="content-section">
+            <h2 class="section-header">3-6. LG전자 스타일 맞춤형 프롬프트 템플릿</h2>
+
+            <div class="p-6 rounded-lg mb-8" style="background:#222;color:#fff">
+                <h4 class="font-bold text-lg mb-4" style="color:#C10933"><i class="fas fa-crown mr-2"></i>LG 보고서 스타일 4원칙
+                </h4>
+                <div class="grid grid-cols-4 gap-4 text-xs">
+                    <div>
+                        <p class="font-bold mb-1" style="color:#C10933">① 빽빽하게</p>
+                        <p style="color:#bbb">여백 최소화, 한 페이지에 최대 정보량. 다단 구조 선호</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1" style="color:#C10933">② 구조적으로</p>
+                        <p style="color:#bbb">현상→원인→대응→기대효과 4단 논리</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1" style="color:#C10933">③ 표로 정리</p>
+                        <p style="color:#bbb">비교·현황·일정은 반드시 Table 형태</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1" style="color:#C10933">④ One-Page</p>
+                        <p style="color:#bbb">제목이 곧 결론. 한 페이지 한 메시지</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-4">■ 프롬프트 공식 5단계</h4>
+            <div class="grid grid-cols-5 gap-3 text-center text-xs mb-10">
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-xl font-bold text-red-700">①</p>
+                    <p class="font-bold">배경 제시</p>
+                    <p class="text-gray-500">현재 상황·데이터</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-xl font-bold text-red-700">②</p>
+                    <p class="font-bold">목적 명시</p>
+                    <p class="text-gray-500">임원보고/팀회의</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-xl font-bold text-red-700">③</p>
+                    <p class="font-bold">구조 지정</p>
+                    <p class="text-gray-500">현상-원인-대응</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-xl font-bold text-red-700">④</p>
+                    <p class="font-bold">톤·분량</p>
+                    <p class="text-gray-500">간결/A4 1장</p>
+                </div>
+                <div class="p-3 border-2 border-red-200 rounded-lg bg-red-50">
+                    <p class="text-xl font-bold text-red-700">⑤</p>
+                    <p class="font-bold">출력 형식</p>
+                    <p class="text-gray-500">표/번호/목차</p>
+                </div>
+            </div>
+
+            <h4 class="font-bold text-lg mb-4">■ 바로 쓰는 템플릿</h4>
+
+            <h5 class="font-bold mb-2 mt-6"><i class="fas fa-file-alt mr-1 text-red-600"></i> 임원 보고용 현황 보고서</h5>
+            <div class="prompt-box">
+                <span class="prompt-label">COPY & USE</span>
+                "다음 데이터를 기반으로 임원 보고용 보고서를 작성해 줘.
+                [데이터: 여기에 붙여넣기]
+
+                ■ 작성 조건:
+                1. 구조: 현상 → 원인분석 → 대응방안 → 기대효과
+                2. 제목은 결론형 (예: '6월 CS 만족도 92.3%, 전월 대비 1.2%p 상승')
+                3. 핵심 지표는 표로 정리 (전월비, 전년비 포함)
+                4. 대응방안은 번호 매겨 3가지 이내
+                5. 톤: 간결·공식적, A4 1장, 다단 구조로 빽빽하게
+                6. 마지막에 '요청사항' 1~2줄 추가"
+            </div>
+
+            <h5 class="font-bold mb-2 mt-8"><i class="fas fa-desktop mr-1 text-red-600"></i> HTML 발표자료 (LG 스타일)</h5>
+            <div class="prompt-box">
+                <span class="prompt-label">COPY & USE</span>
+                "다음 내용으로 HTML 발표자료를 만들어 줘.
+                ■ 내용: [보고 내용 붙여넣기]
+                ■ 슬라이드: 8~12장
+                ■ 디자인 조건:
+                - 테마: 흰색 배경 + LG 레드(#C10933) 포인트
+                - 폰트: Noto Sans KR, 작은 글씨 OK
+                - 정보 밀도 높게 (빽빽하게, 다단 구조)
+                - 데이터는 반드시 표·차트로 시각화
+                - 첫 슬라이드: 제목 + 핵심결론 1줄
+                - 마지막: 요청사항/Next Step
+                ■ 키보드 좌우 화살표로 넘기는 방식"
+            </div>
+
+            <h5 class="font-bold mb-2 mt-8"><i class="fas fa-language mr-1 text-red-600"></i> 전문용어 유지 번역</h5>
+            <div class="prompt-box">
+                <span class="prompt-label">COPY & USE</span>
+                "다음 영문을 한국어로 번역해 줘.
+                ■ 조건:
+                1. 가전/CS 업계 전문용어는 영어 병기 (예: '고객 생애 가치(CLV)')
+                2. 고유명사·브랜드명은 원문 유지
+                3. 직역 금지, 자연스러운 한국어
+                4. 번역 후 '주요 용어 대조표' 추가
+                [번역할 텍스트 붙여넣기]"
+            </div>
+        </section>
+
+
+        <!-- PART 4. AI 에이전트 만들기 -->
+        <section id="cowork-intro" class="content-section">
+            <h2 class="section-header">4-1. MS Cowork 소개 & 실습</h2>
+
+            <div class="info-box" style="border-left-color:#0078D4;background:#EFF6FF">
+                <h3 class="font-bold text-xl mb-3"><i class="fas fa-people-arrows mr-2 text-blue-600"></i>MS Cowork란?
+                </h3>
+                <p class="mb-2">Microsoft Copilot의 <strong>에이전트(Agents) 탭</strong>에서 선택할 수 있는 협업형 AI 어시스턴트입니다. 개인 업무를 넘어
+                    <strong>팀원들과 함께 AI 기반으로 협업</strong>하고, 지식을 공유하며 업무 효율을 높이는 데 특화되어 있습니다.
+                </p>
+                <p class="text-sm text-gray-600">Copilot 채팅 → 상단 <strong>"에이전트(Agents)"</strong> 탭 클릭 →
+                    <strong>Cowork</strong> 선택
+                </p>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-star mr-2 text-blue-500"></i>Cowork 핵심 기능</h3>
+            <div class="grid md:grid-cols-3 gap-5 mb-8">
+                <div class="p-5 bg-white border-2 border-blue-100 rounded-xl">
+                    <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-3"><i
+                            class="fas fa-book-open"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">공유 지식베이스</h4>
+                    <p class="text-xs text-gray-600">팀 문서, 회의록, 업무 매뉴얼을 업로드하면 팀원 모두가 같은 맥락으로 AI에게 질문할 수 있습니다.</p>
+                </div>
+                <div class="p-5 bg-white border-2 border-blue-100 rounded-xl">
+                    <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-3"><i
+                            class="fas fa-comments"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">협업 채팅</h4>
+                    <p class="text-xs text-gray-600">팀원과 채팅하면서 AI에게 동시에 질문하고, 답변을 함께 확인하며 의사결정을 빠르게 내릴 수 있습니다.</p>
+                </div>
+                <div class="p-5 bg-white border-2 border-blue-100 rounded-xl">
+                    <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-3"><i
+                            class="fas fa-tasks"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">작업 할당 & 추적</h4>
+                    <p class="text-xs text-gray-600">AI가 회의 내용을 자동 분석해 액션 아이템을 추출하고, 담당자별로 할당 및 진행 상황을 추적합니다.</p>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-play-circle mr-2 text-red-600"></i>Cowork 실습 시나리오</h3>
+            <div class="p-6 bg-gray-50 rounded-lg mb-6">
+                <h4 class="font-bold text-red-700 mb-3">📋 시나리오: CS팀 주간 보고 준비</h4>
+                <ol class="list-decimal pl-5 space-y-3 text-sm text-gray-700">
+                    <li>Copilot 채팅 → <strong>"에이전트" 탭</strong> → <strong>Cowork</strong> 선택 후 새 작업 공간 생성</li>
+                    <li>팀 공유 문서(이번 주 VOC 현황, 수리 접수 데이터)를 <strong>지식 소스로 업로드</strong></li>
+                    <li>팀원 초대 → 모두가 같은 Cowork 공간에서 AI와 대화 시작</li>
+                    <li>아래 프롬프트로 주간 보고서 초안 생성 요청</li>
+                </ol>
+            </div>
+            <div class="prompt-box">
+                <span class="prompt-label">COWORK 실습 프롬프트</span>
+                "업로드한 이번 주 CS 현황 데이터를 분석해서 월요일 팀장 보고용 주간 업무 요약 보고서를 작성해줘.
+
+                [포함 항목]
+                1. 이번 주 주요 성과 (수치 포함, 전주 대비)
+                2. 주요 이슈 및 원인 분석 (TOP 3)
+                3. 다음 주 중점 추진 과제
+                4. 팀장 보고 시 예상 질문 3가지와 답변 초안
+
+                [어조]: 간결한 보고체, 각 항목 3줄 이내"
+            </div>
+        </section>
+
+        <!-- 4-2. 나만의 에이전트 만들기 -->
+        <section id="agent-build" class="content-section">
+            <h2 class="section-header">4-2. 나만의 에이전트 만들기</h2>
+
+            <div class="info-box">
+                <h3 class="font-bold text-xl mb-2"><i class="fas fa-robot mr-2 text-red-600"></i>Copilot에서 직접 에이전트를 만들 수
+                    있습니다</h3>
+                <p class="text-sm text-gray-700">Microsoft Copilot의 <strong>에이전트(Agents) 탭 → "에이전트 만들기"</strong>를 통해 별도의
+                    개발 없이 나만의 AI 챗봇을 제작할 수 있습니다. 사내 문서, 가이드 URL 등을 학습시켜 자연어로 질문하면 답변하는 챗봇을 수 분 내에 완성할 수 있습니다.</p>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-database mr-2 text-red-600"></i>실습 예시: CS 데이터마트 자연어
+                챗봇 만들기</h3>
+            <div class="p-5 bg-blue-50 border border-blue-200 rounded-xl mb-6 text-sm">
+                <p class="font-bold text-blue-900 mb-1">🎯 목표</p>
+                <p class="text-gray-700">CC&S전략팀에서 운영중인 <strong>CS 데이터마트</strong> 사용자를 위해 사용 방법·가이드 기반으로 누구나
+                    자연어로 질문할 수 있는 FAQ 챗봇을 만든다.</p>
+                <p class="text-xs text-gray-500 mt-2">가이드 출처: <a href="https://audp.bimatrix.co.kr/" target="_blank"
+                        class="text-blue-600 underline">audp.bimatrix.co.kr</a> (AUD 플랫폼 아카데미)</p>
+            </div>
+
+            <div class="p-6 bg-gray-50 rounded-lg mb-6">
+                <h4 class="font-bold text-red-700 mb-4"><i class="fas fa-list-ol mr-2"></i>에이전트 제작 5단계</h4>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <span
+                            class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+                        <div>
+                            <p class="font-bold text-gray-800">Copilot → 에이전트 탭 → "에이전트 만들기" 클릭</p>
+                            <p class="text-xs text-gray-500 mt-1">Microsoft Copilot 채팅창 상단의 에이전트 탭에서 새 에이전트 생성 시작</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span
+                            class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+                        <div>
+                            <p class="font-bold text-gray-800">에이전트 이름 & 역할(시스템 프롬프트) 설정</p>
+                            <div
+                                class="mt-2 p-3 bg-white border border-gray-200 rounded text-xs text-gray-700 font-mono">
+                                이름: CS 데이터마트 도우미<br>
+                                역할: 너는 LG전자 CS전략팀의 BI매트릭스 데이터마트 전문 안내 챗봇이야. 사용자가 데이터 조회, 지표 해석, 화면 조작 방법을 물어보면 업로드된 가이드
+                                문서를 기반으로 친절하고 정확하게 안내해줘. 모르는 내용은 솔직하게 모른다고 말하고, 가이드 문서를 참고하도록 안내해.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span
+                            class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+                        <div>
+                            <p class="font-bold text-gray-800">지식 소스(Knowledge) 연결</p>
+                            <ul class="text-xs text-gray-600 mt-1 space-y-1 list-disc pl-4">
+                                <li><strong>파일 업로드:</strong> AUD 플랫폼 가이드 PDF / 매뉴얼 문서 업로드</li>
+                                <li><strong>웹사이트 연결:</strong> <code
+                                        class="bg-gray-100 px-1 rounded">https://audp.bimatrix.co.kr/</code> URL 추가</li>
+                                <li>화면 구성 설명서, KPI 정의서, 지표 계산 공식 등 사내 문서 추가 업로드 가능</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span
+                            class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+                        <div>
+                            <p class="font-bold text-gray-800">동작 테스트 (대화 예시로 확인)</p>
+                            <div class="mt-2 grid grid-cols-2 gap-2">
+                                <div class="p-2 bg-white border rounded text-xs text-gray-700">💬 "월별 일별 컬럼 구성 방법은?"
+                                </div>
+                                <div class="p-2 bg-white border rounded text-xs text-gray-700">💬 "파생항목은 어떻게 생성해?"
+                                </div>
+                                <div class="p-2 bg-white border rounded text-xs text-gray-700">💬 "NPS를 계산하는 빅쿼리 함수
+                                    작성해줘."
+                                </div>
+                                <div class="p-2 bg-white border rounded text-xs text-gray-700">💬 "AUD 리포트는 어떻게 만들어?"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span
+                            class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">5</span>
+                        <div>
+                            <p class="font-bold text-gray-800 text-green-700">저장 → 배포 (다음 섹션에서 계속)</p>
+                            <p class="text-xs text-gray-500 mt-1">"게시(Publish)" 버튼을 누르면 Teams, 웹사이트 등에 배포 가능</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 bg-amber-50 border border-amber-200 rounded-xl">
+                <h4 class="font-bold text-amber-900 mb-2"><i class="fas fa-lightbulb mr-2 text-amber-500"></i>우리 팀 에이전트
+                    아이디어</h4>
+                <div class="grid md:grid-cols-3 gap-3 text-xs text-gray-700">
+                    <div class="p-3 bg-white rounded border">📊 <strong>CS KPI 해설 봇</strong><br>지표 정의·계산식 즉시 조회</div>
+                    <div class="p-3 bg-white rounded border">🔧 <strong>수리 접수 안내 봇</strong><br>처리 절차·현황 자연어 조회</div>
+                    <div class="p-3 bg-white rounded border">📋 <strong>업무 매뉴얼 봇</strong><br>신입 온보딩 가이드 질의응답</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4-3. 에이전트 배포하기 -->
+        <section id="agent-deploy" class="content-section">
+            <h2 class="section-header">4-3. 에이전트 배포하기</h2>
+
+            <p class="mb-6 text-gray-700">만든 에이전트를 팀원들이 실제로 쓸 수 있도록 <strong>배포(Publish)</strong>해야 합니다. 용도에 맞는 채널을 선택해
+                배포할 수 있습니다.</p>
+
+            <div class="grid md:grid-cols-3 gap-5 mb-8">
+                <div class="p-6 border-2 border-blue-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2"><i
+                                class="fab fa-microsoft text-blue-700 text-xl"></i></div>
+                        <h4 class="font-bold text-gray-800">Teams 채널 배포</h4>
+                        <p class="text-xs text-blue-600 font-bold mt-1">✅ 사내 협업 최적</p>
+                    </div>
+                    <ol class="text-xs space-y-2 text-gray-600 list-decimal pl-4">
+                        <li>에이전트 편집화면 → <strong>"게시" 클릭</strong></li>
+                        <li>채널 선택에서 <strong>Microsoft Teams</strong> 선택</li>
+                        <li>배포할 팀/채널 지정</li>
+                        <li>팀원이 Teams 채팅에서 에이전트와 바로 대화 가능</li>
+                    </ol>
+                </div>
+                <div class="p-6 border-2 border-green-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-link text-green-700 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">링크 공유</h4>
+                        <p class="text-xs text-green-600 font-bold mt-1">🔗 빠른 공유</p>
+                    </div>
+                    <ol class="text-xs space-y-2 text-gray-600 list-decimal pl-4">
+                        <li>게시 완료 후 <strong>"링크 복사"</strong> 클릭</li>
+                        <li>이메일, Teams 메시지로 링크 전송</li>
+                        <li>사내망 계정이 있으면 누구나 접근 가능</li>
+                        <li>모바일에서도 이용 가능</li>
+                    </ol>
+                </div>
+                <div class="p-6 border-2 border-purple-200 rounded-xl bg-white">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-code text-purple-700 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">웹사이트 임베드</h4>
+                        <p class="text-xs text-purple-600 font-bold mt-1">🌐 포털·사이트 삽입</p>
+                    </div>
+                    <ol class="text-xs space-y-2 text-gray-600 list-decimal pl-4">
+                        <li>게시 완료 후 <strong>"웹사이트에 포함"</strong> 선택</li>
+                        <li>생성된 <strong>iframe 코드 복사</strong></li>
+                        <li>사내 포털·SharePoint 페이지에 붙여넣기</li>
+                        <li>방문자가 페이지에서 바로 챗봇과 대화</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 class="font-bold mb-2"><i class="fas fa-shield-alt text-red-600 mr-2"></i>배포 시 보안 주의사항</h4>
+                <ul class="text-sm text-gray-700 space-y-1">
+                    <li>✓ 에이전트에 <strong>기밀 데이터·개인정보가 포함된 문서</strong>는 지식 소스로 업로드 금지</li>
+                    <li>✓ 사내망 계정으로만 접근 가능하도록 <strong>접근 권한 설정</strong> 확인</li>
+                    <li>✓ 외부 공개 배포 시 보안팀 사전 협의 필요</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PART 5. 조별 실습 과제 -->
+        <!-- 5-1. 조별 실습 과제 -->
+        <section id="group-lab" class="content-section">
+            <h2 class="section-header">5-1. 조별 실습 과제</h2>
+
+            <div class="info-box" style="border-left-color:#DC2626;background:#FEF2F2">
+                <h3 class="font-bold text-xl mb-3"><i class="fas fa-bullhorn mr-2 text-red-600"></i>지금부터는 실전입니다!</h3>
+                <p class="text-lg"><strong>"오늘 배운 것을 본업에 돌아가서 바로 쓸 수 있는 결과물"</strong>을 만들어 주세요.</p>
+                <p class="text-sm text-gray-600 mt-2">교육 시간 안에 완성하지 못해도 괜찮습니다. 핵심은 <strong>직접 손으로 만들어 보는 경험</strong>입니다.
+                </p>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-users mr-2 text-red-600"></i>실습 진행 방식</h3>
+            <div class="grid md:grid-cols-4 gap-4 mb-10 text-center">
+                <div class="p-5 border-2 border-red-200 rounded-xl bg-red-50">
+                    <div class="text-3xl mb-2">👥</div>
+                    <p class="font-bold text-gray-800">조별 편성</p>
+                    <p class="text-xs text-gray-500 mt-1">3~5명 한 조로 구성</p>
+                </div>
+                <div class="p-5 border-2 border-blue-200 rounded-xl bg-blue-50">
+                    <div class="text-3xl mb-2">🎯</div>
+                    <p class="font-bold text-gray-800">과제 선택</p>
+                    <p class="text-xs text-gray-500 mt-1">아래 3가지 중 택 1</p>
+                </div>
+                <div class="p-5 border-2 border-green-200 rounded-xl bg-green-50">
+                    <div class="text-3xl mb-2">🛠️</div>
+                    <p class="font-bold text-gray-800">제작 & 협업</p>
+                    <p class="text-xs text-gray-500 mt-1">함께 만들고 토의</p>
+                </div>
+                <div class="p-5 border-2 border-purple-200 rounded-xl bg-purple-50">
+                    <div class="text-3xl mb-2">📢</div>
+                    <p class="font-bold text-gray-800">발표 & 공유</p>
+                    <p class="text-xs text-gray-500 mt-1">결과물 시연 및 피드백</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <!-- 과제 A -->
+                <div class="p-6 border-2 border-blue-300 rounded-xl bg-white hover:shadow-lg transition">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span
+                            class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold">A</span>
+                        <h4 class="font-bold text-gray-800">에이전트 만들기</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">MS Copilot에서 우리 팀 업무에 도움이 되는 맞춤형 지식 FAQ 에이전트를 설계합니다.</p>
+                    <div class="bg-blue-50 rounded-lg p-3 text-xs text-gray-700 space-y-1">
+                        <p class="font-bold text-blue-800">예시 과제:</p>
+                        <ul class="list-disc pl-4">
+                            <li>BI매트릭스 CS 데이터마트 가이드 챗봇</li>
+                            <li>CS 상담 응대 FAQ 및 업무 매뉴얼 챗봇</li>
+                            <li>신규 입사자 전용 부서 온보딩 안내 챗봇</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500">
+                        <strong>도구:</strong> MS Copilot 웹 포털 (에이전트 만들기 기능)
+                    </div>
+                </div>
+
+                <!-- 과제 B -->
+                <div class="p-6 border-2 border-green-300 rounded-xl bg-white hover:shadow-lg transition">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span
+                            class="w-8 h-8 bg-green-600 text-white rounded-lg flex items-center justify-center font-bold">B</span>
+                        <h4 class="font-bold text-gray-800">Cowork 협업 설계</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">MS Cowork 에이전트를 활성화하여 팀원들과의 공유 지식망 및 협업 태스크를 시연합니다.</p>
+                    <div class="bg-green-50 rounded-lg p-3 text-xs text-gray-700 space-y-1">
+                        <p class="font-bold text-green-800">예시 과제:</p>
+                        <ul class="list-disc pl-4">
+                            <li>글로벌 VOC 만족도 요약 보고서 공동 검토</li>
+                            <li>부서 내 지식 자료 연동을 통한 공동 QA 진행</li>
+                            <li>팀 내 협업 일정 및 공용 가이드 북 제작</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500">
+                        <strong>도구:</strong> MS Copilot (Cowork 에이전트 탭)
+                    </div>
+                </div>
+
+                <!-- 과제 C -->
+                <div class="p-6 border-2 border-red-300 rounded-xl bg-white hover:shadow-lg transition">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span
+                            class="w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold">C</span>
+                        <h4 class="font-bold text-gray-800">웹페이지(MVP) 만들기</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">아웃룩 Copilot(Claude)으로 실무에 쓸 수 있는 웹페이지를 제작하고 배포합니다.</p>
+                    <div class="bg-red-50 rounded-lg p-3 text-xs text-gray-700 space-y-1">
+                        <p class="font-bold text-red-800">예시 과제:</p>
+                        <ul class="list-disc pl-4">
+                            <li>CS 실적 대시보드 제작 및 시연</li>
+                            <li>팀 업무 현황 보고용 HTML 슬라이드</li>
+                            <li>인터랙티브 웹 기반 업무 체크리스트</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500">
+                        <strong>배포:</strong> 파일 전송 / GitHub Pages / 내 PC 서버 (3-4 참고)
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-xl">
+                <h4 class="font-bold text-red-900 mb-3"><i class="fas fa-star mr-2 text-red-500"></i>실습 과제 평가 기준</h4>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="text-center">
+                        <div class="text-2xl mb-1">💼</div>
+                        <p class="font-bold text-gray-800">실무 활용도</p>
+                        <p class="text-xs text-gray-500">본업에 바로 적용할 수 있는가?</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl mb-1">⚡</div>
+                        <p class="font-bold text-gray-800">완성도</p>
+                        <p class="text-xs text-gray-500">동작 가능한 결과물이 나왔는가?</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl mb-1">💡</div>
+                        <p class="font-bold text-gray-800">창의성</p>
+                        <p class="text-xs text-gray-500">기존에 없던 새로운 시도가 있는가?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-2. 마무리 & Q&A -->
+        <section id="closing" class="content-section">
+            <h2 class="section-header">5-2. 마무리 & Q&A</h2>
+            <div class="mt-10 text-center">
+                <h2 class="text-3xl font-bold mb-6">"Life's Good with AI"</h2>
+                <p class="text-gray-500 mb-10">오늘 배운 도구들을 내일부터 당장 하나씩 실무에 적용해 보세요. <br> 여러분의 작은 시도가 LG전자의 AX 대전환을 만듭니다.
+                </p>
+                <button onclick="window.scrollTo(0,0)"
+                    class="bg-red-700 text-white px-10 py-4 rounded-full font-bold hover:bg-red-800 shadow-lg">교육 시작점으로
+                    돌아가기</button>
+            </div>
+        </section>
+
+        <footer class="bg-gray-900 text-gray-500 py-12 text-center text-sm">
+            <p>© 2026 LG Electronics CS전략팀 · AX 기본교육. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        // 아코디언 토글 기능
+        function togglePart(partId) {
+            const content = document.getElementById(partId);
+            const btn = document.getElementById('btn-' + partId);
+
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                btn.classList.remove('collapsed');
+            } else {
+                content.classList.add('collapsed');
+                btn.classList.add('collapsed');
+            }
+        }
+
+        // 특정 메뉴 아이템의 부모 PART를 자동으로 펼쳐주는 함수
+        function expandParentPart(item) {
+            const parentContent = item.closest('.part-content');
+            if (parentContent && parentContent.classList.contains('collapsed')) {
+                parentContent.classList.remove('collapsed');
+                const partId = parentContent.getAttribute('id');
+                const btn = document.getElementById('btn-' + partId);
+                if (btn) btn.classList.remove('collapsed');
+            }
+        }
+
+        document.querySelectorAll('.curriculum-item').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+
+                document.querySelectorAll('.curriculum-item').forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+
+                // 활성화된 메뉴의 부모 아코디언 자동 열기
+                expandParentPart(this);
+
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.curriculum-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                    // 스크롤하면서 도달한 섹션이 속한 아코디언 자동 열기
+                    expandParentPart(item);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
