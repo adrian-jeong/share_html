@@ -23,6 +23,8 @@
             color: var(--lge-dark);
             line-height: 1.8;
             scroll-behavior: smooth;
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
         .nav-sidebar {
@@ -121,8 +123,9 @@
         }
 
         .content-section {
-            padding: 100px 80px;
-            max-width: 1100px;
+            padding: 80px 8%;
+            max-width: 1280px;
+            margin: 0 auto;
             border-bottom: 1px solid var(--lge-border);
         }
 
@@ -269,8 +272,8 @@
                     <i class="fas fa-chevron-down text-xs"></i>
                 </button>
                 <div class="part-content collapsed" id="part3">
-                    <a href="#mvp-concept" class="curriculum-item block">3-1. MVP 프로토타입 개념</a>
-                    <a href="#mvp-dashboard" class="curriculum-item block">3-2. 대시보드 프로토타입 제작</a>
+                    <a href="#mvp-concept" class="curriculum-item block">3-1. MVP 제품 개념</a>
+                    <a href="#mvp-dashboard" class="curriculum-item block">3-2. 대시보드 MVP 제작</a>
                     <a href="#mvp-ppt" class="curriculum-item block">3-3. HTML 발표자료 제작</a>
                     <a href="#mvp-deploy" class="curriculum-item block">3-4. HTML 배포의 의미 & 방법</a>
                     <a href="#copilot-ppt" class="curriculum-item block">3-5. Outlook Copilot(Claude)으로 PPT 만들기</a>
@@ -312,18 +315,18 @@
 
             <!-- 교육 실습 도구 선정 안내 -->
             <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-xl mb-8">
-                <h3 class="font-bold text-amber-800 text-sm mb-2"><i class="fas fa-info-circle mr-2"></i>[안내] 실습 도구로
+                <h3 class="font-bold text-amber-800 text-base mb-2"><i class="fas fa-info-circle mr-2"></i>[안내] 실습 도구로
                     Microsoft Copilot을 선정한 이유</h3>
-                <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
                     본 교육의 실습 도구는 <strong>Microsoft Copilot</strong>을 활용합니다. 사내망 내에서 Gemini를 사용하려면 개별 권한 신청이 필요했으나, 최근 보안
                     정책 변경으로 인해 개인이 사내망 내 Gemini 권한을 직접 신청하는 것이 제한되었습니다. 또한, 모든 인원이 Gemini Enterprise(유료 라이선스) 권한을 균일하게
                     가지고 있는 상황도 아닙니다.
                 </p>
-                <p class="text-xs text-gray-700 leading-relaxed mb-3">
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
                     반면, <strong>Microsoft Copilot은 사내 계정(@lge.com)으로 로그인하면 LG전자 임직원 누구나 제한 없이 즉시 사용 가능한 환경이
                         제공</strong>되므로 모든 교육생이 동일한 실습을 완수할 수 있는 최적의 도구로 선정되었습니다.
                 </p>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 text-xs text-gray-600 space-y-1.5">
+                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm text-gray-600 space-y-1.5">
                     <p class="font-bold text-gray-800">💡 꼭 기억하세요! AI는 '껍데기(UI)'보다 '프롬프트 논리'가 본질입니다.</p>
                     <p>시중에 제공되는 수많은 대형 언어 모델(LLM)들은 서비스 껍데기(UI)와 브랜드 이름만 다를 뿐, <strong>질문의 논리 구조(맥락 설정, 구체적 지시, 제약 사항)는
                             거의 동일</strong>합니다. 본 교육에서 다루는 프롬프트 엔지니어링과 에이전트 연동 논리는 향후 권한을 부여받은 Gemini나 ChatGPT, Claude 등
@@ -336,12 +339,12 @@
             <!-- 베이스 모델 vs AI 에이전트 이론 -->
             <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fas fa-brain text-[#C10933] mr-2"></i>핵심 이론: 베이스
                 모델 vs AI 에이전트</h3>
-            <p class="text-xs text-gray-600 mb-6">
+            <p class="text-sm text-gray-600 mb-6">
                 현재 사내 아웃룩 Copilot 등을 실행하면 내부 모델을 GPT나 Claude로 선택해서 쓸 수 있는 기능이 제공됩니다. 그렇다면 공식 사이트(ChatGPT, Claude.ai)에 직접
                 접속해 사용하는 것과 Copilot에서 사용하는 것은 어떤 차이가 있을까요?
             </p>
 
-            <div class="grid md:grid-cols-2 gap-6 mb-10 text-xs">
+            <div class="grid md:grid-cols-2 gap-6 mb-10 text-sm">
                 <!-- 베이스 모델 -->
                 <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col justify-between">
                     <div>
@@ -618,7 +621,8 @@
                     <p class="text-xs text-gray-500 mb-1">프롬프트: "개인정보보호법 35조 내용 알려줘"</p>
                     <div class="p-2 bg-white border rounded text-xs text-gray-700 mb-2">"35조에 따르면 기업은 연 1회 이상 개인정보 영향평가를
                         의무 수행해야 합니다."</div>
-                    <p class="text-xs text-red-600 font-bold">⚠ 실제 법조문과 다른 내용임! (실제 개인정보보호법 제35조는 '개인정보의 열람' 조항이며, 영향평가는 제33조입니다.)</p>
+                    <p class="text-xs text-red-600 font-bold">⚠ 실제 법조문과 다른 내용임! (실제 개인정보보호법 제35조는 '개인정보의 열람' 조항이며, 영향평가는
+                        제33조입니다.)</p>
                 </div>
                 <div class="p-5 border rounded-xl bg-red-50 border-red-200">
                     <p class="font-bold text-red-700 mb-2"><i class="fas fa-times-circle mr-1"></i>유형 3: 없는 사람·사건</p>
@@ -795,65 +799,65 @@
                 </div>
             </div>
 
-            <!-- 2대 접속 공식 -->
-            <h3 class="font-bold text-xl text-gray-800 mb-4"><i class="fas fa-link text-red-600 mr-2"></i>업무 효율을 극대화하는
-                2대 접속 공식</h3>
+            <!-- 3대 접속 공식 -->
+            <h3 class="font-bold text-xl text-gray-800 mb-4"><i class="fas fa-link text-red-600 mr-2"></i>업무 효율을 극대화하는 3대 접속 공식</h3>
 
             <div class="mb-6 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
                 <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0"></i>
-                <p class="text-xs text-gray-700"><strong>⚠️ 로그인 계정 확인 필수:</strong> 접속 후 오른쪽 상단 프로필 아이콘을 클릭하여 <strong>사내
-                        계정(@lge.com)으로 로그인</strong>되어 있는지 확인하세요. 사내 보안(상용 데이터 보호)이 적용되어 입력한 대화가 외부 학습에 사용되지 않습니다.</p>
+                <p class="text-xs text-gray-700"><strong>⚠️ 로그인 계정 확인 필수:</strong> 접속 후 화면 우측 상단의 프로필 아이콘을 클릭하여 <strong>사내 계정(@lge.com)으로 로그인</strong>되어 있는지 확인하세요. 사내 보안(상용 데이터 보호)이 적용되어 입력한 대화가 외부 학습에 사용되지 않습니다. (※ 조직에 따라 브라우저 우측 상단의 Edge 사이드바 버튼 접속이 제한될 수 있으므로, 아래 3대 경로를 우선 사용합니다.)</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-3 gap-6">
                 <!-- 공식 1 -->
-                <div
-                    class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
+                <div class="p-5 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
                     <div>
-                        <div
-                            class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
-                            브라우저 연동</div>
-                        <h3 class="font-bold text-lg text-gray-800 mb-3"><i
-                                class="fab fa-edge text-blue-600 mr-2"></i>공식 1: MS Edge 브라우저 사이드바</h3>
-                        <p class="text-xs text-gray-500 mb-4">웹서핑 중이거나 사내 시스템(LGE 그룹웨어), PDF 문서를 보면서 실시간으로 질문할 때 가장
-                            유용합니다.</p>
-                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                        <div class="absolute top-0 right-0 bg-blue-600 text-white text-2xs font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-xl">사내 메신저</div>
+                        <h3 class="font-bold text-md text-gray-800 mb-2"><i class="fab fa-microsoft text-blue-600 mr-1.5"></i>공식 1: Teams 앱 내 실행</h3>
+                        <p class="text-2xs text-gray-500 mb-3">사내 메신저인 Teams 앱 내에서 별도 창 이동 없이 바로 질문하고 소통할 때 가장 신속합니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-2xs text-gray-700 space-y-1">
                             <div><strong>[실행 방법]</strong></div>
-                            <ol class="list-decimal pl-4 space-y-2">
-                                <li><strong>MS Edge</strong> 브라우저를 켭니다.</li>
-                                <li>브라우저 우측 상단 모서리에 있는 파란색 <strong>Copilot 아이콘</strong>을 클릭합니다.</li>
-                                <li>또는 단축키 <kbd class="bg-white border px-1 rounded text-2xs font-bold">Ctrl</kbd> +
-                                    <kbd class="bg-white border px-1 rounded text-2xs font-bold">Shift</kbd> + <kbd
-                                        class="bg-white border px-1 rounded text-2xs font-bold">.</kbd> (마침표)를 누릅니다.
-                                    <span class="text-xs text-red-500 font-semibold">(※ PC 환경 및 설정에 따라 단축키가 작동하지 않을 수 있습니다.)</span>
-                                </li>
+                            <ol class="list-decimal pl-3 space-y-1">
+                                <li><strong>Microsoft Teams</strong> 앱을 실행합니다.</li>
+                                <li>좌측 세로 메뉴 바에서 <strong>Copilot 앱 아이콘</strong>을 찾아 클릭합니다.</li>
+                                <li>대화창에서 텍스트를 전송하여 즉각적인 도움을 받습니다.</li>
                             </ol>
                         </div>
                     </div>
                 </div>
 
                 <!-- 공식 2 -->
-                <div
-                    class="p-6 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
+                <div class="p-5 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
                     <div>
-                        <div
-                            class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
-                            독립형 웹 포털</div>
-                        <h3 class="font-bold text-lg text-gray-800 mb-3"><i
-                                class="fas fa-globe text-purple-600 mr-2"></i>공식 2: Copilot 전용 웹 포털</h3>
-                        <p class="text-xs text-gray-500 mb-4">긴 이메일이나 문서 초안을 넓은 창에서 편집하고 장문의 텍스트를 분석할 때 쾌적하게 쓸 수 있습니다.
-                        </p>
-                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2">
+                        <div class="absolute top-0 right-0 bg-purple-600 text-white text-2xs font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-xl">메일 업무 최적</div>
+                        <h3 class="font-bold text-md text-gray-800 mb-2"><i class="fas fa-envelope-open-text text-purple-600 mr-1.5"></i>공식 2: 아웃룩 앱 사이드바</h3>
+                        <p class="text-2xs text-gray-500 mb-3">아웃룩 메일 작성, 번역, 요약 또는 보고용 HTML 시안 코드를 제작할 때 최적인 접속 경로입니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-2xs text-gray-700 space-y-1">
                             <div><strong>[실행 방법]</strong></div>
-                            <ol class="list-decimal pl-4 space-y-2">
-                                <li>브라우저(Chrome/Edge 등) 주소창에 아래 전용 웹 주소를 입력해 접속합니다.</li>
+                            <ol class="list-decimal pl-3 space-y-1">
+                                <li><strong>Outlook</strong> 메일 앱을 실행합니다.</li>
+                                <li>좌측 세로 메뉴 바에 있는 <strong>Copilot 버튼</strong>을 클릭하여 켭니다.</li>
+                                <li>우측 사이드바로 활성화되는 전용 창에서 작업 지시를 보냅니다.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공식 3 -->
+                <div class="p-5 border border-gray-200 bg-white rounded-2xl relative shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="absolute top-0 right-0 bg-green-600 text-white text-2xs font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-xl">전용 웹 포털</div>
+                        <h3 class="font-bold text-md text-gray-800 mb-2"><i class="fas fa-globe text-green-600 mr-1.5"></i>공식 3: 웹 주소 직접 입력</h3>
+                        <p class="text-2xs text-gray-500 mb-3">장문의 텍스트 분석이나 문서 초안 수정 등 대화 기록을 넓은 브라우저 화면에서 한눈에 볼 때 유용합니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-2xs text-gray-700 space-y-1">
+                            <div><strong>[실행 방법]</strong></div>
+                            <ol class="list-decimal pl-3 space-y-1">
+                                <li>Edge나 Chrome 주소창에 아래의 웹 주소를 입력합니다:</li>
                                 <li>
-                                    <a href="https://m365.cloud.microsoft/chat" target="_blank"
-                                        class="text-blue-600 font-bold hover:underline block my-1">
+                                    <a href="https://m365.cloud.microsoft/chat" target="_blank" class="text-blue-600 font-bold hover:underline block my-0.5">
                                         <i class="fas fa-external-link-alt mr-1"></i> m365.cloud.microsoft/chat
                                     </a>
                                 </li>
-                                <li>사내 계정으로 로그인한 상태에서 자유롭게 대화를 시작합니다.</li>
+                                <li>사내 계정(@lge.com)으로 로그인한 것을 확인 후 대화를 시작합니다.</li>
                             </ol>
                         </div>
                     </div>
@@ -913,86 +917,84 @@
             <h2 class="section-header">2-2. PDF 요약 & 보고서 작성</h2>
 
             <div class="info-box">
-                <h3 class="font-bold text-xl mb-2"><i class="fas fa-file-pdf mr-2 text-red-600"></i>Copilot에 PDF를 직접 올려서
-                    분석할 수 있습니다</h3>
-                <p class="text-sm text-gray-700">아웃룩 Copilot(Claude 모델) 또는 Microsoft Copilot 채팅창에 <strong>PDF 파일을
-                        첨부</strong>하면, 문서 내용을 읽고 요약·분석·보고서 초안까지 즉시 생성합니다. 긴 보고서, 정책 문서, 외부 리서치 자료를 빠르게 소화하는 데 매우 효과적입니다.
-                </p>
+                <h3 class="font-bold text-xl mb-2"><i class="fas fa-file-pdf mr-2 text-red-600"></i>Copilot에 PDF를 직접 올려서 분석할 수 있습니다</h3>
+                <p class="text-sm text-gray-700">아웃룩 Copilot(Claude 모델) 또는 Microsoft Copilot 채팅창에 <strong>PDF 파일을 첨부</strong>하면, 문서 내용을 읽고 요약·분석·보고서 초안까지 즉시 생성합니다. 긴 보고서, 정책 문서, 외부 리서치 자료를 빠르게 소화하는 데 매우 효과적입니다. 실습에서는 가상의 딥리서치로 생성된 보고서인 <strong>`lg_electronics_cc&s_transformation.pdf`</strong>(LG전자 고객 서비스 CC&S 부서의 2025–2026년도 고객 가치 혁신 및 서비스 전략 리포트)를 활용합니다.</p>
             </div>
 
-            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-upload mr-2 text-red-600"></i>PDF 연동 및 요약 실행법 (2가지
-                방법)</h3>
+            <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-upload mr-2 text-red-600"></i>PDF 연동 및 요약 실행법 (공식 첨부 방식 2가지)</h3>
             <div class="grid md:grid-cols-2 gap-6 mb-6">
                 <!-- 방법 A -->
                 <div class="p-5 bg-gray-50 rounded-xl border border-gray-200">
-                    <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-paperclip text-[#C10933] mr-1"></i>방법 A:
-                        아웃룩 & 웹 포털에서 직접 첨부</h4>
+                    <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-paperclip text-[#C10933] mr-1"></i>방법 A: 내 PC 파일 직접 업로드</h4>
                     <ol class="list-decimal pl-4 space-y-1.5 text-xs text-gray-700">
-                        <li>아웃룩 또는 웹 포털(<code class="bg-gray-100 px-1 rounded">m365.cloud.microsoft/chat</code>) 접속</li>
-                        <li>채팅 입력창 하단의 <strong>📎 클립(첨부) 버튼</strong> 클릭</li>
-                        <li>내 PC의 PDF 파일을 선택하여 업로드</li>
-                        <li>업로드 완료 후 프롬프트를 입력하여 요약 지시</li>
+                        <li>Copilot 채팅 입력창 하단의 <strong>📎 클립(첨부) 버튼</strong> 또는 <strong>+ 버튼</strong>을 클릭합니다.</li>
+                        <li><strong>'이 기기에서 업로드'</strong>(또는 파일 찾아보기)를 클릭합니다.</li>
+                        <li>내 PC에 저장된 PDF 파일을 선택하여 업로드합니다.</li>
+                        <li>업로드 완료가 표시되면 요약/분석 지시 프롬프트를 입력해 전송합니다.</li>
                     </ol>
                 </div>
                 <!-- 방법 B -->
                 <div class="p-5 bg-gray-50 rounded-xl border border-gray-200">
-                    <h4 class="font-bold text-gray-800 mb-3"><i class="fab fa-edge text-[#0078D4] mr-1"></i>방법 B: Edge
-                        브라우저 드래그 앤 드롭 (추천)</h4>
+                    <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-cloud text-[#0078D4] mr-1"></i>방법 B: OneDrive(클라우드) 파일 연동</h4>
                     <ol class="list-decimal pl-4 space-y-1.5 text-xs text-gray-700">
-                        <li>내 PC 폴더에 있는 PDF 파일을 마우스로 클릭합니다.</li>
-                        <li>클릭한 상태로 <strong>MS Edge 브라우저 화면 안으로 드래그</strong>해 놓습니다.</li>
-                        <li>단축키 <kbd class="bg-white border px-1 rounded text-2xs font-bold">Ctrl</kbd>+<kbd
-                                class="bg-white border px-1 rounded text-2xs font-bold">Shift</kbd>+<kbd
-                                class="bg-white border px-1 rounded text-2xs font-bold">.</kbd>을 눌러 우측 <strong>Copilot
-                                사이드바</strong>를 켭니다.
-                            <span class="text-xs text-red-500 font-semibold">(※ 단축키 미작동 시 우측 상단의 Copilot 아이콘을 직접 클릭해 주세요.)</span>
-                        </li>
-                        <li>채팅창에 "현재 페이지를 기반으로 요약해줘"라고 입력합니다.</li>
+                        <li>Copilot 채팅 입력창 하단의 <strong>📎 클립(첨부) 버튼</strong> 또는 <strong>+ 버튼</strong>을 클릭합니다.</li>
+                        <li>메뉴에서 <strong>'OneDrive'</strong>(또는 클라우드 파일 선택)를 클릭합니다.</li>
+                        <li>사내 클라우드 공간에 백업 또는 공유되어 있는 PDF 파일을 선택하여 연동합니다.</li>
+                        <li>연동이 정상 완료되면 프롬프트를 입력해 분석 작업을 수행합니다.</li>
                     </ol>
                 </div>
             </div>
-            <p class="text-xs text-gray-500 mb-6">💡 한 번에 여러 PDF를 분석할 때는 [방법 A]의 다중 첨부를 권장하며, 열려 있는 개별 문서를 즉시 분석할 때는 [방법
-                B]가 간편합니다.</p>
+            <p class="text-xs text-gray-500 mb-6">💡 PC에 로컬로 저장된 파일은 [방법 A]를 사용하고, 클라우드에 백업되어 있거나 협업 공간에 공유된 파일은 [방법 B]를 활용하면 편리합니다. <span class="text-red-600 font-semibold">(※ 사내 보안 정책상 PDF 파일을 Edge 브라우저 화면으로 직접 드래그앤드롭하여 열 경우 "파일 업로드 금지/제한" 경고 메시지가 표시될 수 있으므로, 반드시 위 두 가지 공식 첨부 방식을 이용해 주세요.)</span></p>
 
-            <h3 class="font-bold text-xl mb-4"><i class="fas fa-compress-alt mr-2"></i>시나리오 ①: 긴 보고서 핵심만 추출</h3>
-            <div class="prompt-box">
-                <span class="prompt-label">BEST PROMPT</span>
-                "첨부된 보고서를 분석해서 다음을 정리해 줘. (문서에 없는 내용은 절대 추가하지 마.)
-
-                1. 이 문서의 핵심 주제 1문장 요약
-                2. 핵심 내용 TOP 5 (불렛 형태, 각 항목 2줄 이내)
-                3. 주요 수치·데이터 정리 (표로)
-                4. 우리 팀 업무에 관련 있는 내용 별도 표시
-                5. 경영진 보고용 1페이지 요약 초안 (현상→시사점→제언 구조)"
+            <!-- 영문 문서 즉각 이해 개념 설명 -->
+            <div class="p-6 bg-red-50 border border-red-200 rounded-xl mb-8">
+                <h4 class="font-bold text-red-900 mb-3"><i class="fas fa-language mr-2"></i>번역기 없는 '영문 보고서 즉각 이해' 혁신</h4>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    기존에는 영문 보고서를 읽기 위해 문장들을 복사하여 기존 번역기(구글 번역, 파파고 등)에 일일이 붙여넣어 한국어로 변환한 뒤, 이를 다시 조합해 가며 비즈니스 맥락을 이해해야 했습니다. 이 방식은 시간이 오래 걸릴 뿐만 아니라 전문 비즈니스 약어나 기술 용어가 오번역되어 전체 문맥을 왜곡시키는 한계가 있었습니다.
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    <strong>대형 언어 모델(LLM) 기반의 Copilot은 영문 텍스트를 다이렉트로 완벽하게 독해(Comprehend)</strong>할 수 있습니다. 번역 필터를 중간에 거치는 것이 아니라, 인공지능이 영문 텍스트가 가진 전체 비즈니스 의미와 맥락을 자체 언어망 속에서 곧바로 파악한 뒤, 사용자가 요구하는 <strong>한국어 보고서 형식으로 즉시 요약·재구성하여 출력</strong>합니다.
+                </p>
+                <ul class="list-disc pl-5 text-xs text-gray-600 space-y-1.5 mt-2">
+                    <li><strong>컨텍스트 보존:</strong> 단어 대 단어의 단순 치환이 아닌, 전체 문서의 비즈니스 논리 구조(배경 -> 현상 -> 전략 -> 제언)를 이해하고 보존합니다.</li>
+                    <li><strong>업무 절차 단축:</strong> '영문 복사 -> 번역기 붙여넣기 -> 번역문 복사 -> 이해/가공'의 4단계 복잡한 업무 프로세스를 <strong>'PDF 파일 첨부 -> 한국어로 즉시 요약 질문'의 단 1단계</strong>로 혁신합니다.</li>
+                    <li><strong>사내 전문 용어 유지:</strong> 사내에서 사용하는 전문 약어(CC&S, CX, VOC, Customer Value Innovation 등)를 억지 한글 단어로 번역하지 않고, 문맥에 맞게 정확한 전문 비즈니스 맥락으로 유지하여 정리합니다.</li>
+                </ul>
             </div>
 
-            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-chart-bar mr-2"></i>시나리오 ②: 여러 PDF 비교 분석 후 보고서 작성
-            </h3>
-            <div class="prompt-box">
-                <span class="prompt-label">BEST PROMPT (PDF 2개 이상 첨부 시)</span>
-                "첨부한 두 문서를 비교 분석해서 보고서 초안을 작성해 줘.
-
-                [비교 항목]
-                1. 두 문서의 공통점과 차이점 (표 형태)
-                2. 각 문서의 핵심 주장 요약
-                3. 상충되는 내용이 있다면 명확히 표시
-                4. 종합 결론 및 우리 팀 적용 방향 제언
-
-                [출력 형태]: A4 1~2장 분량, 현상→원인→시사점→제언 구조
-                [어조]: 간결하고 공식적인 내부 보고서 스타일"
-            </div>
-
-            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-pen-alt mr-2"></i>시나리오 ③: 외부 자료 → 사내 보고서 변환</h3>
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-pen-alt mr-2 text-red-600"></i>시나리오 ①: 영문 전략 보고서 국문 요약 및 즉각적 이해</h3>
             <div class="prompt-box">
                 <span class="prompt-label">BEST PROMPT</span>
-                "첨부된 외부 자료(리서치/뉴스/분석 보고서)를 우리 팀 사내 보고서 형식으로 재작성해 줘.
+                "첨부된 영문 보고서 `lg_electronics_cc&s_transformation.pdf` 내용을 요약하여, 사내 임직원들이 번역기 없이도 한눈에 파악할 수 있도록 국문 주간 업무 보고서 형태(텍스트와 요약 표)로 가공해 줘.
+
+                [보고서 구성 서식]
+                - [개요]: CC&S본부의 25~26년 전략적 변화 및 의의
+                - [핵심 추진 과제]: 상담 프로세스 고도화 및 고객 접점 개선 사항
+                - [시사점 및 제언]: 당사 서비스 경쟁력 강화를 위한 제언
+                - 격식 있고 명확한 개조식 문체 사용"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-compress-alt mr-2 text-red-600"></i>시나리오 ②: CC&S 혁신 보고서 핵심 요약</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "첨부된 `lg_electronics_cc&s_transformation.pdf` 보고서는 LG전자 고객 서비스 부서(CC&S)의 2025-2026년도 트랜스포메이션 방향성을 담고 있어. 이 문서를 분석해서 다음을 요약해 줘. (문서에 없는 내용은 절대 임의로 지어내지 마.)
+
+                1. LG전자 CC&S본부의 'Customer Value Innovation (고객 가치 혁신)' 관점에서의 핵심 목표 1문장 요약
+                2. 2025-2026년 변화를 촉발한 주요 요인(Drivers of change) TOP 3
+                3. 상담 프로세스, 수리 완료, 옴니채널 등 서비스 운영 관점에서의 주요 개선 조치 사항들
+                4. 향후 고객 경험(CX) 및 비즈니스 가치 창출에 대한 예상 효과
+                5. 경영진 보고용 1페이지 요약본 (현상 -> 개선전략 -> 기대효과 구조)"
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-chart-bar mr-2 text-red-600"></i>시나리오 ③: CC&S 전략 기반 실행 계획(Action Item) 도출</h3>
+            <div class="prompt-box">
+                <span class="prompt-label">BEST PROMPT</span>
+                "첨부된 `lg_electronics_cc&s_transformation.pdf` 내용을 바탕으로, 우리 부서(CC&S전략팀)에서 올해 우선적으로 착수해야 할 '고객 중심 마인드셋(Customer-First Mindset)' 내재화 실행 방안을 작성해 줘.
 
                 [조건]
-                - LG전자 CC&S전략팀 관점에서 재해석
-                - 핵심 수치와 트렌드는 반드시 포함
-                - 경쟁사 언급이 있으면 별도 섹션으로 정리
-                - 마지막에 '우리 팀 Action Item 제안' 3가지 추가
-                - 분량: A4 1장, 빽빽하게 구성"
+                - 보고서에 언급된 서비스 운영 개선 전략(상담/수리/옴니채널 등)을 바탕으로 구체적인 Action Item 3가지 제안
+                - 각 Action Item별로 예상되는 예상 장애요인(Risk)과 그에 대한 대응 방안을 함께 서술
+                - 분량: A4 1장 분량의 보고서 스타일로 명료하게 작성"
             </div>
 
             <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
@@ -1009,8 +1011,7 @@
             <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-3">
                 <div class="bg-[#C10933] text-white text-xs font-bold px-2 py-1 rounded">실무 상황</div>
                 <p class="text-xs text-gray-700">
-                    글로벌 VOC 현황 데이터에서 상담 접수일(A열)과 처리 완료일(B열) 사이의 실제 처리 소요 일수를 구해야 합니다.
-                    날짜 차이 수식이 헷갈리는 상황에서 Copilot으로 수식을 받고, 카테고리별 NPS 데이터를 복사하여 보고서용 통계 요약을 즉석에서 뽑아내고자 합니다.
+                    제공된 두 가지 실습용 데이터셋 파일인 <strong>`제품별_NPS_수리현황.csv`</strong>와 <strong>`주차별_CS_NPS_시각화.csv`</strong>를 모두 활용해 실무 분석을 진행합니다. 먼저 상담 접수일자(A열)와 처리 완료일자(B열) 사이의 실제 처리 소요 일수를 구해야 하는 상황에서, C열의 '소요기간(계산필요)'에 넣을 수식을 Copilot으로 제작하고, 두 데이터 파일을 Copilot에 직접 업로드(첨부)하여 수리 현황과 만족도 추이를 연계하여 요약 분석하고자 합니다.
                 </p>
             </div>
 
@@ -1020,9 +1021,9 @@
                     <div
                         class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">
                         1</div>
-                    <h3 class="font-bold text-gray-800 text-md">엑셀 시트 열 구조 확인 및 질문 준비</h3>
+                    <h3 class="font-bold text-gray-800 text-md">실습용 CSV 파일 열 구조 확인</h3>
                     <p class="text-xs text-gray-500 mt-1">
-                        분석하고자 하는 엑셀 파일의 정확한 열 이름과 알파벳(A열, B열 등)을 확인합니다.
+                        제공된 실습용 파일인 <strong>`제품별_NPS_수리현황.csv`</strong> 및 <strong>`주차별_CS_NPS_시각화.csv`</strong>를 실행하여 각각의 열 구조(일자, 완료 여부, 제품 카테고리, 주차, NPS 점수 등)를 확인합니다.
                     </p>
                 </div>
 
@@ -1041,8 +1042,8 @@
                         "다음 요청에 맞는 엑셀 함수 수식을 만들어 주고 원리를 쉽게 설명해 줘.
 
                         [요청 사항]
-                        - 현재 내 엑셀 데이터의 A열은 '상담 접수일자' (예: 2026-06-01), B열은 '처리 완료일자' (예: 2026-06-05)가 입력되어 있어.
-                        - C열의 각 셀에 '처리 완료일자'에서 '상담 접수일자'를 빼서 순수한 처리 소요 기간(일수)을 숫자로만 보여주는 수식을 만들어 줘.
+                        - 현재 내 엑셀 데이터(`제품별_NPS_수리현황.csv`)의 A열은 '상담 접수일자' (예: 2026-06-01), B열은 '처리 완료일자' (예: 2026-06-05)가 입력되어 있어.
+                        - C열('소요기간(계산필요)')의 각 셀에 '처리 완료일자'에서 '상담 접수일자'를 빼서 순수한 처리 소요 기간(일수)을 숫자로만 보여주는 수식을 만들어 줘.
                         - B열(처리 완료일)이 아직 공란인 경우(미완료 건)에는 \"처리중\"이라는 텍스트를 표시하는 IF 조건도 함께 넣어 줘.
                         - 날짜 서식 오류나 문자 데이터형으로 인한 에러를 방지하는 IFERROR 처리도 포함해 줘.
 
@@ -1055,30 +1056,27 @@
                     <div
                         class="absolute left-0 top-1 w-7 h-7 bg-[#C10933] text-white rounded-full flex items-center justify-center font-bold text-sm">
                         3</div>
-                    <h3 class="font-bold text-gray-800 text-md">소량 데이터 직접 복사로 요약 시각화 얻기</h3>
+                    <h3 class="font-bold text-gray-800 text-md">두 파일 첨부하여 다중 파일 연계 분석 및 요약</h3>
                     <p class="text-xs text-gray-500 mt-1">
-                        데이터가 수백 줄 이내로 크지 않다면, 엑셀 시트에서 필요한 영역을 마우스로 드래그 복사(Ctrl+C)하여 Copilot Web 채팅창에 바로 붙여넣기(Ctrl+V)한 후
-                        분석과 보고용 요약 결과 도출을 요구합니다.
-                    </p>
+                        양이 많은 로우(Raw) 데이터이므로 복사해서 붙여넣는 대신, Copilot Web 채팅창 하단의 <strong>📎 클립(첨부) 버튼</strong>을 클릭하여 실습 파일인 <strong>`제품별_NPS_수리현황.csv`</strong>와 <strong>`주차별_CS_NPS_시각화.csv`</strong> 두 개를 모두 함께 업로드한 후 다중 파일 연계 분석을 진행합니다.
+                      </p>
 
-                    <div class="prompt-box">
-                        <span class="prompt-label">BEST PROMPT (데이터 표 직접 요약)</span>
-                        "아래 붙여넣은 표는 LG전자 제품 카테고리별 글로벌 NPS 및 수리 처리 현황 통계 데이터야. 이 데이터를 읽어줘.
+                      <div class="prompt-box">
+                          <span class="prompt-label">BEST PROMPT (다중 파일 연계 분석 및 요약)</span>
+                          "첨부된 `제품별_NPS_수리현황.csv`와 `주차별_CS_NPS_시각화.csv` 두 파일은 LG전자의 고객 서비스(CS) 수리 현황 및 만족도 추이를 담은 로우(Raw) 데이터야. 두 파일을 연계하여 분석을 진행하고 보고서 양식으로 요약해 줘.
 
-                        1. NPS 점수가 가장 낮은 취약 제품 카테고리가 무엇이고, 해당 카테고리의 평균 처리 소요 일수와 만족도 점수를 같이 추출해 줘.
-                        2. 전체 카테고리 중 처리 소요 일수가 평균 대비 20% 이상 긴 항목을 찾아 개선이 필요한 항목으로 표시해 줘.
-                        3. 이 데이터를 활용해 CC&S 주간보고에 삽입할 수 있는 제품별 NPS 비교 표(Table)로 가독성 있게 정리해 줘.
-
-                        [붙여넣을 데이터 표]
-                        (여기에 엑셀에서 드래그해서 복사해 온 표 데이터 붙여넣기)"
-                    </div>
+                          1. `제품별_NPS_수리현황.csv`를 기반으로 각 제품 카테고리별로 추천고객(9-10점) 비율과 비추천고객(0-6점) 비율을 계산해 순수 고객만족도지수(NPS = 추천% - 비추천%)를 도출해 줘.
+                          2. `제품별_NPS_수리현황.csv`에서 NPS 점수가 가장 낮은 취약 제품 카테고리를 찾아내고, 해당 카테고리의 평균 수리 완료 소요 일수를 함께 계산해 줘.
+                          3. `주차별_CS_NPS_시각화.csv` 파일의 만족도 점수 추이를 분석하여, 특정 주차에 만족도가 크게 흔들렸는지 트렌드를 요약해 줘.
+                          4. 두 분석 결과를 종합하여, 제품군별 수리 현황과 만족도 트렌드 상관관계를 정리한 비교 표(Table)를 만들고 CC&S 주간보고서 형태로 가독성 있게 정리해 줘."
+                      </div>
                 </div>
             </div>
         </section>
 
         <section id="mvp-concept" class="content-section">
             <h2 class="section-header">3-1. 즉시 실행하는 MVP 개념</h2>
-            <p class="text-lg mb-8"><strong>MVP (Minimum Viable Prototype)</strong>는 회의실에서 말로만 요구사항을 전달하는 한계를 극복하기
+            <p class="text-lg mb-8"><strong>MVP (Minimum Viable Product, 최소 기능 제품)</strong>는 회의실에서 말로만 요구사항을 전달하는 한계를 극복하기
                 위해, AI를 통해 <strong>실제 브라우저에서 동작하는 인터랙티브 샘플</strong>을 즉시 생성하여 협업하는 방식입니다.</p>
 
             <div class="grid md:grid-cols-2 gap-8 mb-10">
@@ -1091,7 +1089,7 @@
                     </ul>
                 </div>
                 <div class="p-6 bg-red-50 border-2 border-red-600 rounded-xl">
-                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-check-circle mr-2"></i>MVP 프로토타이핑 (시각적 협업)
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-check-circle mr-2"></i>MVP 제품 개발 (시각적 협업)
                     </h3>
                     <ul class="text-sm space-y-3 text-gray-700">
                         <li>- 아웃룩 Copilot(Claude)을 활용해 <strong>5분 만에 실제 작동 HTML 생성</strong></li>
@@ -1117,7 +1115,7 @@
                     <div class="p-4 bg-white border rounded-lg text-center">
                         <div class="text-3xl mb-2">🔧</div>
                         <p class="font-bold text-gray-800">업무 도구 시안</p>
-                        <p class="text-xs text-gray-500 mt-1">신규 시스템·서비스 기획 단계의 UI 프로토타입</p>
+                        <p class="text-xs text-gray-500 mt-1">신규 시스템·서비스 기획 단계의 UI MVP 시제품</p>
                     </div>
                 </div>
             </div>
@@ -1134,34 +1132,33 @@
                     <li><strong>아웃룩 앱 실행:</strong> 아웃룩을 열고 <strong>좌측 사이드바의 Copilot 버튼</strong>을 클릭합니다.</li>
                     <li><strong>Claude 모델 선택:</strong> 코파일럿 창 좌측 상단의 <strong>'자동' 버튼</strong>을 클릭하여
                         <strong>Claude(클로드)</strong>로 변경합니다.
-                        <span class="text-xs text-red-500 font-semibold">(※ 사내 라이선스/M365 버전에 따라 해당 버튼 및 모델 선택 화면이 지원되지 않거나 다를 수 있습니다.)</span>
+                        <span class="text-xs text-red-500 font-semibold">(※ 사내 라이선스/M365 버전에 따라 해당 버튼 및 모델 선택 화면이 지원되지
+                            않거나 다를 수 있습니다.)</span>
                     </li>
-                    <li><strong>데이터와 함께 프롬프트 전송:</strong> 아래 프롬프트에 분석할 데이터(엑셀 복사본 등)를 붙여 함께 전송합니다.</li>
+                    <li><strong>파일 첨부 및 프롬프트 전송:</strong> 코파일럿 창 하단의 <strong>📎 클립(첨부) 버튼</strong>을 클릭하여 실습용 대용량 파일인 <strong>`주차별_CS_NPS_시각화.csv`</strong>를 업로드하고 아래 프롬프트를 전송합니다.</li>
                     <li><strong>HTML 저장 & 시연:</strong> 생성된 코드를 복사 → 메모장에 붙여넣기 → <strong>파일명.html</strong>로 저장 → 더블클릭하여
                         브라우저에서 바로 시연합니다.</li>
                 </ol>
             </div>
 
-            <h3 class="font-bold text-xl mb-4"><i class="fas fa-chart-bar mr-2 text-red-600"></i>시나리오: CS 현황 대시보드 즉석 제작
-            </h3>
+            <h3 class="font-bold text-xl mb-4"><i class="fas fa-chart-bar mr-2 text-red-600"></i>시나리오: CS 현황 대시보드 즉석 제작</h3>
             <div class="prompt-box">
                 <span class="prompt-label">BEST PROMPT</span>
-                "아래 CS 현황 데이터를 기반으로 브라우저에서 바로 실행되는 HTML 대시보드를 만들어 줘.
+                "첨부된 `주차별_CS_NPS_시각화.csv` 파일은 주차별/제품별 고객 만족도 및 수리 완료 상태 로우 데이터야. 이 데이터를 기반으로 브라우저에서 바로 실행되는 대화형 HTML/JS 대시보드를 만들어 줘.
 
-                ■ 시각화 요소:
-                1. 상단: KPI 카드 4개 — 총 접수건, 완료건, 평균 처리일수, NPS 점수 (각 수치 크게 표시)
-                2. 중앙: 제품별 NPS 점수 막대 차트 (색상: LG 레드 계열, 낮은 항목은 강조)
-                3. 하단: 주차별 접수 추이 꺾은선 그래프
+                ■ 데이터 요약 및 시각화 요건:
+                1. 상단: KPI 카드 4개 — 총 접수건수(전체 행 개수), 완료건수('진행상태'가 '완료'인 행의 개수), 평균 처리일수('소요시간(일)'의 평균), 평균 NPS 만족도 점수('NPS 점수(0-10)'의 평균)
+                2. 중앙: 제품 카테고리별 평균 NPS 점수 막대 차트 (가장 낮은 제품은 빨간색으로 시각적 강조)
+                3. 하단: 주차별(19주차~25주차) 접수건수 추이를 보여주는 꺾은선 그래프
 
-                ■ 디자인:
-                - 배경: 흰색, 포인트 컬러: #C10933 (LG 레드)
-                - 폰트: Noto Sans KR
-                - 반응형 레이아웃, 카드 그림자 효과
+                ■ 디자인 및 라이브러리:
+                - Tailwind CSS와 Chart.js를 CDN으로 불러와서 사용해 줘.
+                - 배경: 깔끔한 흰색/회색(#F3F4F6) 톤, 포인트 컬러: LG 레드(#C10933)
+                - 반응형 레이아웃, 카드 컴포넌트에 그림자(shadow-sm) 적용
+                - 마우스 오버 시 차트에 상세 수치가 툴팁으로 표시되도록 설정
 
-                ■ 기능: 차트에 마우스 오버 시 수치 툴팁 표시
-
-                [붙여넣을 데이터]
-                (여기에 엑셀에서 복사한 데이터 붙여넣기)"
+                ■ 결과물:
+                - `<!DOCTYPE html>`로 시작해서 `</html>`로 끝나는 단일 HTML 전체 코드를 출력해 줘. CSS와 JS는 모두 내장해 줘."
             </div>
 
             <h3 class="font-bold text-xl mb-4 mt-10"><i class="fas fa-play-circle mr-2 text-green-600"></i>시연 가이드: 회의에서
@@ -1199,12 +1196,12 @@
             <div class="prompt-box">
                 <span class="prompt-label">COPY & USE</span>
                 "아래 보고서 내용을 바탕으로 브라우저에서 실행되는 HTML 발표자료(웹 슬라이드)를 제작해 줘.
-                
+
                 - 슬라이드 분량: 5~8장 내외
                 - 키보드 좌우 화살표로 이전/다음 슬라이드로 넘어가는 스크립트 포함
                 - 각 슬라이드는 제목과 본문(다단 구조)으로 깔끔하게 구성
                 - 디자인: 흰색 배경, 포인트 컬러 #C10933
-                
+
                 [보고 내용]
                 (여기에 보고할 텍스트 내용을 붙여넣으세요)"
             </div>
@@ -1317,7 +1314,8 @@
                         <i class="fas fa-circle-info mr-1"></i>인터넷만 되면 누구나 접근 가능. 모바일에서도 열람 가능합니다.
                     </div>
                     <div class="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800 font-bold">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> [보안 경고] 사내 데이터(VOC, NPS, 미공개 실적 등)가 포함된 문서는 외부 공개되는 GitHub Pages 배포가 절대 금지됩니다! 보안이 필요 없는 가짜(더미) 샘플 데이터의 UI 시안 배포용으로만 사용하시기 바랍니다.
+                        <i class="fas fa-exclamation-triangle mr-1"></i> [보안 경고] 사내 데이터(VOC, NPS, 미공개 실적 등)가 포함된 문서는 외부
+                        공개되는 GitHub Pages 배포가 절대 금지됩니다! 보안이 필요 없는 가짜(더미) 샘플 데이터의 UI 시안 배포용으로만 사용하시기 바랍니다.
                     </div>
                 </div>
 
@@ -1405,7 +1403,9 @@
                             class="w-7 h-7 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold text-xs mb-2">
                             ②</div>
                         <p class="font-bold text-gray-800 mb-1">'자동' → Claude 변경</p>
-                        <p class="text-xs text-gray-600">좌측 상단 <strong>'자동'</strong> 클릭 → <strong>Claude</strong> 선택 <span class="text-red-500 font-semibold">(※ 사내 M365 라이선스 및 버전에 따라 화면이 상이할 수 있습니다.)</span></p>
+                        <p class="text-xs text-gray-600">좌측 상단 <strong>'자동'</strong> 클릭 → <strong>Claude</strong> 선택
+                            <span class="text-red-500 font-semibold">(※ 사내 M365 라이선스 및 버전에 따라 화면이 상이할 수 있습니다.)</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-lg p-4 border border-amber-200">
                         <div
@@ -1513,12 +1513,12 @@
             <div class="prompt-box">
                 <span class="prompt-label">COPY & USE</span>
                 "아래 보고서 내용을 바탕으로 브라우저에서 실행되는 HTML 발표자료(웹 슬라이드)를 제작해 줘.
-                
+
                 - 슬라이드 분량: 5~8장 내외
                 - 키보드 좌우 화살표로 이전/다음 슬라이드로 넘어가는 스크립트 포함
                 - 각 슬라이드는 제목과 본문(다단 구조)으로 깔끔하게 구성
                 - 디자인: 흰색 배경, 포인트 컬러 #C10933
-                
+
                 [보고 내용]
                 (여기에 보고할 텍스트 내용을 붙여넣으세요)"
             </div>
@@ -1638,7 +1638,8 @@
                             <div
                                 class="mt-2 p-3 bg-white border border-gray-200 rounded text-xs text-gray-700 font-mono">
                                 이름: CS 데이터마트 도우미<br>
-                                역할: 너는 LG전자 CC&S전략팀의 BI매트릭스 데이터마트 전문 안내 챗봇이야. 사용자가 데이터 조회, 지표 해석, 화면 조작 방법을 물어보면 업로드된 가이드
+                                역할: 너는 LG전자 CC&S전략팀의 BI매트릭스 데이터마트 전문 안내 챗봇이야. 사용자가 데이터 조회, 지표 해석, 화면 조작 방법을 물어보면 업로드된
+                                가이드
                                 문서를 기반으로 친절하고 정확하게 안내해줘. 모르는 내용은 솔직하게 모른다고 말하고, 가이드 문서를 참고하도록 안내해.
                             </div>
                         </div>
@@ -1846,7 +1847,7 @@
                             class="w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold">C</span>
                         <h4 class="font-bold text-gray-800">웹페이지(MVP) 만들기</h4>
                     </div>
-                    <p class="text-sm text-gray-600 mb-3">아웃룩 Copilot(Claude)으로 실무에 쓸 수 있는 웹페이지를 제작하고 배포합니다.</p>
+                    <p class="text-sm text-gray-600 mb-3">아웃룩 Copilot(Claude) 및 실습용 데이터인 <strong>`주차별_CS_NPS_시각화.csv`</strong>를 활용해 실무에 쓸 수 있는 웹페이지(CS 만족도 대시보드 등)를 제작하고 배포합니다.</p>
                     <div class="bg-red-50 rounded-lg p-3 text-xs text-gray-700 space-y-1">
                         <p class="font-bold text-red-800">예시 과제:</p>
                         <ul class="list-disc pl-4">
@@ -1857,7 +1858,8 @@
                     </div>
                     <div class="mt-3 text-xs text-gray-500">
                         <strong>배포:</strong> 파일 직접 전송 / 내 PC 서버 (3-4 참고)<br>
-                        <span class="text-red-600 font-bold">※ 주의: 사내 데이터 유출 방지를 위해 GitHub Pages 배포는 샘플/더미 데이터로 제작된 시안에 한해서만 허용되며, 실제 사내 데이터 배포는 절대 금지됩니다.</span>
+                        <span class="text-red-600 font-bold">※ 주의: 사내 데이터 유출 방지를 위해 GitHub Pages 배포는 샘플/더미 데이터로 제작된 시안에
+                            한해서만 허용되며, 실제 사내 데이터 배포는 절대 금지됩니다.</span>
                     </div>
                 </div>
             </div>
@@ -1973,7 +1975,7 @@
                     const text = node.nodeValue;
                     const lines = text.split('\n');
                     let minIndent = Infinity;
-                    
+
                     // 각 줄의 최소 들여쓰기 공백 수 찾기 (빈 줄 제외)
                     lines.forEach(line => {
                         if (line.trim().length > 0) {
@@ -1986,7 +1988,7 @@
                             }
                         }
                     });
-                    
+
                     // 최소 공백 수만큼 각 줄의 시작 부분에서 제거
                     if (minIndent !== Infinity && minIndent > 0) {
                         const dedentedLines = lines.map(line => {
