@@ -11,30 +11,17 @@
       theme: {
         extend: {
           colors: {
-            lgRed: {
-              DEFAULT: '#A50034',
-              deep: '#82002A',
-              light: '#FBE9EF'
-            },
-            lgPlum: {
-              DEFAULT: '#6E3263',
-              deep: '#53254B',
-              light: '#F1E8F0'
-            },
-            lgGray: {
-              DEFAULT: '#6B6B6B',
-              dark: '#231F23',
-              soft: '#F3F4F6'
-            }
+            lgRed: { DEFAULT: '#A50034', deep: '#82002A', light: '#FBE9EF' },
+            lgPlum: { DEFAULT: '#6E3263', deep: '#53254B', light: '#F1E8F0' },
+            lgGray: { DEFAULT: '#6B6B6B', dark: '#231F23', soft: '#F3F4F6' }
           },
-          fontFamily: {
-            sans: ['Pretendard', 'sans-serif'],
-          }
+          fontFamily: { sans: ['Pretendard', 'sans-serif'] }
         }
       }
     }
   </script>
   <style>
+    * { word-break: keep-all; overflow-wrap: break-word; }
     @media print {
       body { background-color: #ffffff; }
       .no-print { display: none; }
@@ -49,177 +36,193 @@
 
     <!-- Header -->
     <header class="border-b-2 border-lgRed pb-4 mb-6">
-      <div>
-        <span class="inline-block bg-lgRed-light text-lgRed text-xs font-bold px-2.5 py-1 rounded-full mb-2">고객가치혁신부문 · AI Transformation</span>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">전 Staff AX 역량강화 교육 실행 계획</h1>
-        <p class="text-sm text-slate-500 mt-1">부문 전 구성원 실무 AX 역량 평준화 및 현업 실행력 강화</p>
-      </div>
+      <span class="inline-block bg-lgRed-light text-lgRed text-xs font-bold px-2.5 py-1 rounded-full mb-2">고객가치혁신부문 · AI Transformation</span>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">전 Staff AX 역량강화 교육 실행 계획</h1>
+      <p class="text-sm text-slate-500 mt-1">부문 전 구성원 실무 AX 역량 평준화 및 현업 실행력 강화</p>
     </header>
 
-    <!-- Key Metrics Banner -->
-    <section class="grid grid-cols-3 gap-4 mb-6 page-break">
+    <!-- Key Metrics -->
+    <section class="grid grid-cols-3 gap-4 mb-6">
       <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
         <span class="text-xs text-slate-500 font-semibold block">총 교육 대상</span>
         <span class="text-2xl font-bold text-lgRed">470명</span>
-        <span class="text-[11px] text-slate-400 block mt-0.5">Lv.1 67명 / Lv.2·3·4 403명</span>
+        <span class="text-[11px] text-slate-400 block mt-0.5">기초교육 67명 / 기본교육 470명</span>
       </div>
       <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
         <span class="text-xs text-slate-500 font-semibold block">총 운영 차수</span>
         <span class="text-2xl font-bold text-slate-800">23차수</span>
-        <span class="text-[11px] text-slate-400 block mt-0.5">도입 2차 / 본교육 21차</span>
+        <span class="text-[11px] text-slate-400 block mt-0.5">기초 2차 / 기본 21차</span>
       </div>
       <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
         <span class="text-xs text-slate-500 font-semibold block">운영 일자</span>
-        <span class="text-sm sm:text-base font-bold text-lgPlum mt-1 block">06.30 ~ 08.13</span>
+        <span class="text-base font-bold text-lgPlum mt-1 block">06.30 ~ 08.13</span>
         <span class="text-[11px] text-slate-400 block">W6동 서울아카데미</span>
       </div>
     </section>
 
-    <!-- Content Grid: 목적+대상원칙 (좌) / 트랙구성 (우) -->
+    <!-- 역량 진단 결과 + 교육 구성 -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
 
-      <!-- Left Column (5 cols): 추진 목적 + 교육 대상 및 원칙 -->
-      <div class="lg:col-span-5 space-y-4 page-break">
+      <!-- 좌: 역량 진단 서베이 결과 -->
+      <div class="lg:col-span-5 border border-slate-200 rounded-xl p-4 page-break">
+        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
+          <span class="w-1.5 h-3.5 bg-lgRed inline-block rounded-full"></span>
+          AX 역량 진단 서베이 결과
+        </h2>
+        <p class="text-[11px] text-slate-500 mb-3">진단 결과 기반 Level 분류 → 교육 과정 편성</p>
 
-        <!-- 추진 목적 -->
-        <div class="border border-slate-200 rounded-xl p-4">
-          <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-2">
-            <span class="w-1.5 h-3.5 bg-lgRed inline-block rounded-full"></span>
-            추진 목적
-          </h2>
-          <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-4 font-medium">
-            <li>실무 적용 중심의 <strong class="text-slate-900">현장 밀착형 실습 교육</strong> 추진</li>
-            <li>부문 내 <strong class="text-slate-900">AX Pro 강사 및 코치 매칭</strong>으로 내재화 최적화</li>
-            <li>개인 업무 카테고리에 맞춘 분반 편성으로 교육 효율성 증대</li>
-          </ul>
-        </div>
-
-        <!-- 교육 대상 및 원칙 -->
-        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
-          <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-2.5">
-            <span class="w-1.5 h-3.5 bg-lgPlum inline-block rounded-full"></span>
-            교육 대상 및 원칙
-          </h2>
-          <div class="space-y-3">
-            <div class="p-2.5 bg-lgRed-light rounded-lg border border-red-100">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-lgRed block mb-1">필수 참석 대상</span>
-              <p class="text-xs text-slate-800 font-bold leading-relaxed">
-                고객가치혁신부문 Staff 전원
-              </p>
+        <!-- 레벨별 바 차트 -->
+        <div class="space-y-2.5">
+          <!-- LV1 -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[11px] font-bold text-slate-700">Level 1 · 입문</span>
+              <span class="text-[11px] font-bold text-slate-500">67명 <span class="text-slate-400">(12.7%)</span></span>
             </div>
-            <div class="grid grid-cols-2 gap-2 text-[11px]">
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-500 block mb-0.5">제외 대상</span>
-                <p class="text-slate-600 font-medium">담당급 이상 임원,<br>센터장, 자재계,<br>명장 및 대명장</p>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-lgPlum block mb-0.5">AX Pro 활용</span>
-                <p class="text-slate-600 font-medium">부문 내 AX Pro 인원은 강사 및 코치로 참여</p>
-              </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-slate-400 h-2 rounded-full" style="width:12.7%"></div>
             </div>
           </div>
+          <!-- LV2 -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[11px] font-bold text-slate-700">Level 2 · 기본</span>
+              <span class="text-[11px] font-bold text-slate-500">293명 <span class="text-slate-400">(56.6%)</span></span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-lgRed h-2 rounded-full" style="width:56.6%"></div>
+            </div>
+          </div>
+          <!-- LV3 -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[11px] font-bold text-slate-700">Level 3 · 활용</span>
+              <span class="text-[11px] font-bold text-slate-500">138명 <span class="text-slate-400">(26.6%)</span></span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-lgRed h-2 rounded-full" style="width:26.6%"></div>
+            </div>
+          </div>
+          <!-- LV4 -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[11px] font-bold text-lgPlum">Level 4 · 심화</span>
+              <span class="text-[11px] font-bold text-slate-500">21명 <span class="text-slate-400">(4.0%)</span></span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-lgPlum h-2 rounded-full" style="width:4%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AX Pro 역할 설명 -->
+        <div class="mt-4 p-3 bg-lgPlum-light rounded-lg border border-purple-100">
+          <span class="text-[10px] font-bold text-lgPlum-deep block mb-1.5">★ AX Pro 운영 방식</span>
+          <ul class="text-[11px] text-slate-700 space-y-1 leading-relaxed">
+            <li>· 각 담당/실별 <strong>1~3명 선별</strong> — 상위 레벨 + 조직 업무 이해도 고려, 각 담당이 직접 선정</li>
+            <li>· <strong>사내 강사풀</strong>로 운영 — 교육 강사 및 코치 역할 수행</li>
+            <li>· 교육 이후 <strong>조직 내 AX 확산</strong> 주도 역할</li>
+            <li>· 조직별 균등 선발로 <strong>지속적 내재화</strong> 기반 구축</li>
+          </ul>
         </div>
       </div>
 
-      <!-- Right Column (7 cols): 교육 트랙 구성 -->
+      <!-- 우: 교육 과정 구성 -->
       <div class="lg:col-span-7 border border-slate-200 rounded-xl p-4 page-break">
         <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
           <span class="w-1.5 h-3.5 bg-slate-700 inline-block rounded-full"></span>
-          교육 트랙 및 세부 구성
+          교육 과정 구성
         </h2>
 
         <div class="space-y-3">
-          <!-- Track 1 -->
-          <div class="border-l-4 border-lgGray bg-slate-50 p-3 rounded-r-lg">
+          <!-- 기본 교육 -->
+          <div class="border-l-4 border-lgRed bg-lgRed-light/30 p-3 rounded-r-lg">
             <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-slate-700">Track 1. AX Level 1 (도입 과정)</span>
-              <span class="text-[11px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-bold">67명</span>
+              <span class="text-xs font-bold text-lgRed-deep">기본(실무 심화) 교육 — 전원 필수</span>
+              <span class="text-[11px] bg-lgRed text-white px-2 py-0.5 rounded font-bold">470명 전원</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mb-2">기초 지식 확립 및 사내 Copilot 조작 실습 중심</p>
-            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-slate-600">
-              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">도입 교육 (3H)</span>
-              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">개인 내재화 (1개월)</span>
-              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">본교육 합류 (7H)</span>
+            <p class="text-[11px] text-slate-500 mb-2">Level 2·3·4 대상 + Level 1 도입 완료 후 합류 · 일 7시간 (09시~17시) · 오프라인</p>
+            <div class="grid grid-cols-2 gap-2 text-[10px]">
+              <div class="bg-white p-1.5 rounded border border-slate-100">
+                <span class="font-bold text-slate-700 block">✓ MS Copilot 실전 실무</span>
+                <span class="text-slate-500">Outlook 자동요약, Excel 데이터 분석</span>
+              </div>
+              <div class="bg-white p-1.5 rounded border border-slate-100">
+                <span class="font-bold text-lgRed-deep block">🔥 현업 연계 프로젝트</span>
+                <span class="text-slate-500">에이전트/홈페이지 제작 실습 및 발표</span>
+              </div>
             </div>
           </div>
 
-          <!-- Track 2 -->
-          <div class="border-l-4 border-lgRed bg-lgRed-light/30 p-3 rounded-r-lg">
+          <!-- 기초 교육 -->
+          <div class="border-l-4 border-slate-400 bg-slate-50 p-3 rounded-r-lg">
             <div class="flex justify-between items-center mb-1">
-              <span class="text-xs font-bold text-lgRed-deep">Track 2. AX Level 2·3·4 (기본 교육)</span>
-              <span class="text-[11px] bg-lgRed text-white px-2 py-0.5 rounded font-bold">403명</span>
+              <span class="text-xs font-bold text-slate-700">기초(도입) 교육 — Level 1 추가 과정</span>
+              <span class="text-[11px] bg-slate-400 text-white px-2 py-0.5 rounded font-bold">67명</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mb-2">실무 오피스 자동화(이메일, 데이터 분석) 및 MVP 제작 조별 실습</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px]">
-              <div class="bg-white p-1.5 rounded border border-slate-100">
-                <span class="font-bold text-slate-700 block">✓ MS Copilot 실전 실무</span>
-                <span class="text-slate-500">Outlook 자동요약, Excel 데이터 분석 지원</span>
-              </div>
-              <div class="bg-white p-1.5 rounded border border-slate-100">
-                <span class="font-bold text-lgRed-deep block">🔥 핵심 실무 연계 프로젝트</span>
-                <span class="text-slate-500">현업용 에이전트/홈페이지 제작 토의 및 발표</span>
-              </div>
+            <p class="text-[11px] text-slate-500 mb-2">기초 지식 확립 및 사내 Copilot 조작 실습 · 일 3시간 (09시~12시) · 온/오프라인</p>
+            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-slate-600">
+              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">도입 교육 (3H)</span>
+              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">자율 내재화 (1개월)</span>
+              <span class="bg-white px-2 py-1 rounded border border-slate-100 text-center font-semibold">기본교육 합류 (7H)</span>
             </div>
+          </div>
+        </div>
+
+        <!-- 교육 신청 -->
+        <div class="mt-3 border-t border-slate-100 pt-3">
+          <p class="text-[11px] font-bold text-slate-600 mb-2">교육 신청 안내</p>
+          <div class="grid grid-cols-2 gap-2">
+
+            <!-- 기초 교육 -->
+            <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-800">① AX 기초 교육</span>
+                <span class="text-[9px] bg-slate-300 text-slate-700 px-1.5 py-0.5 rounded font-bold shrink-0">신청 6/15~6/22</span>
+              </div>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 leading-relaxed">
+                <li>· <span class="font-semibold text-slate-700">대상</span> AI 기초 역량 필요 인원 (66명)</li>
+                <li>· <span class="font-semibold text-slate-700">일정</span> 6/30(화) ~ 7/1(수), 2차수 중 택1</li>
+                <li>· <span class="font-semibold text-slate-700">시간</span> 일 3시간 (09시~12시)</li>
+                <li>· <span class="font-semibold text-slate-700">방식</span> 오프라인(마곡·트윈) / 온라인 병행</li>
+              </ul>
+              <a href="https://cvi-exg.github.io/staff_ax_starter/" target="_blank"
+                 class="block text-center text-[10px] font-bold bg-slate-700 hover:bg-slate-900 text-white py-1.5 rounded transition mt-auto">
+                🔗 기초 교육 신청 포털
+              </a>
+            </div>
+
+            <!-- 기본 교육 -->
+            <div class="p-2.5 bg-lgRed-light/40 rounded-lg border border-red-100 flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-lgRed-deep">② AX 기본 교육</span>
+                <span class="text-[9px] bg-lgRed text-white px-1.5 py-0.5 rounded font-bold shrink-0">신청 6/17~6/24</span>
+              </div>
+              <ul class="text-[10px] text-slate-600 space-y-0.5 leading-relaxed">
+                <li>· <span class="font-semibold text-slate-700">대상</span> 고가혁 Staff 전원 (임원·사내 강사 제외)</li>
+                <li>· <span class="font-semibold text-slate-700">일정</span> 7/2(목) ~ 8/13(목), 21차수 중 택1</li>
+                <li>· <span class="font-semibold text-slate-700">시간</span> 일 7시간 (09시~17시)</li>
+                <li>· <span class="font-semibold text-slate-700">방식</span> 오프라인(현장) 전용</li>
+              </ul>
+              <a href="https://cvi-exg.github.io/staff_ax_adv/" target="_blank"
+                 class="block text-center text-[10px] font-bold bg-lgRed hover:bg-lgRed-deep text-white py-1.5 rounded transition mt-auto">
+                🔗 기본 교육 신청 포털
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 교육 신청 안내: 좌우 배치 -->
-    <section class="border border-slate-200 rounded-xl p-4 mb-6 page-break">
-      <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
-        <span class="w-1.5 h-3.5 bg-lgRed inline-block rounded-full"></span>
-        교육 신청 안내
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-        <!-- 기초 교육 -->
-        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-slate-800">① AX 기초 교육</span>
-            <span class="text-[10px] bg-slate-300 text-slate-700 px-2 py-0.5 rounded font-bold">신청 6/15(월) ~ 6/22(월)</span>
-          </div>
-          <div class="text-[11px] text-slate-600 space-y-1 mb-3">
-            <p>· <span class="font-semibold text-slate-700">대상</span>: AI 기초 역량 확보 필요 인원 (66명)</p>
-            <p>· <span class="font-semibold text-slate-700">일정</span>: 6/30(화) ~ 7/1(수), 2차수 중 1개 선택</p>
-            <p>· <span class="font-semibold text-slate-700">시간</span>: 일 3시간 (09시~12시)</p>
-            <p>· <span class="font-semibold text-slate-700">방식</span>: 오프라인(마곡·트윈) / 온라인 병행</p>
-          </div>
-          <a href="https://cvi-exg.github.io/staff_ax_starter/" target="_blank"
-             class="block text-center text-[11px] font-bold bg-slate-700 hover:bg-slate-900 text-white py-1.5 rounded transition">
-            🔗 고가혁 Staff AX 기초 교육 신청 포털
-          </a>
-        </div>
-
-        <!-- 기본 교육 -->
-        <div class="p-3 bg-lgRed-light/40 rounded-lg border border-red-100">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-lgRed-deep">② AX 기본 교육</span>
-            <span class="text-[10px] bg-lgRed text-white px-2 py-0.5 rounded font-bold">신청 6/17(수) ~ 6/24(수)</span>
-          </div>
-          <div class="text-[11px] text-slate-600 space-y-1 mb-3">
-            <p>· <span class="font-semibold text-slate-700">대상</span>: 고가혁 Staff 전 구성원 (임원급·사내 강사 제외)</p>
-            <p>· <span class="font-semibold text-slate-700">일정</span>: 7/2(목) ~ 8/13(목), 21개 차수 중 1개 선택</p>
-            <p>· <span class="font-semibold text-slate-700">시간</span>: 일 7시간 (09시~17시)</p>
-            <p>· <span class="font-semibold text-slate-700">방식</span>: 오프라인(현장) 전용</p>
-          </div>
-          <a href="https://cvi-exg.github.io/staff_ax_adv/" target="_blank"
-             class="block text-center text-[11px] font-bold bg-lgRed hover:bg-lgRed-deep text-white py-1.5 rounded transition">
-            🔗 고가혁 Staff AX 기본 교육 신청 포털
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Timeline / Schedule Section -->
+    <!-- 전체 일정 -->
     <section class="border border-slate-200 rounded-xl p-4 page-break">
       <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
         <span class="w-1.5 h-3.5 bg-lgRed-deep inline-block rounded-full"></span>
-        전체 실행 일정 및 상세 교육 캘린더
+        전체 실행 일정
       </h2>
 
-      <!-- Process Steps -->
+      <!-- 단계 -->
       <div class="grid grid-cols-5 gap-2 text-center text-xs mb-4">
         <div class="p-1.5 bg-slate-100 rounded">
           <span class="text-[10px] text-slate-400 block font-bold">1단계 · 6/11~6/18</span>
@@ -231,26 +234,26 @@
         </div>
         <div class="p-1.5 bg-lgRed-light rounded">
           <span class="text-[10px] text-lgRed-deep block font-bold">3단계 · 6/30~7/1</span>
-          <span class="font-bold text-lgRed-deep">Level 1 도입</span>
+          <span class="font-bold text-lgRed-deep">기초 교육<br>(Level 1)</span>
         </div>
         <div class="p-1.5 bg-lgRed-light rounded">
           <span class="text-[10px] text-lgRed-deep block font-bold">4단계 · 7/2~8/6</span>
-          <span class="font-bold text-lgRed-deep">본 교육 (1~18차)</span>
+          <span class="font-bold text-lgRed-deep">기본 교육<br>(1~18차)</span>
         </div>
         <div class="p-1.5 bg-lgPlum-light rounded">
           <span class="text-[10px] text-lgPlum-deep block font-bold">5단계 · 8/11~13</span>
-          <span class="font-bold text-lgPlum-deep">본 교육 (19~21차)</span>
+          <span class="font-bold text-lgPlum-deep">기본 교육<br>(19~21차)</span>
         </div>
       </div>
 
-      <!-- Schedule Table -->
+      <!-- 일정표 -->
       <div class="overflow-x-auto">
         <table class="min-w-full text-xs text-left text-slate-600 border-collapse">
           <thead>
             <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold">
               <th class="p-2.5">시기</th>
               <th class="p-2.5">차수 구분</th>
-              <th class="p-2.5">기간 / 상세 일자</th>
+              <th class="p-2.5">상세 일자</th>
               <th class="p-2.5">교육 대상</th>
               <th class="p-2.5">장소 및 시간 / 비고</th>
             </tr>
@@ -260,66 +263,66 @@
               <td class="p-2.5 font-bold text-slate-900" rowspan="2">6월 초·중</td>
               <td class="p-2.5"><span class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-bold">AX Pro 킥오프</span></td>
               <td class="p-2.5 font-medium">06. 11 (목)</td>
-              <td class="p-2.5 font-medium">AX Pro 전원</td>
-              <td class="p-2.5">온라인 진행</td>
+              <td class="p-2.5">AX Pro 전원</td>
+              <td class="p-2.5">온라인 진행 ✓ 완료</td>
             </tr>
             <tr>
               <td class="p-2.5"><span class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-bold">AX Pro 워크샵</span></td>
               <td class="p-2.5 font-medium">06. 18 (목)</td>
-              <td class="p-2.5 font-medium">AX Pro 전원</td>
-              <td class="p-2.5">워크샵 진행</td>
+              <td class="p-2.5">AX Pro 전원</td>
+              <td class="p-2.5">워크샵 진행 ✓ 완료</td>
             </tr>
             <tr class="bg-slate-50">
               <td class="p-2.5 font-bold text-slate-900">6월 중</td>
               <td class="p-2.5"><span class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-bold">강사 전파 교육</span></td>
               <td class="p-2.5 font-medium">06. 23 (화)</td>
-              <td class="p-2.5 font-medium">사내 강사 대상</td>
+              <td class="p-2.5">사내 강사 대상</td>
               <td class="p-2.5">전파 교육 진행</td>
             </tr>
             <tr>
               <td class="p-2.5 font-bold text-slate-900">6월 말</td>
-              <td class="p-2.5"><span class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-bold">도입 1~2차</span></td>
+              <td class="p-2.5"><span class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-bold">기초 교육 1~2차</span></td>
               <td class="p-2.5 font-medium">06. 30 (화) ~ 07. 01 (수)</td>
-              <td class="p-2.5 font-medium">Track 1 (Level 1) 전원 (67명)</td>
-              <td class="p-2.5">W6동 6F / W동 B1F (3H, 09시~12시)</td>
+              <td class="p-2.5">Level 1 전원 (67명)</td>
+              <td class="p-2.5">W6동 6F / W동 B1F · 3H (09시~12시)</td>
             </tr>
             <tr class="bg-lgRed-light/10">
               <td class="p-2.5 font-bold text-lgRed" rowspan="4">7월</td>
-              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 1차</span></td>
+              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 1차</span></td>
               <td class="p-2.5 font-medium">07. 02 (목)</td>
-              <td class="p-2.5 font-medium text-slate-800">Track 2 (Level 2·3·4) 첫 차수 개강</td>
-              <td class="p-2.5">W6동 CC&amp;S서울아카데미 6F (7H, 09시~17시)</td>
+              <td class="p-2.5">Level 2·3·4 첫 차수 개강</td>
+              <td class="p-2.5">W6동 CC&amp;S 서울아카데미 6F · 7H (09시~17시)</td>
             </tr>
             <tr class="bg-lgRed-light/10">
-              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 2~7차</span></td>
+              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 2~7차</span></td>
               <td class="p-2.5 font-medium">07. 07 (화) ~ 07. 16 (목)</td>
-              <td class="p-2.5">Track 2 (Level 2·3·4) 대상자 분반</td>
-              <td class="p-2.5 text-slate-500">7/10(Refresh Day), 7/17(제헌절) 교육 미실행</td>
+              <td class="p-2.5">Level 2·3·4 대상자 분반</td>
+              <td class="p-2.5 text-slate-500">7/10 Refresh Day, 7/17 제헌절 미운영</td>
             </tr>
             <tr class="bg-lgRed-light/10">
-              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 8~11차</span></td>
+              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 8~11차</span></td>
               <td class="p-2.5 font-medium">07. 21 (화) ~ 07. 24 (금)</td>
-              <td class="p-2.5">Track 2 (Level 2·3·4) 대상자 분반</td>
+              <td class="p-2.5">Level 2·3·4 대상자 분반</td>
               <td class="p-2.5">화~금 4일 연속 집중 운영</td>
             </tr>
             <tr class="bg-lgRed-light/10">
-              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 12~15차</span></td>
+              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 12~15차</span></td>
               <td class="p-2.5 font-medium">07. 28 (화) ~ 07. 31 (금)</td>
-              <td class="p-2.5">Track 2 (Level 2·3·4) 대상자 분반</td>
+              <td class="p-2.5">Level 2·3·4 대상자 분반</td>
               <td class="p-2.5">화~금 4일 연속 집중 운영</td>
             </tr>
             <tr>
               <td class="p-2.5 font-bold text-lgPlum" rowspan="2">8월</td>
-              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 16~18차</span></td>
+              <td class="p-2.5"><span class="bg-lgRed text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 16~18차</span></td>
               <td class="p-2.5 font-medium">08. 04 (화) ~ 08. 06 (목)</td>
-              <td class="p-2.5">Track 2 (Level 2·3·4) 대상자 분반</td>
-              <td class="p-2.5 text-slate-500">Track 2 대상자 교육 종료</td>
+              <td class="p-2.5">Level 2·3·4 대상자 분반</td>
+              <td class="p-2.5 text-slate-500">Level 2·3·4 교육 종료</td>
             </tr>
             <tr class="bg-lgPlum-light/20">
-              <td class="p-2.5"><span class="bg-lgPlum text-white text-[10px] px-2 py-0.5 rounded font-bold">본 교육 19~21차</span></td>
+              <td class="p-2.5"><span class="bg-lgPlum text-white text-[10px] px-2 py-0.5 rounded font-bold">기본 교육 19~21차</span></td>
               <td class="p-2.5 font-medium text-lgPlum-deep">08. 11 (화) ~ 08. 13 (목)</td>
-              <td class="p-2.5 font-bold">Track 1 (Level 1) 도입 완료 인원</td>
-              <td class="p-2.5">1개월 실무 내재화 후 본 교육 최종 합류</td>
+              <td class="p-2.5 font-bold">Level 1 기초 교육 완료 인원</td>
+              <td class="p-2.5">1개월 자율 내재화 후 기본 교육 최종 합류</td>
             </tr>
           </tbody>
         </table>
@@ -327,11 +330,11 @@
     </section>
 
     <!-- Footer -->
-    <div class="mt-6 flex justify-end gap-3 no-print">
+    <div class="mt-6 flex justify-end no-print">
       <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 1.173a2.25 2.25 0 0 1-2.24 2.684H8.351a2.25 2.25 0 0 1-2.243-2.684L6.34 18m11.318-4.171A42.233 42.233 0 0 0 12 13.2a42.233 42.233 0 0 0-5.658.629m11.318 0c.08.006.16.012.24.018a2.25 2.25 0 0 0 2.242-2.242V8.25a2.25 2.25 0 0 0-2.242-2.242H3.75A2.25 2.25 0 0 0 1.5 8.25v3.25c0 1.12.83 2.052 1.94 2.219l.24.018m15.53-.018L18 14m-12 0-.219-.018"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h.008v.008H19.5V12Zm-3-3h.008v.008H16.5V9Z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 1.173a2.25 2.25 0 0 1-2.24 2.684H8.351a2.25 2.25 0 0 1-2.243-2.684L6.34 18m11.318-4.171A42.233 42.233 0 0 0 12 13.2a42.233 42.233 0 0 0-5.658.629m11.318 0c.08.006.16.012.24.018a2.25 2.25 0 0 0 2.242-2.242V8.25a2.25 2.25 0 0 0-2.242-2.242H3.75A2.25 2.25 0 0 0 1.5 8.25v3.25c0 1.12.83 2.052 1.94 2.219l.24.018m15.53-.018L18 14m-12 0-.219-.018"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h.008v.008H19.5V12Zm-3-3h.008v.008H16.5V9Z"/>
         </svg>
         보고서 인쇄 / PDF 저장
       </button>
