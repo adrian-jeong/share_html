@@ -558,58 +558,109 @@
             </div>
 
             <!-- 베이스 모델 vs AI 에이전트 이론 -->
-            <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fas fa-brain text-[#C10933] mr-2"></i>핵심 이론: 베이스
-                모델 vs AI 에이전트</h3>
-            <p class="text-sm text-gray-600 mb-6">
-                현재 사내 아웃룩 Copilot 등을 실행하면 내부 모델을 GPT나 Claude로 선택해서 쓸 수 있는 기능이 제공됩니다. 그렇다면 공식 사이트(ChatGPT, Claude.ai)에 직접
-                접속해 사용하는 것과 Copilot에서 사용하는 것은 어떤 차이가 있을까요?
+            <h3 class="font-bold text-lg text-gray-800 mb-3"><i class="fas fa-brain text-[#C10933] mr-2"></i>핵심 이론: 베이스 모델 vs AI 에이전트</h3>
+            <p class="text-sm text-gray-600 mb-2">
+                사내 아웃룩 Copilot을 실행하면 내부 모델을 GPT나 Claude로 선택할 수 있습니다. 그런데 한 가지 질문이 생깁니다.
             </p>
+            <div class="mb-6 p-4 bg-gray-100 border-l-4 border-[#C10933] rounded-r-xl text-sm text-gray-700">
+                <strong>"ChatGPT 공식 사이트에서 GPT로 질문하는 것"</strong>과 <strong>"사내 Copilot에서 GPT 모델로 질문하는 것"</strong>은 같은 건가요? 다른 건가요?
+            </div>
 
-            <div class="grid md:grid-cols-2 gap-6 mb-10 text-sm">
-                <!-- 베이스 모델 -->
-                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-2 mb-3 text-blue-600">
-                            <i class="fas fa-microchip text-lg"></i>
-                            <h4 class="font-bold text-gray-800">기본 베이스 모델 (Base Model / LLM)</h4>
-                        </div>
-                        <p class="text-gray-500 mb-2">예: GPT 계열, Claude 계열, Gemini 계열 등</p>
-                        <p class="text-gray-600 leading-relaxed mb-4">
-                            인공지능의 <strong>순수한 '두뇌' 엔진</strong>입니다. 독자적인 대규모 학습 데이터를 기초로 추론, 요약, 코딩 등의 순수 연산 작업을 처리합니다.
-                        </p>
+            <!-- 핵심 개념: 두뇌 vs 껍데기 -->
+            <div class="mb-6 p-5 bg-white border-2 border-gray-200 rounded-xl text-sm">
+                <p class="font-bold text-gray-800 mb-3 text-base"><i class="fas fa-lightbulb text-amber-500 mr-2"></i>답: <span class="text-[#C10933]">두뇌(베이스 모델)는 같아도, 그것을 감싼 에이전트가 다릅니다.</span></p>
+                <div class="flex items-center gap-3 flex-wrap text-center">
+                    <div class="flex-1 min-w-32 p-3 bg-blue-50 rounded-xl border border-blue-200">
+                        <p class="text-xs text-blue-500 mb-1">베이스 모델 (두뇌)</p>
+                        <p class="font-bold text-blue-800">GPT / Claude</p>
+                        <p class="text-xs text-gray-500 mt-1">추론·요약·언어 처리<br>어디서 쓰든 동일한 지능</p>
                     </div>
-                    <div class="bg-blue-50 p-3 rounded-lg text-blue-900 space-y-1">
-                        <p class="font-bold">⚠️ 공식 웹사이트 직접 접속의 특징:</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li>해당 모델 본연의 지능과 성능을 가장 빠르게 테스트할 수 있습니다.</li>
-                            <li><strong>사내 시스템(이메일, 파일, 캘린더 등)과 자동으로 연동되지 않아</strong> 일일이 복사해서 입력해야 합니다.</li>
-                            <li>개인 계정으로 입력한 데이터는 AI 학습에 쓰여 <strong>사내 기밀 유출 리스크</strong>가 매우 높습니다.</li>
-                        </ul>
+                    <div class="text-2xl text-gray-400">+</div>
+                    <div class="flex-1 min-w-32 p-3 bg-purple-50 rounded-xl border border-purple-200">
+                        <p class="text-xs text-purple-500 mb-1">에이전트 (껍데기)</p>
+                        <p class="font-bold text-purple-800">ChatGPT / Copilot<br>/ Perplexity 등</p>
+                        <p class="text-xs text-gray-500 mt-1">무엇과 연결되고<br>어떤 데이터를 쓰는지 결정</p>
+                    </div>
+                    <div class="text-2xl text-gray-400">=</div>
+                    <div class="flex-1 min-w-32 p-3 bg-green-50 rounded-xl border border-green-200">
+                        <p class="text-xs text-green-500 mb-1">최종 서비스</p>
+                        <p class="font-bold text-green-800">용도별로<br>완전히 다른 경험</p>
+                        <p class="text-xs text-gray-500 mt-1">보안·연동 범위·<br>데이터 접근이 달라짐</p>
                     </div>
                 </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">→ <strong>똑같은 GPT 두뇌</strong>라도, 어떤 에이전트 위에서 실행되느냐에 따라 <strong>무엇을 할 수 있는지, 어떤 보안이 적용되는지</strong>가 완전히 달라집니다.</p>
+            </div>
 
-                <!-- AI 에이전트 -->
-                <div class="p-5 bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-2 mb-3 text-purple-600">
-                            <i class="fas fa-user-cog text-lg"></i>
-                            <h4 class="font-bold text-gray-800">AI 에이전트 / 시스템 통합형 (Copilot)</h4>
-                        </div>
-                        <p class="text-gray-500 mb-2">예: M365 Copilot, Copilot Studio 에이전트, Cowork 등</p>
-                        <p class="text-gray-600 leading-relaxed mb-4">
-                            베이스 모델을 두뇌로 삼되, <strong>내 업무 데이터(이메일, 일정, 파일)와 유기적으로 연결되어 동작(Action)을 자동 수행</strong>하도록 사내
-                            보안망 내에 구축된 지능형 시스템입니다.
-                        </p>
-                    </div>
-                    <div class="bg-purple-50 p-3 rounded-lg text-purple-900 space-y-1">
-                        <p class="font-bold">✨ Copilot(에이전트 서비스) 활용의 특징:</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong>사내 보안 확보:</strong> 사내 계정으로 로그인되어 입력 내용이 외부 학습에 절대 사용되지 않습니다.</li>
-                            <li><strong>업무 환경 결합:</strong> 별도 텍스트 복사 없이 내 아웃룩 메일함, 캘린더 데이터를 AI가 직접 조회하여 요약하거나 보고서로
-                                가공합니다.</li>
-                            <li>보안망 내에서 검증된 GPT/Claude의 능력을 가져와 내 사내 데이터에 직접 안전하게 결합시킵니다.</li>
-                        </ul>
-                    </div>
+            <!-- 에이전트별 비교표 -->
+            <h4 class="font-bold text-gray-800 mb-3 text-sm"><i class="fas fa-table-cells mr-2 text-[#C10933]"></i>대표 AI 서비스별 비교 — 두뇌는 같아도, 에이전트가 다르다</h4>
+            <div class="overflow-x-auto mb-6">
+                <table class="w-full text-xs border border-gray-200 rounded-xl overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700 text-center">
+                        <tr>
+                            <th class="p-3 text-left">서비스</th>
+                            <th class="p-3">베이스 모델 (두뇌)</th>
+                            <th class="p-3">에이전트의 역할 (껍데기)</th>
+                            <th class="p-3">사내 기밀 보안</th>
+                            <th class="p-3">사내 시스템 연동</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-center text-gray-700">
+                        <tr class="bg-white">
+                            <td class="p-3 text-left font-bold">ChatGPT<br><span class="text-xs font-normal text-gray-400">chat.openai.com</span></td>
+                            <td class="p-3">GPT-4o</td>
+                            <td class="p-3 text-left text-xs">웹 검색·이미지 생성·GPTs 플러그인 연동</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-bold text-xs">위험</span></td>
+                            <td class="p-3 text-gray-400 text-xs">없음</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 text-left font-bold">Perplexity<br><span class="text-xs font-normal text-gray-400">perplexity.ai</span></td>
+                            <td class="p-3 text-xs">GPT / Claude<br>/ Sonar 등</td>
+                            <td class="p-3 text-left text-xs">실시간 웹 검색 특화 — 출처 인용 자동화</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-bold text-xs">위험</span></td>
+                            <td class="p-3 text-gray-400 text-xs">없음</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-3 text-left font-bold">Genspark<br><span class="text-xs font-normal text-gray-400">genspark.ai</span></td>
+                            <td class="p-3 text-xs">GPT / Claude<br>/ Gemini 등</td>
+                            <td class="p-3 text-left text-xs">다중 AI 조합·딥리서치·슬라이드 자동 생성</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-bold text-xs">위험</span></td>
+                            <td class="p-3 text-gray-400 text-xs">없음</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 text-left font-bold">MS Copilot<br><span class="text-xs font-normal text-gray-400">사내 계정 로그인</span></td>
+                            <td class="p-3 text-xs">GPT / Claude<br>선택 가능</td>
+                            <td class="p-3 text-left text-xs">아웃룩·Teams·캘린더·OneDrive 업무 연동</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full font-bold text-xs">안전</span></td>
+                            <td class="p-3 text-green-700 font-bold text-xs">이메일·일정·파일</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-3 text-left font-bold">엘지니<br><span class="text-xs font-normal text-gray-400">사내 전용 시스템</span></td>
+                            <td class="p-3 text-xs">GPT / Claude<br>등 사내 설정</td>
+                            <td class="p-3 text-left text-xs">사내 ERP·데이터마트·사내망 전용 연동</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full font-bold text-xs">안전</span></td>
+                            <td class="p-3 text-green-700 font-bold text-xs">사내 전 시스템</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 핵심 메시지 -->
+            <div class="mb-8 grid md:grid-cols-2 gap-4 text-sm">
+                <div class="p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                    <p class="font-bold text-orange-800 mb-2"><i class="fas fa-triangle-exclamation mr-1"></i>외부 AI 서비스 (ChatGPT·Perplexity·Genspark 등)</p>
+                    <ul class="list-disc pl-4 space-y-1 text-gray-700 text-xs">
+                        <li>GPT·Claude 등 <strong>강력한 두뇌</strong>를 누구나 쉽게 활용 가능</li>
+                        <li>웹 검색·리서치·콘텐츠 생성 등 <strong>에이전트별로 특화된 기능</strong> 제공</li>
+                        <li>입력한 데이터가 <strong>해당 회사 서버에 저장·학습</strong>될 수 있어 <span class="text-red-600 font-bold">사내 기밀 입력 절대 금지</span></li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-green-50 border border-green-200 rounded-xl">
+                    <p class="font-bold text-green-800 mb-2"><i class="fas fa-shield-halved mr-1"></i>사내 승인 AI (MS Copilot · LGE 내부 시스템)</p>
+                    <ul class="list-disc pl-4 space-y-1 text-gray-700 text-xs">
+                        <li><strong>동일한 GPT/Claude 두뇌</strong>를 사용하되, 사내 보안망 안에서 실행</li>
+                        <li>아웃룩·캘린더·사내 데이터와 <strong>직접 연동</strong>되어 복사 없이 업무 처리</li>
+                        <li>입력 내용이 <strong>외부 학습에 사용되지 않아</strong> 기밀 데이터 활용 가능</li>
+                    </ul>
                 </div>
             </div>
 
@@ -1947,13 +1998,24 @@
                 </p>
             </div>
 
+            <!-- 무료 사용자 안내 -->
+            <div class="mb-6 flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-300 rounded-xl text-sm">
+                <i class="fas fa-circle-info text-yellow-500 mt-0.5 shrink-0 text-lg"></i>
+                <div class="text-gray-700 space-y-1">
+                    <p><strong class="text-yellow-800">📌 파일 업로드 관련 안내 (무료 라이선스 사용자)</strong></p>
+                    <p>Cowork의 <strong>지식 소스 파일 업로드</strong>는 M365 Copilot 유료 라이선스 기능으로, 무료 계정에서는 지원되지 않을 수 있습니다.<br>
+                    이 교육에서는 <strong>파일 업로드 없이 데이터를 채팅창에 직접 붙여넣는 방식</strong>으로 동일한 실습을 진행합니다. 텍스트로 붙여넣은 데이터도 AI가 완벽하게 분석합니다.</p>
+                    <p class="text-xs text-gray-500">※ 유료 라이선스 사용자라면 파일 업로드 방식도 동일하게 활용 가능합니다.</p>
+                </div>
+            </div>
+
             <h3 class="font-bold text-xl mb-4 mt-8"><i class="fas fa-star mr-2 text-blue-500"></i>Cowork 핵심 기능</h3>
             <div class="grid md:grid-cols-3 gap-5 mb-8">
                 <div class="p-5 bg-white border-2 border-blue-100 rounded-xl">
                     <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-3"><i
                             class="fas fa-book-open"></i></div>
                     <h4 class="font-bold text-gray-800 mb-2">공유 지식베이스</h4>
-                    <p class="text-xs text-gray-600">팀 문서, 회의록, 업무 매뉴얼을 업로드하면 팀원 모두가 같은 맥락으로 AI에게 질문할 수 있습니다.</p>
+                    <p class="text-xs text-gray-600">팀 문서, 회의록, 데이터를 채팅에 <strong>붙여넣거나</strong>(무료) <strong>파일로 업로드</strong>(유료 라이선스)하면, 팀원 모두가 같은 맥락으로 AI에게 질문할 수 있습니다.</p>
                 </div>
                 <div class="p-5 bg-white border-2 border-blue-100 rounded-xl">
                     <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-3"><i
@@ -2033,7 +2095,7 @@
                             <tbody class="divide-y divide-gray-100 text-gray-700">
                                 <tr>
                                     <td class="p-3 font-bold">주간 CS·NPS 보고</td>
-                                    <td class="p-3">주간 데이터 업로드 → 전주 대비 분석 → 이슈 TOP3 도출 → 팀장 보고 양식으로 요약</td>
+                                    <td class="p-3">주간 데이터 <strong>붙여넣기</strong> → 전주 대비 분석 → 이슈 TOP3 도출 → 팀장 보고 양식으로 요약</td>
                                     <td class="p-3">매주</td>
                                 </tr>
                                 <tr>
@@ -2057,47 +2119,68 @@
 
                     <!-- 워크플로우 구축 프롬프트 -->
                     <div class="prompt-box">
-                        <span class="prompt-label">워크플로우 구축 프롬프트 (① 정의)</span>
+                        <span class="prompt-label">워크플로우 구축 프롬프트 (① 정의 — 붙여넣기 방식)</span>
                         우리 팀의 [주간 CS·NPS 보고] 업무를 매주 재사용할 수 있는 워크플로우로 만들고 싶어.
                         아래 순서를 항상 똑같이 수행하도록 작업 절차를 정리해줘.
 
-                        [입력] 매주 올리는 `주차별_CS_NPS_시각화.csv`
+                        [입력] 매주 아래처럼 CSV 형식의 주간 데이터를 텍스트로 붙여넣을 예정이야.
                         [처리 단계]
                         1. 핵심 지표 계산 (평균 NPS, 전주 대비 증감)
                         2. 악화된 지표·이슈 TOP 3 자동 추출
                         3. 원인 추정과 다음 주 액션 제안
-                        [출력] 첨부한 '팀장 보고 양식'에 맞춰 1페이지로 정리
+                        [출력] 아래 '팀장 보고 양식'에 맞춰 1페이지로 정리
                         [규칙] 수치는 반드시 데이터 근거, 추정은 "추정"이라 표기
 
-                        → 이 절차를 저장해두고, 다음 주엔 새 파일만 올리면 같은 형식으로 만들어줘.
+                        [팀장 보고 양식]
+                        - 제목: ○○주차 CS 주간 현황 (결론형)
+                        - ① 핵심 지표 요약 표 (전주 대비 포함)
+                        - ② 이슈 TOP 3 (원인·대응 병기)
+                        - ③ 다음 주 액션 아이템
+
+                        → 이 절차를 기억해두고, 다음 주엔 새 데이터만 붙여넣으면 같은 형식으로 만들어줘.
                     </div>
-                    <p class="text-xs text-gray-500 mt-3"><i class="fas fa-lightbulb mr-1 text-amber-500"></i><strong>핵심:</strong> 위처럼 <strong>입력·처리·출력·규칙</strong>을 명시하면 일회성 답변이 아니라 "다음에도 똑같이 도는" 작업 흐름이 됩니다. 양식·기준표를 지식 소스로 올려두면 품질이 더 안정됩니다.</p>
+                    <p class="text-xs text-gray-500 mt-3"><i class="fas fa-lightbulb mr-1 text-amber-500"></i><strong>핵심:</strong> 위처럼 <strong>입력·처리·출력·규칙</strong>을 명시하면 일회성 답변이 아니라 "다음에도 똑같이 도는" 작업 흐름이 됩니다. 데이터는 파일 업로드 대신 <strong>텍스트로 붙여넣어도 동일하게 동작</strong>합니다.</p>
                 </div>
             </div>
 
             <h3 class="font-bold text-xl mb-4"><i class="fas fa-play-circle mr-2 text-red-600"></i>Cowork 실습 시나리오</h3>
-            <p class="text-sm text-gray-600 mb-4">앞에서 설계한 <strong>'주간 보고 워크플로우'를 실제로 한 번 실행</strong>해 보는 실습입니다. 처음엔 함께 만들고, 이후엔 자료만 바꿔 재사용하면 됩니다.</p>
+            <p class="text-sm text-gray-600 mb-4">앞에서 설계한 <strong>'주간 보고 워크플로우'를 실제로 한 번 실행</strong>해 보는 실습입니다. 파일 업로드 없이 <strong>샘플 데이터를 텍스트로 붙여넣어</strong> 동일하게 진행합니다.</p>
             <div class="p-6 bg-gray-50 rounded-lg mb-6">
                 <h4 class="font-bold text-red-700 mb-3">📋 시나리오: CS팀 주간 보고 준비</h4>
                 <ol class="list-decimal pl-5 space-y-3 text-sm text-gray-700">
                     <li>Copilot 채팅 → <strong>"에이전트" 탭</strong> → <strong>Cowork</strong> 선택 후 새 작업 공간 생성</li>
-                    <li>팀 공유 문서(이번 주 VOC 현황, 수리 접수 데이터)와 <strong>보고 양식·분류 기준표</strong>를 <strong>지식 소스로 업로드</strong> <span class="text-gray-500">(워크플로우의 판단 기준이 됩니다)</span></li>
                     <li>팀원 초대 → 모두가 같은 Cowork 공간에서 AI와 대화 시작</li>
-                    <li>아래 프롬프트로 주간 보고서 초안 생성 요청</li>
-                    <li><strong>저장 &amp; 재사용:</strong> 결과가 만족스러우면 이 작업 공간을 그대로 두고, 다음 주엔 새 데이터만 올려 같은 흐름을 반복</li>
+                    <li>아래 프롬프트에서 <strong>[데이터 붙여넣기]</strong> 부분에 실습 CSV 파일을 열어 내용을 복사하여 붙여넣은 뒤 전송<br>
+                        <span class="text-xs text-gray-500">(파일을 열고 Ctrl+A → Ctrl+C로 전체 복사 후, 프롬프트 안에 붙여넣으면 됩니다.)</span>
+                    </li>
+                    <li>AI 보고서 초안 확인 후, "2항 더 간결하게" 등 대화로 다듬기</li>
+                    <li><strong>재사용:</strong> 다음 주에도 같은 공간에서 새 데이터만 붙여넣어 반복 실행</li>
                 </ol>
             </div>
             <div class="prompt-box">
-                <span class="prompt-label">COWORK 실습 프롬프트</span>
-                "업로드한 이번 주 CS 현황 데이터를 분석해서 월요일 팀장 보고용 주간 업무 요약 보고서를 작성해줘.
+                <span class="prompt-label">COWORK 실습 프롬프트 (텍스트 붙여넣기 방식)</span>
+                아래 이번 주 CS NPS 데이터를 분석해서 월요일 팀장 보고용 주간 업무 요약 보고서를 작성해줘.
+
+                [이번 주 CS NPS 데이터]
+                주차,제품카테고리,NPS점수(0-10),진행상태,소요시간(일)
+                25주차,세탁기,8,완료,3
+                25주차,냉장고,5,완료,7
+                25주차,에어컨,9,완료,2
+                25주차,TV,6,진행중,
+                25주차,세탁기,7,완료,4
+                25주차,냉장고,4,완료,8
+                25주차,에어컨,10,완료,1
+                25주차,TV,8,완료,3
+                (※ 실제 실습 시 이 자리에 CSV 파일 전체 내용을 복사해서 붙여넣으세요)
 
                 [포함 항목]
-                1. 이번 주 주요 성과 (수치 포함, 전주 대비)
-                2. 주요 이슈 및 원인 분석 (TOP 3)
+                1. 이번 주 주요 성과 — 제품별 평균 NPS, 전주(24주차) 대비 증감
+                2. 주요 이슈 및 원인 분석 TOP 3 (NPS 최저 제품 중심)
                 3. 다음 주 중점 추진 과제
                 4. 팀장 보고 시 예상 질문 3가지와 답변 초안
 
-                [어조]: 간결한 보고체, 각 항목 3줄 이내"
+                [규칙] 수치는 데이터 근거 명시, 추정은 "(추정)"이라 표기
+                [어조] 간결한 보고체, 각 항목 3줄 이내
             </div>
         </section>
 
@@ -2476,21 +2559,30 @@
                     <h4 class="font-bold text-lg">Cowork 협업 설계 — 함께 보고 함께 묻는 공유 작업</h4>
                 </div>
                 <div class="p-6">
-                    <p class="text-sm text-gray-700 mb-4"><strong>🎯 목표:</strong> 조원 모두가 같은 Cowork 공간에서 같은 자료를 보며 AI와 대화해, 혼자 할 때보다 빠르게 공동 결과물(요약·검토 의견)을 만든다.</p>
+                    <p class="text-sm text-gray-700 mb-4"><strong>🎯 목표:</strong> 조원 모두가 같은 Cowork 공간에서 같은 자료를 보며 AI와 대화해, 혼자 할 때보다 빠르게 공동 결과물(요약·검토 의견)을 만든다. <strong>파일 업로드 없이 데이터를 텍스트로 붙여넣어 진행</strong>한다.</p>
                     <p class="font-bold text-gray-800 mb-2">단계별 진행</p>
                     <ol class="list-decimal pl-5 space-y-2 text-sm text-gray-700 mb-5">
                         <li><strong>공간 개설:</strong> 조장이 MS Copilot의 <strong>Cowork 탭</strong>에서 새 공간을 만들고 조원을 초대 (화면은 <em>4-1. MS Cowork 소개 &amp; 실습</em> 참고)</li>
-                        <li><strong>지식 소스 업로드:</strong> 공동으로 볼 자료를 올립니다. (예: 실습 파일 <strong>`주차별_CS_NPS_시각화.csv`</strong>, 팀 회의록 등)</li>
+                        <li><strong>데이터 준비:</strong> 실습 파일 <strong>`주차별_CS_NPS_시각화.csv`</strong>를 열어 <strong>전체 내용을 복사(Ctrl+A → Ctrl+C)</strong>합니다. 아래 프롬프트의 [데이터 붙여넣기] 자리에 붙여넣으면 파일 업로드 없이 동일하게 분석됩니다.</li>
                         <li><strong>역할 나눠 질문:</strong> 조원 A는 '요약', B는 '이슈 도출', C는 '대응안'을 각자 AI에 질문 → 한 화면에서 결과가 쌓이는 것을 확인</li>
                         <li><strong>공동 정리:</strong> 아래 프롬프트로 흩어진 답변을 하나의 보고서로 합칩니다</li>
                         <li><strong>합의:</strong> 조원이 함께 결과를 읽고 한 줄씩 수정 → 최종본 확정</li>
                     </ol>
                     <div class="prompt-box">
-                        <span class="prompt-label">B · Cowork 공동 작업 프롬프트</span>
-                        업로드한 [주차별 CS NPS 데이터]를 바탕으로 우리 조가 함께 검토할 공동 보고서를 작성해줘.
+                        <span class="prompt-label">B · Cowork 공동 작업 프롬프트 (텍스트 붙여넣기 방식)</span>
+                        아래 주차별 CS NPS 데이터를 바탕으로 우리 조가 함께 검토할 공동 보고서를 작성해줘.
+
+                        [주차별 CS NPS 데이터]
+                        주차,제품카테고리,NPS점수(0-10),진행상태,소요시간(일)
+                        19주차,세탁기,8,완료,3 / 19주차,냉장고,6,완료,5 / 19주차,에어컨,9,완료,2
+                        20주차,세탁기,7,완료,4 / 20주차,냉장고,5,완료,7 / 20주차,에어컨,8,완료,3
+                        21주차,세탁기,6,완료,5 / 21주차,냉장고,4,완료,9 / 21주차,에어컨,9,완료,2
+                        22주차,세탁기,8,완료,3 / 22주차,냉장고,7,완료,5 / 22주차,에어컨,10,완료,1
+                        23주차,세탁기,5,완료,6 / 23주차,냉장고,4,완료,8 / 23주차,에어컨,7,완료,4
+                        (※ 실제 실습 시 이 자리에 CSV 파일 전체 내용을 복사해서 붙여넣으세요)
 
                         [포함 항목]
-                        1. 한눈 요약 (핵심 수치 3가지, 전주 대비 증감)
+                        1. 한눈 요약 (제품별 평균 NPS, 주차별 증감 추이)
                         2. 가장 시급한 이슈 TOP 3와 추정 원인
                         3. 조원이 토의할 논점 질문 3가지
                         4. 다음 주 우리 팀 액션 아이템 제안
