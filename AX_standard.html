@@ -1198,6 +1198,37 @@
                                 <li>우측 사이드바로 활성화되는 전용 창에서 작업 지시를 보냅니다.</li>
                             </ol>
                         </div>
+                        <button onclick="document.getElementById('modal-copilot-btn').classList.remove('hidden')" class="mt-3 w-full flex items-center justify-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 border border-amber-400 rounded-lg text-2xs text-amber-800 font-semibold transition-colors cursor-pointer">
+                            <i class="fas fa-question-circle"></i> Copilot 버튼이 안 보이나요?
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 팝업 모달 -->
+                <div id="modal-copilot-btn" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background:rgba(0,0,0,0.45);" onclick="if(event.target===this)this.classList.add('hidden')">
+                    <div class="bg-white rounded-2xl shadow-2xl w-80 max-w-[90vw] overflow-hidden">
+                        <div class="bg-amber-400 px-5 py-3 flex items-center justify-between">
+                            <p class="font-bold text-white text-sm"><i class="fas fa-exclamation-triangle mr-2"></i>Copilot 버튼이 안 보일 때</p>
+                            <button onclick="document.getElementById('modal-copilot-btn').classList.add('hidden')" class="text-white hover:text-amber-100 text-lg leading-none">&times;</button>
+                        </div>
+                        <div class="px-5 py-4 text-sm text-gray-700 space-y-3">
+                            <p class="text-xs text-gray-500">아웃룩 설정에서 Copilot이 비활성화되어 있을 수 있습니다. 아래 순서대로 켜주세요.</p>
+                            <ol class="space-y-2.5">
+                                <li class="flex items-start gap-3">
+                                    <span class="flex-shrink-0 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                    <span>아웃룩 <strong>우측 상단</strong>의 <strong>⚙️ 톱니바퀴(설정) 버튼</strong>을 클릭합니다.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="flex-shrink-0 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                    <span>설정 패널에서 <strong>Copilot</strong> 탭을 선택합니다.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="flex-shrink-0 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                    <span><strong>'Copilot 켜기'</strong> 토글 버튼을 <strong>활성화(ON)</strong>합니다.</span>
+                                </li>
+                            </ol>
+                            <button onclick="document.getElementById('modal-copilot-btn').classList.add('hidden')" class="mt-1 w-full py-2 bg-amber-400 hover:bg-amber-500 text-white font-bold rounded-lg text-sm transition-colors">확인</button>
+                        </div>
                     </div>
                 </div>
 
