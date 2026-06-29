@@ -506,7 +506,7 @@
                         </li>
                         <li
                             style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb; margin-bottom:8px;">
-                            <span style="color:#4ade80; font-size:14px;">✓</span> 해외 법인 회신 메일 초안 자동 생성
+                            <span style="color:#4ade80; font-size:14px;">✓</span> 받은 메일 회신 초안 자동 작성 (한글·영문)
                         </li>
                         <li style="display:flex; align-items:center; gap:8px; font-size:12px; color:#e5e7eb;">
                             <span style="color:#4ade80; font-size:14px;">✓</span> 주간보고 요약자료 반자동화
@@ -569,8 +569,8 @@
             </div>
 
             <!-- 교육 시간표 -->
-            <h3 class="font-bold text-lg text-gray-800 mb-1">🕒 교육 시간표 (총 3시간 · 교시별 쉬는 시간 15분)</h3>
-            <p class="text-xs text-gray-400 mb-4">3개 교시로 구성되며, 각 교시 사이에 15분 쉬는 시간이 있습니다. 시작 시각은 날짜·강의실에 따라 다릅니다.</p>
+            <h3 class="font-bold text-lg text-gray-800 mb-1">🕒 교육 시간표</h3>
+            <p class="text-xs text-gray-400 mb-4">09:00 ~ 12:00 &nbsp;·&nbsp; 3개 교시 구성, 쉬는 시간 15분 × 2회 포함</p>
 
             <div class="space-y-4">
 
@@ -581,12 +581,13 @@
                             <span class="bg-purple-600 text-white text-xs font-bold px-3 py-0.5 rounded-full font-outfit">1교시</span>
                             <span class="font-bold text-gray-800 text-sm">AI 이해하기 <span class="text-purple-600">· 이론</span></span>
                         </div>
-                        <span class="text-xs font-semibold text-purple-500">40분</span>
+                        <span class="text-xs font-semibold text-purple-500">09:00–09:40 <span class="font-normal text-purple-300">(40분)</span></span>
                     </div>
                     <div class="bg-white divide-y divide-gray-100">
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">10분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">09:00</div>
+                                <div class="text-xs text-gray-400">~09:10</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">오프닝 — 교육 소개 &amp; 오늘의 목표</p>
@@ -595,8 +596,9 @@
                             <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">01</span>
                         </div>
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">30분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">09:10</div>
+                                <div class="text-xs text-gray-400">~09:40</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">AI 모델 &amp; AI 에이전트 이론</p>
@@ -611,7 +613,8 @@
                 <div class="flex items-center justify-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl py-4">
                     <i class="fa-solid fa-mug-hot text-amber-500"></i>
                     <span class="font-bold text-amber-800 text-sm">쉬는 시간</span>
-                    <span class="text-xs text-amber-600 font-semibold bg-amber-100 px-2 py-0.5 rounded-full">15분</span>
+                    <span class="text-xs text-amber-600 font-semibold bg-amber-100 px-2 py-0.5 rounded-full">09:40–09:55</span>
+                    <span class="text-xs text-amber-400">(15분)</span>
                 </div>
 
                 <!-- 2교시 -->
@@ -621,12 +624,13 @@
                             <span class="bg-blue-600 text-white text-xs font-bold px-3 py-0.5 rounded-full font-outfit">2교시</span>
                             <span class="font-bold text-gray-800 text-sm">Copilot 기초 다지기 <span class="text-blue-600">· 기초</span></span>
                         </div>
-                        <span class="text-xs font-semibold text-blue-500">45분</span>
+                        <span class="text-xs font-semibold text-blue-500">09:55–10:40 <span class="font-normal text-blue-300">(45분)</span></span>
                     </div>
                     <div class="bg-white divide-y divide-gray-100">
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">25분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">09:55</div>
+                                <div class="text-xs text-gray-400">~10:20</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">Copilot 사용법 &amp; 프롬프트 4요소</p>
@@ -635,12 +639,13 @@
                             <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">03</span>
                         </div>
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">20분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">10:20</div>
+                                <div class="text-xs text-gray-400">~10:40</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">핵심 기능 도감 &amp; 3대 접속 공식</p>
-                                <p class="text-xs text-gray-400">문서·PDF 요약/초안/엑셀 도우미, Teams·아웃룩·Copilot Web 접속법</p>
+                                <p class="text-xs text-gray-400">문서·PDF 요약/초안/실시간 검색, Teams·아웃룩·Copilot Web 접속법</p>
                             </div>
                             <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">04·05</span>
                         </div>
@@ -651,7 +656,8 @@
                 <div class="flex items-center justify-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl py-4">
                     <i class="fa-solid fa-mug-hot text-amber-500"></i>
                     <span class="font-bold text-amber-800 text-sm">쉬는 시간</span>
-                    <span class="text-xs text-amber-600 font-semibold bg-amber-100 px-2 py-0.5 rounded-full">15분</span>
+                    <span class="text-xs text-amber-600 font-semibold bg-amber-100 px-2 py-0.5 rounded-full">10:40–10:55</span>
+                    <span class="text-xs text-amber-400">(15분)</span>
                 </div>
 
                 <!-- 3교시 -->
@@ -661,12 +667,13 @@
                             <span class="bg-[#C10933] text-white text-xs font-bold px-3 py-0.5 rounded-full font-outfit">3교시</span>
                             <span class="font-bold text-gray-800 text-sm">실무 적용 실습 <span class="text-[#C10933]">· A to Z</span></span>
                         </div>
-                        <span class="text-xs font-semibold text-[#C10933]">75분</span>
+                        <span class="text-xs font-semibold text-[#C10933]">10:55–11:55 <span class="font-normal opacity-60">(60분)</span></span>
                     </div>
                     <div class="bg-white divide-y divide-gray-100">
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">20분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">10:55</div>
+                                <div class="text-xs text-gray-400">~11:10</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">실습 ① PDF·웹 문서 요약</p>
@@ -675,18 +682,20 @@
                             <span class="bg-red-100 text-[#C10933] text-xs font-bold px-2 py-0.5 rounded-full shrink-0">06</span>
                         </div>
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">25분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">11:10</div>
+                                <div class="text-xs text-gray-400">~11:30</div>
                             </div>
                             <div class="flex-1">
-                                <p class="font-semibold text-gray-800 text-sm">실습 ② 아웃룩 이메일 영문 회신</p>
-                                <p class="text-xs text-gray-400">정선영 선임 메일에 회신 → Copilot(Claude)로 영문 초안 작성</p>
+                                <p class="font-semibold text-gray-800 text-sm">실습 ② 아웃룩 이메일 회신 작성</p>
+                                <p class="text-xs text-gray-400">정선영 선임 메일에 회신 → Copilot(Claude)로 회신 초안 작성 (한글·영문)</p>
                             </div>
                             <span class="bg-red-100 text-[#C10933] text-xs font-bold px-2 py-0.5 rounded-full shrink-0">07</span>
                         </div>
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">20분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">11:30</div>
+                                <div class="text-xs text-gray-400">~11:45</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">실습 ③ 주간보고 요약자료</p>
@@ -695,8 +704,9 @@
                             <span class="bg-red-100 text-[#C10933] text-xs font-bold px-2 py-0.5 rounded-full shrink-0">08</span>
                         </div>
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">10분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">11:45</div>
+                                <div class="text-xs text-gray-400">~11:55</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">프롬프트 빌더 직접 써보기</p>
@@ -714,12 +724,13 @@
                             <span class="bg-gray-500 text-white text-xs font-bold px-3 py-0.5 rounded-full font-outfit">마무리</span>
                             <span class="font-bold text-gray-800 text-sm">정리 &amp; 질의응답</span>
                         </div>
-                        <span class="text-xs font-semibold text-gray-500">5분</span>
+                        <span class="text-xs font-semibold text-gray-500">11:55–12:00 <span class="font-normal text-gray-400">(5분)</span></span>
                     </div>
                     <div class="bg-white">
                         <div class="flex items-center gap-4 px-5 py-3">
-                            <div class="text-center shrink-0 w-14">
-                                <div class="text-xs font-bold text-gray-400">5분</div>
+                            <div class="text-center shrink-0 w-16">
+                                <div class="text-xs font-bold text-gray-600">11:55</div>
+                                <div class="text-xs text-gray-400">~12:00</div>
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-gray-800 text-sm">핵심 정리 &amp; Q&amp;A</p>
@@ -750,9 +761,9 @@
                 </h3>
 
                 <div class="bg-gradient-to-r from-[#C10933] to-[#A00728] rounded-2xl p-7 text-white mb-6">
-                    <p class="text-lg font-bold mb-2">"AI가 내 일을 대신하는 것이 아니라, <span class="text-yellow-200">AI를 잘 쓰는 동료가 내 일을 더 빨리 끝냅니다."</span></p>
+                    <p class="text-lg font-bold mb-2">"같은 도구를 쥐어도, <span class="text-yellow-200">쓸 줄 아는 사람과 모르는 사람의 결과물은 완전히 다릅니다."</span></p>
                     <p class="text-sm text-white/85 leading-relaxed">
-                        기술 자체보다 중요한 것은 <strong>활용 격차</strong>입니다. 같은 도구를 손에 쥐어도,
+                        기술 자체보다 중요한 것은 <strong>활용 격차</strong>입니다. 누구에게나 열려 있는 도구지만,
                         쓰는 사람에 따라 결과물의 속도와 품질이 크게 달라집니다.
                         오늘 교육의 목표는 거창한 자동화가 아니라, <strong>여러분이 내일 아침 업무에서 바로 한 가지를 적용</strong>하는 것입니다.
                     </p>
@@ -1380,8 +1391,8 @@
                         <i class="fa-solid fa-circle-check text-lg"></i>
                         <h4 class="font-bold text-sm">이렇게 물으면 → 바로 쓸 수 있는 답변</h4>
                     </div>
-                    <div class="bg-green-50 rounded-lg p-3 font-mono text-xs text-green-800 mb-2">"브라질 법인 담당자에게 수리 지연
-                        사과와 보증 연장 제안을 담은 영문 메일 초안 써줘"</div>
+                    <div class="bg-green-50 rounded-lg p-3 font-mono text-xs text-green-800 mb-2">"교육 안내 메일을 받았는데, 참석 감사와
+                        함께 일정 확인을 요청하는 정중한 회신 메일 초안 써줘"</div>
                     <div class="bg-green-50 rounded-lg p-3 font-mono text-xs text-green-800">"아래 고객만족도 데이터에서 점수가 가장 낮은
                         카테고리 3개를 표로 정리해줘 [데이터 붙여넣기]"</div>
                     <p class="text-xs text-gray-400 mt-2"><strong>목적 + 조건 + 데이터</strong>를 함께 넣으면 바로 사용 가능한 결과가 나옵니다.</p>
@@ -1401,7 +1412,7 @@
                 <div class="bg-white border-t-4 border-orange-400 rounded-xl p-4 shadow-sm">
                     <span class="text-xs font-bold text-orange-500">② 상황/맥락</span>
                     <p class="font-bold text-gray-800 text-sm mt-1 mb-1">무슨 일?</p>
-                    <p class="text-xs text-gray-500">"수리가 지연돼 고객이 항의한 상황", "주간보고를 취합해야 하는데"</p>
+                    <p class="text-xs text-gray-500">"교육 안내 메일에 회신해야 하는 상황", "주간보고를 취합해야 하는데"</p>
                 </div>
                 <div class="bg-white border-t-4 border-blue-500 rounded-xl p-4 shadow-sm">
                     <span class="text-xs font-bold text-blue-600">③ 요청/목적</span>
@@ -1417,10 +1428,10 @@
             <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-10">
                 <p class="text-xs text-gray-500 mb-1"><i class="fa-solid fa-arrow-down text-gray-400 mr-1"></i> 네 칸을 이으면
                     이렇게 완성됩니다</p>
-                <p class="text-sm text-gray-800 leading-relaxed"><span class="bg-red-100 text-[#C10933] px-1 rounded">고객 응대
-                        담당자 입장에서</span>, <span class="bg-orange-100 text-orange-700 px-1 rounded">부품 지연으로 수리가 늦어져 고객이
-                        항의한 상황</span>인데, <span class="bg-blue-100 text-blue-700 px-1 rounded">사과와 보증 연장을 제안하는 메일을
-                        써줘.</span> <span class="bg-emerald-100 text-emerald-700 px-1 rounded">정중한 영문 비즈니스 어조로.</span></p>
+                <p class="text-sm text-gray-800 leading-relaxed"><span class="bg-red-100 text-[#C10933] px-1 rounded">교육에 참석한
+                        실무자 입장에서</span>, <span class="bg-orange-100 text-orange-700 px-1 rounded">선임이 보낸 교육 안내 메일에
+                        답해야 하는 상황</span>인데, <span class="bg-blue-100 text-blue-700 px-1 rounded">참석 감사와 질문에 대한 답변을 담은
+                        회신 메일을 써줘.</span> <span class="bg-emerald-100 text-emerald-700 px-1 rounded">정중한 비즈니스 어조로.</span></p>
             </div>
 
             <!-- 대화 이어가기 (Follow-up) -->
@@ -1506,27 +1517,16 @@
                 }
                 </script>
 
-                <div class="grid md:grid-cols-2 gap-4 mt-4">
-                    <div class="bg-white rounded-xl p-4 border border-amber-200">
-                        <p class="font-bold text-amber-800 text-sm mb-2"><i class="fa-solid fa-magnifying-glass mr-1"></i>
-                            특히 꼭 확인할 것</p>
-                        <ul class="text-xs text-gray-600 space-y-1">
-                            <li>• <strong>숫자·통계</strong> (매출, %, 건수)</li>
-                            <li>• <strong>날짜·기한</strong></li>
-                            <li>• <strong>사람 이름·회사명·제품명·법규</strong></li>
-                            <li>• <strong>인용문·출처</strong> (없는 논문을 지어내기도 함)</li>
-                        </ul>
+                <div class="bg-white rounded-xl p-4 border border-amber-200 mt-4">
+                    <p class="font-bold text-amber-800 text-sm mb-3"><i class="fa-solid fa-magnifying-glass mr-1"></i>
+                        발송·보고 전, 특히 이 4가지는 꼭 직접 확인하세요</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-gray-600">
+                        <div class="bg-amber-50 rounded-lg px-3 py-2"><strong class="text-amber-900">숫자·통계</strong><br>매출, %, 건수</div>
+                        <div class="bg-amber-50 rounded-lg px-3 py-2"><strong class="text-amber-900">날짜·기한</strong><br>일정, 마감일</div>
+                        <div class="bg-amber-50 rounded-lg px-3 py-2"><strong class="text-amber-900">고유명사</strong><br>사람·회사·제품명·법규</div>
+                        <div class="bg-amber-50 rounded-lg px-3 py-2"><strong class="text-amber-900">인용문·출처</strong><br>없는 자료를 지어내기도</div>
                     </div>
-                    <div class="bg-white rounded-xl p-4 border border-amber-200">
-                        <p class="font-bold text-emerald-700 text-sm mb-2"><i class="fa-solid fa-thumbs-up mr-1"></i> 안심하고
-                            맡겨도 좋은 일</p>
-                        <ul class="text-xs text-gray-600 space-y-1">
-                            <li>• <strong>긴 글 요약·정리</strong></li>
-                            <li>• <strong>초안·아이디어</strong> 작성</li>
-                            <li>• <strong>번역·말투 변경</strong></li>
-                            <li>• <strong>표·목차 등 형식 잡기</strong></li>
-                        </ul>
-                    </div>
+                    <p class="text-xs text-gray-400 mt-3">반대로 <strong>요약·초안·번역·형식 잡기</strong>는 안심하고 맡겨도 좋습니다 (02번 'AI가 잘하는 일 vs 서툰 일' 참고).</p>
                 </div>
                 <p class="text-xs text-amber-800 mt-4 font-bold"><i class="fa-solid fa-key mr-1"></i> 핵심: AI는 '비서'이지
                     '검증된 사실 창고'가 아닙니다. 초안은 AI가, 최종 책임은 내가.</p>
@@ -1600,7 +1600,7 @@
         <section id="free-feature-map" class="content-section">
             <h2 class="section-header">04. 브라우저 기반 Copilot 핵심 기능 도감</h2>
             <p class="text-gray-600 mb-8">
-                아래 정리된 기능들은 앞서 배운 <strong>3대 접속 경로(Teams·아웃룩·Copilot Web)</strong> 어디서든 별도의 복잡한 절차 없이 상시 사용 가능한 실무 핵심 기능들입니다.
+                아래 정리된 기능들은 이 과정에서 다루는 <strong>3대 접속 경로(Teams·아웃룩·Copilot Web)</strong> 어디서든 별도의 복잡한 절차 없이 상시 사용 가능한 실무 핵심 기능들입니다.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1748,14 +1748,19 @@
                     <div>
                         <div class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-xl">메일 업무 최적</div>
                         <h3 class="font-bold text-md text-gray-800 mb-2"><i class="fas fa-envelope-open-text text-purple-600 mr-1.5"></i>공식 2: 아웃룩 앱 사이드바</h3>
-                        <p class="text-xs text-gray-500 mb-3">아웃룩 메일 작성, 번역, 요약 또는 보고용 HTML 시안 코드를 제작할 때 최적인 접속 경로입니다.</p>
+                        <p class="text-xs text-gray-500 mb-1">아웃룩 <strong>좌측 탭</strong>의 Copilot 아이콘 — 일반 질문·초안 작성에 활용합니다.</p>
+                        <p class="text-xs text-amber-600 font-semibold mb-3">⚠️ 현재 열고 있는 메일 내용은 자동 연동되지 않습니다.</p>
                         <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1">
                             <div><strong>[실행 방법]</strong></div>
                             <ol class="list-decimal pl-3 space-y-1">
                                 <li><strong>Outlook</strong> 메일 앱을 실행합니다.</li>
-                                <li>좌측 세로 메뉴 바에 있는 <strong>Copilot 버튼</strong>을 클릭하여 켭니다.</li>
-                                <li>우측 사이드바로 활성화되는 전용 창에서 작업 지시를 보냅니다.</li>
+                                <li>좌측 세로 탭 바에 있는 <strong>Copilot 아이콘</strong>을 클릭합니다.</li>
+                                <li>우측에 열리는 대화창에서 작업 지시를 보냅니다.</li>
                             </ol>
+                        </div>
+                        <div class="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-2.5">
+                            <p class="text-xs text-blue-900"><i class="fa-solid fa-envelope text-blue-500 mr-1"></i><strong>메일 회신 초안 작성은?</strong> 메일을 열면 나타나는 <strong>우측 상단 Copilot 아이콘</strong>을 사용하세요.
+                            <button onclick="openCopilotLocModal()" class="text-[#C10933] font-bold underline hover:text-[#A00728] ml-1 whitespace-nowrap">두 버튼 차이 보기 ▶</button></p>
                         </div>
                         <p class="text-xs text-amber-700 mt-2"><i class="fa-solid fa-circle-info mr-1"></i>버튼이 안 보이면?
                             <button onclick="openTsModal()" class="text-[#C10933] font-bold underline hover:text-[#A00728]">Copilot 켜는 방법 보기</button>
@@ -1945,10 +1950,9 @@
                         <span
                             class="mt-0.5 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">①</span>
                         <p class="text-xs text-gray-800 leading-relaxed">
-                            <strong>아웃룩 이메일 데이터는 '아웃룩 코파일럿'에서만 연동됩니다.</strong><br>
-                            아웃룩 앱이 열려 있을 때 <strong>아웃룩 화면 좌측 사이드바에 있는 Copilot 버튼</strong>을 눌러야만 메일함 데이터가 AI와 연동됩니다.
-                            Copilot Web(m365.cloud.microsoft)이나 Edge 사이드바 코파일럿에서는 아웃룩 메일 데이터에 <strong>직접 접근이
-                                불가</strong>합니다.
+                            <strong>메일에 연동된 Copilot은 '우측 상단 아이콘'입니다.</strong><br>
+                            메일을 열면 <strong>메일 화면 우측 상단에 Copilot 아이콘</strong>이 나타납니다. 이 아이콘을 눌러야 현재 열고 있는 메일 내용이 AI와 연동됩니다.
+                            좌측 탭의 Copilot은 일반 대화용이며, 현재 보고 있는 메일 내용이 <strong>자동으로 연동되지 않습니다.</strong>
                         </p>
                     </div>
                     <div class="flex items-start gap-3">
@@ -1957,8 +1961,8 @@
                         <p class="text-xs text-gray-800 leading-relaxed">
                             <strong>무료 버전 사용자는 아웃룩 코파일럿만 사용 가능합니다.</strong><br>
                             M365 무료(기본) 계정 사용자는 Copilot Web 등 다른 코파일럿에서 아웃룩 이메일 데이터가 연동되지 않습니다.
-                            따라서 <span class="font-bold text-red-700">아웃룩 앱 내 사이드바 Copilot 버튼</span>이 유일한 이메일 AI 연동
-                            경로입니다.
+                            아웃룩 앱에서 메일을 열고 <span class="font-bold text-red-700">우측 상단 Copilot 아이콘</span>을 클릭하는 것이
+                            이메일 직접 연동 경로입니다.
                         </p>
                     </div>
                     <div class="flex items-start gap-3">
@@ -1995,7 +1999,7 @@
                             <div style="height:10px;background:#F3F4F6;border-radius:4px;margin-bottom:6px;width:90%;"></div>
                             <div style="height:10px;background:#F3F4F6;border-radius:4px;margin-bottom:6px;width:70%;"></div>
                             <div style="height:10px;background:#F3F4F6;border-radius:4px;width:80%;"></div>
-                            <div style="margin-top:14px;"><span class="mock-callout"><i class="fa-solid fa-arrow-left"></i> 이 색색의 Copilot 아이콘 클릭</span></div>
+                            <div style="margin-top:14px;"><span class="mock-callout"><i class="fa-solid fa-arrow-left"></i> 이 Copilot 아이콘 클릭</span></div>
                         </div>
                     </div>
                 </div>
@@ -2246,7 +2250,7 @@
                         <select id="builder-tool" onchange="updateScenarios()"
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C10933]">
                             <option value="web_pdf">Copilot Web (PDF·웹 문서 요약)</option>
-                            <option value="out_mail">아웃룩 Copilot (해외 법인 영문 회신)</option>
+                            <option value="out_mail">아웃룩 Copilot (메일 회신 초안 작성)</option>
                             <option value="weekly">아웃룩 Copilot (주간보고 요약자료 작성)</option>
                         </select>
                     </div>
@@ -2309,7 +2313,7 @@
                     <h3 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-rocket text-orange-500 mr-2"></i>실무 공식 3종</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
                         <li>• <strong>PDF·웹 요약</strong>: 영문 보고서를 3분 만에 한글 핵심 요약 (Copilot Web)</li>
-                        <li>• <strong>영문 회신</strong>: 아웃룩 Copilot + Claude로 해외 법인 메일 2분 완성</li>
+                        <li>• <strong>메일 회신</strong>: 아웃룩 Copilot + Claude로 받은 메일 회신 초안 2분 완성 (한글·영문)</li>
                         <li>• <strong>주간보고</strong>: 팀별 원문 → 표준 양식 자동 조립 (아웃룩 Copilot + Claude)</li>
                     </ul>
                 </div>
@@ -2436,8 +2440,8 @@
             out_mail: {
                 tip: "아웃룩 앱에서 회신할 메일을 연 뒤, 좌측 사이드바 Copilot을 켜고 '자동' → Claude로 바꿔 사용하면 더 자연스럽습니다.",
                 scenarios: [
-                    { label: "수리 지연 사과 + 보증 연장", base: "지금 열려 있는 고객 항의 이메일에 대해, 다음 조건으로 정중한 영문 비즈니스 답장 초안을 작성해 줘.\n1. 지연 사유는 부품 글로벌 수급 이슈임을 정중히 설명.\n2. 진심 어린 사과와 무상 보증 6개월 연장 제안.\n3. 최우선 처리 약속 및 완료 예정일 안내.\n4. 담당자 직통 연락처 안내." },
-                    { label: "단가 인하 거절 + 대안 제시", base: "거래처의 단가 인하 요청에 대해, 단가 인하는 어렵지만 대신 보증기간 연장 등 대안을 제안하는 정중한 영문 비즈니스 답장 초안을 써 줘." },
+                    { label: "안내·요청 메일에 정중히 회신", base: "지금 열려 있는 메일에 대해, 다음 조건으로 정중한 비즈니스 회신 초안을 작성해 줘.\n1. 메일을 보내 주신 데 대한 감사 인사로 시작.\n2. 메일에서 요청하거나 질문한 사항에 대한 답변을 명확히 정리.\n3. 추가로 확인이 필요한 사항이 있으면 정중히 문의.\n4. 알맞은 맺음말(드림)로 마무리." },
+                    { label: "협업 요청 메일에 회신", base: "지금 열려 있는 협업·업무 협조 요청 메일에 대해, 협조 가능 여부와 진행 방식을 정리한 정중하고 간결한 회신 초안을 써 줘." },
                     { label: "받은 메일 요약 후 회신 포인트", base: "지금 열려 있는 메일 내용을 3줄로 요약하고, 회신할 때 꼭 짚어야 할 포인트 3가지를 정리해 줘." }
                 ]
             },
