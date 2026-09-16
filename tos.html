@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEIC Speaking Level 5 Prep Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .card-flip {
+            perspective: 1000px;
+        }
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card-flip.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        T5
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-slate-900 leading-tight">TOEIC Speaking Level 5</h1>
+                        <p class="text-xs text-slate-500">Target Score: IM1 - IM3 (110 - 130 pts)</p>
+                    </div>
+                </div>
+
+                <!-- Global Progress Quick Badge -->
+                <div class="hidden sm:flex items-center gap-4 bg-slate-100 py-1.5 px-3 rounded-full border border-slate-200 text-xs">
+                    <div class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-fire text-amber-500"></i>
+                        <span class="font-medium text-slate-600">Expression Mastered:</span>
+                        <span id="global-expression-count" class="font-bold text-brand-600">0 / 100</span>
+                    </div>
+                    <div class="w-px h-4 bg-slate-300"></div>
+                    <div class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-[#4f46e5] fa-calendar-check text-indigo-500"></i>
+                        <span class="font-medium text-slate-600">Curriculum:</span>
+                        <span id="global-curriculum-count" class="font-bold text-indigo-600">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
+
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <nav class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm sticky top-22 space-y-1">
+                <button onclick="switchTab('curriculum')" id="nav-curriculum" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-calendar-days text-slate-400 w-5"></i> 2주 학습 커리큘럼
+                </button>
+                <button onclick="switchTab('expressions')" id="nav-expressions" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all bg-brand-50 text-brand-700 font-semibold">
+                    <i class="fa-solid fa-book-open text-brand-600 w-5"></i> 필수 100 표현
+                </button>
+                <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-layer-group text-slate-400 w-5"></i> 암기 플래시카드
+                </button>
+                <button onclick="switchTab('quiz')" id="nav-quiz" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-brain text-slate-400 w-5"></i> 스피드 퀴즈 모드
+                </button>
+                <button onclick="switchTab('templates')" id="nav-templates" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-file-contract text-slate-400 w-5"></i> 파트별 전략 & 템플릿
+                </button>
+                <button onclick="switchTab('practice')" id="nav-practice" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-microphone text-slate-400 w-5"></i> 실전 녹음 연습실
+                </button>
+
+                <div class="pt-4 mt-4 border-t border-slate-100 px-3">
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">TTS Accent Settings</div>
+                    <select id="tts-voice-select" class="w-full text-xs p-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-700 focus:outline-none focus:border-brand-500">
+                        <option value="en-US">English (US)</option>
+                        <option value="en-GB">English (UK)</option>
+                    </select>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Panel Area -->
+        <main class="flex-1 min-w-0">
+
+            <!-- TAB 1: 2-WEEK CURRICULUM -->
+            <section id="tab-curriculum" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">2주 완송 레벨 5 커리큘럼</h2>
+                            <p class="text-sm text-slate-500">매일 진도 체크박스를 클릭하여 학습 완료를 기록하세요.</p>
+                        </div>
+                        <div class="text-right">
+                            <span id="curriculum-percent" class="text-2xl font-extrabold text-brand-600">0%</span>
+                            <span class="text-xs block text-slate-400">달성도</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2.5 mb-6 overflow-hidden">
+                        <div id="curriculum-progress-bar" class="bg-brand-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+
+                    <div id="curriculum-list" class="space-y-4">
+                        <!-- Daily checklist rendered via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: 100 ESSENTIAL EXPRESSIONS LIST -->
+            <section id="tab-expressions" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">레벨 5 필수 100가지 표현</h2>
+                            <p class="text-sm text-slate-500">질문을 받고 0초 만에 튀어나올 수 있도록 반복 연습하세요.</p>
+                        </div>
+                        <!-- Filters and Search -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <div class="relative flex-1 sm:w-48">
+                                <input type="text" id="expr-search" placeholder="검색어 (한/영)..." oninput="renderExpressions()" class="w-full text-xs pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-brand-500">
+                                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-xs text-slate-400"></i>
+                            </div>
+                            <select id="expr-category" onchange="renderExpressions()" class="text-xs p-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-700 focus:outline-none focus:border-brand-500">
+                                <option value="all">전체 파트 (1-100)</option>
+                                <option value="1">1단계: 답변 시작 & 연결 (1-20)</option>
+                                <option value="2">2단계: 사진 묘사 (21-40)</option>
+                                <option value="3">3단계: 단골 질문 응답 (41-60)</option>
+                                <option value="4">4단계: 표 해석 & 안내 (61-80)</option>
+                                <option value="5">5단계: 의견 제시 & 만능 이유 (81-100)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="expressions-container" class="grid grid-cols-1 gap-3">
+                        <!-- Expressions populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: FLASHCARDS -->
+            <section id="tab-flashcards" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">암기 플래시카드</h2>
+                            <p class="text-sm text-slate-500">카드를 클릭하여 한글/영어를 뒤집어 보세요.</p>
+                        </div>
+                        <span id="flashcard-counter" class="text-sm font-semibold text-slate-500">1 / 100</span>
+                    </div>
+
+                    <!-- Flashcard Object -->
+                    <div id="flashcard" onclick="flipCard()" class="card-flip w-full max-w-lg h-64 cursor-pointer my-4">
+                        <div class="card-inner relative w-full h-full text-center shadow-lg rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 flex flex-col items-center justify-center">
+                            <!-- Front -->
+                            <div class="card-front absolute inset-0 p-6 flex flex-col justify-between items-center">
+                                <span class="text-xs uppercase tracking-wider text-brand-400 font-semibold" id="fc-category">Category</span>
+                                <p id="fc-korean" class="text-xl sm:text-2xl font-bold">한글 의미가 표시됩니다.</p>
+                                <p class="text-xs text-slate-400">클릭해서 영어 표현 확인 <i class="fa-solid fa-rotate-right ml-1"></i></p>
+                            </div>
+                            <!-- Back -->
+                            <div class="card-back absolute inset-0 p-6 flex flex-col justify-between items-center rounded-2xl bg-brand-600 text-white">
+                                <span class="text-xs uppercase tracking-wider text-brand-200 font-semibold">English Expression</span>
+                                <p id="fc-english" class="text-xl sm:text-2xl font-extrabold px-2">English phrase goes here.</p>
+                                <button onclick="event.stopPropagation(); speakText(document.getElementById('fc-english').innerText)" class="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-full text-xs font-medium transition">
+                                    <i class="fa-solid fa-volume-high mr-1"></i> 발음 듣기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard Navigation Buttons -->
+                    <div class="flex items-center gap-4 mt-6">
+                        <button onclick="prevFlashcard()" class="p-3 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-700 transition">
+                            <i class="fa-solid fa-arrow-left text-lg"></i>
+                        </button>
+                        <button onclick="toggleBookmarkCurrent()" id="fc-bookmark-btn" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2">
+                            <i class="fa-regular fa-star text-amber-500"></i> 북마크 저장
+                        </button>
+                        <button onclick="nextFlashcard()" class="p-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full transition">
+                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: SPEED QUIZ -->
+            <section id="tab-quiz" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto">
+                    <div id="quiz-start-screen" class="text-center py-8">
+                        <div class="w-16 h-16 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900 mb-2">스피드 문장 매칭 퀴즈</h2>
+                        <p class="text-sm text-slate-500 mb-6 max-w-md mx-auto">한글 상황/뜻에 알맞은 영어 표현을 제한시간 안에 찾아보세요!</p>
+                        <button onclick="startQuiz()" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition shadow-md">
+                            퀴즈 시작하기
+                        </button>
+                    </div>
+
+                    <div id="quiz-game-screen" class="hidden">
+                        <div class="flex justify-between items-center mb-6 border-b pb-4">
+                            <div>
+                                <span class="text-xs text-slate-400 block">진행 상황</span>
+                                <span id="quiz-progress" class="text-sm font-bold text-brand-600">Q 1 / 10</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 block">점수</span>
+                                <span id="quiz-score" class="text-sm font-bold text-emerald-600">0 점</span>
+                            </div>
+                        </div>
+
+                        <div id="quiz-question-card" class="bg-slate-900 text-white p-6 rounded-xl mb-6 text-center">
+                            <span class="text-xs text-brand-400 font-semibold uppercase tracking-wider block mb-2">다음 한글 뜻에 맞는 영어 표현은?</span>
+                            <h3 id="quiz-target-korean" class="text-xl font-bold">한글 뜻 샘플</h3>
+                        </div>
+
+                        <div id="quiz-options" class="grid grid-cols-1 gap-3 mb-6">
+                            <!-- Options rendered via JS -->
+                        </div>
+                    </div>
+
+                    <div id="quiz-result-screen" class="hidden text-center py-8">
+                        <div id="quiz-result-icon" class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900 mb-2">퀴즈 완료!</h2>
+                        <p id="quiz-final-score" class="text-lg font-semibold text-slate-600 mb-6">최종 점수: 100점</p>
+                        <button onclick="startQuiz()" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition">
+                            다시 도전하기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: PART STRATEGIES & TEMPLATES -->
+            <section id="tab-templates" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">파트별 핵심 공략 & 마법 템플릿</h2>
+                        <p class="text-sm text-slate-500">레벨 5(IM1~IM3) 목표에 딱 맞는 최소한의 고효율 틀입니다.</p>
+                    </div>
+
+                    <!-- Part 1 -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Part 1</span>
+                            <h3 class="font-bold text-slate-800">문장 읽기 (Q1 ~ Q2)</h3>
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside mb-3">
+                            <li>감점 방지가 목표! **마침표(.)에서 1초 확실히 쉬어주기**</li>
+                            <li>A↗, B↗, and C↘ 나열 억양 패턴 유지하기</li>
+                        </ul>
+                    </div>
+
+                    <!-- Part 2 -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Part 2</span>
+                            <h3 class="font-bold text-slate-800">사진 묘사 (Q3 ~ Q4) - 4문장 완성 틀</h3>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs space-y-2 text-slate-700 font-mono">
+                            <p><strong class="text-brand-600">1. 장소:</strong> This picture was taken at [장소: an outdoor cafe / an office].</p>
+                            <p><strong class="text-brand-600">2. 인물1:</strong> On the left, a man is [행동: drinking coffee / talking on the phone].</p>
+                            <p><strong class="text-brand-600">3. 인물2:</strong> On the right, a woman is [행동: looking at a laptop / carrying a bag].</p>
+                            <p><strong class="text-brand-600">4. 마무리:</strong> Overall, the atmosphere is peaceful [or busy].</p>
+                        </div>
+                    </div>
+
+                    <!-- Part 3 -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Part 3</span>
+                            <h3 class="font-bold text-slate-800">질문 답하기 (Q5 ~ Q7)</h3>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs space-y-2 text-slate-700">
+                            <p><strong>Q5 & Q6 (15초):</strong> 질문 문장을 그대로 활용하여 첫 문장 완성 후, <code class="bg-slate-100 px-1 py-0.5 rounded text-brand-600">because it is convenient / cheap.</code> 덧붙이기</p>
+                            <p><strong>Q7 (30초 만능틀):</strong> I prefer [A] for a few reasons. First, <code class="bg-slate-100 px-1 py-0.5 rounded text-brand-600">it saves my time and money.</code> Second, <code class="bg-slate-100 px-1 py-0.5 rounded text-brand-600">I can get useful information easily.</code> Therefore, I prefer [A].</p>
+                        </div>
+                    </div>
+
+                    <!-- Part 4 -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Part 4</span>
+                            <h3 class="font-bold text-slate-800">표 보고 답하기 (Q8 ~ Q10)</h3>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs space-y-2 text-slate-700 font-mono">
+                            <p><strong>Q8 (시간/장소):</strong> The event will start at [시간] on [날짜]. It will be held in [장소].</p>
+                            <p><strong>Q9 (정보 정정):</strong> Actually, that's not correct. [올바른 정보] is scheduled at [시간].</p>
+                            <p><strong>Q10 (세션 2개 안내):</strong> Sure, there are two scheduled sessions. First, [발표자] will talk about [주제] at [시간]. Second, ...</p>
+                        </div>
+                    </div>
+
+                    <!-- Part 5 -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Part 5</span>
+                            <h3 class="font-bold text-slate-800">의견 제시하기 (Q11) - 60초 만능 조립식 틀</h3>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs space-y-2 text-slate-700 font-mono">
+                            <p><strong class="text-brand-600">1. 서론:</strong> I agree/disagree that [질문 문장 복사].</p>
+                            <p><strong class="text-brand-600">2. 본론 (만능 이유):</strong> First of all, it saves a lot of time and money. Also, it is very convenient to use.</p>
+                            <p><strong class="text-brand-600">3. 경험 (조립형):</strong> When I was a university student, I had a similar experience and it made my life much easier.</p>
+                            <p><strong class="text-brand-600">4. 결론:</strong> Therefore, I think like this.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: PRACTICE RECORDING STUDIO -->
+            <section id="tab-practice" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto text-center">
+                    <h2 class="text-xl font-bold text-slate-900 mb-1">실전 음성 녹음 타이머</h2>
+                    <p class="text-sm text-slate-500 mb-6">실제 시험 타이머(준비시간/답변시간)에 맞춰 직접 목소리를 녹음하고 들어보세요.</p>
+
+                    <!-- Timer Controls -->
+                    <div class="flex justify-center gap-3 mb-6">
+                        <button onclick="setupPracticeTimer(45, 30)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-semibold rounded-lg text-slate-700">Part 2 (준비45초 / 답변30초)</button>
+                        <button onclick="setupPracticeTimer(3, 15)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-semibold rounded-lg text-slate-700">Part 3 Q5/6 (준비3초 / 답변15초)</button>
+                        <button onclick="setupPracticeTimer(45, 60)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-semibold rounded-lg text-slate-700">Part 5 Q11 (준비45초 / 답변60초)</button>
+                    </div>
+
+                    <!-- Display Timer -->
+                    <div class="bg-slate-900 text-white p-8 rounded-2xl mb-6 shadow-inner">
+                        <span id="timer-status-label" class="text-xs uppercase tracking-widest text-brand-400 font-bold block mb-2">READY</span>
+                        <div id="timer-display" class="text-5xl font-extrabold font-mono tracking-tight">00:00</div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4">
+                        <button id="start-timer-btn" onclick="startPracticeSession()" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> 타이머 & 녹음 시작
+                        </button>
+                        <button id="stop-timer-btn" onclick="resetPracticeSession()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold transition" disabled>
+                            <i class="fa-solid fa-rotate-left"></i> 리셋
+                        </button>
+                    </div>
+
+                    <!-- Audio Player for Recording -->
+                    <div id="audio-playback-container" class="mt-8 pt-6 border-t border-slate-100 hidden">
+                        <p class="text-xs text-slate-500 font-semibold mb-3">내 답변 녹음본 재생</p>
+                        <audio id="audio-player" controls class="mx-auto w-full max-w-md"></audio>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // 100 Key Expressions Dataset
+        const expressionsData = [
+            // Category 1: Start & Transition (1-20)
+            { id: 1, cat: 1, en: "In my opinion,", kr: "내 생각에는" },
+            { id: 2, cat: 1, en: "I think that...", kr: "내 생각에 ~인 것 같다" },
+            { id: 3, cat: 1, en: "I agree with the statement that...", kr: "나는 ~라는 의견에 동의한다" },
+            { id: 4, cat: 1, en: "I disagree that...", kr: "나는 ~에 반대한다" },
+            { id: 5, cat: 1, en: "I prefer A to B.", kr: "B보다 A를 선호한다" },
+            { id: 6, cat: 1, en: "There are several reasons for this.", kr: "여기에는 몇 가지 이유가 있다" },
+            { id: 7, cat: 1, en: "First of all,", kr: "첫째로" },
+            { id: 8, cat: 1, en: "Secondly,", kr: "둘째로" },
+            { id: 9, cat: 1, en: "Most of all,", kr: "무엇보다도" },
+            { id: 10, cat: 1, en: "For example,", kr: "예를 들어" },
+            { id: 11, cat: 1, en: "In my case,", kr: "내 경우에는" },
+            { id: 12, cat: 1, en: "When I was a university student,", kr: "내가 대학생이었을 때" },
+            { id: 13, cat: 1, en: "According to the schedule,", kr: "일정표에 따르면" },
+            { id: 14, cat: 1, en: "Based on the information,", kr: "정보에 기반하면" },
+            { id: 15, cat: 1, en: "Actually, that's not correct.", kr: "사실, 그 정보는 틀립니다" },
+            { id: 16, cat: 1, en: "Let me check the details for you.", kr: "자세한 정보를 확인해 드리겠습니다" },
+            { id: 17, cat: 1, en: "As far as I know,", kr: "내가 알기로는" },
+            { id: 18, cat: 1, en: "Therefore,", kr: "그러므로" },
+            { id: 19, cat: 1, en: "That's why I think so.", kr: "그것이 내가 그렇게 생각하는 이유이다" },
+            { id: 20, cat: 1, en: "Overall,", kr: "전반적으로" },
+
+            // Category 2: Part 2 Photo Description (21-40)
+            { id: 21, cat: 2, en: "This picture was taken at an outdoor cafe.", kr: "이 사진은 야외 카페에서 찍혔다" },
+            { id: 22, cat: 2, en: "The first thing I see is a man.", kr: "가장 먼저 보이는 것은 한 남성이다" },
+            { id: 23, cat: 2, en: "On the left side of the picture,", kr: "사진 왼쪽에" },
+            { id: 24, cat: 2, en: "On the right side of the picture,", kr: "사진 오른쪽에" },
+            { id: 25, cat: 2, en: "In the middle of the picture,", kr: "사진 한가운데에" },
+            { id: 26, cat: 2, en: "In the background,", kr: "배경에는" },
+            { id: 27, cat: 2, en: "In the foreground,", kr: "전경에는" },
+            { id: 28, cat: 2, en: "There are many people in this picture.", kr: "이 사진에는 많은 사람들이 있다" },
+            { id: 29, cat: 2, en: "He is wearing a white shirt.", kr: "그는 흰 셔츠를 입고 있다" },
+            { id: 30, cat: 2, en: "She is holding a cup of coffee.", kr: "그녀는 커피 잔을 들고 있다" },
+            { id: 31, cat: 2, en: "They are having a conversation.", kr: "그들은 대화를 나누고 있다" },
+            { id: 32, cat: 2, en: "He is looking at a computer screen.", kr: "그는 컴퓨터 화면을 보고 있다" },
+            { id: 33, cat: 2, en: "She is talking on the phone.", kr: "그녀는 통화 중이다" },
+            { id: 34, cat: 2, en: "They are sitting around a table.", kr: "그들은 테이블에 둘러앉아 있다" },
+            { id: 35, cat: 2, en: "He is carrying a bag.", kr: "그는 가방을 메고/들고 있다" },
+            { id: 36, cat: 2, en: "She is walking down the street.", kr: "그녀는 길을 따라 걸어가고 있다" },
+            { id: 37, cat: 2, en: "Some items are displayed on the shelf.", kr: "물건들이 선반에 전시되어 있다" },
+            { id: 38, cat: 2, en: "It looks like a busy day.", kr: "바쁜 하루처럼 보인다" },
+            { id: 39, cat: 2, en: "It seems like they are enjoying their time.", kr: "그들은 즐거운 시간을 보내는 것처럼 보인다" },
+            { id: 40, cat: 2, en: "Overall, the atmosphere is peaceful.", kr: "전반적으로 분위기가 평화롭다" },
+
+            // Category 3: Part 3 Response (41-60)
+            { id: 41, cat: 3, en: "I usually go shopping once a week.", kr: "나는 보통 일주일에 한 번 쇼핑한다" },
+            { id: 42, cat: 3, en: "The last time I went to a movie was last weekend.", kr: "내가 마지막으로 영화 본 건 지난 주말이다" },
+            { id: 43, cat: 3, en: "I prefer to buy products online.", kr: "나는 온라인으로 물건 사는 걸 선호한다" },
+            { id: 44, cat: 3, en: "Because it is very convenient.", kr: "왜냐하면 매우 편리하기 때문이다" },
+            { id: 45, cat: 3, en: "It takes about 30 minutes.", kr: "약 30분 정도 걸린다" },
+            { id: 46, cat: 3, en: "It is located near my home.", kr: "그것은 우리 집 근처에 위치해 있다" },
+            { id: 47, cat: 3, en: "I usually search for information on the Internet.", kr: "나는 주로 인터넷에서 정보를 검색한다" },
+            { id: 48, cat: 3, en: "I often get recommendations from my friends.", kr: "나는 자주 친구들에게 추천을 받는다" },
+            { id: 49, cat: 3, en: "Price is the most important factor for me.", kr: "가격이 나에게 가장 중요한 요소이다" },
+            { id: 50, cat: 3, en: "Quality is more important than price.", kr: "품질이 가격보다 중요하다" },
+            { id: 51, cat: 3, en: "I like it because the price is reasonable.", kr: "가격이 적당해서 좋다" },
+            { id: 52, cat: 3, en: "I usually spend about 50 dollars.", kr: "나는 보통 50달러 정도를 쓴다" },
+            { id: 53, cat: 3, en: "It helps me relax and reduce stress.", kr: "그것은 쉬면서 스트레스를 푸는 데 도움이 된다" },
+            { id: 54, cat: 3, en: "I enjoy spending time with my family.", kr: "나는 가족들과 시간을 보내는 것을 즐긴다" },
+            { id: 55, cat: 3, en: "I have been doing this for 2 years.", kr: "나는 이것을 2년 동안 해오고 있다" },
+            { id: 56, cat: 3, en: "It is easy to access.", kr: "접근하기 쉽다" },
+            { id: 57, cat: 3, en: "It provides good customer service.", kr: "좋은 고객 서비스를 제공한다" },
+            { id: 58, cat: 3, en: "I think it is a great way to learn new things.", kr: "새로운 것을 배우기 좋은 방법이라 생각한다" },
+            { id: 59, cat: 3, en: "I don't think it is a good idea.", kr: "좋은 아이디어라고 생각하지 않는다" },
+            { id: 60, cat: 3, en: "I would like to try it in the future.", kr: "나중에 한 번 시도해보고 싶다" },
+
+            // Category 4: Part 4 Schedule / Information (61-80)
+            { id: 61, cat: 4, en: "The event will take place on Monday, October 5th.", kr: "행사는 10월 5일 월요일에 열립니다" },
+            { id: 62, cat: 4, en: "It will start at 9:00 AM.", kr: "오전 9시에 시작할 예정입니다" },
+            { id: 63, cat: 4, en: "It will be held in Room 302.", kr: "302호에서 개최될 예정입니다" },
+            { id: 64, cat: 4, en: "The keynote speech will be given by John Smith.", kr: "기조 연설은 존 스미스 씨가 할 것입니다" },
+            { id: 65, cat: 4, en: "The price is 50 dollars per person.", kr: "가격은 1인당 50달러입니다" },
+            { id: 66, cat: 4, en: "First, there is a session on Marketing at 10 AM.", kr: "먼저, 오전 10시에 마케팅 세션이 있습니다" },
+            { id: 67, cat: 4, en: "Next, a lunch break is scheduled from 12 PM to 1 PM.", kr: "다음으로, 12시부터 1시까지 점심시간이 예정되어 있습니다" },
+            { id: 68, cat: 4, en: "The last session is hosted by Sarah Lee.", kr: "마지막 세션은 사라 리 씨가 진행합니다" },
+            { id: 69, cat: 4, en: "No, you have the wrong information.", kr: "아닙니다, 잘못된 정보를 알고 계십니다" },
+            { id: 70, cat: 4, en: "Actually, the time has been changed to 2 PM.", kr: "사실, 시간이 오후 2시로 변경되었습니다" },
+            { id: 71, cat: 4, en: "The workshop was canceled.", kr: "그 워크숍은 취소되었습니다" },
+            { id: 72, cat: 4, en: "There are two scheduled sessions.", kr: "예정된 세션이 두 개 있습니다" },
+            { id: 73, cat: 4, en: "Let me give you the details.", kr: "자세한 내용을 말씀해 드리겠습니다" },
+            { id: 74, cat: 4, en: "The entrance fee is free.", kr: "입장료는 무료입니다" },
+            { id: 75, cat: 4, en: "You need to register in advance.", kr: "사전에 등록하셔야 합니다" },
+            { id: 76, cat: 4, en: "If you have any other questions, feel free to ask.", kr: "다른 질문이 있으시면 언제든 물어보세요" },
+            { id: 77, cat: 4, en: "It is scheduled to end at 5 PM.", kr: "오후 5시에 끝날 예정입니다" },
+            { id: 78, cat: 4, en: "The speaker will talk about AI trends.", kr: "강연자는 AI 트렌드에 대해 이야기할 것입니다" },
+            { id: 79, cat: 4, en: "There is no session available at that time.", kr: "그 시간에는 가능한 세션이 없습니다" },
+            { id: 80, cat: 4, en: "You can participate in two different workshops.", kr: "두 개의 서로 다른 워크숍에 참여하실 수 있습니다" },
+
+            // Category 5: Part 5 Opinion & Reasons (81-100)
+            { id: 81, cat: 5, en: "It saves a lot of time and money.", kr: "시간과 돈을 많이 아껴준다" },
+            { id: 82, cat: 5, en: "It is very convenient to use.", kr: "사용하기에 매우 편리하다" },
+            { id: 83, cat: 5, en: "We can get useful information easily.", kr: "유용한 정보를 쉽게 얻을 수 있다" },
+            { id: 84, cat: 5, en: "It helps people improve their communication skills.", kr: "사람들의 의사소통 능력을 향상하도록 돕는다" },
+            { id: 85, cat: 5, en: "It provides various options to choose from.", kr: "선택할 수 있는 다양한 옵션을 제공한다" },
+            { id: 86, cat: 5, en: "Working in a group is more effective.", kr: "그룹으로 일하는 것이 더 효과적이다" },
+            { id: 87, cat: 5, en: "We can share new ideas with each other.", kr: "서로 새로운 아이디어를 공유할 수 있다" },
+            { id: 88, cat: 5, en: "It helps students focus on their studies.", kr: "학생들이 학업에 집중하도록 돕는다" },
+            { id: 89, cat: 5, en: "It brings good results.", kr: "좋은 결과를 가져온다" },
+            { id: 90, cat: 5, en: "I had a similar experience before.", kr: "전에 비슷한 경험을 한 적이 있다" },
+            { id: 91, cat: 5, en: "It made my life much easier.", kr: "그것은 내 삶을 훨씬 더 편리하게 만들어 주었다" },
+            { id: 92, cat: 5, en: "It is good for health.", kr: "건강에 좋다" },
+            { id: 93, cat: 5, en: "People can broaden their knowledge.", kr: "사람들은 지식을 넓힐 수 있다" },
+            { id: 94, cat: 5, en: "It creates a good working environment.", kr: "좋은 업무 환경을 조성한다" },
+            { id: 95, cat: 5, en: "It motivates people to work harder.", kr: "사람들이 더 열심히 일하도록 동기를 부여한다" },
+            { id: 96, cat: 5, en: "Online learning is flexible and comfortable.", kr: "온라인 학습은 유연하고 편안하다" },
+            { id: 97, cat: 5, en: "Experience is more important than theoretical knowledge.", kr: "경험이 이론적 지식보다 중요하다" },
+            { id: 98, cat: 5, en: "It reduces stress and makes people happy.", kr: "스트레스를 줄이고 사람들을 행복하게 만든다" },
+            { id: 99, cat: 5, en: "Therefore, I strongly agree with this opinion.", kr: "따라서 나는 이 의견에 강력히 동의한다" },
+            { id: 100, cat: 5, en: "For these reasons, I think like this.", kr: "이러한 이유들로 나는 이렇게 생각한다" }
+        ];
+
+        // 2-Week Curriculum Data
+        const curriculumData = [
+            { day: 1, title: "Part 1 (문장 읽기)", task: "강세, 억양, 나열형(A↗, B↗, C↘) 끊어 읽기 연습" },
+            { day: 2, title: "Part 2 (사진 묘사) - 인물", task: "장소 및 인물 행동(be + -ing) 템플릿 20문장 소리내어 읽기" },
+            { day: 3, title: "Part 2 (사진 묘사) - 사물&배경", task: "사물 위치/분위기 마무리 템플릿 학습 및 사진 5장 묘사" },
+            { day: 4, title: "Part 3 (질문 답하기) - Q5, Q6", task: "질문 단어 활용 첫 문장 즉답 훈련 (쇼핑/교통 주제)" },
+            { day: 5, title: "Part 3 (질문 답하기) - Q7", task: "이유/경험 덧붙이기 (Because..., For example...)" },
+            { day: 6, title: "1주차 중간 복습", task: "Part 1~3 필수 표현(1~60번) 복습 및 플래시카드 점검" },
+            { day: 7, title: "1주차 실전 테스트", task: "Part 1~3 기출 3회분 음성 녹음 후 자체 모니터링" },
+            { day: 8, title: "Part 4 (표 보고 답하기) - Q8, Q9", task: "일정표 전치사(at, on, in) 및 정보 정정 패턴 연습" },
+            { day: 9, title: "Part 4 (표 보고 답하기) - Q10", task: "공통 일정 2가지 연속 안내 템플릿 및 4회분 실전 연습" },
+            { day: 10, title: "Part 5 (의견 제시) - 만능 이유", task: "시간/비용 절약, 편리함 만능 이유 템플릿 암기" },
+            { day: 11, title: "Part 5 (의견 제시) - 경험 연결", task: "조립식 경험/예시(When I was...) 문장 연결 연습" },
+            { day: 12, title: "전체 파트 실전 모의고사 1회", task: "11문항 풀세트 준비시간/답변시간 엄수하여 녹음" },
+            { day: 13, title: "전체 파트 실전 모의고사 2회", task: "녹음본 들으며 음묵(어...음...) 최소화 재점검" },
+            { day: 14, title: "최종 암기 점검 & 시험 대비", task: "100가지 필수 표현 최종 암기 및 시험장 유의사항 확인" }
+        ];
+
+        // App State
+        let state = {
+            masteredExprs: JSON.parse(localStorage.getItem('toeic_mastered_exprs') || '[]'),
+            curriculumProgress: JSON.parse(localStorage.getItem('toeic_curriculum_progress') || '{}'),
+            currentFCIndex: 0,
+            quizQuestions: [],
+            quizIndex: 0,
+            quizScore: 0,
+            mediaRecorder: null,
+            audioChunks: []
+        };
+
+        // Navigation Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('bg-brand-50', 'text-brand-700', 'font-semibold');
+                el.classList.add('text-slate-600');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-brand-50', 'text-brand-700', 'font-semibold');
+                activeNav.classList.remove('text-slate-600');
+            }
+        }
+
+        // Text To Speech
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                const voiceLang = document.getElementById('tts-voice-select').value;
+                utterance.lang = voiceLang;
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Render 100 Expressions
+        function renderExpressions() {
+            const container = document.getElementById('expressions-container');
+            const filterCategory = document.getElementById('expr-category').value;
+            const searchKeyword = document.getElementById('expr-search').value.toLowerCase();
+
+            container.innerHTML = '';
+
+            const filtered = expressionsData.filter(item => {
+                const matchCat = filterCategory === 'all' || item.cat === parseInt(filterCategory);
+                const matchSearch = item.en.toLowerCase().includes(searchKeyword) || item.kr.includes(searchKeyword);
+                return matchCat && matchSearch;
+            });
+
+            filtered.forEach(item => {
+                const isMastered = state.masteredExprs.includes(item.id);
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-xl border transition flex items-center justify-between gap-4 ${isMastered ? 'bg-emerald-50/60 border-emerald-200' : 'bg-slate-50 border-slate-200 hover:border-brand-300'}`;
+                
+                card.innerHTML = `
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="text-xs font-mono font-bold w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center flex-shrink-0">${item.id}</span>
+                        <div class="min-w-0">
+                            <p class="font-bold text-sm text-slate-800 truncate">${item.en}</p>
+                            <p class="text-xs text-slate-500 truncate">${item.kr}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <button onclick="speakText('${item.en.replace(/'/g, "\\'")}')" class="p-2 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-brand-600 transition">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                        <button onclick="toggleMastery(${item.id})" class="p-2 rounded-lg transition ${isMastered ? 'text-emerald-600 bg-emerald-100' : 'text-slate-400 hover:bg-slate-200'}">
+                            <i class="fa-solid fa-circle-check text-base"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            updateGlobalStats();
+        }
+
+        function toggleMastery(id) {
+            if (state.masteredExprs.includes(id)) {
+                state.masteredExprs = state.masteredExprs.filter(i => i !== id);
+            } else {
+                state.masteredExprs.push(id);
+            }
+            localStorage.setItem('toeic_mastered_exprs', JSON.stringify(state.masteredExprs));
+            renderExpressions();
+        }
+
+        function updateGlobalStats() {
+            document.getElementById('global-expression-count').innerText = `${state.masteredExprs.length} / 100`;
+            
+            const currCompleted = Object.values(state.curriculumProgress).filter(Boolean).length;
+            const currPercent = Math.round((currCompleted / curriculumData.length) * 100);
+            document.getElementById('global-curriculum-count').innerText = `${currPercent}%`;
+            
+            const percentEl = document.getElementById('curriculum-percent');
+            if (percentEl) percentEl.innerText = `${currPercent}%`;
+            const barEl = document.getElementById('curriculum-progress-bar');
+            if (barEl) barEl.style.width = `${currPercent}%`;
+        }
+
+        // Render Curriculum List
+        function renderCurriculum() {
+            const container = document.getElementById('curriculum-list');
+            container.innerHTML = '';
+
+            curriculumData.forEach(item => {
+                const isDone = !!state.curriculumProgress[item.day];
+                const row = document.createElement('div');
+                row.className = `p-4 rounded-xl border flex items-center justify-between gap-4 transition ${isDone ? 'bg-indigo-50/50 border-indigo-200' : 'bg-white border-slate-200'}`;
+                
+                row.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <input type="checkbox" id="curr-day-${item.day}" ${isDone ? 'checked' : ''} onchange="toggleCurriculumDay(${item.day})" class="mt-1 w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+                        <div>
+                            <label for="curr-day-${item.day}" class="text-sm font-bold text-slate-800 cursor-pointer">DAY ${item.day}: ${item.title}</label>
+                            <p class="text-xs text-slate-500 mt-0.5">${item.task}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full ${isDone ? 'bg-indigo-100 text-indigo-700 font-semibold' : 'bg-slate-100 text-slate-500'}">Day ${item.day}</span>
+                `;
+                container.appendChild(row);
+            });
+
+            updateGlobalStats();
+        }
+
+        function toggleCurriculumDay(day) {
+            state.curriculumProgress[day] = !state.curriculumProgress[day];
+            localStorage.setItem('toeic_curriculum_progress', JSON.stringify(state.curriculumProgress));
+            renderCurriculum();
+        }
+
+        // Flashcards Module
+        function renderFlashcard() {
+            const current = expressionsData[state.currentFCIndex];
+            document.getElementById('fc-category').innerText = `Stage ${current.cat} (No. ${current.id})`;
+            document.getElementById('fc-korean').innerText = current.kr;
+            document.getElementById('fc-english').innerText = current.en;
+            document.getElementById('flashcard-counter').innerText = `${state.currentFCIndex + 1} / ${expressionsData.length}`;
+
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextFlashcard() {
+            state.currentFCIndex = (state.currentFCIndex + 1) % expressionsData.length;
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            state.currentFCIndex = (state.currentFCIndex - 1 + expressionsData.length) % expressionsData.length;
+            renderFlashcard();
+        }
+
+        // Quiz Module
+        function startQuiz() {
+            document.getElementById('quiz-start-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.add('hidden');
+            document.getElementById('quiz-game-screen').classList.remove('hidden');
+
+            // Shuffle and pick 10
+            state.quizQuestions = [...expressionsData].sort(() => 0.5 - Math.random()).slice(0, 10);
+            state.quizIndex = 0;
+            state.quizScore = 0;
+
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            if (state.quizIndex >= state.quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+
+            const current = state.quizQuestions[state.quizIndex];
+            document.getElementById('quiz-progress').innerText = `Q ${state.quizIndex + 1} / ${state.quizQuestions.length}`;
+            document.getElementById('quiz-score').innerText = `${state.quizScore} 점`;
+            document.getElementById('quiz-target-korean').innerText = current.kr;
+
+            // Generate options
+            let options = [current.en];
+            while (options.length < 4) {
+                const randomItem = expressionsData[Math.floor(Math.random() * expressionsData.length)].en;
+                if (!options.includes(randomItem)) options.push(randomItem);
+            }
+            options.sort(() => 0.5 - Math.random());
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-brand-50 hover:border-brand-300 font-semibold text-sm text-slate-700 transition";
+                btn.innerText = opt;
+                btn.onclick = () => handleQuizAnswer(opt, current.en);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleQuizAnswer(selected, correct) {
+            if (selected === correct) {
+                state.quizScore += 10;
+            }
+            state.quizIndex++;
+            renderQuizQuestion();
+        }
+
+        function endQuiz() {
+            document.getElementById('quiz-game-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.remove('hidden');
+            document.getElementById('quiz-final-score').innerText = `최종 점수: ${state.quizScore} / 100점`;
+        }
+
+        // Practice Recording Studio Timer
+        let practiceTimer = null;
+        let prepTime = 45;
+        let answerTime = 30;
+
+        function setupPracticeTimer(prep, answer) {
+            prepTime = prep;
+            answerTime = answer;
+            document.getElementById('timer-status-label').innerText = 'READY';
+            document.getElementById('timer-display').innerText = `00:${prepTime < 10 ? '0' : ''}${prepTime}`;
+        }
+
+        function startPracticeSession() {
+            let currentPhase = 'PREP'; // PREP -> SPEAK
+            let timeLeft = prepTime;
+
+            document.getElementById('start-timer-btn').disabled = true;
+            document.getElementById('stop-timer-btn').disabled = false;
+
+            // Start Audio Recording
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                    state.mediaRecorder = new MediaRecorder(stream);
+                    state.audioChunks = [];
+                    state.mediaRecorder.ondataavailable = e => state.audioChunks.push(e.data);
+                    state.mediaRecorder.onstop = () => {
+                        const blob = new Blob(state.audioChunks, { type: 'audio/mp3' });
+                        const audioUrl = URL.createObjectURL(blob);
+                        const player = document.getElementById('audio-player');
+                        player.src = audioUrl;
+                        document.getElementById('audio-playback-container').classList.remove('hidden');
+                    };
+                    state.mediaRecorder.start();
+                }).catch(err => console.warn("Mic access denied or unsupported"));
+            }
+
+            practiceTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-status-label').innerText = currentPhase === 'PREP' ? 'PREPARATION TIME' : 'ANSWERING TIME';
+                document.getElementById('timer-display').innerText = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+                if (timeLeft <= 0) {
+                    if (currentPhase === 'PREP') {
+                        currentPhase = 'SPEAK';
+                        timeLeft = answerTime;
+                        speakText("Begin speaking now.");
+                    } else {
+                        clearInterval(practiceTimer);
+                        document.getElementById('timer-status-label').innerText = 'COMPLETE';
+                        speakText("Time is up.");
+                        if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+                            state.mediaRecorder.stop();
+                        }
+                        document.getElementById('start-timer-btn').disabled = false;
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetPracticeSession() {
+            clearInterval(practiceTimer);
+            if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+                state.mediaRecorder.stop();
+            }
+            document.getElementById('start-timer-btn').disabled = false;
+            document.getElementById('stop-timer-btn').disabled = true;
+            setupPracticeTimer(45, 30);
+        }
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderExpressions();
+            renderCurriculum();
+            renderFlashcard();
+            setupPracticeTimer(45, 30);
+        }
+    </script>
+</body>
+</html>
