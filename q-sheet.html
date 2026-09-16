@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="ko">
+<!--
+  이 파일은 review/questions.js 에서 자동 생성됩니다.
+  여기를 고치지 마세요 — 다음 생성 때 덮어써집니다.
+  내용을 바꾸려면 review/questions.js 를 고치세요.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숨은고수 경력직편 질문지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+  :root{
+    --bg:#0E1128; --bg-2:#171B3A; --panel:#1B1F42; --panel-2:#20244A;
+    --line:#2C3160; --ink:#F1EEE4; --ink-2:#C6C4DC; --ink-3:#8C8AAE;
+    --gold:#E0B564; --gold-dim:#8A7442; --note-ink:#D3AF6F;
+    --notes-bg:#241A10; --notes-line:#4A3821;
+    --radius:14px;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans KR","Malgun Gothic",sans-serif;
+    line-height:1.68; -webkit-font-smoothing:antialiased;
+    word-break:keep-all; overflow-wrap:break-word;
+  }
+  .display{ font-family:"Black Han Sans","Noto Sans KR",sans-serif; font-weight:400; }
+  h1,h2,h3,h4,h5{ margin:0; text-wrap:balance; }
+  p{ margin:0; } ul,ol{ margin:0; padding:0; list-style:none; } a{ color:inherit; }
+  .wrap{ max-width:940px; margin:0 auto; padding-inline:20px; padding-block:0 72px; }
+
+  .topbar{ position:sticky; top:0; z-index:30; background:rgba(14,17,40,.93); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .topbar-inner{ max-width:940px; margin:0 auto; padding:11px 20px; display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; }
+  .wordmark{ font-size:.82rem; font-weight:700; letter-spacing:.1em; color:var(--gold); }
+  .topbar-meta{ font-size:.78rem; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .nav{ display:flex; gap:6px; overflow-x:auto; padding:0 20px 11px; max-width:940px; margin:0 auto; }
+  .nav a{ flex:none; text-decoration:none; font-size:.76rem; font-weight:700; white-space:nowrap;
+    padding:5px 11px; border-radius:999px; border:1px solid var(--line); color:var(--ink-2); background:var(--panel); }
+  .nav a:hover{ border-color:var(--gold-dim); color:var(--ink); }
+  .nav a:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+  .masthead{ padding-block:46px 34px; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-size:.76rem; font-weight:700; letter-spacing:.18em; color:var(--gold); }
+  .masthead h1{ margin-top:12px; font-size:clamp(2.2rem,6.4vw,3.4rem); line-height:1.08; }
+  .masthead .sub{ margin-top:8px; font-size:clamp(1rem,2.2vw,1.22rem); font-weight:700; color:var(--ink-2); }
+  .facts{ margin-top:22px; display:flex; flex-wrap:wrap; gap:8px 10px; }
+  .fact{ font-size:.8rem; color:var(--ink-2); padding:5px 12px; border-radius:999px;
+    background:var(--panel); border:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  .fact b{ color:var(--ink); font-weight:700; }
+
+  .guests{ margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  @media (max-width:760px){ .guests{ grid-template-columns:1fr; } }
+  .guest-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    border-left:3px solid var(--gtone); padding:16px 16px 15px; display:flex; flex-direction:column; gap:5px; }
+  .guest-card .gname{ font-size:1.12rem; color:var(--ink); }
+  .guest-card .gfrom{ font-size:.8rem; color:var(--gtone); font-weight:700; line-height:1.5; }
+
+  .howto{ margin-top:28px; padding:18px 20px; border:1px solid var(--line); border-left:3px solid var(--gold);
+    border-radius:var(--radius); background:var(--bg-2); display:flex; flex-direction:column; gap:7px; }
+  .howto h5{ font-size:.78rem; letter-spacing:.12em; color:var(--gold); font-weight:700; }
+  .howto li{ font-size:.88rem; color:var(--ink-2); display:flex; gap:9px; }
+  .howto li .k{ flex:none; color:var(--ink); font-weight:700; min-width:5.2em; }
+
+  .section-label{ margin-top:52px; font-size:.78rem; font-weight:700; letter-spacing:.16em; color:var(--ink-3); }
+  .run{ margin-top:14px; display:flex; flex-direction:column; gap:6px; }
+  .run li{ display:grid; grid-template-columns:2.1rem 1fr 4.6rem; align-items:center; gap:14px;
+    padding:11px 16px; border-radius:11px; background:var(--panel); border:1px solid var(--line);
+    border-left:3px solid var(--tone); }
+  @media (max-width:560px){ .run li{ grid-template-columns:1.8rem 1fr; } }
+  .run .rno{ font-size:1.1rem; color:var(--tone); }
+  .run .rname{ font-weight:700; font-size:.95rem; }
+  .run .rtime{ text-align:right; font-size:.86rem; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+  @media (max-width:560px){ .run .rtime{ grid-column:2; text-align:left; color:var(--tone); } }
+
+  .corner{ padding-block:44px 8px; border-top:1px solid var(--line); margin-top:44px; }
+  .corner-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px; }
+  .corner-no{ font-size:2rem; color:var(--tone); line-height:1; }
+  .corner-name{ font-size:clamp(1.35rem,3.4vw,1.75rem); }
+  .corner-time{ font-size:.8rem; font-weight:700; color:var(--tone); padding:3px 10px;
+    border-radius:999px; border:1px solid var(--tone); font-variant-numeric:tabular-nums; }
+  .corner-goal{ margin-top:12px; font-size:.94rem; color:var(--ink-2); max-width:64ch; }
+
+  .blocks{ margin-top:24px; display:flex; flex-direction:column; gap:14px; }
+  .qblock{ background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--tone);
+    border-radius:var(--radius); padding:18px 20px 17px; }
+  .qblock.is-shared{ background:var(--panel-2); }
+  .qb-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 10px; margin-bottom:13px; }
+  .qb-name{ font-size:1.15rem; font-weight:700; color:var(--tone); }
+  .qb-tag{ font-size:.75rem; color:var(--ink-3); }
+
+  .qlist{ display:flex; flex-direction:column; gap:12px; }
+  .qlist > li{ display:grid; grid-template-columns:1.35rem 1fr; gap:11px; align-items:start; }
+  .qmark{ font-size:.95rem; color:var(--gold-dim); line-height:1.7; font-family:"Black Han Sans","Noto Sans KR",sans-serif; }
+  .q-key > .qmark{ color:var(--gold); }
+  .qno{ font-size:.72rem; color:var(--ink-3); font-variant-numeric:tabular-nums; margin-right:5px; }
+  .qtext{ font-size:.97rem; color:var(--ink-2); }
+  .q-key .qtext{ color:var(--ink); font-weight:500; }
+  .qtext b{ color:var(--ink); font-weight:700; }
+  .sub{ margin-top:7px; display:flex; flex-direction:column; gap:5px; }
+  .sub li{ font-size:.86rem; color:var(--ink-3); display:flex; gap:8px; }
+  .sub li::before{ content:"↳"; flex:none; color:var(--gold-dim); }
+  .care{ margin-top:8px; font-size:.82rem; color:var(--note-ink); background:var(--notes-bg);
+    border:1px solid var(--notes-line); border-radius:9px; padding:8px 12px; }
+  .care b{ color:var(--gold); font-weight:700; }
+  .balance{ font-size:.97rem; color:var(--ink-2); }
+  .q-key .balance{ color:var(--ink); font-weight:500; }
+  .balance i{ font-style:normal; color:var(--gold); font-weight:700; }
+  .balance .vs{ color:var(--gold); font-weight:700; font-size:.86rem; padding:0 4px; }
+  .aq-map{ margin-top:10px; display:flex; flex-direction:column; gap:6px; }
+  .aq-map li{ font-size:.86rem; color:var(--ink-2); display:grid; grid-template-columns:6.4rem 1fr; gap:10px; }
+  .aq-map .who{ color:var(--gold); font-weight:700; }
+
+  .notes{ margin-top:48px; background:var(--notes-bg); border:1px solid var(--notes-line);
+    border-radius:var(--radius); padding:22px 22px 20px; }
+  .notes h3{ font-size:1.1rem; color:var(--gold); }
+  .notes .caption{ margin-top:5px; font-size:.8rem; color:var(--note-ink); }
+  .notes ul{ margin-top:16px; display:flex; flex-direction:column; gap:10px; }
+  .notes li{ font-size:.9rem; color:#E8D6B4; display:flex; gap:10px; line-height:1.62; }
+  .notes li::before{ content:"·"; flex:none; color:var(--gold); font-weight:700; }
+  .notes li b{ color:var(--gold); font-weight:700; }
+  .ops{ margin-top:22px; display:flex; flex-direction:column; gap:7px; }
+  .ops li{ font-size:.85rem; color:var(--ink-3); display:grid; grid-template-columns:7.2rem 1fr; gap:10px; }
+  .ops .k{ color:var(--ink-2); font-weight:700; }
+
+  footer{ margin-top:44px; padding-top:20px; border-top:1px solid var(--line); font-size:.8rem; color:var(--ink-3); }
+
+  @media print{
+    :root{ --bg:#fff; --bg-2:#F6F5F1; --panel:#fff; --panel-2:#F6F5F1;
+      --line:#C9C6BC; --ink:#15172B; --ink-2:#3A3C52; --ink-3:#6E7089;
+      --gold:#8A6A1E; --gold-dim:#A48B52; --note-ink:#6B5220;
+      --notes-bg:#FBF6EC; --notes-line:#D8C9A8; }
+    body{ background:#fff; }
+    .topbar, .nav{ display:none; }
+    .corner{ break-inside:avoid; }
+    .qblock, .notes li{ break-inside:avoid; }
+    .notes li{ color:#3A2E12; }
+    a{ text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="wordmark">숨은고수 · 경력직편 · 진행 큐시트</span>
+    <span class="topbar-meta">2026년 9월 16일(수) 16:00–17:00 · W10동 3층 강의장#1(301호)</span>
+  </div>
+  <nav class="nav" aria-label="코너 이동">
+    <a href="#run">진행 개요</a>
+    <a href="#c1">1 오프닝</a>
+    <a href="#c2">2 아이스브레이킹</a>
+    <a href="#c3">3 특이한 경험</a>
+    <a href="#c4">4 리얼토크</a>
+    <a href="#c5">5 Before &amp; After</a>
+    <a href="#c6">6 커리어</a>
+    <a href="#c7">7 관객 Q&amp;A</a>
+    <a href="#c8">8 엔딩메시지</a>
+    <a href="#notes">진행자 메모</a>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">LG전자 사내 토크쇼 · 진행자용</p>
+    <h1 class="display">숨은고수 경력직편</h1>
+    <p class="sub">코너별 진행 큐시트</p>
+    <div class="facts">
+      <span class="fact"><b>2026년 9월 16일(수) 16:00–17:00</b></span>
+      <span class="fact">W10동 3층 강의장#1(301호)</span>
+      <span class="fact">게스트 <b>3인</b></span>
+      <span class="fact">코너 <b>8개</b> · <b>60분</b></span>
+      <span class="fact">질문 <b>85개</b> (필수 <b>34</b>)</span>
+    </div>
+
+    <ul class="guests">
+      <li class="guest-card" style="--gtone:#6FB1EE">
+        <span class="gname display">장준연 팀장</span>
+        <span class="gfrom">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span>
+      </li>
+      <li class="guest-card" style="--gtone:#5FCDBF">
+        <span class="gname display">조은혜 책임</span>
+        <span class="gfrom">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span>
+      </li>
+      <li class="guest-card" style="--gtone:#E1897E">
+        <span class="gname display">전윤상 선임</span>
+        <span class="gfrom">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span>
+      </li>
+    </ul>
+
+    <div class="howto">
+      <h5>이 큐시트 쓰는 법</h5>
+      <ul>
+        <li><span class="k">Q</span><span>무대에서 그대로 읽어도 되는 문장입니다.</span></li>
+        <li><span class="k">금색 Q</span><span>온에어 필수 질문(34개). 시간이 밀리면 <b>금색만</b> 살리고 나머지는 버립니다.</span></li>
+        <li><span class="k">↳</span><span>답이 짧게 끝났을 때 이어 던질 꼬리질문.</span></li>
+        <li><span class="k">※ 박스</span><span>표현·수위 주의. <b>리허설에서 본인 확인이 끝난 것만</b> 무대에 올립니다.</span></li>
+      </ul>
+    </div>
+  </header>
+
+  <h2 class="section-label" id="run">진행 개요 · 60분</h2>
+  <ol class="run">
+    <li style="--tone:#9BA3D6">
+      <span class="rno display">1</span>
+      <span class="rname">오프닝 · 게스트 소개</span>
+      <span class="rtime">9분</span>
+    </li>
+    <li style="--tone:#6FB1EE">
+      <span class="rno display">2</span>
+      <span class="rname">아이스브레이킹 · 밸런스 게임</span>
+      <span class="rtime">5분</span>
+    </li>
+    <li style="--tone:#C79BE0">
+      <span class="rno display">3</span>
+      <span class="rname">특이한 경험 · 숨은 이력</span>
+      <span class="rtime">4분</span>
+    </li>
+    <li style="--tone:#E1897E">
+      <span class="rno display">4</span>
+      <span class="rname">리얼토크 · 이제는 말할 수 있다</span>
+      <span class="rtime">12분</span>
+    </li>
+    <li style="--tone:#5FCDBF">
+      <span class="rno display">5</span>
+      <span class="rname">Before &amp; After</span>
+      <span class="rtime">8분</span>
+    </li>
+    <li style="--tone:#E0B564">
+      <span class="rno display">6</span>
+      <span class="rname">커리어 · 오늘 하나는 가져가기</span>
+      <span class="rtime">11분</span>
+    </li>
+    <li style="--tone:#9BA3D6">
+      <span class="rno display">7</span>
+      <span class="rname">관객 Q&amp;A</span>
+      <span class="rtime">7분</span>
+    </li>
+    <li style="--tone:#E0B564">
+      <span class="rno display">8</span>
+      <span class="rname">엔딩메시지</span>
+      <span class="rtime">4분</span>
+    </li>
+  </ol>
+
+  <section class="corner" id="c1" style="--tone:#9BA3D6">
+    <div class="corner-head">
+      <span class="corner-no display">1</span>
+      <h2 class="corner-name display">오프닝 · 게스트 소개</h2>
+      <span class="corner-time">9분</span>
+    </div>
+    <p class="corner-goal">세 분의 경로를 관객 머릿속에 심어주는 구간입니다. &quot;왜 옮겼나&quot;라는 동기는 관객 사전질문에서 깊게 받기로 했으니, 여기서 다 써버리지 않게 진행자가 끊어줍니다.</p>
+    <div class="blocks">
+      <div class="qblock is-shared" style="--tone:#9BA3D6">
+        <div class="qb-head"><span class="qb-name display">3인 공통 질문</span><span class="qb-tag">세 분 모두에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">먼저 <b>전 직장 · 지금 하는 일 · LG전자 몇 년차</b>, 이 세 가지만 담아 한 줄 소개 부탁드려요.</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext"><b>이직은 언제부터 생각하게 되셨어요?</b> 그리고 결국 LG전자로 오게 된 계기는 어떤 것이었나요?</span>
+            <div class="care">※ 예상 답변 — 회사 안에서의 경쟁력과 사회에서의 경쟁력, 그 둘의 차이에 대한 이야기를 하실 예정입니다. (원래 &quot;쿠팡·홈&amp;쇼핑과 고민 끝에 LG를 택한 이유&quot;로 물었는데, 본인이 이 형태로 바꿔달라고 하셨습니다.)</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">경력직인데 처음부터 팀장으로 들어오신 거잖아요. 첫 출근날 팀원들 앞에 섰을 때, 솔직히 어떤 기분이셨어요?</span>
+            <ul class="sub"><li><span>팀원들은 팀장님을 어떻게 맞아주던가요?</span></li></ul>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">코웨이 10년이 한자리가 아니었더라고요. <b>해외 영업으로 시작해서 해외 마케팅, 전사 신사업 Task, 신상품 기획</b>까지 — 한 회사 안에서 직무가 계속 바뀌셨어요. 어떻게 이렇게 옮겨다니게 되신 거예요?</span>
+            <ul class="sub"><li><span>전사 신사업 Task 로 갔던 사업이 무산됐을 때는 어떤 마음이셨어요?</span></li><li><span>그 이동이 본인 선택이었어요, 아니면 주어진 거였어요?</span></li><li><span>영업·마케팅·상품기획·서비스기획 중에 <b>제일 안 어울릴 것 같았던</b> 건 뭐예요?</span></li></ul><div class="care">※ 이 게스트의 중심 컨셉(&quot;변화를 기회로 받아들인 사람&quot;)을 여는 질문. 직무 순서는 본인이 직접 고쳐준 표현입니다 — 해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">그 끝에 기획하신 제품이 <b>코웨이 페블체어</b>고, 성과도 좋았다고 들었어요. 어떤 제품이었어요?</span>
+            <p class="attach">▶ <a href="https://youtube.com/shorts/rfC6nq6dU-M" target="_blank" rel="noopener">코웨이 페블체어 쇼츠</a> <span>— 조은혜 책임이 기획한 제품 · 무대 화면에서 재생</span></p><ul class="sub"><li><span>상품기획을 하다가 <b>서비스 기획까지</b> 맡게 되셨다고요. 서비스기획자가 퇴사하면서 일이 넘어온 거라던데요?</span></li><li><span>둘을 같이 해본 게 오히려 남는 게 있었어요?</span></li></ul><div class="care">※ 제품명(페블체어)을 무대에서 말해도 된다고 확인받았습니다. 발표자료의 이 슬라이드에 <b>쇼츠 재생 버튼</b>이 있으니, 질문을 던지기 전에 먼저 틀어서 객석이 제품을 보게 하고 시작하세요. (재생 15~20초면 충분합니다)</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="qtext">2024년 입사니까 이제 3년차인데 — 오늘 이 자리의 조은혜 책임님, 한 줄 소개 부탁드려요.</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="qtext">코웨이 시절의 조은혜와 지금의 조은혜, 스스로 제일 달라졌다고 느끼는 게 뭐예요?</span>
+            <div class="care">※ 본인이 &quot;이 질문 좋다&quot;고 표시한 질문입니다.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">부천영화제 조직위 <b>사무국 초청팀</b>에서 시작해서 쏘카로, 쏘카에서 LG전자로 — 세 분 중 가장 다채로운 여정인데요, 자기소개 부탁드려요.</span>
+            <ul class="sub"><li><span>쏘카 안에서도 부서를 일곱 번 옮기셨어요. 한 회사에서 그렇게 여러 일을 해본 게 어떤 도움이 됐어요?</span></li></ul><div class="care">※ 여정 순서는 본인 확인 완료. 쏘카 내 이동: 운영기획팀 → 충청사업팀 → 부름기획팀 → 경기사업팀 → 차량경험혁신TF → 타다 TF → 기술기획팀.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">쏘카에서는 <b>대전 지역 사업을 통째로</b> 맡으셨다고요. 차량 25대, 정비업체·주차장 계약, 고객 VOC까지 — 하루가 어땠어요?</span>
+            <ul class="sub"><li><span>감으로 알던 걸 데이터로 확인하니 신기했다고 하셨죠. 그 경험 얘기해주세요.</span></li></ul><div class="care">※ 예상 답변 — &quot;일당백&quot; 역할. 사업 전개를 혼자 고민·실행하고 운영까지. 매일 주차장 후보지 물색·미팅, 차량 점검, VOC 처리, 외주업체 관리감독, 팀원 채용, 미신고 사고영상 찾아 서울로 전송, 매일 야근. &quot;돌이켜 보면 어떻게 했나 싶다.&quot; 데이터를 본 것은 시킨 일이었다고 정정해주셨습니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="qtext">조직위에서 쏘카로 간 것도, 쏘카에서 LG전자로 온 것도 <b>사람 추천</b>이었다고요. 그런 제안이 어떻게 오게 된 걸까요?</span>
+            <div class="care">※ 예상 답변 — &quot;그냥 운이었던 것 같다. 두 분 다 한때는 막역했지만 지금은 연락하고 지내지 않는다.&quot; 원래 있던 &quot;그 선배는 지금도 연락하세요?&quot; 꼬리질문은 답이 확인돼서 뺐습니다. 관계 관리 쪽으로 몰지 마세요.</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c2" style="--tone:#6FB1EE">
+    <div class="corner-head">
+      <span class="corner-no display">2</span>
+      <h2 class="corner-name display">아이스브레이킹 · 밸런스 게임</h2>
+      <span class="corner-time">5분</span>
+    </div>
+    <p class="corner-goal"><b>이 코너에는 필수 표시가 없습니다.</b> 3인 공통 4문항을 팻말로 빠르게 훑고, 갈린 것만 20초씩 이유를 받으세요. 개인 문항은 시간이 남을 때만. 게스트 답이 이미 확인된 항목은 메모에 적어뒀으니 진행자가 바로 받아주면 더 빨라집니다.</p>
+    <div class="blocks">
+      <div class="qblock is-shared" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">3인 공통 질문</span><span class="qb-tag">세 분 모두에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="balance">내 커리어를 주기적으로 정리해두는 사람 <i>A</i><span class="vs">VS</span>필요해질 때 몰아서 정리하는 사람 <i>B</i></span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="balance">복지 좋은 큰 회사 <i>A</i><span class="vs">VS</span>의사결정 빠른 작은 회사 <i>B</i></span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="balance">전 직장 동료와 아직 연락하는 사람 <i>A</i><span class="vs">VS</span>깔끔하게 정리한 사람 <i>B</i></span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="balance">회사 밥이 최고의 복지 <i>A</i><span class="vs">VS</span>회사 헬스장이 최고의 복지 <i>B</i></span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="balance">&quot;직급을 두지 말자&quot;는 리인벤트 문화 <i>A</i><span class="vs">VS</span>직급은 있어도 회의에서 다들 활발히 말하는 문화 <i>B</i></span>
+            <ul class="sub"><li><span>실제로 <b>말하기가 더 편했던</b> 쪽은 어디였어요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="balance">사람이 없어도 시스템이 알아서 돌아가는 조직 <i>A</i><span class="vs">VS</span>사람이 일일이 챙겨야 돌아가는 조직 <i>B</i></span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="balance">루틴업무는 성과로 안 치고 개선업무만 인정하는 방식 <i>A</i><span class="vs">VS</span>루틴도 성실히 하면 인정하는 방식 <i>B</i></span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="balance">힘들지만 실력이 붙는 프로젝트 <i>A</i><span class="vs">VS</span>무난하고 마음 편한 프로젝트 <i>B</i></span>
+            <ul class="sub"><li><span>돌아보면 어느 쪽이 결국 본인 성장에 더 도움이 됐나요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="balance">다들 기피하는 업무를 맡는 사람 <i>A</i><span class="vs">VS</span>검증된 업무를 맡는 사람 <i>B</i></span>
+            <ul class="sub"><li><span>기피 업무를 맡아본 입장에서, 지금도 같은 선택을 하시겠어요?</span></li></ul><div class="care">※ Before &amp; After 의 ERP 이야기로 넘어가는 다리. 여기서 답이 길어지면 &quot;그 얘기는 뒤에서 자세히&quot;로 끊고 넘기세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">07</span><span class="balance">의료비 지원 <i>A</i><span class="vs">VS</span>회사 헬스장 <i>B</i> — 하나만 남긴다면?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="balance">3년마다 1개월 유급휴가 <i>A</i><span class="vs">VS</span>전국 차량 75% 할인 <i>B</i> — 쏘카 복지 중 하나만 가져올 수 있다면?</span>
+            <div class="care">※ 답 확인됨 — <b>A(1개월 유급휴가)</b>. &quot;실제로 안식휴가 쓰고 퇴사한 인원도 많았다&quot;는 이야기가 붙습니다. 진행자가 바로 받아주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="balance">인구통계 보고 차량 배치를 정하던 현장 <i>A</i><span class="vs">VS</span>지금 본사에서 데이터를 다루는 일 <i>B</i> — 데이터 다루는 재미는 어느 쪽이 컸어요?</span>
+            <div class="care">※ 답 확인됨 — <b>A</b>. &quot;데이터를 보고 실행하면 성과가 바로 나와서 성취감이 컸다. input 대비 output 이 크게 보였다. 사업 초기였기 때문에 가능했던 것.&quot;</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="balance">영어 닉네임으로 부르는 조직 <i>A</i><span class="vs">VS</span>직책으로 부르는 조직 <i>B</i></span>
+            
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c3" style="--tone:#C79BE0">
+    <div class="corner-head">
+      <span class="corner-no display">3</span>
+      <h2 class="corner-name display">특이한 경험 · 숨은 이력</h2>
+      <span class="corner-time">4분</span>
+    </div>
+    <p class="corner-goal">여는 질문 하나만 필수입니다. &quot;특이한 자격증 가진 분이 있다고 들었다&quot;로 열면 두 분이 손을 들고 받고, 아래 개인 질문은 이야기가 이어지는 대로 골라 쓰세요. <b>시간이 모자라면 이 코너를 제일 먼저 줄입니다.</b></p>
+    <div class="blocks">
+      <div class="qblock" style="--tone:#C79BE0">
+        <div class="qb-head"><span class="qb-name display">특이한 경험 · 숨은 이력</span><span class="qb-tag">사진 두 장으로 맞춰보는 코너 · 정답 공개 후 해당 게스트에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">이 사진과 관련 있는 <b>자격증</b>을 가진 분이 있다는데... 누구실까요?</span>
+            <div class="care">※ 화면에 흑백요리사 포스터가 뜹니다. 답은 장준연 팀장(맛평가사 자격증). 본인이 먼저 손 들게 두고, 안 들면 진행자가 지목하세요. 손을 들면 다음 슬라이드로 넘겨 흑백요리사_장준연 사진을 띄우고, 그 사진을 배경으로 맛평가사 이야기를 이어가세요.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">맛평가사 자격증 · 예전에 맛평가 카페 운영</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">맛평가사 자격증, 이건 어떻게 따는 거예요? 시험이 따로 있어요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">예전에는 맛평가 카페도 운영하셨다고 들었어요. 언제부터, 어쩌다 시작하신 거예요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="qtext">회원분들과 실제로 모여서 평가도 하셨어요?</span>
+            <ul class="sub"><li><span>지금은 안 하신다고 들었는데, 어쩌다 접으신 거예요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="qtext">업무와 전혀 상관없는 분야인데, 왜 자격증까지 따게 되셨어요?</span>
+            <ul class="sub"><li><span>이 취미가 일에 도움이 된 순간도 있었어요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="qtext">팀에서 회식 장소 정할 때, 팀장님께 물어보나요?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#C79BE0">
+        <div class="qb-head"><span class="qb-name display">특이한 경험 · 숨은 이력</span><span class="qb-tag">사진 두 장으로 맞춰보는 코너 · 정답 공개 후 해당 게스트에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="qtext">이 포스터와 관련 있는 분이 있다는데... 누구실까요?</span>
+            <div class="care">※ 화면에 영화 &lt;택시운전사&gt; 포스터가 뜹니다. 답은 전윤상 선임(택시기사 자격증). 같은 방식으로 지목하세요. 손을 들면 다음 슬라이드로 넘겨 택시운전사_전윤상 사진을 띄우고, 그 사진을 배경으로 택시기사 이야기를 이어가세요.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">택시기사 자격증</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">택시기사 자격증은 어쩌다 따신 거예요? 쏘카 일과 관련이 있었나요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">따는 게 어려워요? 준비하는 데 얼마나 걸렸어요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="qtext">실제로 운전해보신 적도 있어요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="qtext">차량 25대를 직접 굴리던 쏘카 일과, 이 자격증이 이어지는 지점이 있나요?</span>
+            <div class="care">※ 정교사 2급 교원자격증도 갖고 계신데, &quot;교직이수만 하면 따는 거라 특별하지 않다&quot;며 본인이 빼달라고 하셨습니다. 무대에서 먼저 꺼내지 마세요.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#C79BE0">
+        <div class="qb-head"><span class="qb-name display">특이한 경험 · 숨은 이력</span><span class="qb-tag">사진 두 장으로 맞춰보는 코너 · 정답 공개 후 해당 게스트에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="qtext">이력서에는 안 쓰지만 은근히 자랑하고 싶은 경험 — 또 있으신 분?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c4" style="--tone:#E1897E">
+    <div class="corner-head">
+      <span class="corner-no display">4</span>
+      <h2 class="corner-name display">리얼토크 · 이제는 말할 수 있다</h2>
+      <span class="corner-time">12분</span>
+    </div>
+    <p class="corner-goal">가장 조심해야 하는 구간입니다. 원칙 두 개 — 특정 부서·개인이 드러나지 않게, 그리고 전 직장이나 우리 조직을 깎아내리는 그림이 되지 않게. 게스트들이 &quot;누워서 침 뱉기&quot;를 가장 걱정했으니, 진행자가 먼저 긍정 프레임을 깔고 넘깁니다.</p>
+    <div class="blocks">
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">08</span><span class="qtext">이 말씀이 오래 남았어요 — <b>&quot;코웨이에서는 정말 인정받고 잘 나갔지만, 행복하지는 않았다.&quot;</b> 그게 어떤 상태였어요?</span>
+            <ul class="sub"><li><span>밖에서 보기엔 제일 잘 되던 시기였는데요.</span></li><li><span>인정과 행복이 따로 갈 수 있다는 걸 그때 아셨어요?</span></li></ul><div class="care">※ 이 게스트의 가장 강한 대목. 전 직장을 깎는 이야기가 아니라 본인의 상태 이야기라는 걸 진행자가 먼저 정리해주고 넘깁니다. 다음 번아웃 질문과 한 덩어리로 가세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">09</span><span class="qtext">그리고 그건 매너리즘이 아니라 <b>번아웃</b>이었다고 짚어주셨어요. 그 둘은 어떻게 다른 거예요?</span>
+            <ul class="sub"><li><span>번아웃이라는 걸 스스로 언제 알아차리셨어요?</span></li><li><span>그때 회사나 주변에서 알아봐주는 사람이 있었어요?</span></li></ul><div class="care">※ 객석 다수가 자기 상태로 들을 대목. &quot;매너리즘&quot;이라고 부르지 않도록 진행자도 표현을 통일하세요. 해법은 커리어 코너로 넘깁니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">10</span><span class="qtext">그 시기에 <b>LG전자에 먼저 와 있던 코웨이 전 동료의 추천</b>이 들어왔다고요. 타이밍이 절묘했네요.</span>
+            <ul class="sub"><li><span>번아웃이라 변화를 주고 싶었다고 하셨는데, 망설임은 없었어요?</span></li><li><span>그 동료는 지금도 같이 일하거나 연락하세요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">11</span><span class="qtext">사전미팅에서 <b>&quot;LG는 빌런이 적다&quot;</b>고 하셨어요. 이 표현, 오늘 무대에서 풀어주실 수 있어요?</span>
+            <ul class="sub"><li><span>책임님이 정의하는 &quot;빌런&quot;은 어떤 사람인가요?</span></li></ul><div class="care">※ 본인이 빼달라고 하지는 않았지만 전 직장 비방으로 들릴 수 있습니다. 진행자가 &quot;사람이 좋아서 남는 회사&quot; 쪽으로 착지시키고, 답이 무거워지면 바로 넘기세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">12</span><span class="qtext">좋은 사수를 만난 게 컸다고 하셨죠. 어떤 점에서 그렇게 느끼셨어요?</span>
+            
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">13</span><span class="qtext">아쉬운 점도 있다고 들었어요 — <b>입사 동기가 없어서</b> 조금 외로<b>웠</b>다고. 그 마음, 좀 더 들려주실 수 있어요?</span>
+            <ul class="sub"><li><span>경력으로 들어오면 &quot;동기&quot;라는 게 아예 생기지 않는 건가요?</span></li><li><span>사내공모나 전배로 조직만 옮겨 온 동료들도 이 조직에선 마찬가지일 것 같은데요.</span></li><li><span>그 마음으로, 지금 객석에 <b>&quot;먼저 다가와 주세요&quot;</b> 하는 부탁 직접 드려주세요.</span></li></ul><div class="care">※ &quot;조금 외롭다&quot;를 &quot;외로웠다&quot;로 바꿔달라는 본인 요청을 반영했습니다(지금은 괜찮다는 뜻). 엔딩에 따로 있던 &quot;먼저 다가와 달라&quot; 질문도 본인 요청으로 여기에 붙였으니, 이 질문 하나로 마무리까지 받으세요.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="qtext">주변에서 <b>가장 많이 받는 질문이 &quot;왜 옮겼냐&quot;</b>라고 하셨어요. 그 질문 받을 때마다 솔직히 어떤 기분이세요?</span>
+            <ul class="sub"><li><span>오늘 이 자리에서, 그 질문에 대한 정답을 아예 정리해주신다면?</span></li></ul>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">07</span><span class="qtext"><b>회의실 문화가 달라서 겪은 에피소드</b>가 있다고 들었어요. 어떤 상황이었어요?</span>
+            <ul class="sub"><li><span>보고할 때도 성과보다 <b>개선사항을 중심으로</b> 회의하는 문화에 익숙했다고요. 그 차이는 어디서 제일 크게 느껴졌어요?</span></li><li><span><b>착수 보고</b>를 했는데 겪은 일도 있다고 하셨죠. 그 이야기도 들려주세요.</span></li></ul><div class="care">※ 본인 요청으로 세 질문(회의실 문화 / 보고 문화 / 착수 보고 에피소드)을 하나로 합쳤습니다. 에피소드 하나로 세 가지를 같이 답해주실 예정이니, 중간에 끊지 말고 끝까지 받으세요. 특정 부서·개인이 드러나면 진행자가 정리합니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">08</span><span class="qtext">조직이 바뀌면 전 직장은 시스템이 알아서 권한을 끊고 새로 등록해줬는데, 여기는 <b>식당 이용까지 직접 등록</b>해야 한다고요. 실제로 겪어보니 어떠셨어요?</span>
+            <ul class="sub"><li><span>이건 외부에서 온 사람만의 일도 아니잖아요. 사내공모나 전배로 조직만 옮겨 온 동료들도 똑같이 겪을 텐데요?</span></li></ul>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">07</span><span class="qtext">쏘카에서 8년을 계셨는데, 어느 순간부터 <b>받는 대우가 약해졌다</b>고 느끼셨다고요. 어떤 신호였어요?</span>
+            <div class="care">※ 예상 답변 — &quot;내부 승진 비율이 줄고, 리더십 자리를 자꾸 밖에서 데려온 사람들로 채울 때. 사업 성숙도상 경영진이 필요하다고 판단했을 수도 있지만, 정체성이 많이 희석돼서 구태의연한 회사가 된 모습이 시그널이었다.&quot; 특정 회사 비판으로 흐르면 &quot;오래 있으면 어디서나 생기는 일&quot;로 일반화해 받으세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">08</span><span class="qtext">그러던 중에 <b>업무를 옮기는 과정에서 오퍼가 들어왔다</b>고요. 먼저 찾아 나선 게 아니라 타이밍이 맞았던 쪽이었네요?</span>
+            <ul class="sub"><li><span>&quot;일관성 있는 모습&quot;이 작용했다고 보시는데, 그게 구체적으로 어떤 모습이었을까요?</span></li></ul><div class="care">※ 예상 답변 — &quot;무언가 해뒀다기보다는, 일관성 있는 모습이 긍정적으로 작용해서 제안을 받은 것이 아닐까 싶다.&quot; 커리어 코너의 &quot;추천받는 사람&quot; 질문과 짝이니, 여기서 답이 다 나오면 뒤에서는 짧게 정리만 하세요.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">09</span><span class="qtext">사내벤처에 도전하셨는데, <b>솔직히 좋지만은 않았다</b>고 하셨어요. 그 이야기 들려주세요.</span>
+            <ul class="sub"><li><span>도전을 많이 한 케이스인데 — &quot;이건 안 했으면 좋았겠다&quot; 싶은 것도 있어요?</span></li></ul><div class="care">※ 예상 답변(본인이 직접 정리해주셨습니다) — 시리즈A에 조인하는 것과 제로베이스 창업은 완전히 다른 경험. 인사가 만사인데 좋은 사람을 구하기 어려웠다. 당시 사내벤처는 LG전자 안에서 4년을 키워 내보내는 구조여서, 커진 덩치에 비해 적절한 지원을 못 받았고 외부 시장 환경도 좋지 않았다. 누구를 탓할 수도 없고 경영진인 스스로가 책임져야 해서 어깨가 무거웠다. → <b>&quot;창업을 할 땐 단단한 각오와 준비가 필요하다.&quot;</b> 이 결론으로 착지시키면 실패담이 아니라 조언이 됩니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">10</span><span class="qtext">B2C에서 <b>B2B</b>로 넘어온 것도 크셨다고요. 고객이 개인에서 법인으로 바뀌면, 일이 구체적으로 어떻게 달라져요?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">11</span><span class="qtext">차 25대로 대전 전체를 커버하면서, <b>VOC 처리</b>로 진짜 힘들었던 순간 하나만 풀어주실 수 있어요?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c5" style="--tone:#5FCDBF">
+    <div class="corner-head">
+      <span class="corner-no display">5</span>
+      <h2 class="corner-name display">Before &amp; After</h2>
+      <span class="corner-time">8분</span>
+    </div>
+    <p class="corner-goal">관객 사전질문 &quot;벤치마킹할 만한 일하는 방식&quot;의 답이 여기서 나옵니다. 전 직장에서 실제로 통했던 방식을 구체적으로 꺼내게 하고, 여기서 가능한지 같이 따져봅니다.</p>
+    <div class="blocks">
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">09</span><span class="qtext">전 직장은 <b>직무분석</b>으로 업무가 명확히 나뉘고, 부서 간 중복 업무가 없었다고 하셨어요. LG전자는 어떤가요?</span>
+            <ul class="sub"><li><span>루틴업무 80%는 성과로 안 치고 개선업무 20%로 평가받는 구조였다고요. 그게 사람을 어떻게 바꾸던가요?</span></li></ul><div class="care">※ 본인이 &quot;이 질문 좋다&quot;고 표시한 질문입니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">10</span><span class="qtext">&quot;사람이 일을 하는 게 아니라 <b>시스템이 일을 해야 한다</b>&quot; — 이 원칙의 좋은 점과, 그래서 정책·시스템 하나 바꾸기가 엄청 어려웠던 점을 같이 말씀해주신다면?</span>
+            <ul class="sub"><li><span>성과의 정량 지표가 딱딱 관리되던 것과 지금 — 성과를 체감하는 방식은 어떻게 달라요?</span></li></ul><div class="care">※ 성과 지표 질문은 본인이 &quot;13번에 같이 답하겠다&quot;고 하셔서 꼬리질문으로 붙였습니다.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">14</span><span class="qtext">신사업을 하실 때 <b>ERP를 건드리는 업무</b>를 맡으셨는데, 다들 기피하는 일이었다고요. 그 일이 어쩌다 책임님께 왔어요?</span>
+            <ul class="sub"><li><span>그게 나중에 <b>안마의자 상품기획에서 리모컨 서비스 기획</b>을 할 때 크게 도움이 됐다고요. 어떻게 이어졌어요?</span></li><li><span>기피 업무가 발판이 된다는 걸 그때 아셨어요, 한참 뒤에 아셨어요?</span></li></ul><div class="care">※ 본인이 &quot;이 질문 좋다&quot;고 표시했습니다. 이 게스트가 객석에 줄 수 있는 가장 구체적인 사례이니, &quot;힘든 일이 나중에 무기가 된다&quot;가 말이 아니라 실제 경로로 들리게 충분히 받아주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">15</span><span class="qtext"><b>&quot;영업팀이 아니라 영업본부&quot;</b>라서 의사결정 구조 자체가 다르다고 하셨죠. 조직 이름 하나로 체감되는 그 차이, 관객들에게 설명해주신다면?</span>
+            
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">16</span><span class="qtext">업무 협조를 받는 방식이 전 직장과 많이 다르고, 솔직히 복잡하고 어렵다고 하셨어요. 구체적으로 어떻게 달라요?</span>
+            <ul class="sub"><li><span>작은 회사 방식이 그리운 순간도 있어요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">17</span><span class="qtext">코웨이 10년 + LG전자 2년 — 지금 돌아보면 가장 크게 달라진 일하는 방식, 딱 하나만 꼽는다면?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">12</span><span class="qtext">쏘카는 <b>직무와 상관없이 전 직원에게 SQL을 가르쳤다</b>고요. 그게 두고두고 도움이 됐다고 하셨는데 — 우리도 해볼 만할까요?</span>
+            <ul class="sub"><li><span>그때는 SQL을 직접 짰지만 우리는 <b>데이터마트와 SAP BI</b>가 있잖아요. 그럼 뭘 배우면 될까요?</span></li><li><span>새로 온 사람을 빨리 전력화시키려면, 교육은 얼마나 필요하다고 보세요?</span></li></ul><div class="care">※ 예상 답변 — &quot;데이터는 또 하나의 VOC라고 생각하게 되고, 시야가 넓어지고, 주장의 근거가 찾아진다. 우리도 해볼 만하다. 다만 방향이나 방법은 다르게 가져가도 된다. 그때야 AI도 없어서 SQL 문법을 배워 쿼리를 직접 짜야 했지만, 우리에게는 데이터마트도 있고 SAP BI 도 있다 — <b>이거 교육 필요하다.</b>&quot; / 두 번째 꼬리질문에 대해서는 &quot;교육의 목표는 빨리 적응해 전력화시키는 것이니, 고가혁 경험이 없다면 교육은 다다익선&quot;이라고 하셨습니다. 관객 사전질문 &quot;벤치마킹할 만한 방식&quot;의 답이 여기서 나옵니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">13</span><span class="qtext">불편사항을 내부에 공유하면 바로 개선됐다고요. 그 <b>속도의 비결</b>이 뭐였어요?</span>
+            <div class="care">※ 예상 답변(에피소드가 좋습니다) — &quot;고객 만족과 문제 해결에 미쳐 있었던 것 같다. 창업자가 타운홀 미팅에서 영화 <b>&lt;머니볼&gt;</b>을 보여줬던 게 기억난다. '경기에 이기는 것'이라는 큰 목표보다, 출루를 잘하는 선수를 찾고 출루를 반복하면 승리로 이어진다는 메시지가 인상적이었다. 우리도 거창한 계획보다 고객 불편 하나를 빠르게 해결하는 데 집중했다.&quot; 머니볼 비유를 진행자가 받아주면 객석에 잘 남습니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">14</span><span class="qtext"><b>25대로 시작해 400대, 전국 2만대까지</b> 키우고 나오셨어요. 지금 LG전자와 스케일은 완전히 다른데, 오히려 통하는 감각이 있었나요?</span>
+            <ul class="sub"><li><span>정비업체·주차장 계약을 따내던 협상력, 지금 업무에도 쓰이나요?</span></li></ul><div class="care">※ 예상 답변(본인이 네 가지로 정리해주셨습니다) — 비슷한 점 ① 고정비가 큰 운영 비즈니스 ② 제한된 자산·인력의 가동률을 높이는 것이 핵심 ③ 수요가 발생하는 시간 안에 서비스를 공급해야 하는 Time-sensitive business ④ 모든 것을 직영으로 할 수 없어 파트너 네트워크를 활용해야 하는 사업. → &quot;보유한 자원을 얼마나 잘 활용하고 생산성을 높이느냐가 핵심이라는 점에서 비슷하다.&quot; 규모(1천대 미만 입사 → 2만대 퇴사)도 함께 언급하실 예정.</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c6" style="--tone:#E0B564">
+    <div class="corner-head">
+      <span class="corner-no display">6</span>
+      <h2 class="corner-name display">커리어 · 오늘 하나는 가져가기</h2>
+      <span class="corner-time">11분</span>
+    </div>
+    <p class="corner-goal">객석이 가져갈 것을 회수하는 구간입니다. 답이 겹쳐도 괜찮으니, &quot;그래서 뭘 하면 되나&quot;까지 실행 가능한 수준으로 밀어주세요. 이 코너가 흐리면 토크쇼 전체가 남의 이야기로 끝납니다.</p>
+    <div class="blocks">
+      <div class="qblock is-shared" style="--tone:#E0B564">
+        <div class="qb-head"><span class="qb-name display">3인 공통 질문</span><span class="qb-tag">세 분 모두에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="qtext">세 분 모두 커리어에서 한 번은 크게 방향을 바꾸셨어요. 그 결정을 하기 전에 <b>스스로 확인해본 것</b>이 있다면, 하나씩만 알려주세요.</span>
+            <ul class="sub"><li><span>반대로, 그때 확인 안 하고 넘어갔다가 나중에 아쉬웠던 건요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">07</span><span class="qtext">지금 자리에서 3년쯤 된 동료가 &quot;더 성장하는 느낌이 안 든다&quot;고 털어놓으면 — <b>회사를 옮기라는 말 말고</b>, 뭐부터 해보라고 하시겠어요?</span>
+            <div class="care">※ 이 코너의 중심 질문. 객석 대부분은 옮기지 않을 사람들이라, 여기서 쓸 수 있는 답이 나와야 가져갈 게 생깁니다. 답이 추상적으로 흐르면 &quot;그럼 당장 뭘요?&quot;로 한 번 더 밀어주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">08</span><span class="qtext">세 분이 지금도 <b>의식적으로 관리하고 있는 것</b>이 하나씩 있다면 뭐예요? 기록이든 사람이든 공부든요.</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">11</span><span class="qtext"><b>&quot;내 전문분야가 뭔지 한 문장으로 말할 수 있어야 한다&quot;</b>고 보세요? 팀장님은 지금 뭐라고 답하시겠어요?</span>
+            <ul class="sub"><li><span>그 한 문장이 처음부터 있었어요, 아니면 만들어가신 거예요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">12</span><span class="qtext">이력서를 늘 업데이트해두면 <b>자기 객관화</b>가 되고 내 전문분야가 뭔지 점검이 된다고 하셨어요. 어디에 내기 위한 게 아니라 <b>내 커리어를 점검하는 도구</b>로 쓰시는 것 같은데 — 구체적으로 어떻게 관리하세요?</span>
+            <ul class="sub"><li><span>그렇게 정리해보면, 다음에 뭘 더 쌓아야 할지가 보이나요?</span></li></ul><div class="care">※ 이직 준비로 들리지 않게, 진행자가 &quot;커리어 점검 도구&quot;라는 프레임을 먼저 말해주고 넘깁니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">13</span><span class="qtext">루틴업무 80%, 개선업무 20% — <b>개선업무를 스스로 만들어내는 사람과 못 만드는 사람의 차이</b>는 뭐라고 보세요?</span>
+            <ul class="sub"><li><span>팀장 입장에서 보면, 그게 티가 나나요?</span></li><li><span>회사 안에서든 밖에서든 경험을 넓혀봐야 하고, 능동적으로 움직여야 <b>기획력</b>이 붙는다고 하셨죠. 그 말, 객석에 직접 해주세요.</span></li></ul><div class="care">※ 본인이 &quot;이 질문 좋다&quot;고 표시했고, 기획력 관련 질문은 &quot;19번과 함께 답하겠다&quot;고 하셔서 꼬리질문으로 붙였습니다.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">14</span><span class="qtext">HR에서 CS 교육으로, 다시 서비스 조직으로 — 직무가 여러 번 바뀌셨어요. 그때마다 <b>뭘 가져가고 뭘 버릴지</b> 기준이 있었나요?</span>
+            
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">18</span><span class="qtext"><b>번아웃인지, 그냥 좀 지친 것인지</b> — 그 둘은 어떻게 구분하세요? 객석에도 지금 헷갈리는 분들이 있을 것 같아요.</span>
+            
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">19</span><span class="qtext">돌아보면, <b>조직을 옮기지 않고</b> 그 번아웃에서 벗어날 방법도 있었을까요? 있었다면 뭐였을 것 같아요?</span>
+            <ul class="sub"><li><span>반대로, 옮기고 나서야 비로소 풀린 건 뭐였어요?</span></li></ul><div class="care">※ 이 코너에서 객석이 가장 많이 가져갈 답. 옮기는 것만이 답이 아니라는 쪽으로 충분히 받아주세요.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">20</span><span class="qtext">사업이 무산되고, 사람이 떠나서 일이 넘어오고 — 계획대로 된 게 별로 없는데 매번 그걸 기회로 만드셨어요. <b>그건 의식적인 태도예요, 아니면 원래 성격이에요?</b></span>
+            <ul class="sub"><li><span>배울 수 있는 거라면, 뭐부터 바꿔야 할까요?</span></li></ul><div class="care">※ 이 게스트 컨셉의 핵심 질문. &quot;긍정적으로 받아들였다&quot;가 구호로 끝나지 않게, 실제로 뭘 어떻게 했는지까지 밀어주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">21</span><span class="qtext"><b>다들 기피하는 일</b>이 실제로 발판이 됐던 경험을 하셨는데 — 지금 객석에 그런 일을 앞둔 사람이 있다면, 뭐라고 해주시겠어요?</span>
+            <ul class="sub"><li><span>반대로 &quot;이건 피하는 게 맞다&quot; 싶은 일도 있어요?</span></li></ul>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">22</span><span class="qtext">영어 점수와 회화를 꾸준히 해오셨다고요. 그걸 <b>어떻게 계속</b> 하셨어요?</span>
+            <ul class="sub"><li><span>그게 실제로 일에서 쓰이는 순간이 오던가요?</span></li></ul><div class="care">※ 원래 &quot;바쁜 와중에 어떻게 계속했나&quot;로 물었는데, 본인이 &quot;별로 안 바빴다&quot;, &quot;잘난척으로 들릴까 걱정된다&quot;고 하셔서 문구를 덜어냈습니다. 진행자가 &quot;방법을 좀 나눠주세요&quot; 쪽으로 가볍게 받아주세요.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">15</span><span class="qtext">오래 있던 조직에서 <b>내가 제대로 평가받고 있는지</b>, 어떻게 판단하세요?</span>
+            <div class="care">※ 예상 답변 — &quot;어느 회사든 평가권자와 대화해보면 바로 느낌이 온다. 내 KPI 달성에 대해 리더가 얼마나 함께 고민해주고, 나의 노력과 성과를 얼마나 잘 인지하고 있는지 아닌지 느낌이 온다.&quot; 객석이 바로 써볼 수 있는 기준이라 한 번 더 정리해주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">16</span><span class="qtext">두 번 다 사람 추천으로 자리를 옮기셨는데, 본인은 <b>&quot;운이었다&quot;</b>고 하셨어요. 그래도 운이 오려면 뭐가 있어야 할까요?</span>
+            <div class="care">※ 예상 답변 — &quot;그냥 그때 운이 좋았다고 생각한다. 사실 대인관계 관리는 잘하지 못하는 편이다.&quot; 관계 관리 쪽으로 몰지 말고, 앞에서 본인이 말한 <b>&quot;일관성 있는 모습&quot;</b>으로 연결해 받으세요.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">17</span><span class="qtext">사내벤처는 결과적으로 좋지만은 않았다고 하셨는데 — 그 도전이 <b>커리어에 남긴 것</b>은 뭐예요?</span>
+            <div class="care">※ 예상 답변 — &quot;시야가 넓어졌다. 법무/노무/사업/운영을 두루 하면서 해보기 어려운 경험을 많이 했다. 거래처와의 소송, 대금 회수를 위한 추심업체 의뢰, 임원이었지만 근로자성을 인정받기 위한 노동청과의 싸움, 아티클에서만 보던 투자심사역들과의 대화.&quot; 실패한 도전도 커리어가 된다는 이 코너의 결론으로 쓰세요.</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c7" style="--tone:#9BA3D6">
+    <div class="corner-head">
+      <span class="corner-no display">7</span>
+      <h2 class="corner-name display">관객 Q&amp;A</h2>
+      <span class="corner-time">7분</span>
+    </div>
+    <p class="corner-goal">관리자 발표 모드에서 화살표 키로 한 건씩 엽니다. 앞 코너에서 이미 나온 답은 한 문장으로 정리하고 넘기세요.</p>
+    <div class="blocks">
+      <div class="qblock" style="--tone:#9BA3D6">
+        <div class="qb-head"><span class="qb-name display">관객이 미리 보내온 질문</span><span class="qb-tag">사전 서베이 접수분 · 무대에서 그대로 여쭤봅니다</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">01</span><span class="qtext">이직을 결심하게 된 가장 큰 동기가 무엇이었나요? (솔직하게)</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;화이팅&quot;</p><ul class="aq-map"><li><span class="who">조은혜 책임</span><span>코웨이 10년차의 번아웃 + LG에 먼저 와 있던 전 동료의 추천</span></li><li><span class="who">전윤상 선임</span><span>내부 승진이 줄고 리더십을 외부에서 채우던 시점에 들어온 오퍼</span></li><li><span class="who">장준연 팀장</span><span>회사 안에서의 경쟁력과 사회에서의 경쟁력 — 그 차이</span></li></ul><div class="care"><b>진행</b> — 세 분 모두 짧게. 오프닝에서는 경로만 다뤘으니 동기는 여기서 제대로 받습니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">02</span><span class="qtext">이건 LG전자도 벤치마킹할 만하다! 싶은 일하는 방식이나 스마트한 업무시스템? 같은 게 있다면?</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;그냥고수&quot;</p><ul class="aq-map"><li><span class="who">전윤상 선임</span><span>전 직원 데이터 교육 — 지금은 데이터마트·SAP BI 교육이 필요하다</span></li><li><span class="who">장준연 팀장</span><span>직무분석 기반의 명확한 역할 정의 · 사람이 아니라 시스템이 일하는 구조</span></li><li><span class="who">조은혜 책임</span><span>작은 조직의 빠른 업무 협조와 의사결정</span></li></ul><div class="care"><b>진행</b> — Before &amp; After 에서 이미 나왔다면 한 사람당 한 문장씩만 정리하고 넘깁니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">03</span><span class="qtext">타사 대비 LG전자 고가혁만의 장점을 설명해주세요.<br>그래도 여기가 이런건 좋다?! 그나마 좋다!?</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;환영합니다&quot;</p><ul class="aq-map"><li><span class="who">조은혜 책임</span><span>의료비 지원 · 회사 헬스장 · 밥 · 좋은 사수</span></li><li><span class="who">장준연 팀장</span><span>LG만의 문화 — 지금은 새로 온 사람에게 그걸 알려주는 역할까지</span></li><li><span class="who">전윤상 선임</span><span>본사 스케일에서만 해볼 수 있는 일 · 사내벤처 같은 도전 트랙이 있다는 것</span></li></ul><div class="care"><b>진행</b> — 아래 &quot;숨고&quot; 님 질문과 사실상 같은 질문입니다. <b>두 개를 묶어서 한 번에 받으세요.</b></div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">04</span><span class="qtext">타회사와 LG전자를 다 경험해보신 결과, LG전자만의 최대 장점은 무엇이라고 생각하시나요? 다른 후배들이 이직을 고민한다면 어떤말씀을 해주시고 싶으신지 궁금합니다.</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;숨고&quot;</p><div class="care"><b>진행</b> — 위 &quot;환영합니다&quot; 님 질문과 묶어서 받습니다. 이쪽이 &quot;다른 후배들에게&quot;까지 나가 있으니 이 질문으로 받고, 앞 질문은 &quot;그나마 좋은 것&quot;만 덧붙이면 깔끔합니다.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">05</span><span class="qtext">경력직으로 이직할 때 가장 중요하게 준비해야할 건 무엇인가요?</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;물경력&quot;</p><ul class="aq-map"><li><span class="who">장준연 팀장</span><span>이력서를 늘 업데이트해두기 — 자기 객관화와 전문분야 점검</span></li><li><span class="who">조은혜 책임</span><span>기피 업무를 피하지 않은 경험이 결국 발판이 됐다</span></li><li><span class="who">전윤상 선임</span><span>일관성 있는 모습 — 그게 제안으로 이어졌다</span></li></ul><div class="care"><b>진행</b> — 커리어 코너와 가장 잘 이어지는 질문입니다. 세 분이 각자 한 가지씩 짧게.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">06</span><span class="qtext">LG가 이런건 아쉽다는 것들이 궁금합니다. 전직장에서는 이런게 있었는데 LG전자는 없어서 아쉽다거나, LG전자에도 생겨야 한다고 생각하는 것들을 편하게 말씀주시면 좋겠습니다.</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;궁금맨&quot;</p><div class="care"><b>진행</b> — <b>주의</b> — 게스트들이 가장 조심스러워한 주제입니다. 전윤상 선임은 우리 조직 관련 단점 질문 세 개를 &quot;누워서 침 뱉기&quot;라며 빼달라고 하셨습니다. 이 질문은 관객이 직접 쓴 것이니 빼지 말고 여쭤보되, <b>&quot;제도로 바꿀 수 있는 것&quot;</b>으로 좁혀서 받고 답이 무거워지면 진행자가 정리해 넘기세요.</div>
+          </div></li>
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">07</span><span class="qtext">- 경력직 입사라 서운했던 점 &amp; 오히려 좋았던 점이 있다면?<br>- 여러 회사 다녀본 결과, 직장의 가장 중요한 요소는 뭐라고 생각하시나요</span>
+            <p class="qby" style="font-size:.78rem;color:var(--ink-3);margin-top:4px">작성자 &quot;프로&quot;</p><div class="care"><b>진행</b> — 질문 두 개가 붙어 있습니다. <b>&quot;경력직이라 서운했던 점 vs 오히려 좋았던 점&quot;</b>을 먼저 한 사람씩 받고, 두 번째(&quot;직장의 가장 중요한 요소&quot;)는 시간이 되는 사람만 짧게. 앞의 리얼토크·커리어 코너에서 나온 답과 겹치면 한 문장으로 정리하고 넘기세요.</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="corner" id="c8" style="--tone:#E0B564">
+    <div class="corner-head">
+      <span class="corner-no display">8</span>
+      <h2 class="corner-name display">엔딩메시지</h2>
+      <span class="corner-time">4분</span>
+    </div>
+    <p class="corner-goal">세 분 모두 사전미팅에서 관객에게 하고 싶은 말을 이미 갖고 있습니다. 새 질문을 던지기보다, 그 말을 무대에서 직접 하게 만들어주는 구간입니다.</p>
+    <div class="blocks">
+      <div class="qblock is-shared" style="--tone:#E0B564">
+        <div class="qb-head"><span class="qb-name display">3인 공통 질문</span><span class="qb-tag">세 분 모두에게</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">09</span><span class="qtext">마지막으로, 객석이 <b>내일 당장 해볼 수 있는 것</b> 하나씩만 숙제로 주신다면?</span>
+            <div class="care">※ 이 질문으로 무대를 닫습니다. (원래 뒤에 있던 &quot;처음 출근한 날의 나에게 한 문장&quot;은 조은혜 책임 의견으로 삭제했습니다 — 객석에 도움이 안 된다고.)</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#6FB1EE">
+        <div class="qb-head"><span class="qb-name display">장준연 팀장</span><span class="qb-tag">삼성전자 서비스조직 → LG전자 가산 · 차장 때 이직, 처음부터 팀장으로 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">15</span><span class="qtext">LG전자로 와서 <b>어떤 부분이 달라졌다고 느끼세요?</b> 그리고 지금은 새로 온 사람들에게 &quot;LG만의 문화&quot;를 알려주는 역할도 하신다고 들었는데 — 이제 막 우리 조직에 합류한 동료들에게 한마디 해주신다면?</span>
+            <div class="care">※ 본인 요청으로 &quot;일머리가 어느 쪽에 가까워졌나&quot; 질문을 이렇게 바꾸고, 엔딩의 &quot;새로 온 동료에게 한마디&quot;를 여기 합쳤습니다. 장준연 팀장의 엔딩 질문은 이것 하나입니다.</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#5FCDBF">
+        <div class="qb-head"><span class="qb-name display">조은혜 책임</span><span class="qb-tag">코웨이 10년 (해외 영업 → 해외 마케팅 → 전사 신사업 Task → 신상품 기획) → 2024년 LG전자 합류</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">23</span><span class="qtext"><b>경력직끼리 서로 멘토-멘티가 되어주면 좋겠다</b>는 이야기를 하셨어요. 오늘 이 자리에서 그 제안을 직접 해주신다면?</span>
+            <ul class="sub"><li><span>우리 조직은 이직으로 온 사람만 있는 게 아니라 사내공모·전배로 온 동료들도 많은데, 그분들까지 같이 묶으면 어떨까요?</span></li></ul><div class="care">※ 조은혜 책임의 엔딩 질문은 이것 하나입니다. (&quot;진짜 맛집은 입소문&quot; 질문과 &quot;먼저 다가와 달라&quot; 질문은 본인 요청으로 각각 삭제·이동했습니다.)</div>
+          </div></li>
+        </ul>
+      </div>
+      <div class="qblock" style="--tone:#E1897E">
+        <div class="qb-head"><span class="qb-name display">전윤상 선임</span><span class="qb-tag">부천영화제 조직위 사무국 초청팀 → 쏘카 8년(7개 부서) → LG전자 사내벤처 → 해외네트워크</span></div>
+        <ul class="qlist">
+          <li class="qlist-item q-key"><span class="qmark">Q</span><div>
+            <span class="qno">18</span><span class="qtext">사내벤처에 도전해볼까 고민하는 동료들에게, <b>먼저 겪어본 사람</b>으로서 해주고 싶은 말은요?</span>
+            <div class="care">※ 예상 답변 — &quot;과거보다 사내벤처 제도가 안정화됐다고 들었다. 지금은 초기에 1~2억 주고 바로 분사시킨다고. 도전정신이 있고 꿈이 있다면 도전해보는 것도 좋을 것 같다.&quot; 제도 내용은 본인이 들은 이야기라, 진행자가 &quot;지금 제도는 확인이 필요하다&quot;고 가볍게 붙여주세요.</div>
+          </div></li>
+          <li class="qlist-item"><span class="qmark">Q</span><div>
+            <span class="qno">19</span><span class="qtext">큰 결정을 앞두고 가장 크게 걱정했던 건 뭐였어요? 그때의 자신에게 지금 한마디 한다면?</span>
+            <div class="care">※ 예상 답변 — &quot;망하는 게 큰 걱정이었는데, <b>하고 싶은 대로 킵고잉~</b> 하라고 얘기할 것 같다.&quot; 짧고 좋은 클로징이니 시간이 되면 꼭 받으세요.</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" id="notes">
+    <h3 class="display">진행자 메모 · 무대 올리기 전 확인할 것</h3>
+    <p class="caption">내부 확인용 — 게스트 공유본에는 포함하지 않습니다.</p>
+    <ul>
+      <li><span><b>질문이 너무 많다</b> — 장준연 팀장과 전윤상 선임이 공통으로 &quot;1시간에 다 하기엔 질문이 많다&quot;고 하셨습니다. <b>금색(필수) 질문만 진행하면 60분에 맞습니다.</b> 나머지는 답이 짧게 끝났을 때만 꺼내는 예비 카드로 두세요.</span></li>
+      <li><span><b>&quot;누워서 침 뱉기&quot; 주의</b> — 전윤상 선임이 우리 조직 관련 단점 질문(해외네트워크 적응 난관, 온보딩 비교, 빠른 실행이 여기서 통할지)을 모두 빼달라고 하셨습니다. 같은 취지의 질문을 즉석에서 만들어 던지지 마세요. 관객 사전질문 중 &quot;LG가 아쉬운 것&quot;은 관객이 직접 쓴 것이니 빼지 않되, &quot;제도로 바꿀 수 있는 것&quot;으로 좁혀 받습니다.</span></li>
+      <li><span><b>전윤상 선임은 예상 답변이 거의 다 확정</b>돼 있습니다. 각 질문의 메모에 본인이 적어준 답변 방향을 그대로 옮겨뒀으니, 진행자가 미리 읽고 이어받으면 훨씬 매끄럽습니다. 밸런스 게임 04·05번은 이미 A로 답이 정해져 있습니다.</span></li>
+      <li><span><b>전 직장 비교는 사실 묘사까지만.</b> 삼성전자·코웨이·쏘카 관련 비교(시스템, 성과지표, 복지 수치)는 본인 발언 그대로만 쓰고 더 각색하지 않습니다.</span></li>
+      <li><span><b>번아웃 (조은혜)</b> — 처음 메모에는 &quot;매너리즘&quot;으로 적혀 있었지만 본인이 <b>번아웃</b>이라고 정정해주셨습니다. 무대에서 &quot;매너리즘&quot;으로 부르지 않도록 진행자도 표현을 통일하세요.</span></li>
+      <li><span><b>&quot;인정받고 잘 나갔지만 행복하지는 않았다&quot;</b>(조은혜)는 이 게스트의 가장 강한 대목이지만, 전 직장을 깎는 말로 들릴 수 있습니다. 본인의 상태 이야기라는 프레임을 진행자가 먼저 잡아주고 넘깁니다.</span></li>
+      <li><span><b>조은혜 책임의 방향성</b> — 사업 무산, 담당자 퇴사로 넘어온 일, 기피 업무(ERP)까지 환경이 계속 바뀌었는데 불만보다 기회로 받아들이고 해낸 분입니다. 질문이 &quot;고생담&quot;으로 흐르지 않게, 매번 &quot;그래서 무엇이 남았는지&quot;로 닫아주세요.</span></li>
+      <li><span><b>장준연 팀장은 질문을 묶어서</b> 답하고 싶어 하십니다. 회의·보고 문화 에피소드(1개로 합침), 시스템+성과지표, 개선업무+기획력, 엔딩(변화+새 동료에게 한마디) — 각각 한 덩어리로 받고 중간에 끊지 마세요.</span></li>
+      <li><span><b>자격증 소재</b> — 맛평가 카페는 과거에 운영하셨고 지금은 하지 않습니다. 전윤상 선임의 정교사 2급 자격증은 본인이 &quot;특별하지 않다&quot;며 빼달라고 하셨으니 먼저 꺼내지 마세요.</span></li>
+      <li><span><b>커리어 코너가 이 토크쇼의 무게중심</b>입니다. 시간이 밀리면 특이한 경험 → 밸런스 게임 순으로 줄이고, 커리어 코너 11분은 지켜주세요.</span></li>
+    </ul>
+    <ul class="ops">
+      <li><span class="k">질문 접수</span><span>2026.9.15(화) 23:59 자동 마감 · 이후 관리자 페이지에서만 편집 가능</span></li>
+      <li><span class="k">발표 모드</span><span>행사 사이트 관리자 → 발표 모드 · ← → 키로 질문 이동 · 답변완료/랜덤 지원</span></li>
+      <li><span class="k">현장 추가</span><span>손 들어 받는 질문 1~2건 예정. 답이 안 나오면 &quot;경력직 온보딩, 딱 하나만 고칠 수 있다면?&quot; 카드 사용</span></li>
+      <li><span class="k">행사 사이트</span><span>start.bat → http://&lt;이 PC의 IP&gt;:916/ (참가신청·사전질문)</span></li>
+      <li><span class="k">질문지 리뷰</span><span>start-review.bat → http://&lt;이 PC의 IP&gt;:9999/ (게스트 코멘트)</span></li>
+      <li><span class="k">주의</span><span>각 서버의 검은 창을 닫으면 사이트가 내려갑니다 · 행사 동안 PC 절전 해제</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    숨은고수 · 경력직편 진행 큐시트 · review/questions.js 에서 자동 생성 · 2026.9.16 기준
+  </footer>
+
+</div>
+
+</body>
+</html>
