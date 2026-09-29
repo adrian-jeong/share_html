@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AX Star 2026 출품작 소개</title>
+<style>
+:root{
+  --red:#A50034;--red-deep:#7A0026;--red-soft:#FBEFF3;
+  --gold:#B8860B;--gold-bg:#FFF8E6;
+  --ink:#18181B;--sub:#61616A;--mute:#9A9AA3;
+  --line:#E8E6E3;--bg:#F7F6F4;--paper:#fff;
+  --side:260px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",-apple-system,"Segoe UI",sans-serif;
+  line-height:1.55;font-size:14px;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+
+/* ===== Sidebar ===== */
+.side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#fff;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;z-index:30;transition:transform .25s}
+.brand{padding:22px 20px 16px;border-bottom:1px solid var(--line)}
+.brand .eb{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--red)}
+.brand .logo{display:block;height:28px;width:auto;margin-bottom:8px}
+.brand h1{font-size:19px;margin:0;font-weight:800;letter-spacing:-.02em}
+.search{margin:14px 16px 6px;position:relative}
+.search input{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:10px;
+  padding:9px 12px 9px 32px;font-size:13px;font-family:inherit;outline:none}
+.search input:focus{border-color:var(--red);background:#fff}
+.search span{position:absolute;left:11px;top:8px;font-size:13px;color:var(--mute)}
+.nav{flex:1;overflow-y:auto;padding:6px 10px 16px}
+.nav .grp{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.06em;margin:16px 10px 6px}
+.nav button.item{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;
+  padding:9px 10px;border-radius:9px;font-size:13.5px;color:#333;text-align:left}
+.nav button.item:hover{background:var(--bg)}
+.nav button.item.on{background:var(--red-soft);color:var(--red);font-weight:700}
+.nav .ic{width:20px;text-align:center}
+.nav .cnt{margin-left:auto;font-size:11.5px;color:var(--mute);font-weight:600;background:var(--bg);
+  border-radius:999px;padding:1px 8px}
+.nav button.item.on .cnt{background:#fff;color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 10px}
+.fchip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:12px;color:#444}
+.fchip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.side-foot{padding:12px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--mute)}
+
+/* ===== Main ===== */
+main{margin-left:var(--side);min-height:100%;padding:32px 40px 60px}
+.topbar{display:none}
+.ph{margin-bottom:22px}
+.ph .crumb{font-size:12px;color:var(--mute);font-weight:600}
+.ph h2{font-size:24px;margin:4px 0 4px;letter-spacing:-.02em}
+.ph p{margin:0;color:var(--sub);font-size:13.5px}
+.active-filter{display:inline-flex;gap:6px;align-items:center;margin-top:10px;font-size:12px;color:var(--sub)}
+.active-filter button{border:0;background:none;color:var(--red);font-size:12px;font-weight:700;padding:0}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;border-radius:18px;
+  padding:30px 32px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+  background:rgba(255,255,255,.08)}
+.hero .eb{font-size:12px;letter-spacing:.12em;font-weight:700;opacity:.85}
+.hero h2{font-size:28px;margin:6px 0 8px;letter-spacing:-.02em}
+.hero p{margin:0;opacity:.9;max-width:620px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi b{display:block;font-size:26px;letter-spacing:-.02em}
+.kpi span{font-size:12.5px;color:var(--sub)}
+.kpi.g b{color:var(--gold)}
+
+.sec{margin-top:30px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.sec-h h3{font-size:16px;margin:0}
+.sec-h a{font-size:12.5px;color:var(--red);font-weight:700;cursor:pointer}
+
+/* Category overview */
+.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.catcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;
+  transition:.15s;text-align:left}
+.catcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.catcard .top{display:flex;justify-content:space-between;align-items:center}
+.catcard .ic{font-size:22px}
+.catcard .n{font-size:22px;font-weight:800;color:var(--red)}
+.catcard h4{margin:10px 0 4px;font-size:14.5px}
+.catcard p{margin:0;font-size:12.5px;color:var(--sub)}
+.bar{height:5px;background:var(--bg);border-radius:9px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--red);border-radius:9px}
+
+.aibar{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.airow{display:grid;grid-template-columns:130px 1fr 34px;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+.airow .t{height:10px;background:var(--bg);border-radius:9px;overflow:hidden}
+.airow .t i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#D4456F);border-radius:9px}
+.airow b{text-align:right;font-size:12.5px}
+.note{font-size:11.5px;color:var(--mute);margin-top:8px}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;cursor:pointer;
+  display:flex;flex-direction:column;transition:.15s;text-align:left}
+.card:hover{border-color:var(--red);box-shadow:0 6px 18px rgba(0,0,0,.06);transform:translateY(-2px)}
+.card.aw{border:1.5px solid var(--gold);background:linear-gradient(180deg,var(--gold-bg),#fff 90px)}
+.card .tag{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--bg);color:var(--sub)}
+.pill.best{background:var(--gold);color:#fff}
+.pill.ex{background:#fff;color:var(--gold);border:1.2px solid var(--gold)}
+.card h4{margin:0 0 3px;font-size:15px;line-height:1.4;letter-spacing:-.01em}
+.card .who{font-size:12px;color:var(--mute)}
+.card .sum{font-size:13px;color:#3a3a40;margin:10px 0 12px}
+.card ul{list-style:none;margin:auto 0 0;padding:10px 0 0;border-top:1px dashed var(--line)}
+.card li{font-size:12.5px;font-weight:700;color:var(--red-deep);padding:2px 0 2px 18px;position:relative}
+.card li:before{content:"✔";position:absolute;left:0;color:var(--red)}
+.card .ai{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.card .ai span{font-size:11px;color:var(--sub);border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:40px;text-align:center;color:var(--sub)}
+.cat-block{margin-top:26px}
+.cat-block:first-child{margin-top:0}
+.cat-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;margin:0 0 12px}
+.cat-title small{font-weight:600;color:var(--mute);font-size:12px}
+
+/* ===== Drawer ===== */
+.dim{position:fixed;inset:0;background:rgba(20,20,24,.35);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+.dim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(820px,100%);background:#fff;z-index:50;
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;
+  box-shadow:-10px 0 40px rgba(0,0,0,.12)}
+.drawer.on{transform:none}
+.dh{padding:22px 26px 18px;border-bottom:1px solid var(--line);position:relative}
+.dh.aw{background:linear-gradient(180deg,var(--gold-bg),#fff)}
+.dh h3{margin:8px 0 4px;font-size:19px;line-height:1.4;padding-right:30px;letter-spacing:-.01em}
+.dh .who{font-size:13px;color:var(--sub)}
+.x{position:absolute;right:18px;top:18px;border:0;background:var(--bg);width:32px;height:32px;border-radius:50%;font-size:16px}
+.db{overflow-y:auto;padding:14px 26px 30px;flex:1}
+.hl{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:6px 0 14px}
+.hl div{background:var(--red-soft);border-radius:10px;padding:10px 12px;font-size:12.5px;font-weight:700;color:var(--red-deep)}
+details{border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden}
+summary{list-style:none;padding:12px 16px;font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:8px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"›";margin-left:auto;font-size:18px;color:var(--mute);transition:.2s}
+details[open] summary:after{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid var(--line);background:#FCFBFA}
+.dc{padding:14px 18px 16px;font-size:13.5px;color:#333;line-height:1.75;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+.dc a{color:var(--red);text-decoration:underline;word-break:break-all}
+.dc code{background:#F1EFEC;border-radius:4px;padding:0 4px;font-size:12.5px;font-family:Consolas,monospace}
+.dc .tchips{white-space:normal;margin-bottom:10px}
+.dc .raw{border-top:1px dashed var(--line);padding-top:10px;color:#444}
+.dmeta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--mute);margin-top:6px}
+.dtools{display:flex;justify-content:flex-end;margin:4px 0 2px}
+.dtools button{border:0;background:none;color:var(--sub);font-size:12px;font-weight:700;padding:4px 2px}
+.dtools button:hover{color:var(--red)}
+.dc.q{background:#FDF3F5;color:#6B0022}
+.dc.l{background:#F1F5F2;color:#2E4B3E}
+.tchips{display:flex;flex-wrap:wrap;gap:6px}
+.tchips span{background:var(--bg);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;color:#444}
+.dnav{display:flex;justify-content:space-between;gap:10px;padding:14px 26px;border-top:1px solid var(--line)}
+.dnav button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px;font-size:13px;font-weight:600}
+.dnav button:hover{border-color:var(--red);color:var(--red)}
+.dnav button:disabled{opacity:.35;pointer-events:none}
+
+/* ===== Responsive ===== */
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){
+  .side{transform:translateX(-100%);box-shadow:10px 0 40px rgba(0,0,0,.12)}
+  .side.on{transform:none}
+  main{margin-left:0;padding:0 18px 50px}
+  .topbar{display:flex;align-items:center;gap:10px;position:sticky;top:0;background:var(--bg);padding:14px 0;z-index:20}
+  .topbar button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 11px;font-size:15px}
+  .topbar b{font-size:15px}
+  .hero{padding:24px 22px}.hero h2{font-size:22px}
+}
+@media print{.side,.topbar,.dim,.drawer{display:none}main{margin:0}}
+</style>
+</head>
+<body>
+<aside class="side" id="side">
+  <div class="brand"><img class="logo" src="https://www.lg.co.kr/images/common/img_ci_logo_pc2.jpg" alt="LG" onerror="this.style.display='none'"><h1>AX Star 2026</h1></div>
+  <div class="search"><span>🔍</span><input id="q" type="search" placeholder="과제명·출품자·기술 검색"></div>
+  <nav class="nav" id="nav"></nav>
+  <div class="side-foot">수상 등급은 AX Pro 평가와 AI 평가를 종합한 공식 발표 기준입니다.</div>
+</aside>
+<main>
+  <div class="topbar"><button onclick="toggleSide()">☰</button><b>AX Star 2026</b></div>
+  <div id="view"></div>
+</main>
+<div class="dim" id="dim" onclick="closeAll()"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dh" id="dh"></div>
+  <div class="db" id="db"></div>
+  <div class="dnav"><button id="prev">‹ 이전 과제</button><button id="next">다음 과제 ›</button></div>
+</aside>
+<script>
+const CATS=[{"id": "agent", "icon": "🤖", "name": "AI Agent · 지능형 검증", "desc": "AI가 판독·검증·분석을 대신 수행하는 에이전트형 과제"}, {"id": "dash", "icon": "📊", "name": "대시보드 · 데이터 시각화", "desc": "흩어진 데이터를 한 화면에서 보고 판단하게 만든 과제"}, {"id": "auto", "icon": "⚙️", "name": "반복업무 자동화", "desc": "매일·매주 반복되던 집계·가공·배포를 자동화한 과제"}, {"id": "field", "icon": "🛠️", "name": "현장 · 서비스 운영혁신", "desc": "서비스 현장과 고객 접점의 일하는 방식을 바꾼 과제"}, {"id": "hr", "icon": "🎓", "name": "인사 · 교육 · 콘텐츠", "desc": "채용·교육·사내 콘텐츠 제작 방식을 바꾼 과제"}];
+const AIS=["Copilot", "Claude", "GPT", "Gemini", "로컬·오픈소스 모델"];
+const ITEMS=[
+{
+"award": "best",
+"cat": "agent",
+"title": "MCS 안전기준 검증 AI Agent",
+"fullTitle": "MCS 안전기준 검증 AI Agent (서비스센터 현장 사진을 Vision AI가 직접 판독하는 100% 전수 자동검증)",
+"who": "이배성 책임",
+"team": "한국안전보건팀",
+"dept": "고객가치혁신부문 한국안전보건팀",
+"ai": [
+"로컬·오픈소스 모델"
+],
+"summary": "현장 사진 안전점검을 샘플링에서 100% 전수검사로 전환",
+"kpi": [
+"판독 30초 → 2.3초/건",
+"연 약 1,000시간 절감",
+"외주개발비 5억원↑ 절감"
+],
+"chips": [
+"YOLO11x",
+"Qwen3-VL-8B (VLM)",
+"RT-DETR 하이브리드 Vision AI",
+"Python",
+"Excel / React 대시보드"
+],
+"goal": "① 점검 패러다임 전환 (샘플링 → 100% 전수검사)\n\n고객 댁 내 작업은 실시간 모니터링·촬영 불가 → 작업 완료 후 수집 사진의 '사후 검증'이 유일한 점검 수단\n\n육안 검증의 물리적 한계로 샘플링 점검에 국한 → AI 분석 기반 무결점 전수 검사 환경 구축 \n /\n\n② 반복 업무 Process 효율화\n\n안전기준 검증 수작업 → 자동화 전환, 담당자는 미준수 선별 건 최종 확인에 집중\n /\n\n③ Human-in-the-Loop 의사결정 구조 확보\n\n오판 리스크 차단 위해 AI 확신 불가 건은 '확인필요' 분류 후 담당자 이관",
+"prob": "① 육안 검증 공수 과다\n일 약 600건 발생, 팀원 5인이 1인당 120건/일 분석 (총 소요 5시간, 1건당 약 30초)\n팀 전체 일 5시간이 단순 사진 대조에 소진\n / \n② 전수 점검 불가에 따른 사각지대\n시간 제약으로 샘플링 검증 한정 → 미점검 건의 안전기준 위반 미검출 상태 잔존\n / \n③ 판정 기준 일관성 미확보\n담당자별 확인 지점 상이\n사진 각도·조도·거리 편차로 담당자별·시점별 판정 결과 불일치\n / \n④ 외주 개발 시 고비용 발생\n동일 솔루션 AI 전문업체 외주 시 개발비 약 5억 이상 소요 예상 ('25년 LG전자/하이엠솔루텍 공통 솔루션 개발 의뢰 건)",
+"tools": "YOLO11x(객체 검출) + Qwen3-VL-8B(시각언어 AI) + RT-DETR(사람 검출) 하이브리드 Vision AI, Python, Excel 자동 정리 및 React 대시보드 자동 생성",
+"how": "[1] 검증 4단계 End-to-End 자동화\n - 기존 담당자 수행 4단계(점검 대상 추출 → MCS 사진 열람 → 육안 판정 → 엑셀 작성) 전 구간 AI Agent 대체\n - 담당자 역할은 AI 판정 '미준수' 건 최종 확인으로 축소\n\n[2] 2단 판독 구조 — 선별 검출 후 정밀 판독\n - 1차 : 고속 검출 AI(YOLO)가 전량 스캔 → 명확 착용 '준수' / 명확 미착용 '미준수' 즉시 확정\n - 2차 : 애매 구간만 시각언어 AI(VLM)로 확대·정밀 판독\n\n[3] 작업별 판독 방식 차별화 설계\n - 고소작업차 : 장비 영역 크롭·확대 후 정답 예시 사진 대조 판독\n - 슬링벨트 : 벨트-기둥 겹침 정도 계산 + OK/NG 예시 대조 이중 검증\n - 핸드크레인 : 의심 지점 표시 후 동일 질의 2회 반복, 결과 일치 시에만 준수 인정\n - 보호장갑 : 인물 검출 선행 후 손 디테일 유지 해상도로 판독\n\n[4] 오판 방지 구조 내재화\n - 미착용의 착용 오판(과탐지) 원천 차단 원칙 적용 → 확신 불가 건은 판정 강행 없이 '확인필요' 이관\n\n[5] 운영-학습 선순환 체계 구축\n - '미준수' 판정 사진 자동 분류·축적 → 차기 AI 학습 데이터로 활용\n - 별도 데이터 수집 공수 없이 운영 지속만으로 판정 정확도 향상\n\n[6] 판정 결과 실시간 시각화 — 별도 보고자료 작성 공수 제거\n - 판정 완료 시  웹 대시보드 자동 갱신·실행 (실행 후 즉시 열람 가능)\n - 현황 요약 / 담당 및 실별 준수 현황 / 전국 센터별 현황(카드형, 클릭 시 접수건 상세) / 일자별 추이 / 수동 검토 대상(미준수·확인필요) 목록\n - 유형·판정별 필터 및 정렬 기능 제공 → 개선 조치 대상 센터·작업 유형 즉시 식별\n - 기존 판정 결과 수기 집계 후 보고자료 작성하던 공수 제거, 담당자·관리자가 동일 화면에서 현황 공유 가",
+"quant": "① 업무 생산성 향상 : 연간 약 1,000시간 단축 (일 단축시간 4H × 연간 근무일 250일)\n    - 건당 판정 시간 : 인당 30초(육안) → 2.3초 / 일 600건 전량 약 23분 내 처리\n    - 단순 확인 시간 : 90% 이상 절감 (담당자는 AI 선별 '미준수' 건만 최종 확인)\n / \n② 외주 개발비 약 5억 이상 절감 (사내 자체 개발 내재화)",
+"qual": "① 수기 검증 사각지대 해소 : 100% 전수검사 실현\n / \n② 검증 일관성 확보 : 객관적·표준화된 안전기준 적용, 담당자별 판단 편차 제거\n / \n③ 빠른 피드백 체계 구축 : 서비스센터 신속 알림 → 현장 안전 의식 및 자발적 준수율 향상\n / \n④ 고부가가치 업무 전환 : 단순 사진 대조 → 위반 원인 분석·개선 조치 설계로 역량 집중\n / \n⑤ AI 역량 내재화 : 외부 API 없이 사내 GPU 기반 대형 시각언어 AI 운영 레퍼런스 확보\n / \n⑥ 확장성 확보 : 신규 안전기준 추가 시 판정 모듈 단위 확장 가능",
+"date": "2026-08-12"
+},
+{
+"award": "excellent",
+"cat": "hr",
+"title": "촬영 폴더 하나로 끝내는 사내 컨텐츠 제작 자동화 3종",
+"fullTitle": "촬영 폴더 하나로 끝내는 사내 컨텐츠 제작 자동화 3종",
+"who": "정석영 책임",
+"team": "한국CC&S역량개발팀",
+"dept": "고객가치혁신CC&S역량개발담당 한국CC&S역량개발팀",
+"ai": [
+"로컬·오픈소스 모델"
+],
+"summary": "편집·11개 언어 더빙·자막 디자인을 사내 로컬 AI로 무인화",
+"kpi": [
+"편집 22~35분/편",
+"더빙 0.4~8.3분/편",
+"외부 API 비용 0원"
+],
+"chips": [
+"Whisper (STT)",
+"ECAPA-TDNN 화자분리",
+"Ollama + Gemma",
+"Kokoro / MeloTTS 등 TTS",
+"FFmpeg (NVDEC/NVENC)",
+"Node.js + PostgreSQL",
+"전량 사내 로컬 구동"
+],
+"goal": "교육 영상 한 편이 나오기까지 사람이 반복하던 작업 중 창작이 아닌 것만 골라내어 서버에 넘기고, 판단이 필요한 부분만 편집자에게 남기는 것이 목표였습니다. 구체적으로 세 가지를 세웠습니다.\n\n촬영이 끝난 원본 폴더를 지정하는 것만으로 프리미어에서 바로 열리는 시퀀스·검수만 하면 되는 자막·챕터·썸네일까지 무인으로 나오게 한다.\n해외 서비스 인력 대상 다국어 컨텐츠를 성우 섭외나 외부 번역 의뢰 없이 사내에서 즉시 만들어 낸다.\n대본·음성·영상 등 사내 기술자료가 외부 API로 나가지 않는 구조 안에서 이 모두를 구현한다.",
+"prob": "영상 한 편마다 담당자가 붙어 있어야 끝나는 반복 작업이 열 가지 이상 있었고, 편수가 늘면 그만큼 그대로 되풀이됐습니다.\n\n편집 단계. 클립을 나열해 캠끼리 싱크를 맞추고, 전체를 통으로 들으며 NG·간투사·재촬영 구간을 표시하고, 자막을 처음부터 받아쓴 뒤 사물존칭·구어체를 손보고, 제품명·약어 표기를 회차마다 눈으로 맞추고, 챕터·제목·태그·요약을 따로 정리하고, 썸네일 장면을 찾아 캡처해야 했습니다.\n다국어 단계. 자막을 번역기에 돌려 문장을 다듬고, 성우를 섭외하거나 외부 TTS 서비스에 대본을 올리고, 받은 음성을 자막 큐마다 타임라인에 붙이고, 길이가 넘치는 구간을 일일이 줄이거나 늘려야 했습니다. 언어를 하나 늘릴 때마다 이 비용이 통째로 다시 들었습니다.\n자막·디자인 단계. 자막을 한 줄씩 얹어 위치·크기를 맞추고, 강조할 구간을 직접 골라 그래픽을 만들고, 챕터 진행바를 손으로 그려 애니메이션을 걸고, 배움마당 등록용 챕터 시간을 다시 옮겨 적어야 했습니다. 스타일을 바꾸려면 처음부터 다시 만드는 구조였습니다.\n공통 문제. 작업 품질이 담당자 개인 숙련도에 좌우되고, 회차 간 표기·톤이 흔들리며, 외부 TTS·번역 서비스를 쓰면 미공개 제품명과 기술 대본이 사외로 나간다는 보안 부담이 있었습니다.",
+"tools": "음성·언어 AI (전부 사내 서버 로컬 구동). Whisper medium(STT), ECAPA-TDNN 성문 임베딩(화자 분리), Ollama + Gemma 4 12B·E4B(컷 판정·챕터·교열·번역·연출 배치·비전 화면 인식). 음성 합성. Kokoro-82M, MeloTTS, Qwen3-TTS CustomVoice, VoxCPM2(언어별 표준 보이스), Chatterbox Multilingual(목소리 클로닝). 외부 경로는 타입캐스트 API 하나뿐이며 기본 꺼짐 상태입니다. 미디어 처리. FFmpeg(NVDEC/NVENC 하드웨어 가속), libass(ASS 자막 번인), JASSUB(브라우저 미리보기), NumPy 기반 자체 신호처리(에너지 포락선 상호상관 멀티캠 싱크·무음 검출·박수 편집점 감지), 자체 개발 FCP xmeml v4 XML 생성기. 애플리케이션. Node.js + Express(자동화 3종 독립 라우터), SSE 실시간 진행 스트리밍, GPU 단일 작업 락, PostgreSQL(치환 목록·용어집·목소리 프로파일·작업 이력), NAS(CIFS) 단일 저장소, Premiere Pro UXP 플러그인, PyTorch 2.11 + CUDA 12.8. 하드웨어. NVIDIA RTX 5070 Ti 16GB 단일 GPU 1대.",
+"how": "① 진입 구조 — 버튼 세 개, 입력은 폴더 하나\n컨텐츠 관리 시스템 칸반보드의 카드 상세 모달 상단에 편집 자동화·더빙&번역 자동화·자막 디자인 세 버튼을 두었습니다. 카드에 등록된 NAS 경로가 기본값으로 채워지고, 실행하면 진행 단계·로그가 SSE로 실시간 표시되며 중간 중단이 가능합니다. 세 기능 모두 원본을 수정하지 않고 결과를 새 폴더에 쌓으며(_2차·_01·_수정01 자동 번호), GPU 락으로 한 번에 한 작업만 실행합니다.\n\n② 편집 자동화 — 19단계 무인 파이프라인\n영상 정보 확인 → 멀티캠 싱크(타임코드/파형) → 노이즈 제거·음량 평탄화 → 무음 구간 분석 → Whisper STT → 성문 화자 구분 → 편집점·음량 분석 → 간투사·실수·제작대화 판정 → 재촬영 판정 → 챕터·요약·제목·태그 → 하이라이트 발췌 → 자막 교열 → 슬라이드 화면 인식 → 썸네일 → 프리미어 XML → 검수 프록시까지 한 번의 실행으로 이어집니다. 산출물은 정리음성·자막(SRT 3종)·시퀀스(XML 3종)·리포트·썸네일·검수프록시 6개 폴더로 나옵니다.\n현장에서 깨지던 지점은 각각 다르게 풀었습니다. 카메라마다 마이크가 달라 원시 파형 상관이 실패하므로 에너지 포락선을 맞춰 싱크하고, 기준 카메라가 멈춘 사이에도 다른 캠은 돌았으므로 클립 하나에 구간별 오프셋을 따로 부여하며, 강의 소재는 길이의 60% 이상이 무음이라 발화 구간만 STT에 넘겨 반복 환각을 차단하고, 성문 임베딩으로 강사와 촬영자를 분리해 촬영자의 지시·잡담이 자막과 컷 판정에 섞이지 않게 했습니다.\n\n③ 더빙 & 번역 자동화 — 시간 제약 번역과 고정 배치\n11개 언어(한·영·중·일·스페인·프랑스·포르투갈·힌디·러시아·아랍·독일)를 지원합니다. 프롬프트를 단순 번역이 아니라 \"해당 자막 큐에 주어진 발화 시간 안에 읽을 수 있는 길이\"라는 제약 조건으로 설계했고, 용어집(공통·언어별, 최대 5,000행)으로 제품명·기술용어 표기를 강제 고정했습니다. 합성 전 전처리로 러시아어·아랍어는 영문 표기를 자국 문자로 음차 변환하고(LG → элджи), 클로닝 엔진에 발음기가 없는 점을 감안해 약어를 읽는 소리대로 풀어 넘기며(USB → you ess bee), 클로닝 참조 음성은 잡음 제거 후 학습시킵니다.\n배치 설계의 핵심은 각 큐를 SRT 시작 시각에 고정해 앞 큐가 길어져도 뒤가 밀리지 않게 한 것입니다. 길이 초과 시 ① TTS 속도 재합성(무손실, 최대 1.4배) → ② atempo 미세 보정(최대 1.05배) → ③ A2 트랙 분리 + 경고 마커 순으로 처리해, 편집자는 마커가 찍힌 곳만 확인하면 됩니다.\n\n④ 자막 디자인 — AI에게 그림을 그리게 하지 않는 설계\n룩 5종(제품 분해·조립 / 이론·필기 / 예능 / 브이로그 / 쇼츠), 서체(오픈·사내 LG EI Text·LG스마트체2.0·혼합), 출력 구성(진행바·하단 자막·강조 연출), 범위(미리보기 30초·전체)만 고르면 됩니다. 최종본을 재-STT해 단어 단위로 정렬하므로 편집 컷이 들어가도 글자가 밀리지 않습니다.\n프롬프트 구조의 핵심은 LLM에 좌표를 맡기지 않는 것입니다. LLM은 \"어떤 구간을 어떤 종류로 강조할지\"만 JSON으로 출력하고, 좌표·크기·애니메이션은 스타일 팩 규칙으로 렌더러가 결정론적으로 계산합니다. 따라서 같은 입력이면 같은 결과가 나오고, AI 연출이 배치 규칙(하단 자막 대역 침범 금지 등)을 어기면 그 항목만 버리며, 모델이 실패해도 규칙 엔진 결과만으로 끝까지 진행합니다. 산출물에는 배움마당 등록용 챕터 엑셀과, .ass를 읽지 못하는 프리미어를 위한 투명 PNG + xmeml 세트가 함께 나옵니다.\n\n⑤ 공통 설계 원칙 세 가지\n원본은 그대로 둔다(결과는 항상 새 폴더에 누적). 사내에서 끝난다(STT·화자분석·LLM·TTS 전부 로컬, TTS 엔진은 HF_HUB_OFFLINE=1·TRANSFORMERS_OFFLINE=1로 외부 접속 자체를 차단). 지우지 않고 표시한다(삭제후보는 Rose 라벨, 초과 큐는 경고 마커로 남기고 최종 결정은 편집자 몫).\n\n⑥ 자원 운용\n16GB 단일 GPU에서 정밀(12.8GB)·균형(7.6GB)·빠름(9.2GB) 3티어 모델을 작업 성격에 따라 자동 선택하고, 작업 종료 시 상주 모델을 즉시 언로드합니다. 진행 출력이 끊기면 멈춘 프로세스로 보고 자동 종료하며, 내부 예외를 삼키는 STT CLI 특성을 감안해 종료 코드가 아니라 결과 파일 생성 여부로 성공을 판정합니다.",
+"quant": "편집 자동화. 하루 촬영 분량(멀티캠 2앵글·다중 클립) 22~35분, 짧은 멀티캠 세트 25분, 이론 단일 카메라 1편 0.71.6분. 완료 기록 50건. 처리 중 담당자가 붙어 있어야 하는 시간은 0분입니다.\n더빙 & 번역 자동화. 영어 번역 + 더빙 한 편 0.4~8.3분, 한국어 SRT 더빙 0.38.4분, 목소리 클로닝 더빙 0.46.8분(모델 로드 포함). 완료 기록 76건.\n자막 디자인. 미리보기 30초·짧은 소재 1.1~3.2분, 진행바·강조 연출 각각 +20~40초. 완료 기록 29건.\n다국어 확장 비용. 언어 11종을 실행 버튼 한 번으로 커버하며, 성우 섭외비·외부 번역 의뢰비·외부 TTS 계정 비용이 발생하지 않습니다.\n건당 외부 API 비용 0원. STT·LLM·TTS 전부 사내 로컬 모델이라 호출량 과금도 계정 한도도 없습니다. 편수가 늘어도 청구서가 늘지 않습니다.\n한 번 실행에 나오는 산출물 6개 폴더(자막 3종·시퀀스 3종 포함) — 종전에는 각각 별도 작업이었습니다.\n인프라. RTX 5070 Ti 16GB 1대로 3개 자동화 전부를 운영합니다.\n참고. 위 수치는 자동화 소요 시간의 실측값입니다. 동일 작업의 기존 수동 소요 시간은 기록이 남아 있지 않아 절감률을 계산하지 않았습니다. 측정 없이 추정치를 적으면 그 숫자가 근거처럼 인용되므로 비워 두었으며, 담당자별 실제 소요를 몇 건만 측정하면 절감 시간을 확정해 채울 수 있습니다.",
+"qual": "담당자의 역할이 바뀌었습니다. 나열·받아쓰기·표기 맞추기 같은 반복 노동이 사라지고, 편집자에게는 다듬고 최종 판단하는 일만 남았습니다. 실행 중에는 자리를 비울 수 있어 대기 시간이 다른 업무로 전환됩니다.\n품질이 사람에 따라 흔들리지 않습니다. 치환 목록과 용어집이 기계적으로 적용돼 회차·언어가 달라도 제품명·기술용어 표기가 동일하게 유지되고, 자막 좌표·애니메이션은 규칙으로 계산돼 같은 입력이면 같은 결과가 나옵니다. 목소리 프로파일 저장으로 회차가 바뀌어도 같은 화자 음색을 유지합니다.\n보안 부담이 구조적으로 해소됐습니다. 미공개 제품 대본·음성·영상이 외부로 나가지 않으며, TTS 엔진은 오프라인 플래그로 외부 접속 자체가 봉쇄돼 있습니다. 유일한 외부 경로도 기본 꺼짐이며 사용자가 직접 켜야만 동작합니다.\n되돌릴 수 있는 자동화입니다. 원본은 수정하지 않고 결과만 번호를 붙여 누적하므로, 룩을 바꿔 다시 뽑아도 이전 결과가 남습니다. AI는 지우지 않고 표시만 하므로 자동화 오판이 곧바로 손실로 이어지지 않습니다.\n부분 실패가 전체 실패가 되지 않습니다. AI 연출이 실패해도 규칙 엔진 결과로 끝까지 진행하고, 일괄 재출력 중 한 건이 실패해도 나머지는 계속됩니다. 실험 기능은 파일 단위로 떼어낼 수 있어 운영 파이프라인을 위협하지 않습니다.\n후속 업무까지 이어집니다. 뽑은 챕터가 배움마당 등록용 엑셀로 함께 저장돼 옮겨 적는 작업이 없어졌고, 프리미어 UXP 플러그인으로 편집 도구 안에서 같은 기능을 부를 수 있습니다.\n확장 가능한 자산이 됐습니다. 언어 추가·룩 추가가 설정 수준의 작업이 되어, 해외 서비스 인력 대상 교육 컨텐츠를 필요할 때 즉시 다국어로 낼 수 있는 체계를 확보했습니다.",
+"date": "2026-08-11"
+},
+{
+"award": "excellent",
+"cat": "agent",
+"title": "VoC One Click Consulting System",
+"fullTitle": "VoC One Click Consulting System",
+"who": "곽선영 책임",
+"team": "고객가치전략팀",
+"dept": "고객가치혁신담당/ 고객가치전략팀",
+"ai": [
+"Copilot",
+"GPT"
+],
+"summary": "VoC 입력만으로 개선과제·담당조직·실행방안까지 자동 도출",
+"kpi": [
+"컨설팅비 연 3.6억원 절감(1개국)",
+"3개국 확대 시 10억원↑"
+],
+"chips": [
+"Copilot",
+"GPT / LLM 맥락 해석",
+"규칙 기반 분류",
+"우선순위 매트릭스",
+"Vanilla JS (서버 없는 단일 HTML)"
+],
+"goal": "자판기에 동전을 넣으면 원하는 제품이 나오듯이, 온라인 VoC뿐 아니라 Call VoC, ThinQ, SVC까지 통합 VoC 빅데이터 분석을 통해, 고객의 소리(VoC)를 입력하기만 하면 '무엇을 개선해야 하는지(개선과제)', '누가 해야 하는지(담당조직)', '어떻게 해야 하는지(실행방안)'까지 완결된 솔루션이 한 번에 나오는 시스템을 만들고자 하였습니다. 복잡한 분석 과정이나 전문 지식 없이도 누구나 고객의 목소리만 넣으면 실행 가능한 컨설팅 결과를 즉시 받아볼 수 있도록 한다는 것이 본 시스템의 기획 의도이며, 이를 'One Click Consulting'이라는 이름에 담았습니다. \n\n출품명은 이러한 가치를 다음과 같이 함축하고 있습니다.\n\n통합 고객 관점(통합 VoC): 온라인 VoC, Call VoC, ThinQ, SVC 등 분산된 채널을 하나로 통합 분석하여, 채널별 단편 분석의 한계를 넘어 고객을 하나의 관점에서 이해합니다. \n고객 중심(VoC): 모든 분석의 출발점이 고객의 목소리임을 명확히 하여, 고객 경험에 기반한 솔루션임을 강조합니다. \n압도적 사용 경험(One Click): 복잡한 절차 없이 한 번의 클릭으로 분석부터 실행 방안 도출까지 완결되는 직관적 경험을 나타냅니다. \n분석을 넘어 실행까지(Consulting): 단순 분석에 그치지 않고 개선과제·담당조직·실행계획까지 제안하는 '실행형 컨설팅'임을 담았습니다. \n확장성(System / Platform): 일회성 툴이 아니라 다양한 채널과 부서로 확산 가능한 통합 플랫폼임을 시사합니다.",
+"prob": "고객의 목소리(VoC)는 온라인 VoC, 콜센터 상담 이력, 서비스 접수 이력, ThinQ 앱 데이터 등 다양한 고객 접점 채널을 통해 지속적으로 축적되고 있습니다. 각 채널은 전문 조직과 담당자가 체계적으로 관리하고 있으며, 특히 고객 안전이나 품질 관련 이슈와 같이 즉각적인 대응이 필요한 사안은 신속하고 안정적으로 처리되고 있습니다. 다만 채널별로 관리 주체가 나뉘어 있다 보니, 이를 하나로 모아 통합적인 관점에서 분석할 경우 더 큰 가치를 얻을 수 있는 여지가 있었습니다. \n또한 장기간 축적되는 방대한 고객 의견을 빅데이터 관점에서 분석하여 트렌드를 파악하고 중장기 개선 과제로 발굴·관리하는 영역은, 단발성 대응에 비해 상대적으로 더 강화할 수 있는 부분이었습니다. 어떤 문제를 우선적으로 다룰지, 어떤 조직이 개선을 담당할지, 실제로 어떤 과업(Task)을 수행할지에 대한 판단도 담당자의 경험과 전문성에 기반해 이루어지고 있어, 이를 표준화된 체계로 뒷받침한다면 분석의 일관성과 효율성을 한층 높일 수 있을 것으로 보았습니다. \n아울러 데이터 정리, 유형 분류, 원인 분석, 보고서 작성 등의 과정에 적지 않은 시간과 노력이 투입되고 있어, 이 과정을 자동화한다면 담당자가 보다 가치 있는 판단과 실행에 집중할 수 있는 환경을 만들 수 있다고 판단하였습니다. 나아가 기존 분석이 고객 불만과 현상을 파악하는 데 주로 초점이 맞춰져 있었던 만큼, 분석 결과를 실제 개선 활동으로 연결하는 흐름을 강화한다면 VoC의 활용 가치를 크게 높일 수 있는 기회가 있었습니다. \n이에 본 과제는 분산된 고객의 목소리를 통합 분석하고, 고객의 표현 속에 담긴 맥락과 숨겨진 니즈를 해석하여 실질적인 개선 기회를 발굴함과 동시에, 개선 주체와 실행 과제까지 자연스럽게 연결할 수 있는 체계를 구축하고자 하였습니다.",
+"tools": "Copilot , GPT / LLM 맥락해석, 규칙 기반 분류 , 우선순위 매트릭스, 실행 자동화(mailto기반 메일발송), localStorage(담당자 이메일 저장), 카테고리 사전 JSON Export/Import(전사·부서 재사용)",
+"how": "[현재기준]\n서버 없이 동작하는 단일 HTML 기반 클라이언트 사이드 애플리케이션 (Vanilla JavaScript)\n엑셀 처리: SheetJS(xlsx) 라이브러리 — 멀티채널 VoC 엑셀 업로드 파싱\nLLM 맥락 해석(사전 분석): 고객 문장별 '표면 요구 vs 실제 니즈'를 LLM으로 해석하여 데이터셋으로 내장\n규칙 기반 분류 엔진: 24개 카테고리 키워드 사전(defs) + 문장 단위 분해(정규식) \n감성·영향·리스크 분석: 정규식 사전(EMOTION_LEXICON, IMPACT_LEXICON, CRITICAL_RULES) 기반 1~5단계 자동 스코어링 \n정량 스코어링 수식: Problem Score = 감성 × 영향 × 빈도 가중 \n우선순위 매트릭스: 중요도 × 구현난이도 2×2 사분면 자동 배치 \n실행 자동화: 담당부서 자동 매핑 → WBS 자동 생성 → ROI 시뮬레이션 → mailto 기반 담당조직 이메일 발송\n데이터 저장/확산: localStorage(담당자 이메일 저장), 카테고리 사전 JSON Export/Import(전사·부서 재사용) \n\n[확장성 (API 연동 시 발전 방향)]\n현재 시스템은 서버·API 의존 없이 단일 HTML만으로 완결적으로 동작하도록 설계되어 있어 보안·배포·재현성 측면의 강점을 갖습니다. 동시에 각 처리 단계(입력 → 분류 → 스코어링 → 실행 연계)가 모듈화되어 있어, 외부 API 연동만으로 다음과 같은 확장이 가능합니다. \n첫째, LLM API 실시간 연동 시 현재의 내장 해석 데이터셋을 실시간 추론으로 대체하여, 사전에 정의되지 않은 신규 VoC까지 즉시 맥락 분석하고 표면 요구와 실제 니즈를 자동 도출할 수 있습니다. 이 경우 규칙 엔진은 LLM 결과를 검증·표준화하는 안전장치로 병행 활용되어 정확성과 일관성을 동시에 확보할 수 있습니다.\n둘째, 사내 데이터 API 연동을 통해 현재 카테고리별 기준값으로 추정하는 발생건수·손실비용을 실제 A/S 이력, 품질 데이터, CRM 지표와 연계하여 실측 기반 ROI 시뮬레이션으로 고도화할 수 있습니다. \n셋째, 현재 mailto 기반의 담당부서 공유 기능을 Microsoft Graph·그룹웨어·업무관리 시스템 API와 연동하면, 개선과제를 담당 조직에 자동 배정하고 실행 현황을 추적·관리하는 실행 관리(Task Tracking) 체계로 확장할 수 있습니다. \n\n결과적으로 본 시스템은 지금은 독립 실행형으로 제한적으로 즉시 활용 가능하면서도, API 연동을 통해 전사 VoC 통합 분석·실행 관리 플랫폼으로 성장할 수 있는 확장 구조를 갖추고 있습니다. \n\n링크를 엣지에 붙여넣기 해야 레포트 내용이 잘 보입니다. (그냥 링크 클릭시 데이터 안보임)",
+"quant": "① 외부 컨설팅 비용 절감 (직접 재무 효과)\n기존에는 VoC 기반 고객 문제 분석 및 개선과제 도출을 위해 외부 전문 컨설팅을 활용해 왔으며, 이에 1개 국가 기준 연간 약 3.6억 원의 비용이 소요되었습니다. ('26년 기준) 본 시스템은 이러한 분석·컨설팅 과정을 내재화하여 동일한 수준의 결과를 자체적으로 도출할 수 있도록 함으로써, 연간 약 3.6억 원의 컨설팅 비용을 직접 절감할 수 있으며, 연간 3개 국가로 확대 적용 시 약 10억 원 이상의 비용 절감 효과를 기대할 수 있습니다. 이는 단일 조직의 업무 효율화를 넘어 글로벌 단위로 확산 가능한 재무 성과입니다. \n\n② 개선과제 실행에 따른 성과 (별도 추가 성과)\n위 컨설팅 비용 절감 효과는 분석·컨설팅 업무 자체를 대체함으로써 발생하는 성과이며, 본 시스템이 도출한 개선과제를 실제로 실행함으로써 창출되는 고객 경험 개선 및 손실 비용 절감 효과는 이와 별도로 추가 발생합니다. \n본 시스템은 각 개선과제에 대해 연간 발생건수 × 건당 손실비용 × 개선율을 기반으로 절감효과를 산출하고, 투자비 대비 회수기간과 ROI를 자동으로 시뮬레이션합니다. 따라서 과제 실행 규모와 범위에 따라 컨설팅 비용 절감 효과에 더해 실질적인 개선 성과가 누적적으로 확대되는 구조입니다. \n\n③ 업무 효율화 성과\n온라인 VoC, Call VoC, ThinQ, SVC 등 다양한 채널의 데이터를 하나의 체계로 통합 분석하는 기반을 구축하였습니다. \n문장 분해 → 분류 → 감성·영향 산정 → 우선순위 선정 → 개선과제·WBS·ROI 도출 → 담당부서 공유까지 전 과정을 One-Click으로 자동화하여, 분석에 소요되던 시간과 노력을 대폭 절감하였습니다.",
+"qual": "① 컨설팅 업무 자체를 AI로 재설계하다\n단순 업무 자동화를 넘어, 사람에 의존하던 고객가치 혁신 컨설팅 업무 자체를 AI 기반으로 표준화·재설계하였습니다. 누가 하더라도 일관된 컨설팅 품질을 확보하고, AI를 혁신의 협업 파트너로 활용하는 새로운 업무 모델을 제시하였습니다. \n\n②고객의 언어를 '실행'으로 바꾸다\n단순히 고객 불만을 분류하는 데 그치지 않고, 표현 이면의 숨겨진 니즈까지 해석하여 실행 가능한 개선과제로 전환하였습니다. \"고객이 무엇을 말했는가\"를 넘어 \"고객이 진짜 원하는 것이 무엇인가\"에 답하는 시스템을 구현하였습니다. \n\n③흩어진 목소리를 하나의 고객 관점으로\n온라인 VoC, Call VoC, ThinQ, SVC로 분산되어 있던 고객의 목소리를 하나로 통합하여, 채널을 넘나드는 반복적·구조적 문제를 발견할 수 있는 통합 고객 이해 기반을 마련하였습니다.",
+"date": "2026-08-14"
+},
+{
+"award": "excellent",
+"cat": "hr",
+"title": "파견사원 채용 프로세스 재설계 (실무역량검사 Tool 구축)",
+"fullTitle": "파견사원 채용 프로세스 재설계 (실무역량검사 Tool 구축)",
+"who": "신주영 선임",
+"team": "고객가치혁신인사노경팀",
+"dept": "고객가치혁신HR담당 고객가치혁신인사노경팀",
+"ai": [
+"Claude"
+],
+"summary": "학력·경력 대신 실무역량으로 선발하는 30문항 검사 도구 구축",
+"kpi": [
+"'26.5.18부터 실전 적용",
+"결과 처리 100% 자동화"
+],
+"chips": [
+"Claude (제작)",
+"Netlify (배포)",
+"Cloudflare (중계)",
+"Notion (DB)"
+],
+"goal": "- 학력·경력·면접 스킬이 아닌 실제 업무수행 역량 기반 선발 \n- 면접 이전 지원자의 강·약점을 파악하여 맞춤형 면접 구현 \n- 무경력 우수인재 발굴 및 채용 Pool 확대 \n- 채용 실패 및 재채용 리스크 감소",
+"prob": "■ 검증 Tool 미지원\n- 정규 직원 채용시에는 LG way fit test(인적성검사)도 보나, 파견사원 채용시에는 이러한 Tool이 본사에서 지원되지 않음. \n- 오로지 팀장들이 면접에서 이력서 내용과 대화만을 기반으로 지원자를 판단하여 업무적격성을 판단할 수밖에 없는 문제 존재\n- 또한 LG way fit test 쓸 수 있다 하더라도, 4년제 대학 신입 채용 목적으로 개발된 Tool이기 때문에 비서/사무보조 포지션에 지원하는 인원들에게는 난이도 및 기대이익 면에서 적합하지 않은 검사도구.\n\n■ 이력서 허위기재 Validation 어려움\n- 정규 직원 (경력) 채용시에는 레퍼런스 체크를 통하여 실제 해당 인원이 비서/사무보조 일을 이전 회사에서 수행하였는지 확인 가능하였으나 파견사원 채용시에는 오로지 이력서의 내용만을 갖고 검증할 수밖에 없는 한계 존재\n\n■ 무경력자에 대한 입사허들\n- 파견사원의 경우 젊은 인재들이 지원하는데, 단순 아르바이트 경력만 있는 경우 해당 인원이 우리 회사에서 일을 잘 할 것인지 불확실한 경우가 존재. \n- 면접관들은 경력직을 선호. 그러나, 실제 경력직임에도 불구하고 역량 있는 무경력자보다도 업무성과가 떨어지는 상황 존재하며, 낮은 급여 특성상 경력직 후보 Pool 자체가 제한적.",
+"tools": "Claude(제작), Netlify(배포), Cloudflare(중계),Notion(데이터베이스)",
+"how": "■ 개요\n- 기존 \"이력서 → 면접\" 중심 프로세스를 \"실무역량검사 → 결과분석 → 맞춤형 면접\" 프로세스로 재설계\n- 비서 시험 문제, 워드프로세스 문제, 컴퓨터활용능력 문제들을 차용하여 설계 (30문항, 4지선다, 소요시간 18분)\n- 대면 면접인 경우에는 면접대기실에서 20분 정도 테스트를 응시하고 그 결과를 바탕으로 대면 면접 진행\n- 비대면 면접(Webex인 경우)에는 정해진 시간(면접이 09:00 면접인 경우, 08:30에 메일 송부)에 메일로 전달되는 링크를 확인하고 접속하여 응시 후 대면면접 진행\n- 응시결과는 개인 휴대폰에 저장되는 것이 아니라, Notion api key 및 Cloudflare 중계를 통해 파견담당자 Notion에 정리\n- 실제 모의 테스트 진행하여 난이도 조정 (응시자 평균 60~70점)\n\n■ 실행과제 & 해결 \n○ Mission1. 파견사원 비서/사무직군 채용을 직군별로 어떻게 다르게 설정해야할지\n○ Action1.  \n① 공통 ☞ 비즈니스 영어, 이메일 맞춤법, 엑셀 워드 기초, 비즈니스 매너, 사무정보 관리, 데이터 검토, 표데이터 추론. ② 사무보조 직군 ☞ 데이터 검토 심화, 엑셀 심화 과정 문제 추가. ③ 비서 직군 ☞ 의전, 일정 관리, 출장 일정에 대한 문제 추가\n\n○ Mission2. 단순한 4지선다 응답으로는 지원자의 역량을 충분히 확인할 수 없을 것 같으므로 어떤 평가방법 설계가 필요할지\n○ Action2.\n단순히 상식을 묻는 문제가 아니라, 제시문을 주고 해당 상황에서 적합한 행동을 고르게 하는 문제 추가. (예시 : “상사가 다음 일정으로 해외 출장 후 귀국 다음 날 국내 협약식 참석이 잡혀 있다. 비서로서 가장 부적절한 대응은?”)\n\n○ Mission 3. Webex 면접 등 외부 공간에서 컨닝 등 부정행위 하는 인원을 어떻게 검증할 것인가\n○ Action 3. 응시 도중 시험 화면을 벗어나 다른 창으로 넘어가게 되는 경우 (탭 전환, 포커스 이탈) 이 횟수를 모두 기록. 그 횟수가 일정 이상 카운트를 넘는 경우 ‘의심’이라는 태그를 붙여 면접 및 최종 선발시 고려.\n\n○ Mission 4. 개인정보 수집에 대한 컴플라이언스 이슈를 어떻게 해소할 것인가\n○ Action 4. \n수집항목을 응시 코드와 응시 일자로만 제한하여 개인 식별 정보를 일절 수집하지 않음.최초 시험 화면에 접속하여 응시할 때 응시자는 본 검사의 점수가 채용 전형 판단 자료에 활용됨을 동의하고 실시하게끔 세팅함.",
+"quant": "① 2026.05.18 이후 비서·사무보조 직군 채용 전형에 실무역량검사 Tool 실제 적용 중 \n② 이력서·면접 외 추가 정량평가 체계 구축  (지원자당 30개 문항, 18분 분량의 실무역량 데이터 확보) \n③ 응시자 행동 데이터(탭 전환·포커스 이탈) 수집을 통한 정직성 (Intergrity) 지표 확보\n④ 응시결과 수집·채점·저장 프로세스 100% 자동화",
+"qual": "※ 개발한 Tool이 실제 채용 의사결정에 활용되어 사무보조 직군은 검사결과를 주요 선발기준으로 정착 ※\n\n① 학력·경력 중심 채용에서 실무역량 중심 채용으로 전환 \n② 면접 전 지원자의 강·약점 파악을 통한 맞춤형 심층면접 구현 \n③ 말솜씨보다 실제 업무수행능력을 검증할 수 있는 공정한 선발 환경 조성 \n④ 무경력 우수인재 발굴 기반 마련 및 채용 Pool 확대 \n⑤ 부정행위자 필터링 등 검증체계 구축",
+"date": "2026-08-19"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "챗지피티 활용한 대시보드 자동완성",
+"fullTitle": "챗지피티 활용한 대시보드 자동완성",
+"who": "심용석 명장",
+"team": "서남부담당 서부역량강화팀",
+"dept": "서남부담당 서부역량강화팀",
+"ai": [
+"Copilot"
+],
+"summary": "로우데이터만 넣으면 NPS 대시보드가 자동 완성되는 패키지",
+"kpi": [
+"주간 NPS 실적 5분 내 확인"
+],
+"chips": [
+"Copilot 365",
+"Python"
+],
+"goal": "매번 엑셀 자료를 다운로드 받아 가공하고 자료를 만드는 번거로움을 줄이고, 보다 직관적이고 시인성 좋은 자료, 기왕이면 해결방안까지 만들어주는 자료를 만들고 싶었습니다.\n그리고 대시보드를 만들어도 매번 자료가 틀어져서 나올까 노심초사 하는 것이 불편하여 로우데이터를 넣으면 자동으로 자료를 완성해주는 구조를 만들고 싶었습니다.",
+"prob": "자료는 항상 내가 알고 이는 엑셀 활용 능력에 따라 질이 달라졌고 초기 기틀을 마련하는데 많은 시간을 쏟아 부어야 하며 데이터가 쌓일수록 엑셀이 버벅여 많은 시간을 소요하는 문제점이 있었습니다. html활용 대시보드를 만든다 하더라도 매주 새로운 데이터를 넣을때마다 다른 무언가 바뀌진 않을까 결과물을 매번 확인해야하는 번거로움이 있었습니다.",
+"tools": "코파일럿365, 파이썬",
+"how": "파이썬을 활용한 자동실행 구조입니다. \n애초 대시보드 프롬프트를 만들때 마지막에 이를 자동 실행할 수 있는 파이썬 프롬프트도 함께 요청하여 패키징 파일로 제공을 받을 수 있었습니다.\n해서 패키징 안에는 템플릿 html과 파이썬 실행 파일 그리고 인풋과 아웃풋 폴더가 들어 있고\n실제로 인풋 폴더에 로우데이터를 넣고 파이썬 실행파일을 실행하면 아웃풋 폴더에 결과물이 들어가는 것을 확인했습니다.\n추가로 지피티가 추천해준 lists 앱을 통해 센터 관리자가 직접 과제를 확인하고 진행정도를 표시할 수 있는 부분도 업데이트 중에 있습니다.\n\n결과물확인시 링크 들어가서 다운로드 받아 실행해야 정상 화면을 확인할 수 있습니다. 매주 피드백을 받아 계속해서 업데이트하고 있습니다.",
+"quant": "매주 월요일 5분이면 지금까지에 누적NPS 실적과 월별 실적, 그리고 최근 일주일 주간 실적까지 한번에 확인이 되고 개인별 실적까지 확인이 되어 코칭에 용이하게 사용할 수 있습니다.\n추가된 Lists 앱 기능을 통해 센터관리자 직접 관제를 확인하고 진행도를 작성할 수 있는 부분 업데이트 중에 있습니다.(현재 과제 확인만 가능한 수준)",
+"qual": "이전 데이터를 쌓아가던때는 그 과정을 기록하는 것도 일이었지만 지금은 때마다 전체 데이터를 받아서 한번에 제작하여 그런 번거로움과 엑셀을 구동하는 시간을 절약할 수 있었음\n모든 데이터가 한눈에 들어오도록 해서 코칭 계획을 세우는데 더 유리 함",
+"date": "2026-08-04"
+},
+{
+"award": null,
+"cat": "auto",
+"title": "Copilot 활용 Daily DataMart 집계 및 Teams & Outlook 발송 자동화",
+"fullTitle": "Copilot 활용 Daily DataMart 집계 및 Teams & Outlook 발송 자동화",
+"who": "강철균 책임",
+"team": "한국CC&S담당 가전케어사업팀",
+"dept": "한국CC&S담당 가전케어사업팀",
+"ai": [
+"Copilot"
+],
+"summary": "다운로드→집계→메일·Teams 공유까지 매일 아침 업무 무인화",
+"kpi": [
+"연 125시간 절감(개인)",
+"100명 확산 시 연 2.5억원 추정"
+],
+"chips": [
+"Copilot",
+"Python",
+"Excel VBA",
+"OneDrive",
+"Power Automate",
+"Windows 스케줄러"
+],
+"goal": "팀 업무 중 Daily 출근 후 반복 작업에 대한 부분을 자동화하여 업무 효율화\n(Daily 업무 : DataMart 전일 rawdata 다운로드 → 엑셀 집계 파일 전일 Data 적재 → 별도 수식 작업 → 지역담당&유관부서 Mail 발송 → 지역 담당자 Team 실적 파일 공유)",
+"prob": "매일 단순 반복 작업(평균 30분) 및 담당자 휴가&부재라도 아침 실적 집계 공유 후 개인 일정 진행",
+"tools": "Copilot, Python, Excel VBA, OneDrive, PowerAutomate, Windows 스케줄러",
+"how": "① LGEP RPA 계정 로그인 : Python + Windows 스케줄러\n② DataMart 전일 실적 다운로드 : Python\n③ Excel 집계&가공 : Excel VBA\n④ OneDrive 파일 최신화 : Python\n⑤ Teams 자동 알림 : PowerAutomate\n⑥ Outlook 자동 메일 발송 : PowerAutomate",
+"quant": "1. 연간 절감 시간 (시간적 이득)\n  - 일간 절감: 30분 (0.5시간)\n  - 월간 절감 (평균 근무일 22일 기준): 0.5시간 * 22일 = 11시간\n  - 연간 절감 (평균 근무일 250일 기준): 0.5시간 * 250일 = 125시간\n2. 동일한 30분짜리 반복 업무를 조직 전체가 공유하고 있을 때의 확장 효과 (시간당 인건비 20,000원 기준)\n  - 5명 팀: 연간 625시간 절감 / 약 1,250만원 절감\n  - 20명 부서: 연간 2,500시간 절감 / 약 5,000만원 절감\n  - 100명 조직: 연간 12,500시간 절감 / 약 2억 5,000만원 절감",
+"qual": "- 수작업 시 발생하는 Human Error 0% 제로화 가능\n- 집계 중 발생하는 다양한 Interrupt 제거 (긴급호출, 회의 등)\n- 출근 전 자동화 메일링으로 지역담당 및 유관부서 출근 후 즉시 업무 가능\n- 반복 업무 제거 시간 다른 업무 활용 가능",
+"date": "2026-08-05"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "AI 기반 글로벌 서비스 강사 역량진단 및 다국어 음성 대시보드 구축",
+"fullTitle": "AI 기반 글로벌 서비스 강사 역량진단 및 다국어 음성 대시보드 구축",
+"who": "장창순 기정(명장)",
+"team": "해외CC&S역량개발팀",
+"dept": "고객가치혁신CC&S역량개발담당/해외CC&S역량개발팀",
+"ai": [
+"Copilot",
+"GPT"
+],
+"summary": "포르투갈어 서술형 평가 채점·분석을 자동화한 3개 국어 대시보드",
+"kpi": [
+"분석·보고 4~5일 → 약 2일"
+],
+"chips": [
+"Microsoft Copilot",
+"ChatGPT",
+"HTML/CSS/JS",
+"데이터 시각화",
+"다국어 번역",
+"TTS"
+],
+"goal": "해외 서비스 강사 역량평가를 진행하면서 가장 큰 어려움은 시험 자체가 아니라 시험 이후의 결과 분석 및 보고 과정이었습니다.\n\n브라질 현지에서 강사들이 시험을 완료하면 포르투갈어로 작성된 답안지를 한국어로 번역해야 하며, 번역된 답안에 대한 검토와 채점, 정답 비교, 결과 분석까지 모두 수행해야 합니다.\n\n예를 들어 강사 7명이 냉장고 및 세탁기 평가를 응시할 경우 수십 장의 서술형 답안지를 검토해야 하며, 동시에 당일 진행된 교육 실습 결과 및 실습평가 내용까지 종합하여 본사와 법인에 Daily Report를 제출해야 합니다.\n\n기존에는 교육 종료 후에도 호텔에서 늦은 시간까지 시험지 번역, 채점, 검증, Excel 집계, PPT 작성 작업을 반복해야 했으며, 최종 결과 보고까지 약 4~5일이 소요되었습니다.\n\n이에 AI(Copilot, ChatGPT)를 활용하여 답안 분석, 결과 정리, 시각화 대시보드 생성, 다국어 번역 및 보고 자료 작성 프로세스를 구축하였습니다.\n\n그 결과 평가 종료 후 약 2일 이내에 최종 결과 분석과 보고가 가능해졌으며, 본사는 보다 빠르게 현장의 역량 수준을 확인할 수 있게 되었고, 현지 법인과 강사들은 다음날 바로 개인별 평가 결과와 개선 방향을 확인할 수 있게 되었습니다.\n\n또한 한국어, 영어, 포르투갈어 기반의 다국어 대시보드와 음성 기반 설명 기능을 통해 본사, 법인, 강사가 동일한 정보를 한 번에 이해할 수 있도록 하여 글로벌 교육 운영 효율성을 크게 향상시키고자 하였습니다.",
+"prob": "해외 현지에서 강사 교육 및 역량평가를 진행할 경우 시험 실시 자체보다 평가 결과를 분석하고 보고하는 과정에 매우 많은 시간과 인력이 소요되었습니다.\n\n브라질 강사 평가의 경우 현지 강사들이 포르투갈어로 작성한 서술형 답안지를 번역해야 하며, 번역된 답안에 대한 채점, 정답 검증, 결과 분석을 반복적으로 수행해야 합니다. 또한 교육 종료 후에는 당일 교육 운영 결과, 실습 평가 결과, 제품 실습 내용 등을 종합하여 본사 및 법인에 공유할 보고 자료를 작성해야 합니다.\n\n실제 현장에서는 교육 종료 후에도 업무가 끝나지 않습니다. 당일 교육 정리, 실습 평가 결과 취합, 시험지 번역, 채점, 검증, Excel 집계, PPT 보고자료 작성까지 수행해야 하므로 늦은 밤까지 또는 밤을 새워 업무를 진행하는 경우가 많았습니다.\n\n특히 강사 7명이 평가를 응시할 경우 다수의 서술형 답안지를 일일이 검토해야 하며, 동일한 내용을 본사 보고용, 법인 공유용, 강사 피드백용으로 각각 정리해야 하는 비효율이 존재하였습니다.\n\n또한 결과가 정리되어 보고되기까지 수일이 소요되어 본사에서는 현장의 역량 수준을 즉시 파악하기 어려웠고, 현지 강사 역시 본인의 강점과 부족한 부분을 빠르게 확인하기 어려운 문제가 있었습니다.\n\n이러한 과정을 개선하기 위해 AI를 활용한 번역, 채점 분석, 결과 시각화 및 다국어 대시보드 체계를 구축하였으며, 이를 통해 보고 자료 작성 시간과 분석 시간을 대폭 단축하고 본사, 법인, 강사가 동일한 정보를 신속하게 공유할 수 있는 환경을 마련하고자 하였습니다.",
+"tools": "Microsoft Copilot ChatGPT HTML CSS JavaScript Data Visualization Prompt Engineering 다국어 번역 AI 음성 기반 AI 활용",
+"how": "해외 서비스 강사 기술역량 사전평가(브라질)를 대상으로 AI 기반 다국어 분석 대시보드를 구축하였습니다.\n\n냉장고 6문항, 세탁기 6문항 총 12문항의 서술형 평가 결과를 기반으로 AI를 활용하여 채점 검증, 정답 비교, 개인별 점수 분석, 제품별 역량 분석, 취약 항목 분석, 교육 우선순위 도출을 자동화하였습니다.\n\n대시보드에는 냉장고 및 세탁기 평균 점수, 모듈별 평균 점수, 개인별 순위, 개인별 강점 및 취약점, 추천 교육 과정 등을 시각화하여 본사와 현지 법인이 동일한 데이터를 한눈에 확인할 수 있도록 구성하였습니다.\n\n특히 단순 보고서 형태가 아닌 한국어, 영어, 브라질 포르투갈어 3개 언어를 지원하는 다국어 전환 기능을 적용하여 국가별 사용자가 원하는 언어를 선택하면 모든 평가 결과와 분석 내용이 해당 언어로 즉시 변환되도록 구현하였습니다.\n\n또한 음성 언어(Text-To-Speech) 기능을 추가하여 화면의 주요 평가 결과와 분석 내용을 음성으로 청취할 수 있도록 구현하였습니다. 사용자는 대시보드 내용을 직접 읽지 않더라도 음성 안내를 통해 주요 내용을 빠르게 이해할 수 있으며, 언어가 다른 사용자에게도 동일한 정보를 효과적으로 전달할 수 있습니다.\n\n기존에는 시험지 번역, 채점 검증, 결과 집계, PPT 보고서 작성, 현지 법인 공유 자료 생성 등을 수작업으로 수행해야 했으나, AI 기반 분석 및 시각화 체계를 통해 평가 종료 후 신속하게 결과를 제공할 수 있게 되었습니다.\n\n또한 대시보드 링크를 이메일로 공유하면 본사 경영진, 운영 담당자, 현지 법인 관리자, 현지 강사가 동일한 보고서를 실시간으로 확인할 수 있으며, 개인별 결과와 교육 필요 분야를 즉시 확인할 수 있어 빠른 의사결정과 교육 실행이 가능하게 되었습니다.\n\n결과적으로 AI를 활용하여 평가 데이터 분석, 다국어 번역, 시각화, 음성 설명, 보고 자료 생성을 하나의 플랫폼으로 통합함으로써 글로벌 강사 역량평가 프로세스의 효율성과 활용도를 크게 향상시켰습니다.",
+"quant": "브라질 서비스 강사 7명을 대상으로 냉장고(6문항), 세탁기(6문항) 총 12문항의 서술형 기술역량 평가를 실시하였으며, AI(Copilot, Gemini Enterprise, ChatGPT)를 활용하여 번역, 채점 검증, 결과 분석, 시각화 대시보드 구축을 수행하였습니다.\n\n기존에는 현지에서 평가 종료 후 포르투갈어 답안지 번역, 채점, 정답 검증, Excel 집계, PPT 보고서 작성, 법인 공유자료 제작까지 모두 수작업으로 진행하였으며, 교육 종료 후에도 호텔에서 늦은 밤까지 또는 밤을 새워 업무를 수행해야 했습니다.\n\n특히 현지 교육 운영과 실습 평가를 병행하면서 다수의 서술형 답안지를 검토하고, 당일 교육 결과를 본사와 법인에 Daily Report로 공유해야 하는 과정에 많은 시간이 소요되었습니다.\n\nAI 기반 분석 프로세스와 다국어 대시보드를 구축한 결과, 기존 4~5일이 소요되던 결과 분석 및 보고 업무를 약 2일 수준으로 단축하였으며, 평가 종료 다음날 개인별 결과와 교육 필요 항목을 현지 강사에게 즉시 제공할 수 있게 되었습니다.\n\n또한 보고자료를 한국어, 영어, 포르투갈어로 자동 제공하고 음성 안내 기능까지 적용하여 본사, 법인, 현지 강사가 동일한 정보를 빠르게 이해하고 활용할 수 있는 환경을 구축하였습니다.",
+"qual": "단순히 시험 결과를 취합하는 수준을 넘어 글로벌 서비스 강사의 실제 기술역량을 데이터 기반으로 진단하고 시각화하는 체계를 구축하였습니다.\n\n특히 언어가 다른 본사, 법인, 현지 강사가 하나의 대시보드를 통해 동일한 내용을 확인할 수 있도록 한국어, 영어, 포르투갈어 자동 번역 기능과 음성 안내 기능을 적용하였습니다.\n\n이메일로 대시보드 링크만 공유하면 평가 결과, 개인별 역량 수준, 취약 분야, 추천 교육 과정까지 즉시 확인할 수 있어 보고를 받는 관리자와 현지 교육 담당자의 이해도를 크게 향상시켰습니다.\n\n기존에는 보고서를 읽고 해석해야 했던 정보를 시각화와 음성 설명으로 제공함으로써 의사결정 속도를 높였으며, 평가 결과를 기반으로 신속한 교육 실행이 가능해졌습니다.\n\n또한 브라질 강사 역량평가를 시작으로 향후 미국, 유럽, 베트남 등 해외 법인에도 동일하게 적용 가능한 글로벌 표준 역량평가 모델의 기반을 마련하였습니다.",
+"date": "2026-08-05"
+},
+{
+"award": null,
+"cat": "hr",
+"title": "AI 코딩으로 직접 구축한 신입사원 실습일지 디지털 관리 플랫폼",
+"fullTitle": "AI 코딩으로 직접 구축한 신입사원 실습일지 디지털 관리 플랫폼",
+"who": "전규남 기장",
+"team": "한국CC&S역량개발팀",
+"dept": "고객가치혁신CC&S역량개발담당 > 한국CC&S역량개발팀",
+"ai": [
+"Claude",
+"로컬·오픈소스 모델"
+],
+"summary": "종이 OJT 실습일지를 모바일 작성·실시간 결재 시스템으로 전환",
+"kpi": [
+"종이 월 1,470장 → 0장",
+"작성 1~2일 → 1분"
+],
+"chips": [
+"Claude Code",
+"Python / Flask",
+"SQLite",
+"Whisper (STT)",
+"Firebase Cloud Messaging",
+"WebSocket"
+],
+"goal": "신입사원(SM)의 OJT 실습일지를 종이 수기 작성·대면 확인 방식에서 벗어나, 현장에서 모바일로 즉시 작성하고 멘토·관리자가 실시간으로 확인·결재·집계할 수 있는 디지털 시스템으로 전환한다. 개발 인력 없이 현업이 직접 AI 코딩 도구를 활용해 실제 운영 가능한 사내 웹 시스템을 구축하는 것을 목표로 했다.",
+"prob": "- 실습일지·주간/월간 커리큘럼 체크를 모두 종이에 수기 작성 → 현장(수리 실습장)에서 손이 더러운 상태로 작성이 어렵고 누락되는 경우 있음\n- 멘토·관리자가 일지를 직접 대면 수거·확인·서명 후 OJT 일지 직접 사진 촬영하여 아카데미 담당자에게 메일 전송 후 평가\n- 취합·집계가 수작업 → 멘토링/코칭수리/단독수리 건수, 진행률 통계를 담당자가 일일이 세어 정리\n- 종이 분실·훼손 위험, 이력 추적 및 재활용 불가",
+"tools": "Claude (Claude Code) 기반 AI 페어코딩, Python / Flask, Flask-SQLAlchemy(SQLite), OpenAI Whisper(large-v3) 음성인식 STT, Firebase Cloud Messaging(푸시), gunicorn/gevent, WebSocket",
+"how": "- 음성 입력(STT): 브라우저 녹음 → 서버 Whisper(한국어) 인식 → 증상·점검내역 등 텍스트 자동 입력 (손을 못 쓰는 현장에서 말로 기록)\n- 손그림(스케치)·전자서명, 멘토 결재 사인\n- 자동 집계 대시보드: 멘토링/코칭수리/단독수리 건수, 주간·월간 진행률을 실시간 자동 계산 + 엑셀 다운로드\n- FCM 푸시 알림으로 작성·결재 요청 전달",
+"quant": "- 종이 사용량: 월 평균 약 1,470장 → 0장 (전량 디지털화) · 산출: 신입사원 70명 × 월 평균 평일 약 21일 × 일일일지 1장 ≈ 1,470장/월 (연 약 17,500장)\n- 일지 작성·제출 시간: 1~2일 → 1분]으로 단축\n- 담당자 OJT일지 사진을 직접 일일이·집계 업무: 주 4시간 → 대시보드 자동 집계로 거의 0에 근접\n- 확인·결재 리드타임: [예: 평균 1~2일 → 당일]",
+"qual": "- 현장에서 음성으로 즉시 기록 → 작성 누락·오류 감소, 기록 품질 향상\n- 멘토-멘티-관리자 간 결재·피드백이 실시간화되어 분산 센터에서도 동일한 관리 수준 확보\n- 이력이 DB에 축적되어 검색·재활용·통계 분석 가능\n- 개발 인력 없이 현업이 AI로 실사용 시스템을 구축한 사례 → 타 업무로 확산 가능한 AX 성공 모델",
+"date": "2026-08-05"
+},
+{
+"award": null,
+"cat": "agent",
+"title": "Claude를 활용하여 SW 변경점 요약 정리 및 취약점 분석",
+"fullTitle": "Claude 를 활용하여 SW 변경점 요약 정리 및 취약점 분석",
+"who": "장흥진 책임",
+"team": "디지털커뮤니티팀",
+"dept": "고객가치혁신담당/디지털커뮤니티팀",
+"ai": [
+"Claude"
+],
+"summary": "협력사 커밋 변경점을 자연어로 요약하고 취약점 리포트 자동 생성",
+"kpi": [
+"주간 커밋 확인 1시간 → 20분"
+],
+"chips": [
+"Claude",
+"Claude Code",
+"Cowork"
+],
+"goal": "협력업체 개발자들의 업무 진행사항 파악및 소스코드의 취약점 분석하여, 일정 챙기는 업무 뿐만아니라  SW결과물 완성도를 올릴 수 있는 방안을 찾고자 함.",
+"prob": "기존에는 github에서 여러개의 소스저장소에 직접 접근하여, 업로드한 커밋을 하나하나 선택해서 소스코드를 보며 변경점을 확인했으며, 코드리뷰를 매번 진행하는 것은 불가능하여 취약점 찾는 것은 불가능한 수준이었습니다.",
+"tools": "Claude를 활용했으며, Claude code 와  cowork 를 활용함",
+"how": "클라우드  PC에 소스 폴더를 생성하고, git command 를 이용하여 소스코드 다운로드 진행함.\n클로드에서 매주 월요일 해당 폴더에 진입하여 'git pull' command 를 실행하고 변경된 commit 에 대해서 주요 내용을 자연어로 설명해줌\n이후 해당 commit의 취약점을 분석해서 알려줌\n모든 과정을 마크다운 문서로 작성해서 저장함\n\n생성시 사용한 지침만 확인이 가능합니다. 해당 내용은 아래와 같습니다. \n-----------------------------------------------------------------------------------\n---\nname: lifezip-weekly-git-review\ndescription: 매주 월요일 8:10 lifezip 3개 저장소 git pull, 지난 1주일 커밋 요약, 코드 보안 리뷰\n---\n\n이 작업은 LG전자 라이프집(lifezip) 3개 저장소의 주간 git 업데이트 점검 및 코드 보안 리뷰를 생성하는 자동화 작업이다. 매주 월요일 아침에 실행된다. 이전 실행 기억은 없으므로 이 지침만으로 처음부터 끝까지 완결해야 한다.\n\n## 배경/주의사항 (반드시 읽을 것 - 이전 실행에서 얻은 교훈)\n- D 드라이브(02.lifezip_work)는 FUSE 마운트라 git 명령 직접 실행 시 lock 문제 발생 가능 → git 작업은 항상 /tmp에 새로 clone\n- 리포트는 D 드라이브에 \"새 파일\"로만 저장(기존 파일 덮어쓰기/삭제 금지)\n- semgrep 등 외부 네트워크 정적분석 툴은 타임아웃 → grep 휴리스틱 사용\n- bash timeout_ms 최대 45000(45초), clone은 --depth 500 (타임아웃 시 --depth 50 재시도)\n- 먼저 `echo ok`로 샌드박스 정상 기동 확인, 실패 시 2~3회만 재시도 후 중단\n\n## 대상 저장소 (GitHub 2개 repo, 브랜치만 다름)\n| 로컬 폴더명 | GitHub 저장소 | 브랜치 |\n|---|---|---|\n| lge-lifezip-front-web | amoeba-yth/lge-lifezip-front-web | main |\n| lifezip-front-web-myzip2 | amoeba-yth/lge-lifezip-front-web | feat/myzip2.0 |\n| lifezip-myzip2 | amoeba-yth/lge-lifezip-server | feat/myzip2.0 |\n\nGitHub 인증용 read-only classic PAT (repo scope, 이 작업 전용 발급): (보안상 비공개)\n→ clone 목적 외 사용 금지, 401/403 시 작업 중단하고 \"PAT 만료/재발급 필요\" 안내\n\n## 1단계: /tmp에 clone (bash)\n각 저장소 --depth 500 clone, 실패 시 해당 저장소만 건너뛰고 나머지 진행\n\n## 2단계: 저장소별 최근 7일 커밋 추출\n`git log --since=\"7 days ago\"` (hash/작성자/일시/메시지 + 변경파일). 커밋 0건이면 3단계 생략\n\n## 3단계: 보안 리뷰 (grep 휴리스틱)\n- dangerouslySetInnerHTML/innerHTML/eval/new Function → XSS\n- 하드코딩 시크릿/키/토큰 패턴\n- window.location/location.replace → 오픈 리다이렉트\n- console.log 중 민감정보 로깅\n- auth/middleware/guard/session 관련 파일 변경 시 직접 검토\n- package.json 신규 의존성, 외부 API 호출 추가 여부\n\n## 4단계: 통합 리포트 작성 (한글 Markdown, 3개 저장소 통합 1개 파일)\n전체 요약 + 저장소별 커밋 요약 + 보안 리뷰 결과 + \"정적 패턴 매칭 기반, CVE 스캔 미포함\" 안내\n\n## 5단계: 저장\nD 드라이브 마운트 경로 탐색 → `weekly-git-review-reports/{YYYY-MM-DD}_weekly-git-review.md`로 새 파일 저장 (둘 다 실패 시 outputs 폴더)\n\n## 6단계: 공유\npresent_files로 리포트 공유, 채팅엔 저장소별 커밋 수·보안 이슈 유무/심각도만 간결히 전달\n\n## 7단계\n이메일 발송은 시도하지 않음",
+"quant": "주당 커밋 확인시간 1시간 -> 20분",
+"qual": "취약점 분석후 가이드 제공도 가능하여 SW 개발 프로세스가 갖춰지지 않은 조직(코드 리뷰 및 체계적인 검증조직 부재)에서 활용성이 높을 것으로 예상",
+"date": "2026-08-07"
+},
+{
+"award": null,
+"cat": "agent",
+"title": "월세/교통비 증빙 검증 시스템",
+"fullTitle": "월세/교통비 증빙 검증 시스템",
+"who": "주현태 책임",
+"team": "업무혁신팀",
+"dept": "경영관리담당 업무혁신팀",
+"ai": [
+"Claude",
+"Gemini"
+],
+"summary": "장기파견자 증빙의 중복·반환·계좌 오류를 AI가 자동 탐지",
+"kpi": [
+"건당 4분 → 1분 (75%↓)"
+],
+"chips": [
+"Claude",
+"Gemini",
+"Python",
+"Gemini API"
+],
+"goal": "장기파견 임직원의 월세·교통비 증빙을 담당자가 한 장씩 눈으로 확인하던 방식에서 불필요한 시간을 줄이고자 하였습니다.",
+"prob": "최종 결재자는 월250건 X 4분  = 1000분 소요\n장기파견 임직원은 월세, 자차 운행, 통행료, 기차·버스 이용 내역 등 다양한 증빙자료를 Excel에 첨부하여 제출하고 있습니다. \n담당자는 제출된 증빙 이미지와 기준 데이터를 건별로 육안 검증해야 하며, 인원 및 증빙 건수 증가에 따라 검증 시간이 크게 증가하고 있습니다. \n또한 수작업 검증 과정에서 오확인 및 누락 위험이 존재하며, 하이패스 영수증 공급가액 오인, 동일 영수증 중복 제출, 반환 영수증 미감지 등의 반복적인 오류가 발생하고 있습니다.",
+"tools": "Claude, Gemini, Python, Gemini API",
+"how": "1. 프롬프트 구조 / 시스템 아키텍처\n2. 메뉴얼",
+"quant": "최종결재자는 월250건 X 4분  = 1000분 소요 → 월250건 X 1분 = 250분으로 75% 단축",
+"qual": "1. 이미지를 한 장씩 열어 육안으로 숫자를 확인 해소\n2. 동일 영수증의 중복 판단\n3. 반환·취소 영수증을 정상 영수증으로 처리 검증\n4. 월세 계좌번호 확인 오류",
+"date": "2026-08-07"
+},
+{
+"award": null,
+"cat": "field",
+"title": "GPT5.6을 이용한 트롬세탁기 체크리스트",
+"fullTitle": "GPT5.6을 이용한 트롬세탁기 체크리스트",
+"who": "홍성길",
+"team": "CC&S기술솔루션팀",
+"dept": "고객가치혁신CC&S역량개발담당 > CC&S기술솔루션팀",
+"ai": [
+"GPT"
+],
+"summary": "재서비스 방지를 위한 에러·누수·진동 필수 점검 체크리스트",
+"kpi": [
+"해외 PILOT 적용 예정"
+],
+"chips": [
+"GPT"
+],
+"goal": "집을 나올 때 가스 밸브 잠그는걸 잊는 것처럼 세탁기 재 서비스를 줄이고자 필수 체크리스트를 활용하여 놓치기 쉬운 부분을 체크 하면서 확인 할 수 있게 하여 리크레임 감소에 목표를 두고 만들게 되었습니다",
+"prob": "기본 점검 가이드 필수 확인사항에 대한 부재",
+"tools": "GPT",
+"how": "재서비스 기본 체크 항목에 대해 잊고 수리를 해서 기본 체크리스트를 만들려고해\n상단SC앱 에러,누수,진동,핫 이슈 구분좌로 SC앱은 공통 첫번째 그 이후는 1.전면2. 상측3. 후면을 구분을 두고 각각 3개의 이미지가 들어가서 불량 이미지를 보고 체크하도록 한다\n이미지는 시각화 하기 좋게 확대가 가능 하도록 만들고 이미지는 데이터가 많아 ASSET에 각 이름을 부여해 업로드 하면 해당 이미지가 내가 원하는 곳에 보여 지게 한다\n\n첫번째 화면은 SC앱은 링크를 걸어서 다운을 받을 수 있게 하고,에러 값을 입력하게 하고 그옆 에러를 확인할 수 있는 싸이트와 연동되게 한다\n공틍으로 최종 확인을 하기위해  수평,하네스,누수확인 기본적인 부분을 다시 확인하게 예,아니오로 체크하게 하고 각각의 체크 항목은 리포트를 발행하게 해서 어떤 부분을 체크했는지 알 수 있게 한다\n누수/진동 옆에 HOT이슈는 현재 이슈가 되고 있는 기술정보 내용도 각각 3가지로 진동,누수 기술정보를 요약 해서 이미지를 싫어서 넣게 해줘",
+"quant": "해외 반영으로 PILOT 예정",
+"qual": "예상 목표 (재 서비스 감소 및 목표 달성 효과에 기여)",
+"date": "2026-08-10"
+},
+{
+"award": null,
+"cat": "agent",
+"title": "온라인 서비스 접수 경쟁성 무인 조사 Agent",
+"fullTitle": "온라인 서비스 접수 경쟁성 무인 조사 Agent",
+"who": "임태훈 선임",
+"team": "한국CC&S네트워크운영팀",
+"dept": "한국CC&S네트워크운영팀",
+"ai": [
+"Claude",
+"GPT",
+"Gemini"
+],
+"summary": "자사·경쟁사 온라인 접수 현황 조사를 무인화하고 대시보드화",
+"kpi": [
+"연 최대 2,288만원 효율화",
+"리포트 일 2시간 → 30분"
+],
+"chips": [
+"Claude",
+"GPT",
+"Gemini",
+"Python (Selenium)"
+],
+"goal": "자사/경쟁사 서비스 접수 홈페이지에서 사람(파견인원 3명)이 반복 조사하는 업무에 대한 무인화를 통한 인건비 절감 및 비수기 조사 운영 확대",
+"prob": "매년 성수기 3개월 동안 파견인원 3명 운영함에 따라 비용(지급 수수료) 지속 발생 중이며, Daily로 경쟁사 온라인 접수 가능일 반복 조사에 따른 휴먼 에러 및 취합/현황정리까지 수작업 시간 소요",
+"tools": "Claude, GPT, Gemini(바이브 코딩 및 대시보드 제작), Python",
+"how": "[요약]\n셀레늄 기반의 Xpath 탐색 및 정형화된 조사 구조 반복\n- 크롬/엣지 우클릭 → 클릭하고 싶은 버튼에 대한 Xpath 저장 → AI에 Xpath 순서대로 업로드하여 조사 방법 프롬프트 제공\n- 자사, 경쟁사 UX/UI가 달라 시스템 아키텍쳐 상이 (LGver, SSver 분리)\n- exe.파일화 하여 조사 설정 및 서비스 접수 홈페이지 로그인까지만 수동으로 진행 → 그 후 조사 실행 버튼 클릭 시 자동 조사\n\n[조사 순서]\n1. 제품군 선택, 2. 증상/세부증상 선택, 3. 설치 환경 선택, 4. 제품 구입일시 선택, 5. 주소 선택 (지역별 조사 필요하여 주소지 변경 지속), 6. 개인정보 동의, 출장비 징구 동의, 7. 접수가능일 조회, 8. Excel data로 저장 (csv) → 설정된 조사 영역이 전부 완료될 때 까지 저장 후 다음 조사 (타 제품/타 지역 조사 반복), 9. 해당 Excel Data 기반 자동 대시보드化\n\n[상세 프롬프트]\n\"셀레늄 기반으로 웹페이지에서 자동으로 요소를 선택하여 가장 빠른 출장 접수 가능일이 언제인지 조사하여 엑셀로 리포트 해주는 파이썬 코드를 만들고 싶어. 각 요소별 Xpath는 Xpath_LG.csv, Xpath는 Xpath_SS.csv를 참조하고, 도로명 주소는 address_list.csv의 street 칼럼에 있는 항목을 기준으로 조사해주면 돼.\"\n[설명]\n- 응용프로그램 UX/UI는 유첨 파이썬 코드에 있는 UX/UI를 참고해\n- 초기 설정 화면에서 제품군 선택은 (전 제품, RAC, SAC, 냉장고, 세탁기, TV)로 하고, 전 제품 선택시 RAC부터 순차적으로 전 제품을 조사하는 것으로 설정해줘.\n- 지역선택은 address_list.csv 기반으로 city칼럼은 시/도, county칼럼은 군/구까지만 표시해주고 선택된 시/도, 군/구의 street칼럼의 도로명주소를 조사하는 것으로 설정해줘.\n- 설정 완료 후 조사 시작 버튼을 누르면 https://www.lge.co.kr/support/service-engineer-reservation가 크롬으로 자동 실행되게 해줘\n- 수동으로 로그인을 수행할거고, 실행 혹은 Enter버튼을 누르면 Xpath_LG.csv에 있는 순서대로 Xpath를 따라 조사 수행해주면 돼.\n- 첫 조사라면 가장 먼저 수행해야하는 것은 제품 정보 직접 입력 탭 클릭 (xpath: //*[@id=\"tabs-prod\"]/ul/li[2]/a\n- 그 후 제품군 선택 //*[@id=\"modelSelectBox\"]/div[1]/button 후에 그 제품에 해당하는 Xpath를 따라 조사 진행해줘. \n- RAC는 에어컨/환기의 2in1에어컨, SAC는 에어컨/환기의 가정용 천장형 에어컨, 냉장고는 냉장고/김치냉장고의 양문형 냉장고, 세탁기는 세탁기/건조기/의류관리기의 드럼세탁기, TV는 TV/프로젝터의 올레드 TV를 조사해줘\n- 제품군과 제품명 선택, 세부 제품 선택은 Xpath_LG.csv에서 제품구분 A칼럼을 기준으로 맵핑해주면 되고, 위부터 아래까지 순서대로 Xpath 따라서 입력해주고 마지막에 예약가능일자를 조회해서 예약일자 시간을 복사해서 저장해뒀다가 엑셀 파일로 저장하는 개념이야.\n- 냉장고는 설치 형태를 조사하지 않게 해줘\n- 전 제품을 선택했다면, 한 제품에 대해 설정된 지역 내 모든 도로명 주소를 조사할때까지 주소선택의 주소찾기부터 예약일자 및 시간 조사까지 loop를 돌리고, 해당 지역 내 모든 도로명 주소를 조사했다면, 다른 제품 선택 (xpath: //*[@id=\"stepArea\"]/div[1]/div/div[2]/button)을 클릭하여 다음 제품으로 넘어가서 조사해줘. \n- 전 제품으로 설정 시 조사 순서는 RAC -> SAC -> 냉장고 -> 세탁기 -> TV 순으로 해줘.\n- 조사된 결과값은 D:\\download 폴더에 \"lg_service_dates_제품구분.csv\"파일로 저장해줘.",
+"quant": "1. 연간 최대 23백만원 비용 효율화 가능 (파견인원 3명 인건비: 인당 월 2,542,500원 × 3명 × 3개월 = 22,882,500원)\n2. 비수기 (9~5월)에도 무인 운영하여 연간 효과 확대 가능\n3. 성수기 온라인 접수 경쟁성 조사 결과 리포트 작업 시간 단축: 日 2시간 → 30분(데이터 검증/코딩 보완만 진행)",
+"qual": "1. 조사 결과의 일관성 확보 가능\n2. 경쟁사 무인 채널(홈페이지) 변경 사항 Daily 모니터링 가능",
+"date": "2026-08-10"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "AI 활용하여 LGSC 사용율 대시보드 구축",
+"fullTitle": "AI활용하여 LGSC 사용율 대시보드 구축",
+"who": "이요한 명장",
+"team": "CC&S기술솔루션팀",
+"dept": "CC&S 기술솔루션팀",
+"ai": [
+"Copilot"
+],
+"summary": "300만 행 엑셀을 경량화해 국내·해외 LGSC 실적을 원클릭 리포트화",
+"kpi": [
+"국내 집계 2시간 → 30분",
+"해외 법인별 20분 단축"
+],
+"chips": [
+"Copilot",
+"HTML5/CSS3/JS",
+"Web Worker",
+"SheetJS",
+"MapLibre GL JS"
+],
+"goal": "업무 공수 절감: 국내/해외 LGSC 실적 집계 및 리포트 추출 프로세스 자동화로 리드타임 단축\n데이터 활용성 제고: HTML 기반 직관적인 모니터링 환경 제공 및 손쉬운 RAW 데이터 공유\n다차원 리포트 지원: 제품별, 지역별(국내/해외), 주요 지표별 맞춤형 리포트 원클릭 추출",
+"prob": "시스템 과부하 및 처리 지연: 300만 행 이상의 대용량 엑셀 데이터(RAW) 누적으로 인해 일/주간 데이터 취합 및 수식 계산 시 막대한 대기 시간 발생\n비효율적인 수작업 반복: 실적 취합 후에도 다수의 보고 양식에 맞춰 매번 데이터를 분리 및 재가공해야 하는 구조적 비효율 존재",
+"tools": "Copilot(Opus, GTP5.6)",
+"how": "■ 활용 기술\nHTML5, CSS3, Vanilla JavaScript\nWeb Worker, Streams API, DecompressionStream\nExcel XLSX ZIP/XML 직접 파싱\nJSON 기반 사전 전처리 및 고속 조회\nSVG 기반 차트\nCanvas 기반 KPI·차트·표 이미지 출력\nMapLibre GL JS 및 GeoJSON\nSheetJS 또는 자체 XLSX 출력 로직\nSHA-256 기반 데이터 무결성 검증\n브라우저 기반 Excel 및 JSON 생성\n로컬 서버 기반 무설치 웹 애플리케이션\n로컬 서버 기반 동일 폴더 데이터 로딩\n\n■ 프롬프트 구조\n목적 및 사용자 정의\nRAW 데이터 구조와 집계 규칙\n조직 계층 및 매핑 규칙\nKPI 산식\n화면 구성과 UX/UI 조건\n성능 및 보안 조건\n검증 기준\n단계별 수정 및 회귀 방지 지시\n\n■ 시스템 아키텍처\nRAW Excel\n관리자 전처리 HTML\nWeb Worker 파싱 및 집계\n경량 JSON 생성\n사용자용 대시보드 HTML\n조직/기간/제품 필터\nKPI/차트/지도/표 렌더링\nExcel 및 HTML 결과 내보내기\n\n■ 핵심적용내용\n신규 대시보드는 기존 엑셀 기반의 RAW 데이터를 학습하여 계산 로직을 구현하였으며, 사용자 친화성을 위해 화면 UI는 기존 실적 데이터 양식을 그대로 승계하였습니다. 특히 300만 행 이상의 대용량 엑셀 RAW 데이터를 전처리(HTML)하여 JSON 포맷으로 경량화하는 아키텍처를 도입했습니다. 실제 사용자는 변환된 가벼운 JSON 데이터만 로드하게 되므로, 방대한 데이터를 취급함에도 불구하고 수식 계산 지연이나 시스템 부하 없이 쾌적한 실적 조회가 가능합니다.\n\n[국내(한국) 운영 기능: 일일 실적 관리 효율화]\n매일 진행되는 국내 실적 공유 업무의 편의성을 극대화하기 위해 데이터 화면 캡처, 전체 데이터 HTML 다운로드 및 전송, 엑셀(Excel) 내보내기 기능을 탑재했습니다.\n지표 항목은 현장의 혼선을 방지하고자 기존 센터 안내 양식과 동일하게 적용했습니다. 상세 조회 기능으로는 전체 및 전 제품 사용 현황, 참여율을 비롯하여 주요 핵심 진단 항목(냉장고 종합진단, 건조기 블랙박스, TV 종합진단, RAC/SAC 에어컨) 실적을 제공하며, 조직 계층별(담당, 지역, 권역, 센터, SM)로 세분화된 맞춤형 조회가 가능하도록 구현하였습니다.\n\n[해외 운영 기능: 주간 실적 및 법인 맞춤 지원]\n매주 이루어지는 글로벌 실적 공유를 위해 원클릭 캡처 기능을 적용하였으며, 현장에서 빈번하게 발생하는 법인별 RAW 데이터 제공 요청에 신속히 대응할 수 있도록 조건별(대상 건, 사용 건, 사용자) RAW 데이터 엑셀 추출 기능을 신설했습니다. 또한, 본사 실적 보고 시 필수적인 '법인별 실적' 및 '제품 커버리지(Coverage)' 지표를 대시보드 상에서 즉시 집계하고 시각적으로 확인할 수 있도록 기능을 고도화했습니다.",
+"quant": "일일 데이터 집계 2시간 → 30분으로 감소 (한국)\n해외 RAW 데이터 공유 법인별 20분 감소 (해외)",
+"qual": "데이터 집계 오류 개선 및 보고서 리드타임 단축",
+"date": "2026-08-11"
+},
+{
+"award": null,
+"cat": "field",
+"title": "현장지원 오너드라이브 운행일지 자동화 웹앱(PWA)",
+"fullTitle": "현장지원 오너드라이브 운행일지 자동화 웹앱(PWA)",
+"who": "정석영 책임",
+"team": "한국CC&S역량개발팀",
+"dept": "고객가치혁신CC&S역량개발담당 한국CC&S역량개발팀",
+"ai": [
+"Claude"
+],
+"summary": "계기판 사진 2장으로 운행일지 작성부터 정산까지 자동화",
+"kpi": [
+"작성 6분 → 30초 (약 90%↓)",
+"1인당 연 24시간 절감"
+],
+"chips": [
+"Claude Code (Opus)",
+"단일 파일 PWA",
+"Tesseract.js OCR",
+"IndexedDB",
+"ExcelJS"
+],
+"goal": "현장지원 인력이 자차로 서비스센터를 순회할 때, 운행일지 작성·정산에 드는 수기 작업을 \"0\"으로 만드는 것.\n구체적으로는 ①현장에서 계기판 사진 2장(출발/도착)만 찍으면 운행일자·출발/도착 시각·출발/도착지·주행거리가 자동 기입되고, ②그 결과가 회사 표준 「자가 차량 운행 일지 양식」 엑셀(서식·수식 포함)로 그대로 제출 가능한 상태가 되며, ③통신이 끊기는 지하주차장·현장에서도 동작하는 것.",
+"prob": "이중 입력: 현장에서는 수첩·메모앱에 적고, 사무실 복귀 후 엑셀에 다시 옮겨 적는 2단계 작업이 반복됨.\n기억 의존에 따른 부정확성: 출발/도착 시각과 방문지 주소를 사후에 추정 기입 → 실제 운행과 불일치, 증빙력 취약.\n계기판 숫자 전사 오류: 5~6자리 숫자를 눈으로 읽어 옮기다 보니 오타 발생, \"도착 km < 출발 km\" 같은 모순이 제출 후에야 발견되어 반려·재작성.\n출발.도착지가 센터일경우 센터명 수작업 기입",
+"tools": "AI 개발: Claude Code(Claude Opus) — 요구정의·아키텍처 설계·전체 코드 구현·예외 시나리오 보완·반복 리팩터링(버전 260805_8까지 반복 개선). 프론트엔드: 단일 파일 PWA(index.html, 약 2,050라인) + manifest.json + Service Worker(오프라인 캐시, 네트워크 우선/캐시 폴백). 이미지·인식: EXIF-js(촬영일시·GPS·Orientation 추출), Cropper.js(주행거리 영역만 잘라내기), Tesseract.js 5.x OCR(그레이스케일→이진화→어두운 배경 자동 반전 전처리, 숫자 화이트리스트, SPARSE_TEXT_OSD로 기울기 자동 보정, 워커 재사용). 위치·주소: 자체 구축 서비스센터 좌표 DB 111개소 + Haversine 거리계산(반경 500m 내 자동 센터명 치환), 미매칭 시 Kakao Local 또는 Google Geocoding 역지오코딩(사용자가 API 선택). 저장: IndexedDB(사진), localStorage(운행 표·운전자 정보·API 키), JSON 백업/복원. 산출물 생성: ExcelJS(셀 서식·병합·테두리·수식 포함 표준 양식 생성 — SheetJS 무료판은 서식 미지원이라 대체), JSZip(사진 일괄 동봉).",
+"how": "아키텍처: 서버 없는 100% 클라이언트 구조. 사진·위치·개인정보가 단말 밖으로 나가지 않고(주소 변환 시 좌표값만 외부 API로 전송), API 키도 사용자 브라우저에만 저장 → 별도 서버 구축·보안 승인·운영비 없이 배포.\n처리 파이프라인: 촬영 → EXIF Orientation 보정 → 사용자 크롭 → EXIF 촬영일시/GPS 파싱(없거나 카메라 시계 오류면 현재시각·현재위치로 폴백하고 그 사실을 사용자에게 토스트로 고지) → 좌표를 우선 \"○○서비스센터\"로 치환, 없으면 도로명 주소 → OCR로 주행거리 인식(15초 타임아웃, 실패 시 직접 입력 유도) → 표 자동 기입 → 검증(도착≥출발, 한쪽만 입력 시 저장 차단·셀 적색 표시) → 저장 시 행 잠금 + 다음 운행 행 자동 생성 → 엑셀 2시트(①표준 운행일지 양식 ②상세·사진목록) + 이미지 폴더 zip 다운로드.\n엑셀 자동화: 주행거리·누계·합계·신청금액을 값이 아니라 엑셀 수식으로 삽입(예: =H-G, =SUM($I$8:I), =VLOOKUP($E5,$M$3:$N$5,2,0), =E×H, =I/8) → 담당자가 엑셀에서 km 한 칸만 고쳐도 정산 금액까지 자동 재계산. 미입력 항목은 붉은 안내문구로 표시해 누락 방지.\n프롬프트 설계 방식: 기능 나열이 아니라 \"현장에서 실패하는 시나리오\"를 기준으로 요구를 기술하고 각각에 폴백과 사용자 고지를 강제. 예) 갤러리 사진은 위치정보가 제거되어 전달됨 / 계기판은 검은 배경에 흰 글씨 / 촬영이 기울어짐 / 지하주차장 오프라인 / iOS Safari가 7일 미방문 시 저장 데이터를 삭제 / 카메라 시계 초기화로 1970년 날짜 유입. 또한 \"왜 이렇게 구현했는지\"를 코드 주석으로 남기게 해 이후 유지보수·재프롬프트 시 맥락이 유실되지 않도록 함.\n운영 편의: version.json 기반 신버전 자동 감지·안내, 서비스워커 캐시 버전 관리, OS별(iOS/Android) 맞춤 온보딩 가이드와 홈 화면 추가 안내, 모바일 카드뷰/PC 테이블뷰 반응형 및 다크모드 지원.",
+"quant": "운행 1건 작성시간 약 6분 → 약 30초, 약 90% 단축 (기존: 현장 메모 1분 + 복귀 후 엑셀 재입력·주소검색 5분 / 현행: 출발·도착 촬영 각 15초, 나머지 항목 자동 기입).\n월 20건 운행 기준 1인당 월 약 2시간, 연 24시간 절감.\n데이터 재입력 횟수 2회 → 0회 (현장 1회 촬영이 곧 최종 산출물, 복귀 후 정산 잔업 소멸).\n방문지 주소 수동 검색·입력 건당 1~2회 → 0회 (서비스센터 111개소 반경 500m 자동 인식, 표기 100% 표준화).\n엑셀 양식·수식 작성 약 30분 → 버튼 1회(수 초), 서식/합계 오류 발생 여지 제거.\n계기판 숫자 오기·정합성 오류(도착<출발, 한쪽 미입력)를 저장 단계에서 100% 차단 → 제출 후 반려·재작성 건수 0건 목표.\n서버·라이선스 비용 0원 (무서버 정적 웹앱, 앱스토어 등록 불필요, 별도 인프라 운영 인력 0명).\n개발 리드타임: Claude Code 기반 1인 개발로 기획~현장 배포판(ver 8) 완성 — 외주/사내 SI 대비 대폭 단축.",
+"qual": "증빙 신뢰도 향상: 사진 EXIF의 촬영일시·GPS에 근거한 객관적 기록으로, 사후 추정 기입이 사라져 정산 투명성과 감사 대응력이 올라감. 사진이 기록과 함께 엑셀·zip으로 묶여 나와 증빙 매칭 누락이 없음.\n현장 몰입도 개선: 지원 업무가 끝나는 시점에 정산도 함께 끝나므로, 복귀 후 행정 잔업이 사라지고 본연의 기술지원 업무에 집중 가능.\n현장 실사용성 확보: 오프라인 동작 PWA로 지하주차장·통신 음영 지역에서도 그대로 사용, 홈 화면 추가만으로 앱처럼 실행되어 설치 장벽이 없음.\n개인정보·보안 리스크 최소화: 사진과 위치가 단말을 벗어나지 않는 무서버 구조라 위치정보 수집 논란과 서버 보안 검토 부담이 근본적으로 제거됨.",
+"date": "2026-08-11"
+},
+{
+"award": null,
+"cat": "field",
+"title": "AI 기반 서비스센터 고객 경험 혁신 플랫폼",
+"fullTitle": "AI 기반 서비스센터 고객 경험 혁신 플랫폼",
+"who": "정성훈 책임",
+"team": "해외O/H개선팀",
+"dept": "경영관리담당 /해외O/H개선팀",
+"ai": [
+"Copilot"
+],
+"summary": "센터 대기시간을 자가진단·콘텐츠·퀴즈로 채우는 고객 여정 설계",
+"kpi": [
+"10단계 고객여정 프로토타입",
+"5개 제품군·20개 증상 시나리오"
+],
+"chips": [
+"Microsoft 365 Copilot",
+"HTML5/CSS3/JS",
+"LocalStorage"
+],
+"goal": "서비스센터를 방문해서 SM이 수리할 동안 대기실 의자에 앉아서 기다렸던 경험이 우리 모두 있을 겁니다.\n고객 최접점의 서비스센터에서 고객에게 수리 만족 이외에 대기시간에도 고객에게 가치를 줄 수 있는 경험을 제공하고 싶었습니다.\n\n서비스센터를 방문한 고객이 접수 후 수리를 기다리는 시간을 단순한 대기시간으로 보내지 않고, 고객 스스로 제품 상태와 기본 점검 방법을 이해하며 LG전자의 유용한 홈케어 콘텐츠를 경험할 수 있는 고객 중심의 디지털 서비스 접점으로 전환하고자 했습니다.\n\n기존 서비스센터의 고객 경험은 제품 접수와 수리 상담에 집중되어 있어, 고객이 대기하는 동안 제공받을 수 있는 정보와 참여형 콘텐츠가 상대적으로 제한적이었습니다. \n특히 처음 방문한 고객은 센터 운영정보, 수리 절차, 준비사항 등을 한눈에 파악하기 어렵고, 수리가 완료될 때까지 수동적으로 기다리는 경우가 많습니다.\n\n이번 프로젝트의 핵심 목표는 다음과 같습니다.\n\n1. 고객이 선택한 제품과 증상에 따라 기본 점검 내용을 단계적으로 제공\n\n2. 고객 상황에 맞는 공식 홈케어 콘텐츠를 즉시 추천\n\n3. 퀴즈와 포인트를 활용해 대기시간의 체감 피로도를 낮추고 자발적인 참여 유도\n\n4. 센터별 위치와 이용정보를 고객이 한눈에 확인할 수 있도록 제공\n\n5. 서비스센터 방문을 단순 수리 접점이 아닌, 제품 이해와 신뢰를 높이는 고객 경험 접점으로 확대",
+"prob": "본 과제는 직원의 반복 업무를 자동화하는 전형적인 업무 효율화 프로젝트가 아니라, 서비스 이용 과정에서 고객이 겪는 경험상의 비효율과 정보 단절을 개선하는 프로젝트입니다.\n\n기존 고객 경험에는 다음과 같은 문제가 있었습니다.\n\n- 고객이 접수를 마친 후 수리를 기다리는 시간이 별도의 고객 가치로 연결되지 못함\n\n- 제품별 기본 점검 정보와 공식 해결 콘텐츠가 여러 채널에 분산되어 있어 현장에서 즉시 찾기 어려움\n\n- 고객이 어떤 정보를 먼저 확인해야 하는지 알기 어려워 단순 검색을 반복하거나 직원에게 문의해야 함\n- 처음 방문한 고객이 센터 위치, 운영정보, 수리 가능 제품, 방문 시 확인사항 등을 한 화면에서 파악하기 어려움\n\n- 서비스센터의 디지털 콘텐츠가 공통 안내 중심으로 제공되어 고객의 제품과 증상에 맞춘 개인화 경험이 부족함\n\n- 수리 상담 외에는 고객이 직접 참여할 수 있는 콘텐츠가 적어 대기시간이 길게 느껴질 가능성이 있음\n\n이러한 문제를 해결하기 위해 고객의 제품 선택과 증상 입력을 중심으로 자가진단, 맞춤 영상, 퀴즈, 센터별 정보를 하나의 화면에 연결했습니다.\n\n이 프로젝트에서 개선하고자 한 ‘비효율’은 직원의 작업시간이 아니라, 고객이 정보를 찾고 이해하고 기다리는 과정에서 발생하는 고객 시간과 경험의 비효율입니다.",
+"tools": "Microsoft 365 Copilot, HTML5, CSS3, JavaScript, LocalStorage, 반응형 웹 기술",
+"how": "생성형 AI와의 반복적인 협업을 통해 고객 여정을 정의하고, 서비스센터 방문 고객이 모바일 또는 디지털 화면에서 직접 사용할 수 있는 인터랙티브 HTML 프로토타입을 구현했습니다.\n\n단순히 AI에게 화면 디자인을 요청한 것이 아니라, 다음과 같이 고객 경험을 중심으로 요구사항을 단계적으로 구조화했습니다.\n\n1. 고객 페인포인트 정의\n서비스센터 고객은 접수 후 대기시간 동안 수동적으로 기다리는 경우가 많음\n처음 방문한 고객은 센터 이용 절차와 필요한 정보를 한눈에 파악하기 어려움\n제품 문제 해결 콘텐츠가 분산되어 있으며 고객 상황에 맞는 콘텐츠를 바로 찾기 어려움\n서비스 대기시간이 브랜드 경험과 제품 이해로 연결되지 못함\n\n2. 고객 여정 설계\n (1) 서비스센터 선택 (2)→ 센터명·주소·날씨·센터별 이용정보 확인 (3)→ 제품 선택 (4)→ 증상 선택 (5)→ 기본 점검 질문 (6)→ 점검 결과 확인 (7)→ 관련 공식 홈케어 콘텐츠 추천 (8)→ 제품별 퀴즈 참여 (9)→ 포인트와 레벨 획득 (10)→ 방문 메모 저장 및 공식 채널 이동\n\n3. 주요 기능 구현\n\n(1)스마트 자가진단\n\n고객이 세탁기, 냉장고, 에어컨, TV, 건조기 중 하나를 선택하면 제품별 기본 점검 항목이 표시됩니다. 이후 고객이 구체적인 증상을 선택하고 확인 질문에 답하면 해당 증상에 대한 기본 점검 결과를 제공합니다.\n\n현재 구현은 생성형 AI가 자유 답변을 생성하는 방식이 아니라, 제품과 증상별로 설계된 진단 규칙에 따라 안내하는 구조입니다. 따라서 고객에게 기능을 과장하지 않도록 화면에서는 핵심 기능을 스마트 자가진단으로 명확히 표현했습니다.\n\n(2) 맞춤 1분 홈케어 Shorts\n\n선택한 제품과 증상에 따라 관련 공식 해결 콘텐츠 카드가 자동으로 변경됩니다. 각 카드에는 콘텐츠 제목, 재생시간, 공식 영상 보기 버튼을 표시하여 고객이 기다리는 동안 모바일로 손쉽게 확인할 수 있도록 구성했습니다.\n\n(3) 가전을 살려라\n\n제품 선택과 연동된 참여형 퀴즈를 구현했습니다. 제품별로 세 가지 문제가 순차적으로 제시되며, 고객이 정답을 맞히면 해설이 표시되고 다음 문제로 이동합니다. 동일 문제에 대해서는 포인트가 한 번만 적립되도록 설계하여 반복 클릭에 의한 중복 적립을 방지했습니다.\n\n(4) 홈케어 포인트 및 레벨\n\n자가진단과 퀴즈 참여 결과를 포인트로 전환하고, 누적 포인트에 따라 방문자, 홈케어 입문, 홈케어 전문가, 홈케어 마스터로 레벨이 변경되도록 구현했습니다. 포인트와 참여 이력은 브라우저의 LocalStorage에 저장됩니다.\n\n(5) 센터별 맞춤 정보\n\n서비스센터 목록에서 센터를 선택하면 메인 화면의 센터명, 주소, 날씨, 위치 특성과 이용정보가 함께 변경됩니다. 센터 주소에 포함된 정보를 활용하여 LG BEST SHOP 내 위치 여부와 층 정보 등을 구분해 표시하고, 공식 센터 상세정보 및 지도 검색으로 연결되도록 구성했습니다.\n\n(6) 반응형 웹 구현\n\n별도 앱 설치 없이 PC, 태블릿, 모바일 브라우저에서 사용할 수 있도록 반응형 HTML로 제작했습니다. 이미지와 주요 데이터는 HTML 내부에 포함해 단일 파일 형태로 실행할 수 있도록 구성했습니다.\n\n4. 생성형 AI 활용 방식\n\n생성형 AI는 다음 과정에서 활용했습니다.\n\n고객 대기 경험에 대한 문제 정의와 아이디어 확장\n고객 여정과 화면 구조 설계\nHTML, CSS, JavaScript 코드 생성\n센터 선택, 자가진단, 퀴즈, 포인트 기능 구현\n모바일 반응형 UI 개선\n기능 오류 확인과 반복 수정\n고객 관점의 문구와 콘텐츠 구성 개선\n\n생성형 AI가 최종 결과물을 일괄 생성한 것이 아니라, 실제 고객이 서비스센터에서 사용할 상황을 가정해 요구사항을 구체화하고, 결과물을 검토하며 여러 차례 수정하는 방식으로 완성도를 높였습니다.",
+"quant": "현재는 프로토타입 단계로 실제 고객 만족도나 체감 대기시간 개선 수치는 측정 전입니다.\n5개 제품군, 20개 증상별 스마트 자가진단 시나리오, 증상별 맞춤 콘텐츠 3개, 제품별 3문제씩 총 15개 퀴즈를 구현했습니다. 센터 검색, 센터별 정보, 날씨, 자가진단, 콘텐츠 추천, 포인트·레벨, 메모 저장 기능을 하나의 반응형 HTML에 통합했습니다. 현재는 프로토타입 단계이며, 향후 고객 이용률, 자가진단 완료율, 콘텐츠 클릭률, 체감 대기시간 및 만족도 변화를 실증할 예정입니다.",
+"qual": "AI를 임직원의 문서 작성이나 반복 업무 자동화에만 활용하지 않고, 실제 고객이 사용하는 서비스 경험을 기획하고 구현하는 데 적용했습니다. \n생성형 AI와의 반복적인 협업을 통해 고객 여정, 화면 구조, 자가진단 시나리오, 콘텐츠 추천, 게임화 기능을 구체화하고 직접 작동하는 프로토타입으로 완성했다는 점이 핵심 성과입니다. \n향후 실제 센터 정보와 공식 콘텐츠 데이터를 연계하면 전국 서비스센터, 출장서비스, 고객지원 웹 및 해외 서비스 접점으로 확장할 수 있습니다.\n\n서비스센터의 대기시간을 단순히 줄여야 할 불편 요소가 아니라, 고객에게 새로운 가치를 제공할 수 있는 서비스 접점으로 재정의했습니다.\n고객은 기다리는 동안 제품과 증상을 직접 선택하고, 기본 점검 방법과 맞춤형 공식 콘텐츠를 확인하며, 제품별 퀴즈에 참여할 수 있습니다. 이를 통해 수동적인 대기 경험을 제품 이해, 자가관리 학습, 참여와 보상이 결합된 고객 경험으로 전환했습니다.",
+"date": "2026-08-12"
+},
+{
+"award": null,
+"cat": "field",
+"title": "SM 이동 거리 계산기(OSRM, VWorld)",
+"fullTitle": "SM 이동 거리 계산기(OSRM, VWorld)",
+"who": "우진엽 계장",
+"team": "한국CC&S네트워크운영팀",
+"dept": "한국CC&S담당 네트워크운영팀",
+"ai": [
+"Copilot",
+"Claude"
+],
+"summary": "전국 SM 2,500명의 이동거리·시간을 자동 측정해 지능형 TT 검증",
+"kpi": [
+"측정 1개월 → 약 2시간 (99%↓)",
+"113개 센터·2,500명 전수 측정"
+],
+"chips": [
+"Copilot (Claude)",
+"Python (Flask, pandas)",
+"OSRM",
+"VWorld 지오코딩 API"
+],
+"goal": "서비스센터 SM(서비스 매니저)의 실제 방문 이동거리·이동시간을 자동 측정하여, 지능형 TT(타임테이블) 도입 효과를 전국 단위로 검증할 수 있는 데이터를 확보함.",
+"prob": "수작업 측정의 근본적 한계 : 이동거리를 수작업으로 계산하려면 접수 순서대로 SM의 방문지 좌표를 하나씩 찾아 거리를 재야 하므로, 특정 센터의 특정 SM 1~2명으로 범위를 축소한 표본 측정만 가능했음. 전국 약 2,500명 SM의 동선을 사람이 매일 측정하는 것은 불가능함.\n대표성 부족 : 소수 표본만 측정하다 보니 센터별·지역별 편차를 반영하지 못해, 지능형 TT 효과를 전국 관점에서 판단할 근거가 부족함.\n결과적으로 측정 자체가 병목이 되어 파일럿 효과를 정량화하는 데 큰 제약이 있었음.",
+"tools": "Copilot(Claude) · Python(Flask, pandas, openpyxl) · OSRM(사내 라우팅 엔진) · VWorld 지오코딩 API(국토교통부 주소기반) · HTML 대시보드",
+"how": "수작업으로는 특정 SM만 측정 가능했던 것을, 엑셀만 올리면 전국 전 센터·전 SM의 이동거리를 자동 산출하는 웹앱(Flask, 3탭)으로 구현함. 측정 정확도를 높이기 위해 아래 3차 보정을 거침.\n\n[1차] 위·경도 기반 이동거리 측정 원천 데이터의 위도·경도 좌표를 OSRM 라우팅 엔진에 입력하여, 센터·SM·일자별 방문 동선의 이동거리를 자동 계산함. → ★전국 자동 측정을 최초로 실현함★.\n\n[2차] VWorld(국토부 주소기반) 위경도 재보정 1차 결과 확인 시, 주소 미정제(미표준화)로 인한 위경도 오류로 이동거리가 비정상적으로 튀는 구간이 다수 발견됨. 이를 보정하기 위해 국토교통부가 제공하는 VWorld 지오코딩 API로 주소 기반 좌표를 재산출하여, 오류 좌표를 정정하고 거리를 재계산함(의심 구간 자동 탐지 → 재지오코딩 → OSRM 재계산).\n\n[3차] OSRM 이동시간 보정 2차 보정 후 거리는 정확해졌으나, 이동시간 확인 시 OSRM이 정체 없는 자유주행(free-flow) 시간만 계산하여 실제 체감 대비 크게 과소평가되는 문제가 확인됨(OSRM 유효속도 25~52km/h vs 서울 실측 평균 22km/h). 이에 보정시간(초) = 150 + 1.5 × OSRM시간(초) 공식(건당 고정 오버헤드 150초 + 정체배수 1.5)을 적용하여 실측 통행속도와 정합하도록 시간을 보정함.",
+"quant": "측정 소요시간 : 하루치 전국 데이터 기준 약 1개월 → 약 2시간 / \n기존 : 네이버 지도로 SM별 방문지 거리·시간을 일일이 수작업 측정 시, 하루치 전국 데이터 측정에만 약 1개월(1인 기준) 소요. / \n개선 : AI 기반 자동 측정 적용 시 하루치 측정 약 2시간으로 단축 → 약 99% 이상 시간 절감.\n\n측정 범위 : 특정 센터·특정 SM 표본 → 전국 약 113개 센터·약 2,500명 SM 자동 측정\n수작업 시에는 물리적 한계로 특정 센터의 특정 SM 1~2명만 측정 가능했으나, 자동화로 전국 113개 센터·전 SM을 동일 기준으로 측정하게 됨.\n분석 데이터 규모 : Before 20일 + After 20일(약 4주) × 113개 센터\n지능형 TT 효과 검증을 위해 적용 전(Before) 20 워킹데이 + 적용 후(After) 20 워킹데이를 전국 단위로 축적.\n이를 수작업으로 측정하면 40일치 × 약 1개월 ≈ 40개월(1인 기준) 이 필요하나, 자동화로 일 2시간 × 40일 ≈ 80시간(약 10일) 내 처리 가능함.\n측정 정확도 향상(3단계 보정) : 위경도 오류·시간 과소평가를 보정하여, 거리(접수) 데이터의 이동시간 평균 6.5분 → 12.3분(×1.88) 등 실측 통행속도(약 20km/h)와 정합함",
+"qual": "\"측정 불가 → 전국 측정 가능\"으로의 전환 : 하루치에 1개월이 걸리던 수작업으로는 애초에 전국 40일치 Before/After 비교가 불가능했으나, 자동화로 전국 113개 센터의 4주 전후 비교가 실현됨. /\n\n속인성·표본 편향 제거 : 담당자가 임의로 고른 소수 SM 표본이 아니라, 전 센터·전 SM을 동일 규칙으로 측정하여 지역·센터별 편차까지 반영한 대표성 있는 데이터를 확보함.\n\n데이터 신뢰도 확보 : 3단계 보정(위경도 → VWorld 주소기반 → 시간)으로 주소 미정제 오류와 시간 왜곡을 제거하고, 원본 값은 보존한 채 보정값을 별도 컬럼으로 추가하여 투명성·재현성을 갖춤. /\n\n의사결정 속도 향상 : 하루 2시간이면 전국 지표가 갱신되므로, 파일럿 확대 여부를 적시에 데이터로 판단할 수 있는 기반이 마련됨. /\n\n표준 도구화·확산성 : 누구나 엑셀만 올리면 동일 결과를 얻는 구조로, 타 서비스 영역·타 지표로도 이식 가능한 자동 측정 방법론을 정립함.",
+"date": "2026-08-12"
+},
+{
+"award": null,
+"cat": "auto",
+"title": "에어컨 사전점검 성수기 재접수 분석 자동화 Tool",
+"fullTitle": "에어컨 사전점검 성수기 재접수 분석 자동화 Tool",
+"who": "조유진 사원",
+"team": "한국CC&S네트워크운영팀",
+"dept": "한국CC&S담당 / 한국CC&S네트워크운영팀",
+"ai": [
+"Gemini",
+"Claude",
+"GPT"
+],
+"summary": "사전점검 후 성수기 재접수 유형을 자동 분류해 HTML 보고서로 공유",
+"kpi": [
+"매일 1시간 → 20분"
+],
+"chips": [
+"Gemini",
+"Claude",
+"ChatGPT",
+"Python 바이브코딩"
+],
+"goal": "3~5월 진행한 에어컨 사전점검 중 성수기 재접수 되는 건들에 대한 제번/증상/처리결과 등을 분석하여, 내년도 사전점검 실행 계획 반영",
+"prob": "방대한 양의 데이터(사전점검 Data + 6~8월 에어컨 접수 Data)를 수기 분석하고 수기 분석 과정에서 재접수 유형을 분류 기준이 명확하지 않아 분석자에 따라 결과값이 달라질 수 있는 문제 발생",
+"tools": "Gemini / Claude / ChatGPT를 활용하여 Python 바이브 코딩 및 대시보드 제작",
+"how": "PreCheck_Automation.exe 프로그램 구동 방식\n- PreCheck_Automation.exe 내 '2차 재접수 병합_간소화ver.py'를 실행하여 데이터 병합/분석을 진행하고,\n  분석결과로 저장된 '2차 재접수 처리건 분류_결과_완료_260813_1453.xlsx'를 바탕으로\n  'generate_dashboard.py'와 '사전점검_재접수_대시보드.html'을 구동하여 최종 대시보드 생성\n\n- 사용자는 'preCheck_Automation'만 실행하면 됨\n\n- 상세 내용\n① CS Data Mart 데이터 추출 : 크롬 브라우저를 열고 EP로그인(수동) 및 보고서 선택 후 csv 파일 다운로드 진행\n② 데이터 전처리 : 사전점검(1차) 엑셀과 CS Data Mart의 성수기 접수(2차)의 공통 Key값(모델명+제번) 생성, 값 서식(날짜, 숫자 등)을 통일\n③ 다차원 조건식 기반 2차 분류 알고리즘 :\n- 사전점검(1차) 엑셀과 CS Data Mart의 성수기 접수(2차) 데이터 결합\n- 정의한 분류 기준과 우선순위에 맞춰 현재 데이터가 조건에 부합하는지 비교  *분류기준: 수리내역 특정 텍스트(ex. 방청, 냉매 등), 사용부품코드, 처리코드, 제품명 등을 종합하여 기준 정립\n- 적합한 조건에 맞춰 사전점검 재접수 유형 분류\n- 방대한 데이터량으로 인한 속도 저하 방지를 위해 Chunk 기법(1K줄씩 묶어서 한번에 엑셀에 써냄) 활용\n④ 분석 결과에 대한 HTML 자동화 보고서 생성",
+"quant": "작업시간 단축: 매일 1시간 → 20분 내로 단축",
+"qual": "분석자에 따라 사전점검 분류 기준이 달라질 수 있는 오류를 제거했습니다.\nhtml 보고서로 분석 결과 확인이 가능해짐에 따라, 팀원/ 팀간 결과 공유 및 분석에 용이해졌습니다.",
+"date": "2026-08-13"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "클로드를 이용한 글로벌 Contact center Health index Dashboard",
+"fullTitle": "클로드를 이용한 글로벌 Contact center Health index Dashboard",
+"who": "윤보경 책임",
+"team": "Contact Center품질개선팀",
+"dept": "고객가치혁신Contact Center운영지원실 > Contact Center품질개선팀",
+"ai": [
+"Claude"
+],
+"summary": "법인별 Health Index 트렌드와 이슈 코멘트를 자동 생성",
+"kpi": [
+"월 작성 2~3일 → 10분"
+],
+"chips": [
+"Claude"
+],
+"goal": "1. 컨택센터 Health index 작성 관련 리드타임 감축 & 엑셀 기반 누적 데이터 관리 편의성 제고\n2. 각 법인 CIC 리더들의 자발적인 모니터링 강화 : ① 지역 평균 대비 법인 실적, ② 월간 트랜드 제공을 통한 가시성 제고, ③ 목표비 달성률, ④ 3개월 연속 하락에 대한 자동 알람 제공\n3. 동일 실적기반 양방향 커뮤니케이션을 통한 유기적 상황관리 (지속 개발 필요 / 고가혁내 서버 확보 필요)",
+"prob": "1. 기존 엑셀 raw-data 취합, 전처리(지역명, 지표 단위 등) 가공 및 점검에 2~3일 소요\n2. 해당월 마감 실적 및 달성률 등 제한적 정보 제공\n3. 낮은 수준의 이슈 사전 센싱",
+"tools": "Claude",
+"how": "1. 지역별, 법인별 지표별 마감 실적 트랜드 구현\n2. 지역 선택시 이슈 감지 법인에 대한 실적과 코멘트 자동 생성 및 노출\n    - 절대(누적) 목표 대비 달성률 미달, 3개월 누적 하락 트랜드 감지\n3. 각 이슈가 발생한 법인 별 reply 생성 (서버 이슈로 저장 x)\n4. 각 법인 선택시 Week point 확인을 위한 6각형 그래프 화 \n5. 우하단 HQ측에 요청할 내용 입력/저장/공유를 위한 게시판 생성",
+"quant": "월별 작성시간 2~3일 → 10분 단축",
+"qual": "각 지역거점/법인별 MBR 시간 단축\n각 지표별 Trend 및 알람 제공을 통한 자체적인 모니터링 강화 / 이슈 점검 및 개선 계획 수립 - 본사(상황실)review/support - BP 사례 전파로 연결",
+"date": "2026-08-17"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "CC&S 전략담당 One-Page 통합 주간미팅 대시보드",
+"fullTitle": "CC&S 전략담당 One-Page 통합 주간미팅 대시보드",
+"who": "이소민 선임",
+"team": "CC&S전략팀",
+"dept": "전략담당 CC&S전략팀",
+"ai": [
+"Gemini"
+],
+"summary": "4개 팀 주간보고를 하나로 통일하고 Teams 연동으로 이중보고 제거",
+"kpi": [
+"취합 시간 약 50% 단축",
+"서면보고 준비 90%↑ 절감 기대"
+],
+"chips": [
+"Gemini",
+"Node.js",
+"Microsoft Teams Webhook API"
+],
+"goal": "-보고 프로세스의 일원화 : 4개 팀의 보고 형식을 완벽하게 통일하고, 단일 웹 페이지에서 4개 팀의 실적과 계획을 한눈에 파악 가능한 환경 구축.\n\n-협업 프로세스 자동화 (Teams 연동): 팀원이 담당 업무를 작성하면 즉시 해당 팀의 팀즈 단톡방으로 자동 알림이 발송되고, 작성 완료 시 전체 진행 상태가 실시간으로 연동되는 시스템 구현.\n\n- 데이터 안정성 확보 (동시 편집 방어): 여러 명이 동시에 접속해 문서를 수정하더라도 데이터가 덮어씌워지거나 유실되지 않도록 완벽한 충돌 방지 및 이력 복구 기능 구현. \n\n- AI 기반 스마트 리포팅 체계 : 매주 표준화된 포맷으로 누적되는 주간 보고 데이터를 바탕으로, AI가 부문장님 서면 보고용 써머리를 자동 생성할 수 있는 데이터 파이프라인 구축.",
+"prob": "전략담당 산하 4개 팀(전략, 기준정보관리, Data Analytics, GSFS Task)이 매주 진행하는 상무님 주간 보고 준비 과정에서 비효율 발생\n\n(1) 보고 포맷의 파편화 및 취합의 번거로움: 4개 팀이 각기 다른 포맷으로 보고서를 작성하였으며, 보고 시 팀장마다 PC를 번갈아 연결하거나 한 명의 팀장이 4개 팀의 자료를 수동으로 취합\n\n(2) 팀장 및 실무자의 리소스 낭비: 상무님 보고 전 팀장과 팀원 간 리뷰를 위해, 팀장님들은 각 팀원이 본인 업무 영역을 모두 기입했는지 일일이 확인하고 독촉해야 하는 관리 리소스 낭비 발생 \n\n(3) 부서 간 사일로(Silo) 현상: 팀별로 자료를 따로 관리하여, 전략담당 산하 4개 팀이 서로 어떤 핵심 업무를 수행하고 있고 어떤 이슈가 있는지 매주 파악하기 어려움\n\n(4) 보고를 위한 보고 : 매주 상무님 보고 자료를 작성함에도 불구하고, 2주마다 진행되는 부문장님 서면 보고를 위해 또 다시 데이터를 가공하고 요약해야 하는 중복 작업",
+"tools": "Gemini",
+"how": "[ 개발 프롬프트]\n\n1. UI/UX 및 데이터 구조 설계\n   \"바닐라 JS와 HTML/CSS를 활용해 4개 팀(전략, 기준정보관리, Data Analytics, GSFS Task)의 탭이 있는 단일 페이지 대시보드를 만들어줘. 각 팀별로 업무 카드를 추가할 수 있어야 하고, 카드는'전주 실적'과 '금주 계획'으로 나뉘어야 해.  Node.js를 써서 D드라이브 특정 폴더에 주차별/팀별 JSON 파일 형식으로 저장하는 API를 함께 구성해줘.\"\n\n2. 업무 연속성 및 자동 이관 파이프라인 구축\n    \"매번 새로 글을 쓰는 비효율을 막고 싶어. 사용자가 주간보고 기준일을 다음 주로 선택했을 때, 이전 주(정확히 7일 전)에 작성된 파일이 있다면 해당 파일의 '금주 계획' 데이터를 새로운 주의\n    '전주 실적' 칸으로 자동으로 이관해서 띄워주는 로직을 백엔드와 프론트엔드에 추가해줘.\"\n\n3. 자율 서식 에디터 및 커스텀 미니 툴바 개발\n    \"각 업무 카드의 '전주 실적'과 '금주 계획' 상단에 개별 미니 툴바를 만들어줘. 툴바에는 굵게(B), 글자색 변경, 8~36pt 글자 크기 조절, 밑줄, •(불릿) 기호 추가 기능과 함께, 워드처럼 현재 텍스트의  서식을 기억했다가 다른 텍스트에 적용하는 '서식 복사/붙여넣기' 버튼을 구현해줘.\"\n\n4. 다중 사용자 동시 편집 충돌 방지 및 시각화 \n   \"팀원들이 동시에 같은 탭에 접속해서 저장할 때 데이터가 날아가는 걸 막아야 해. 타임스탬프(lastModified) 기반의 버전 체크 방식을 사용해서, 내가 저장하려 할 때 다른 사람이 먼저 수정했다면 저장을 차단해. 더 나아가, 서버의 최신 데이터를 브라우저로 가져와서 내 화면과 비교한 뒤, 내용이 엇갈린 특정 업무 카드에만 빨간색 테두리와 '⚠️ 다른 사용자가 변경함 (충돌)'이라는 뱃지를 띄워서 시각적으로 알려주는 스마트 하이라이트 기능을 짜줘.\"\n\n5. 워크플로우 자동화 및 Teams Webhook 연동\n   \"팀원이 본인 카드의 상태를 '작성중'에서 '정상/지연/완료'로 바꾸면 팀 전체 뱃지가 '작성 대기'에서 '작성 완료'로 변경되도록 해. 그리고 '최종 완료' 버튼을 누르면 Microsoft Teams Webhook API로 POST 요청을 보내서, 해당 팀의 단톡방에 '누가, 어떤 업무(Title)를 완료했는지' 알림 팝업이 발송되도록 Node.js 로직을 작성해.\"\n\n[시스템 아키텍처]\n\n- Frontend (사용자 화면): HTML5, CSS3, Vanilla JavaScript\n- 직관적인 탭(Tab) UI, 상태 뱃지, 커스텀 미니 툴바 및 서식 복사/붙여넣기 기능이 탑재된 자체 에디터 구현.\n- Backend (서버): Node.js \n- API 통신 처리 및 동시 편집 충돌 감지 로직 수행.\n- Data Storage (데이터 저장소): Local/Network Drive (JSON File)\n- 날짜별/팀별 JSON 파일 형식으로 D드라이브에 저장하여 데이터 이동성과 AI 연동(Parsing)의 용이성 확보. 14일 경과 이력 자동 삭제 로직 탑재.\n- Integration (외부 연동): Microsoft Teams Webhook API\n                                        [작성 완료] 액션 발생 시, HTTP POST 요청을 통해 각 팀별 지정된 Teams 채널에 Adaptive Card 형태의 알림(작성자, 업무명 등) 자동 전송.\n- Safety Mechanism (보안/안정성): 스마트 충돌 방지 - last Modified 타임스탬프 기반 잠금  및 충돌 하이라이팅 적용.\n                                                        이력 복구 -  저장 시점마다 과거 15개의 스냅샷을 보관하여 원클릭 롤백(Restore) 지원.",
+"quant": "-보고 준비 리소스 절감: 매주 수동으로 보고서를 취합하고 포맷을 맞추는 데 소요되던 시간 약 50% 단축. (팀원/업무 영역별 작성 여부 확인 시간, 취합/수정 시간 등)\n\n-회의 지연 시간 제로화: 상무님 대면 보고 시 팀별로 화면을 전환하거나 PC를 바꿔 연결하던 대기 시간 완전 제거 (단일 URL로 즉시 보고 가능).\n\n-이중 업무 제거로 인한 생산성 향상: 향후 2주 단위 부문장님 보고서 작성 시, 축적된 JSON 데이터 기반 초안이 자동 생성되어 서면보고 준비 시간 90% 이상 절감 기대.",
+"qual": "협업 투명성(Visibility) 및 시너지 극대화: 4개 팀이 하나의 플랫폼을 사용함으로써 서로의 주요 업무와 이슈를 자연스럽게 인지하게 되어, 부서 간 사일로(Silo)를 타파하고 업무 시너지가 창출됨.\n\n팀장 및 실무자의 업무 스트레스 해소: 누락된 부분을 팀장이 일일이 찾을 필요 없이 '작성 완료' 상태 뱃지와 Teams 자동 알림을 통해 진척도가 투명하게 관리됨.\n\n-'스마트 충돌 하이라이트' 및 '과거 이력 복구' 기능으로 누구나 본인이 작성한 데이터가 날아갈 걱정 없이 안심하고 협업 툴을 사용할 수 있는 환경 조성\n\n- 주간보고 자료를 JSON 데이터로 축적함으로써, 향후 부서의 성과 측정 및 AI 분석을 위한 사내 자산 확보",
+"date": "2026-08-19"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "일하는 방식의 변화를 통한 부품실 구성원들의 업무로드 최소화",
+"fullTitle": "일하는 방식의 변화를 통한 부품실 구성원들의 업무로드 최소화 (KPI 분석/검토/보고의 방법변화 : 수작업 → 자동/공용화/시각화)",
+"who": "김세현 책임",
+"team": "CC&S부품기획팀",
+"dept": "CC&S부품실 / CC&S부품기획팀",
+"ai": [
+"Gemini"
+],
+"summary": "부품실 KPI 집계를 자동화하고 이상징후 신호등으로 공용화",
+"kpi": [
+"연 448시간 → 12시간 (97.3%↓)"
+],
+"chips": [
+"Gemini",
+"HTML5/CSS3/JS",
+"Chart 라이브러리",
+"Git/CI-CD 자동배포"
+],
+"goal": "[주요 반영코자 했던 핵심내용 요약]\n[개인만이 아닌 공용으로 사용할수 있는 시스템적인 사용측면, 자동화 및 일하는 방식의 변화] →\n①부품실내 구성원 누구나가 언제든 접속해서 담당 KPI에 대해 트렌드 직접확인 / 이상징후의 KPI 사전점검하여 보완활동 할수 있도록 편의성 도모하고, 현재의 수작업업무에서 리드타임 단축할수있도록 업무자동화함이 목표.\n   (VS: visual studio code를 사용해서 자동업데이트 되게 특정폴더를 서버로 활용하여 지정운영하고, 자동으로 업데이트 될수 있도록 구현, 첨부한 HTML파일은 연동해 놓은 파일 추출후 Onedrive에 첨부한 상태) \n②현재 각 팀별KPI에 대해 수작업으로 KPI 취합요청 및 정리를 통한 취합/분석진행, 주간회의시 정리된 내용을 메일로 선보고 드리고, 추가로 구두설명 / 리뷰를 진행하고 있습니다만,\n   향후는 KPI 자동화 분석/시각화 시스템을 통해 시간절감 및 추가적인 구두설명대신 직관적으로 이해가 되게 시각화를 도모하고, 향후는 Summary 요약 내용도 별도 확인되게 하여 실적외에도 이해가 쉽게 할 예정으로,\n   각 부서별 별도 보유 KPI 시각화 자료가 있다면 용량고려하여 해당 시스템에 붙혀서 추가연계 관리하는 방향도 긍정적 효과를 줄수 있다고 판단됨. (각 실적별 클릭시 시각화 자동연동, 현재는 그래프 각각연동 추가함)\n③ 아울러, 차월 예상 숫자 및 목표는 트렌드를 고려하여 자동예측이 되도록 했지만, 각 KPI별로의 스페셜한 로직이 있다면 추가로 심는것이 가능하고(고려해야할 상황등) 이로인해 더욱더 적확도 높은 예측이 될수 있을것으로 판단됨. \n   (차월예측/연말예측때 적용가능)\n\n[주요KPI 현황/Summary 관리측면 구현 핵심]→\n①월별 KPI 진행현황에 대해 정상(Green) / 주의(Yellow) / 경고(Red) 로 월별 현황 구분되도록 했고, 해당되는 항목들은 시그널 밑에 같이 표현되게 워딩추가되었고,\n②대표적 지표에 대해 시그널 월별 변화현황관련 직관적으로 알수 있도록 Summary 꺾은선 그래프로 구현함. (악화 or 개선되고 있는지등 점검용 그래프, 실적 추가입력시 매월 자동반영되어 Auto업데이트 되도록 구현)\n③관리KPI항목이 많기에 주요 KPI / Sub KPI들로 필터링기능 추가하여 편의에 따라 구분하여 Display 될수 있도록 하였고,\n④각 KPI 항목별 실적에 대해 상세현황 확인을 위해 항목클릭하면 년도별 현황 꺾은선 그래프로 별도 표시가능토록 했고, (별도 그래프로 트렌드 확인코자 할때, 전년비교/당해년실적,목표등 포함)\n⑤각 팀별 담당하고 있는 KPI와 담당부서 Align하여 필터링시 부서별로 해당 KPI 만 Sorting하여 접속 / 필요KPI 확인토록 구현했습니다, (부품실내 모든 구성원 접속/확인가능)\n⑥년도별, 월별 해당데이타만 볼수 있도록 필터링 추가 셋팅과 (26년 1~6월, 필요시 25년도 추가가능) 더불어,\n⑦연간목표와 당월, 누적 및 차월 마감예상에 대해서도 트렌드를 고려하여 목표대비 비교할수 있도록 항목추가 및 구현가능토록 했습니다.\n⑧하기와 같이 추가로, DR KPI의 Weekly 현황에 대해서도 특이점 점검을 위해 상세데이타에 시각화 기능추가구현 (비중% 및 도넛그래프로 시각화) 했습니다. (상세하기)\n\n[DR 주차별 상세데이타 현황 리뷰측면 상세구현 핵심]→\n①25~26년6월까지의 데이타가 적재되어 년도별 구분되게 DR데이타 필터링 추가하였고, ② 3개 단락(단종/품절, 본부별/지역별구분)과 제품전체 상세로 구분할수 있도록 추가 필터링 셋팅함.\n③DR주차별 데이타에 2주연속 증가추세 및 직전주차대비 20%이상 크게 상승시 데이타에 급증뱃지가 표시될수 있도록 기준마련하여 추가하였고, ④데이타에서도 급증의 Red표시를 함으로서 직관적인 알람표시 확인토록 추가함.\n⑤년도별 DR현황관리시 주차별 발생금액 Top5에 대해 지속적으로 관리할수 있도록 금액과 주차별 랭킹수에 대해 자동 List up 정리/표현되고, 해당주차는 도넛과 막대그래프로 상세확인되도록 시각화함.\n⑥마찬가지로, 본부별 DR현황(품절/단종)에 더불어 지역별 현황(북미/유럽등), 제품별 현황에 대해서도 자동구분이 되고 급증 및 챙겨봐야할 데이타에서는 급증뱃지 추가 표시토록 함. (주기적으로 수치기입 반영)\n[추가 확대할 Activity] → 전체 KPI / DR관리 시스템에 유첨되어 있는 예시의 재고 분석시스템도 추가로 연계된다면 보다 추가적으로 시간절감이 되고, 시각화자료를 통해 심도있는 논의가 가능함. (각 KPI별로 개별시스템 경로연결하여 시스템 용량을 가볍게 할 필요성 있음)",
+"prob": "① 부품실내 KPI(주요&Sub) 주기적 점검관리를 위해 엑셀로 수작업 취합(각 팀별요청/취합)을 하여 각항목별 숫자 증감내용에 대해 직접 검토하고, 현황에 대해 수작업 파악하는데 공수가 상당히 많이 소요되었고, \n   이에 일하는 방식변화를 통해 개선이 필요하다 느꼈습니다. 단순반복적인 업무로부터 기본적 산출, 자명한 계산정도는 자동분석결과 도출 및 시각화로 충분히 가능하다 느꼈으며, \n   단순/반복/계산/기본분석은 AI를 통해 도모하고, 이로 인해 깊이 있는 생각으로 방향성을 제시하고, 트렌드를 보고 미래를 예측하는 방향으로 고민하는 시간에 시간할애하는 것이 맞다고 판단하였습니다.\n②그래서 각 KPI항목 전체취합 및 정리/분석, 보고시에 많은 절차와 불편함으로 각 항목에 대한 산출/추진에 자동화가 필요함을 절실히 느끼게 되었으며, \n   기획팀이 부품실 KPI의 관리를 콘트롤 타워적인 역할을 할수 있는 Tool을 개발하고 시각화를 해준다면 구성원 모두가 조금씩은 나아지고 편해지는 결과가 나올거라고 감히 예상하였습니다.\n③ 기존업무시 엑셀의 데이타 누적관리 및 DR의 주차별 현황에 대해 표 그리기 및 엑셀을 활용한 수작업 도표활용등으로 많은 시간 직접 투입하는 시간이 상당수 있었으며, \n    현재 업무절차로 부품실 전체 KPI관리점검을 위해서 각 부서의 관리현황 취합을 먼저 받고, 수작업 엑셀현황 취합, 개별그래프 수작업 확인, 증감검토/정리후 메일보고 , DR의\n   로우데이타 하나씩 주차별 피벗테이블에 넣고 급증구간 별도산출, 요약과 트렌드 챙겨봐야 할 구간 별도 산출등 이러한 작업중인 부분은 비효율적인 부분으로 판단하여 상당시간 절약할수 있는 부분이 금번기회로 개선코자 하였음.\n④ 대쉬보드 및 시각화에 더불어, 개인만의 자료가 아닌 부품실 및 타구성원들도 함께 공용으로 사용할수 있도록 하고\n   Risk있는 항목 및 데이타는 자동으로 알람띄우고, 시스템이 챙겨줘서 업무 로드를 줄여주는 방향이 절실히 필요해 보여 평소에 느끼고 있었던 부분을 적용코자 하였습니다.\n⑤ 전체 KPI 리뷰하는 시간도 있지만, 각 개별KPI를 다루는 팀에서도 심도있는 리뷰를 위해서는 별도 자료작성 및 리뷰시간이 필요하므로, 각 개별 KPI 검토시스템도 연결하여 통합시스템으로 운영하는것이 필요할것 같음. (결과물 링크에 NPI 전체분석/검토시스템 + 재고분석시스템 HTML 파일2개) → VS Code 연동",
+"tools": "제미나이 AI 활용하여 현황 대시보드 자동업데이트 및 각종 시각화 구현 (사용툴과 기술 하기 참조) - HTML5 : 대시보드의 전체적인 골격, 섹션,테이블, 버튼, 드롭다운등 콘텐츠 구조정의 - CSS3 : 색상, 폰트, 레이아웃, 반응형 디자인등 시각적요소 담당(CSS변수를 사용, 테마색상 관리) - Javascript : 상호작용에 따라 데이타처리, 테이블 동적생성, 차트업데이트하는 대시보드의 핵심로직 담당 - 차트시각화 : 데이타를 시각적인 그래프(라인,바, 도넛차트등)로 변환하는데 사용된 핵심라이브러리 - VS 코드 적용 : 공용서버를 활용한 개개인만의 활용이 아닌 공용사용으로 확장성 증가목적 기술 / 활용                     (※ Visual studio code를 활용하여 특정폴더를 서버로 활용하여 자동으로 업데이트 되게 하는 방법으로 개인만이 아닌 공용사용 가능)",
+"how": "- 데이터가 JavaScript 파일 내에 배열 객체 형태로 직접 내장 (Client-Side Rendering)\n- 상단 필터(월, 조직, 레벨) 변경 시 페이지 새로고침 없이 즉시 테이블과 차트가 업데이트되는 동적 인터랙션 구현\n※ 목표 시스템 아키텍처 (공용 웹 서비스 & 자동 업데이트 환경)\n  개인 PC의 파일을 클릭해서 보는 방식을 넘어, 사내망의 공용 URL로 접속하고 수정된 코드가 자동으로 서버에 반영되는 환경조성 (추가로 VS code도 적용)\n[자동 업데이트 워크플로우]\n1.코드 수정 (VS Code): 개발자(담당자)가 VS Code에서 화면 UI나 로직 코드를 수정\n2.버전 관리 (Git): 수정한 코드를 사내 GitHub, GitLab 등의 저장소에 업로드(Push) 진행.\n3.자동 배포 (CI/CD): 코드 업로드가 감지되면 GitHub Actions, Jenkins 등의 자동화 툴이 서버의 옛날 코드를 최신 코드로 자동 교체.\n4.서비스 반영 (Web Server): 구성원들은 별도의 파일 다운로드 없이 기존 웹 브라우저에서 새로고침만 하면 최신 대시보드를 볼 수 있도록 구성.\n※ VS Code 적용을 통한 특정폴더 서버로 활용 및 자동업데이트 적용\n5. KPI 자동/공용/시각화시스템에 예시의 첨부되어있는 재고의 월별 현황 분석시스템을 연동할 예정 (별도 경로설정등 적용)",
+"quant": "※ 절감시간 검토결과 산출 상세\n   ①월 2회 주간보고시 자동화 적용 (현재: 주 9시간 X 2회 = 월 18시간, 연 : 18시간 X 12개월 = 216시간,  → 향후 : 월 1시간, 연 12시간 (Total 연 204시간 감소, 94.4% 절감)\n   ②공용화적용 : 부품실내 구성원 모두 사용하여 알람기능 및 실적확인용으로 사용한다면, 업무활용 측면에서 많은 시간 추가절감 예상됨.\n    개인당 주1시간일 경우, 연 24시간, 기획담당자 2명씩으로 잡고 부품실내 추가10명에 대해 시뮬레이션하면 24시간 X 10명 (5개팀 기획담당2명) = 연 240시간 추가 절감예상\n   ※ 자동화+공용화 최종적용 :  (기존 Total소요시간 : 연 448시간 (자동화 : 204hrs + 공용화 : 240hrs) → 향후 : 연12시간 (연 감소 434hrs, 97.3% 절감)",
+"qual": "수작업 업무(KPI실적 취합/정리/분석/보고등) 으로 인한 오타/오류 감소, 수작업후 보고로 인한 피로도 감소, 작성 리드타임 현저히 단축 가능.\n개인의 활용만이 아닌 다른 구성원들도 사용가능하도록 공용화함으로서 (공용서버등 활용) 편의성 도모, \n컨트롤 타워성격의 관리시스템 효율성 증가로 다수의 수작업 업무로드 추가 감소 \n구성원 개개인들도 시간 절감 및 효과성 극대화를 통한 업무적 성과 확대/기대",
+"date": "2026-08-19"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "VOC 분석 & Case 관리 플랫폼",
+"fullTitle": "VOC 분석 & Case 관리 플랫폼",
+"who": "박지대로 책임",
+"team": "고객품질Sensing팀",
+"dept": "한국CC&S담당 고객품질Sensing팀",
+"ai": [
+"Gemini"
+],
+"summary": "월 8만 건 VOC를 6단계 Logic Tree로 자동 구조화",
+"kpi": [
+"분석 공수 90%↑ 절감",
+"VOC 37,427건 100% 구조화"
+],
+"chips": [
+"Gemini",
+"Python (pandas, sqlite3)",
+"ECharts"
+],
+"goal": "1. 선순환 문제해결 플랫폼 구축 \n과거 축적된 3A Report(Analysis → Action → Again Prevention)를 AI 지식베이스로 구축하고,\n신규 VOC 발생 시 유사 사례 검색 → 원인/개선안 자동 추천까지 연결하는 개선 체계 구현하고자 했음. \n\n2. VOC 데이터 자동화 및 6단계 Logic Tree 체계화\n방대한 RAW VOC를 6단계 계층 구조(LV1~LV6) 및 키워드 기반으로 자동 분류하고, 주간/월별 Trend, 기온 상관관계, PPM Worst 센터를 \n실시간 다차원 시각화하여 분석 공수를 극대화로 줄이는 것을 목표로 하였음.",
+"prob": "1. 수작업 중심의 RAW 데이터 분류 및 분석 지연\n월 8만 건 이상의 대규모 VOC(고객의 소리) 데이터를 수작업 엑셀 파일로 집계하고 분석관이 \n개별 보고서를 작성함에 따라, 분석에 상당한 시간과 인력이 소요되고 데이터 시인성이 떨어졌음.\n분석관 개인의 주관에 따라 분류 기준이 달라지는 등 객관적이고 동일한 잣대의 이슈 감지가 어려웠음.\n\n2. 부서 간 분산된 과제 관리 및 사후 모니터링 체계 부재\nVOC 이슈 발생 후 서비스 부문, CC&S기술솔루션팀, CC&S부품개선팀, 수도권/지역 담당 간 \n개선 과제 추적 및 이행 관리가 단절되어 있었음.\n과제 수립 후 실제로 불만 건수가 줄어들었는지 검증하는 유효성 모니터링 피드백 루프가 부재하여 \n일회성 대책에 그치는 경우가 많았음.",
+"tools": "Gemini 3.5",
+"how": "1. 📝 작성한 프롬프트 구조 (Prompt Engineering)\n프롬프트는 단순한 질문이 아닌 역할 부여 ➔ 엄격한 제약조건 ➔ 단계별 파이프라인 ➔ 검증 규칙으로 구성된 Structured Task Prompting 구조로 작성되었습니다.\n\ntext\n\n[Role & Context]   전문 VOC 데이터 분석가 및 AI 시스템 개발자 페르소나 설정\n       │\n[Constraints]      LV1~LV4 절대 변경 금지 / VOC번호 고유 개수 집계 표준화\n       │\n[Data Source]      VOC제목, VOC내용, 처리내역, '유형별정의' 시트 수록 정의\n       │\n[Task Execution]   1단계: DB 구축 ➔ 2단계: LV5/LV6 채우기 ➔ 3단계: 4계층 JSON 생성 ➔ 4단계: UI 개발\n       │\n[Validation]       Python/Node.js 자율 검증 및 0-Error 도출\n\nKey Components:\n페르소나 및 목적 명시 (Role & Context):\n서비스부문 고객품질Sensing팀의 37,427건 VOC 데이터를 분석하여 경영진 보고용 AI 대시보드를 구축하는 페르소나 설정.\n\n엄격한 원칙 및 제약조건 (Strict Rules):\nVOC번호 개수 집계: 중복 없는 COUNT(VOC번호)를 유일한 수치 집계 기준으로 명시.\n\n참조 데이터 지시 (Explicit Context Ingestion):\nLV5(상세유형)는 제목/내용 및 '유형별정의' 시트를, LV6(개선방안)는 처리부서/개선부서 처리내역을 필수 참조하도록 명시.\n자율 검증 스크립트 동반 (Self-Verification Loop):\n코드 작성 후 실행 결과를 직접 검증 스크립트로 확인하고 오류 발생 시 자체 피드백/수정하는 프롬프트 루프 적용.\n\n2. 🏛️ 전체 시스템 아키텍처 (System Architecture)\n시스템은 데이터 수집 ➔ AI 가공 ➔ JSON 집계 ➔ 프론트엔드 UI 시각화의 4-Layer 구조로 설계되었습니다.\n\nMermaid diagram\n\nLayer 1: 데이터 수집 및 파이프라인 (Data Ingestion & Storage Layer)\n입력 데이터: VOC접수_보고서...xlsx (37,427행 x 30여 개 컬럼)\n스토리지: Python (pandas, openpyxl, sqlite3)을 활용하여 RDBMS 형태의 voc_database.db (raw_table) 구축.\n데이터 정합성: 모든 행에 고유한 VOC번호가 1:1로 매핑되도록 인덱스 검증.\n\nLayer 2: AI 분류 및 개선방안 엔진 (Classification & Enrichment Engine)\nLV5 (VOC 상세유형): VOC 제목, VOC 내용, LV1~LV4 분류 정보 및 '유형별정의' 시트의 정의 문맥을 자연어 파싱하여 LV5 빈칸 100% 매핑.\nLV6 (VOC 개선방안): 처리부서/개선부서의 조치 내역 원문을 텍스트 마이닝하여 💡 LV6 개선방안 표준 문구 도출.\n\nLayer 3: 데이터 집계 및 변환 엔진 (Data Aggregation Engine)\nDB 원천 데이터를 대시보드 전용 초고속 계층 구조로 사전 집계(Pre-aggregation):\nexecutive.org_view.hierarchy: 개선부서 ➔ LV4 ➔ LV5 ➔ LV6 4단계 트리를 {총건수, 월별건수, 추이 그래프 배열} 구조로 변환.\nexecutive.exec_summary: 월별/주별 VOC 건수 및 기온/날씨 상관관계 메타데이터(goga_monthly, goga_weekly, goga_meta) 생성.\n경량화 파이프라인: JSON/JS 대시보드 데이터셋 최적화 압축 적용.\n\nLayer 4: 프론트엔드 UI 시각화 엔진 (Frontend UI & Rendering Engine)\n기술 스택: HTML5, CSS3, Vanilla JavaScript, ECharts.\n하이브리드 로컬 로딩 방식 (Bulletproof Data Loader):\n서버 없이 파일(file://) 직접 열기 시 **window.DEFAULT_DASHBOARD_DATA**를 즉시 실행하여 CORS 차단 문제 원천 방지.\n인터랙티브 4단계 아코디언 토글:\nexpandLv5Row / expandProdLv5Row 함수를 통해 LV5 클릭 시 하위 💡 LV6 개선방안이 푸른색 하이라이트 행으로 전개되는 동적 DOM 랜더링 적용.",
+"quant": "1. VOC 분석/집계 처리 속도 및 생산성 극대화\n분석 공수 90% 이상 감축: 월 8만 건 이상의 RAW VOC 수작업 엑셀 집계 및 보고서 작성(월평균 약 16시간 이상 소요)을 \n실시간 대시보드 자동 집계로 전환하여 분석 공수를 90% 이상 절감.\n100% 데이터 구조화: 비구조화(Unstructured) 텍스트 VOC를 **6단계 계층 구조(LV1~LV6)**로 100% 구조화하여 정량 지표로 자산화.\n\n2. 부서별 커미티 과제 관리 정량화\n6개 핵심 담당 부서의 시급 과제(18개 안건)에 대한 목표 달성률 및 유효성 상태(Sensing/완료/재상정) 정량 추적.",
+"qual": "1. Data-Driven 의사결정 및 전사 일하는 방식의 혁신\n기존 담당자의 주관적 경험이나 소수의 자의적 샘플에 의존하던 VOC 분석 방식에서 벗어나, \n6단계 Logic Tree 및 기온/계절 상관관계 데이터 기반의 객관적 원인 규명 체계로 의사결정 방식 전환.\n\n2. 부서 간 책임 핑퐁 방지 및 End-to-End 책임 경영 정착\n**VOC 커미티 5단계 운영 프레임워크 (과제선정 ➔ 월간심의 ➔ 대책적용 ➔ 실적모니터링 ➔ 유효성 피드백)**를 \n대시보드 내에 일체화하여, 부서 간 과제 미루기를 방지하고 과제 완료 시까지 선순환 피드백 루프 구축.",
+"date": "2026-08-19"
+},
+{
+"award": null,
+"cat": "dash",
+"title": "한국서비스 재고 통합관리 대시보드",
+"fullTitle": "한국서비스 재고 통합관리 대시보드",
+"who": "송유빈 사원",
+"team": "재무관리팀",
+"dept": "경영관리담당 재무관리팀",
+"ai": [
+"Claude",
+"GPT"
+],
+"summary": "Item 단위 FIFO Aging으로 장기재고를 점검하는 대시보드",
+"kpi": [
+"34,793개 Item 분석",
+"137.2억원 규모 재고 리포트"
+],
+"chips": [
+"Claude",
+"ChatGPT"
+],
+"goal": "- 한국서비스의 최근 1년 재고금액과 수량 추이를 한눈에 파악\n- NERP 수불장을 활용한 Item 단위 FIFO Aging 데이터 산출\n- 사업부·부품·소모품·정상·단종별 장기재고 현황 점검",
+"prob": "- Item 단위 Aging 리포트가 없어 품목별 재고 보유기간 확인이 어려움",
+"tools": "Claude, ChatGPT",
+"how": "1. Aging 데이터 산출\nNERP 수불장의 현재고를 최근 구매입고월부터 FIFO 방식으로 배분\n재고를 3개월 이내 / 3~6개월 / 6~12개월 / 12개월 초과로 구분\nItem별 Aging 수량과 금액을 기준월 말 장부단가로 산출\n사업부·소모품·부품·정상·단종 기준으로 데이터를 집계\n\n2. 재고 현황 대시보드\nPart 1 재고금액\n - 최근 1년 재고 Trend 및 사업부별 전월·전년 증감 시각화\nPart 2 Aging\n - 구간별 구성비와 전월 대비 Aging 변화 제공\n - 12개월 초과 장기재고의 사업부별 순위와 주요 품목 표시\n - 장기재고 품목의 최근 구매입고 이력을 히트맵으로 구현\n - 전체·소모품·부품·정상·단종 조건을 선택할 수 있는 필터 제공\n\n3. 시스템 구조\nNERP 수불장 → 데이터 정제 → FIFO Aging 산출 → Excel 결과 → HTML 대시보드\nHTML 내부에 데이터와 기능을 포함하여 별도 원본 없이 실행 가능\n월별 데이터 교체만으로 동일한 분석 및 대시보드 반복 생성",
+"quant": "- 34,793개 Item, 137.2억 원 규모의 재고를 FIFO 기준으로 분석하는 신규 리포트 및 통합 관리 화면을 구축함.\n- 소모품·부품의 최근 13개월 재고 추이와 12개월 초과 장기재고를 Item·사업부 단위까지 한 화면에서 확인할 수 있도록 시각화함.",
+"qual": "- 총액 중심 재고관리에서 Item·사업부·단종 여부별 장기재고 관리로 전환\n- 장기재고가 집중된 사업부와 주요 품목을 신속하게 파악\n- 장기재고 품목의 반복 구매입고 여부를 함께 점검하여 사전 관리 강화\n- 여러 Excel 자료를 별도로 확인하지 않고 대시보드에서 통합 조회 가능",
+"date": "2026-08-19"
+},
+{
+"award": null,
+"cat": "auto",
+"title": "GPT5.6 Think Deeper(or Claude Opus)를 활용한 글로벌 ASC PSI 배포 업무의 표준화와 자동화",
+"fullTitle": "GPT5.6 Think Deeper (or Claude Opus)를 활용한 글로벌 ASC PSI 배포 업무의 표준화와 자동화",
+"who": "윤가람 책임",
+"team": "선행물동팀",
+"dept": "고객가치혁신부문 선행물동팀",
+"ai": [
+"GPT"
+],
+"summary": "11개 해외법인 PSI 데이터 가공·분리·배포를 한 흐름으로 자동화",
+"kpi": [
+"23만 행 처리 2시간 → 30분 (75%↓)"
+],
+"chips": [
+"GPT5.6"
+],
+"goal": "글로벌 ASC PSI 업무의 표준화와 자동화(11개 법인 배포용 data편집 자동화)\n기존에 담당자가 수작업으로 수행하던 대용량 PSI 데이터의 정렬, 추천수량 계산, 법인별 분리, 서식 적용, 파일 배포 준비를 하나의 자동화 프로세스로 통합.\n - 대용량 서비스부품 데이터를 동일한 기준으로 정제\n - 재고와 Pending을 반영한 Final_recommend 자동 산출\n - 10개 해외법인별 독립 자료 자동 생성\n - 향후 주간 PSI 운영에 반복 적용 가능한 확장형 체계 확보",
+"prob": "① 대용량 데이터의 반복 수작업 : 매주 수십만 건의 데이터를 대상으로 다음 작업을 각각 수행해야 했다.\n- Ship-to, Part No, Category 기준 정렬\n- 불필요한 가격정보 삭제\n- 법인별 데이터 필터링 및 파일 분리\n- 특정 거래처 제외\n- 추천수량 재계산\n- 셀 색상과 헤더 형식 적용\n② 계산 기준 불일치 위험 : 수작업으로 계산하거나 복사할 경우 다음과 같은 오류 위험이 존재했다.\n - Pending 차감 누락\n - 음수 추천수량 발생\n - 공급 가능재고 초과 추천",
+"tools": "GPT5.6을 활용한 법인별 배포용 ASC PSI편집",
+"how": "CSV 파일 원본넣기\n\n아래와 같이 요청사항을 엑셀로 정리하여 만들어달라.\n\n1.첨부 엑셀을 Ship to>Part no>Cate_cd 순으로 오름 차순 정렬한다.\n2.Cate_cd의 값='1'의 행을 grey(RGB:217,217,217)색으로 hightlight한다.\n3.refprice/host_currency_id/usd_price 열을 삭제한다.\n4. 각 행의 final_recommend값은 수식 'final_recommend'값=ROUND(MIN(MAX('Calculation_recom'값-'Total Pending_at_ LGE'값,0),'origin_avail'값),0)으로 동일행의 값을 수식으로 적용하여 계산값을 넣고, 노랑색 바탕색((RGB:255,255,0)으로 강조한다.\n\"5.1번 subsidiary를 기준으로 각각 다른 sheet에 분류하여 저장한다.\n단, LGEAINAF/LGEAINAI,NGEAINDJ는 같은 sheet에 포함시킨다. \n      LGEFSEDZ의 경우 Ship_to_nm이 'FORCE PLUS ' 항목들은 모두 삭제한다.\n완성된 신규Sheet명은 총 10개이며, Subsidiary의 앞의 5글자 기준으로 법인명을 사용하며 LGEAI /LGEBN /LGEDG /LGEES /LGEFS /LGEIS/LGEMK/ LGEPL/LGESW/ LGEUK 로 한다. \"\n 카테고리 제목이 있는  1행 위쪽으로 4개행을 삽입하고, 해당 영역은 아래의 내용을 그대로  복사+붙여넣기한 헤더블록으로  sheet를 완성시켜줘\n  \"4행: 구분선(-) + Final_recommend 그룹 아래 0 \"의 값은 수식 =SUBTOTAL(9,각 열의6행:각 열의 ~마지막행)을 적용시켜줘\n  ['헤더블록' 복붙 넣기]\n6. 최종자료는 sheet별로 각각 독립적인 형태로 저장해서 만들어줘.  파일 제목은 ASC_PSI_'sheet명'으로 하여 엑셀파일로 다운받을 수 있도록 생성해줘\n\n7. 메일초안 만들기\n생성된 엑셀파일을 첨부하여, 각각의 법인담당자들에게 전달할 수 있도록 각각의 메일초안을 작성해. (Outlook 작성 창으로 바로 송부할 수 있도록 만들기.)\n메일 발송 대상 및 내용은 아래와 같음\n - 메일제목 : (PSI Sharing) Weekly PSI_\"법인명\"\n - 메일내용 : -내용삭제함-\n - 법인별 메일수신자 및 참조자 : -내용삭제함-",
+"quant": "①원본데이터 23만행x73개 컬럼 수작업 시간 절감 : 90분절감, 75%↓(기존 :2시간 → AX활용:30분)\n②정확도 향상\n - 모든 행에 동일한 추천수량 산식을 적용\n - 추천수량의 최솟값을 0으로 제한\n - 추천수량이 origin_avail을 초과하지 않도록 통제\n - Cate_cd=1 행을 동일 색상으로 표시하여 데이터 식별성 확보",
+"qual": "23만 건 이상의 글로벌 서비스부품 PSI 데이터를 대상으로, 데이터 정제부터 추천수량 산출, 법인별 문서 생성 및 Outlook 배포 준비까지 하나의 자동화 흐름으로 연결하였다. \n담당자의 반복적인 Excel 작업을 표준화된 디지털 프로세스로 전환하고, 계산 정확성·업무 속도·글로벌 협업 품질을 동시에 개선했다.",
+"date": "2026-08-21"
+}
+];
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+ITEMS.forEach((it,i)=>it.id=i);
+const AWARD_ORDER={best:0,excellent:1};
+const catOf=id=>CATS.find(c=>c.id===id);
+const state={view:"home",q:"",ai:new Set(),list:[],cur:-1};
+
+function matches(it){
+  if(state.ai.size && !it.ai.some(a=>state.ai.has(a))) return false;
+  if(state.q){
+    const hay=[it.title,it.fullTitle,it.who,it.team,it.dept,it.summary,it.goal,it.prob,it.tools,it.how,it.quant,it.qual,it.chips.join(" "),it.ai.join(" "),catOf(it.cat).name].join(" ").toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).filter(Boolean).every(w=>hay.includes(w));
+  }
+  return true;
+}
+const filtering=()=>state.q||state.ai.size;
+
+function renderNav(){
+  const n=f=>ITEMS.filter(it=>f(it)&&matches(it)).length;
+  const btn=(v,ic,label,c)=>`<button class="item ${state.view===v?"on":""}" onclick="go('${v}')"><span class="ic">${ic}</span>${label}${c!==undefined?`<span class="cnt">${c}</span>`:""}</button>`;
+  let h=`<div class="grp">개요</div>`+btn("home","🏠","홈 · 한눈에 보기")+btn("award","🏆","수상작",n(i=>i.award))+btn("all","📋","전체 출품작",n(()=>true));
+  h+=`<div class="grp">분야별</div>`+CATS.map(c=>btn("cat-"+c.id,c.icon,c.name,n(i=>i.cat===c.id))).join("");
+  h+=`<div class="grp">활용 AI 필터</div><div class="chips">`+AIS.map(a=>`<button class="fchip ${state.ai.has(a)?"on":""}" onclick="toggleAI('${a}')">${a}</button>`).join("")+`</div>`;
+  document.getElementById("nav").innerHTML=h;
+}
+
+function card(it){
+  const aw=it.award?`<span class="pill ${it.award==="best"?"best":"ex"}">${it.award==="best"?"★ 최우수상":"우수상"}</span>`:"";
+  return `<button class="card ${it.award?"aw":""}" onclick="openItem(${it.id})">
+    <div class="tag">${aw}<span class="pill">${catOf(it.cat).icon} ${esc(catOf(it.cat).name)}</span></div>
+    <h4>${esc(it.title)}</h4><div class="who">${esc(it.who)} · ${esc(it.team)}</div>
+    <div class="sum">${esc(it.summary)}</div>
+    <ul>${it.kpi.map(k=>`<li>${esc(k)}</li>`).join("")}</ul>
+    <div class="ai">${it.ai.map(a=>`<span>${esc(a)}</span>`).join("")}</div></button>`;
+}
+function filterNote(){
+  if(!filtering()) return "";
+  const parts=[];if(state.q)parts.push(`검색 "${esc(state.q)}"`);if(state.ai.size)parts.push("AI: "+[...state.ai].join(", "));
+  return `<div class="active-filter">필터 적용 중 · ${parts.join(" / ")} <button onclick="clearFilter()">초기화</button></div>`;
+}
+function gridOf(list){
+  state.list=list.map(i=>i.id);
+  return list.length?`<div class="grid">${list.map(card).join("")}</div>`:`<div class="empty">조건에 맞는 출품작이 없습니다.</div>`;
+}
+function sortAw(a,b){return AWARD_ORDER[a.award]-AWARD_ORDER[b.award]}
+
+function renderHome(){
+  const aw=ITEMS.filter(i=>i.award).sort(sortAw);
+  const max=Math.max(...CATS.map(c=>ITEMS.filter(i=>i.cat===c.id).length));
+  const aiCnt=AIS.map(a=>[a,ITEMS.filter(i=>i.ai.includes(a)).length]).sort((x,y)=>y[1]-x[1]);
+  const aiMax=aiCnt[0][1];
+  state.list=aw.map(i=>i.id);
+  return `<div class="hero"><div class="eb">AX STAR 2026 · 출품작 소개</div>
+    <h2>현장에서 직접 AI로 업무를 바꾼 ${ITEMS.length}개의 도전</h2>
+    <p>분야별로 묶어 정리했습니다. 좌측 메뉴에서 분야를 고르고, 카드를 누르면 출품서 원문 전체(목표·문제점·기술·적용 내용·성과)를 볼 수 있습니다.</p></div>
+    <div class="kpis">
+      <div class="kpi"><b>${ITEMS.length}건</b><span>전체 출품</span></div>
+      <div class="kpi g"><b>${aw.length}건</b><span>수상 (최우수 1 · 우수 3)</span></div>
+      <div class="kpi"><b>${CATS.length}개</b><span>분야</span></div>
+      <div class="kpi"><b>${new Set(ITEMS.map(i=>i.team)).size}개</b><span>참여 조직</span></div>
+    </div>
+    <div class="sec"><div class="sec-h"><h3>🏆 수상작</h3><a onclick="go('award')">수상작 모아보기 ›</a></div>${aw.length?`<div class="grid">${aw.map(card).join("")}</div>`:""}</div>
+    <div class="sec"><div class="sec-h"><h3>분야별 출품 현황</h3><a onclick="go('all')">전체 보기 ›</a></div>
+      <div class="catgrid">${CATS.map(c=>{const n=ITEMS.filter(i=>i.cat===c.id).length;
+        return `<button class="catcard" onclick="go('cat-${c.id}')"><div class="top"><span class="ic">${c.icon}</span><span class="n">${n}</span></div>
+        <h4>${esc(c.name)}</h4><p>${esc(c.desc)}</p><div class="bar"><i style="width:${n/max*100}%"></i></div></button>`}).join("")}</div></div>
+    <div class="sec"><div class="sec-h"><h3>활용 AI 현황</h3></div>
+      <div class="aibar">${aiCnt.map(([a,n])=>`<div class="airow"><span>${a}</span><div class="t"><i style="width:${n/aiMax*100}%"></i></div><b>${n}건</b></div>`).join("")}
+      <div class="note">과제별 주요 활용 AI 기준 (1개 과제에서 여러 AI를 쓴 경우 중복 집계) · 좌측 필터로 해당 과제만 볼 수 있습니다.</div></div></div>`;
+}
+
+function render(){
+  renderNav();
+  const v=state.view;let h="";
+  if(v==="home"&&!filtering()){h=renderHome();}
+  else if(v==="award"){
+    const l=ITEMS.filter(i=>i.award&&matches(i)).sort(sortAw);
+    h=`<div class="ph"><div class="crumb">개요</div><h2>🏆 수상작</h2><p>사람 평가(AX Pro)와 AI 평가를 종합해 선정된 최우수 1건, 우수 3건</p>${filterNote()}</div>`+gridOf(l);
+  }else if(v.startsWith("cat-")){
+    const c=catOf(v.slice(4));const l=ITEMS.filter(i=>i.cat===c.id&&matches(i)).sort((a,b)=>(a.award?AWARD_ORDER[a.award]:9)-(b.award?AWARD_ORDER[b.award]:9));
+    h=`<div class="ph"><div class="crumb">분야별</div><h2>${c.icon} ${esc(c.name)}</h2><p>${esc(c.desc)} · ${l.length}건</p>${filterNote()}</div>`+gridOf(l);
+  }else{ // all (또는 홈에서 검색/필터)
+    const l=ITEMS.filter(matches);
+    h=`<div class="ph"><div class="crumb">개요</div><h2>📋 전체 출품작</h2><p>분야별로 묶어 보여드립니다 · ${l.length}건</p>${filterNote()}</div>`;
+    if(!l.length){h+=`<div class="empty">조건에 맞는 출품작이 없습니다.</div>`;state.list=[];}
+    else{state.list=[];CATS.forEach(c=>{const g=l.filter(i=>i.cat===c.id).sort((a,b)=>(a.award?AWARD_ORDER[a.award]:9)-(b.award?AWARD_ORDER[b.award]:9));
+      if(!g.length)return;state.list.push(...g.map(i=>i.id));
+      h+=`<div class="cat-block"><div class="cat-title">${c.icon} ${esc(c.name)} <small>${g.length}건</small></div><div class="grid">${g.map(card).join("")}</div></div>`;});}
+  }
+  document.getElementById("view").innerHTML=h;
+}
+
+function go(v){state.view=v;try{history.replaceState(null,"","#"+v);}catch(e){}closeSide();render();window.scrollTo({top:0});}
+function toggleAI(a){state.ai.has(a)?state.ai.delete(a):state.ai.add(a);if(state.view==="home")state.view="all";render();}
+function clearFilter(){state.q="";state.ai.clear();document.getElementById("q").value="";render();}
+document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value.trim();if(state.q&&state.view==="home")state.view="all";render();});
+
+function fmt(s){
+  let t=esc(s||"");
+  t=t.replace(/`([^`\n]+)`/g,"<code>$1</code>");
+  t=t.replace(/\*\*([^*\n]+?)\*\*/g,"<b>$1</b>");
+  return t;
+}
+function openItem(id){
+  const it=ITEMS[id];state.cur=id;const c=catOf(it.cat);
+  const aw=it.award?`<span class="pill ${it.award==="best"?"best":"ex"}">${it.award==="best"?"★ 최우수상":"우수상"}</span> `:"";
+  document.getElementById("dh").className="dh"+(it.award?" aw":"");
+  document.getElementById("dh").innerHTML=`<button class="x" onclick="closeAll()" aria-label="닫기">✕</button>
+    <div>${aw}<span class="pill">${c.icon} ${esc(c.name)}</span></div><h3>${esc(it.fullTitle)}</h3>
+    <div class="who">${esc(it.who)} · ${esc(it.dept)}</div>
+    <div class="dmeta"><span>활용 AI: ${esc(it.ai.join(", "))}</span><span>제출일 ${esc(it.date)}</span></div>`;
+  const sec=(ic,t,body,cls="")=>body?`<details open><summary>${ic} ${t}</summary><div class="dc ${cls}">${body}</div></details>`:"";
+  document.getElementById("db").innerHTML=`<div class="hl">${it.kpi.map(k=>`<div>✔ ${esc(k)}</div>`).join("")}</div>
+    <div class="dtools"><button onclick="toggleAllSec()">모두 접기 / 펼치기</button></div>`
+    +sec("🎯","목표",fmt(it.goal))+sec("⚠️","문제점",fmt(it.prob))
+    +sec("🧰","툴 / 기술",`<div class="tchips">${it.chips.map(t=>`<span>${esc(t)}</span>`).join("")}</div><div class="raw">${fmt(it.tools)}</div>`)
+    +sec("💡","핵심 적용 내용",fmt(it.how))+sec("📈","정량적 성과",fmt(it.quant),"q")+sec("🌱","정성적 성과",fmt(it.qual),"l");
+  document.getElementById("db").scrollTop=0;
+  const pos=state.list.indexOf(id);const p=document.getElementById("prev"),n=document.getElementById("next");
+  p.disabled=pos<=0;n.disabled=pos<0||pos>=state.list.length-1;
+  p.onclick=()=>openItem(state.list[pos-1]);n.onclick=()=>openItem(state.list[pos+1]);
+  document.getElementById("drawer").classList.add("on");document.getElementById("drawer").setAttribute("aria-hidden","false");
+  document.getElementById("dim").classList.add("on");
+}
+function toggleAllSec(){const d=[...document.querySelectorAll("#db details")];const open=d.some(x=>!x.open);d.forEach(x=>x.open=open);}
+function closeAll(){document.getElementById("drawer").classList.remove("on");document.getElementById("drawer").setAttribute("aria-hidden","true");closeSide();document.getElementById("dim").classList.remove("on");}
+function toggleSide(){document.getElementById("side").classList.toggle("on");document.getElementById("dim").classList.toggle("on");}
+function closeSide(){document.getElementById("side").classList.remove("on");if(!document.getElementById("drawer").classList.contains("on"))document.getElementById("dim").classList.remove("on");}
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById("drawer").classList.contains("on"))return;
+  if(e.key==="Escape")closeAll();
+  if(e.key==="ArrowRight"&&!document.getElementById("next").disabled)document.getElementById("next").click();
+  if(e.key==="ArrowLeft"&&!document.getElementById("prev").disabled)document.getElementById("prev").click();
+});
+let h0="";try{h0=location.hash.slice(1);}catch(e){}if(["home","award","all",...CATS.map(c=>"cat-"+c.id)].includes(h0))state.view=h0;
+render();
+</script>
+</body>
+</html>
